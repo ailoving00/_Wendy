@@ -1,5 +1,5 @@
 ﻿//
-//2019-10-22
+//2019-10-21
 //자동차 퍼즐 조작
 //
 using System.Collections;
@@ -11,25 +11,10 @@ public class mouse_test : MonoBehaviour
     public Camera _mainCam = null;
 
     private GameObject target = null; //mouse target
-
-    private GameObject _blockPrefab;
-    private GameObject[] _blocks;
-    public GameObject _exit; //탈출구
-    public GameObject _me; //옮겨야할 블럭
+    public GameObject cube; //나중에 tag 사용
 
     private Vector3 MousePos;
     private bool _targetState = false;
-
-    void Start()
-    {
-        if (_blocks == null)
-            _blocks = GameObject.FindGameObjectsWithTag("Block");
-
-        //foreach (GameObject block in _blocks)
-        //{
-        //    Instantiate(_blockPrefab, block.transform.position, block.transform.rotation);
-        //}
-    }
 
     void Update()
     {
@@ -37,14 +22,11 @@ public class mouse_test : MonoBehaviour
         {
             target = GetClickedObject();
 
-            if (target != null)
+            if (target != null && target.Equals(cube))
             {
-                if (target.tag == "Block")
-                {
-                    _targetState = true;
+                _targetState = true;
 
-                    Debug.Log(target.GetComponent<Collider>().name);
-                }
+                //Debug.Log(target.GetComponent<Collider>().name);
             }
         }
         else if (true == Input.GetMouseButtonUp(0))
@@ -61,7 +43,6 @@ public class mouse_test : MonoBehaviour
 
         }
     }
-    //void OnMouseDown() {}
 
     private GameObject GetClickedObject()
     {

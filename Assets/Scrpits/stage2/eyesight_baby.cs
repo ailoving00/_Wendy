@@ -9,9 +9,9 @@ public class eyesight_baby : MonoBehaviour
 
     [SerializeField]
     private GameObject go_Camera;
+
     private Transform CamValue;
 
-    private float BackTime = 2f;
  //   private float fTickTime;
 
     //   private Vector3 rotation;
@@ -39,7 +39,6 @@ public class eyesight_baby : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fTickTime += Time.deltaTime;
 
         // 카메라의 위치 저장 
         CamValue = go_Camera.transform;
@@ -58,12 +57,6 @@ public class eyesight_baby : MonoBehaviour
                     go_Camera.transform.position = go_Camera.transform.position
                                                         + new Vector3(0, -7, 0);
 
-                 
-                if (fTickTime >= fDestroyTime)
-                {
-                    go_Camera.transform.position = go_Camera.transform.position
-                                    + new Vector3(0, 7, 0);
-                }
 
 
             }

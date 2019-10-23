@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/CarPuzzle_test.unity
-=======
-- path: Assets/Scenes/PlayerEyeside.unity
->>>>>>> 8a36510f5e6f7a140b141ab7d5627932ae362806
   isLoaded: 1
   isActive: 1
   isSubScene: 0

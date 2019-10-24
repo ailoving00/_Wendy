@@ -10,13 +10,9 @@ public class eyesight_baby : MonoBehaviour
     [SerializeField]
     private GameObject go_Camera;
 
+    private Transform CamValue;
 
-    float moveFloat;
-    int speed = 10;
-    Vector3 startMarker;
-    Vector3 endMarket;
-
-    //   private float fTickTime;
+ //   private float fTickTime;
 
     //   private Vector3 rotation;
 
@@ -38,18 +34,14 @@ public class eyesight_baby : MonoBehaviour
         return _underdoor;
     }
 
+
+
     // Start is called before the first frame update
     void Start()
     {
 
         // 카메라의 위치 저장 
-       // startMarker = go_Camera.transform.position;
-        //endMarket = new Vector3(0.45f, 7.11f, 11.55f);
-
-        //현재 카메라의 월드좌표를 뷰포트 기준좌표로 변환
-        // Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-
-        //go_to_CamValue = transform.position(new Vector3(0.45f, 7.11f, 11.55f));
+        CamValue = go_Camera.transform;
     }
 
     // Update is called once per frame
@@ -62,64 +54,8 @@ public class eyesight_baby : MonoBehaviour
                 if (_underdoor.Equals(gameObject))
                 {
 
-                // float fMove = Time.deltaTime * speed;
-
-                // go_to_Camera.transform.position = new Vector3(0.45f, 7.11f, 11.55f);
-                //go_Camera.transform.position = Vector3.MoveTowards(go_Camera.transform.position, new Vector3(0.45f, 7.11f, 11.55f), 100);
-
-
-
-              //  go_Camera.transform.position = Vector3.Lerp(startMarker,)
-
-                moveFloat += Time.deltaTime * 2.5f;
-
-              
-              //  go_Camera.transform.position = Vector3.Lerp(go_Camera.transform.position, new Vector3(0.45f, 7.11f, 11.55f), speed * Time.deltaTime);
-
-              //  if (go_Camera.transform. position = )
-             
-         
-              //  go_Camera.transform.rotation = Quaternion.Euler(1.9f, -173f, -1.3f);
-                // 위치는 지정완료. 이동하는데 걸리는 것을 수정
-
-
-
-            }
-                ///카메라를 움직이는 코드
-                // rotation = rotation + new Vector3(0, -180, 0);
-
-
-            }
-    }
-
-}
-
-
-/*
- 
-     
-     
-     
-        void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            _underdoor = GetClickedObject();
-
-                if (_underdoor.Equals(gameObject))
-                {
-
-                 float fMove = Time.deltaTime * speed;
-
-                // go_to_Camera.transform.position = new Vector3(0.45f, 7.11f, 11.55f);
-                //go_Camera.transform.position = Vector3.MoveTowards(go_Camera.transform.position, new Vector3(0.45f, 7.11f, 11.55f), 100);
-
-                go_Camera.transform.position = new Vector3(0.45f, 7.11f, 11.55f);
-
-             
-         
-                go_Camera.transform.rotation = Quaternion.Euler(1.9f, -173f, -1.3f);
-                // 위치는 지정완료. 그렇다면 이동하는데 걸리는 것을 수정해야한다. 
+                    go_Camera.transform.position = go_Camera.transform.position
+                                                        + new Vector3(0, -7, 0);
 
 
 
@@ -131,12 +67,4 @@ public class eyesight_baby : MonoBehaviour
             }
     }
 
-} 
-     
-     
-     
-     
-     */
-
-
-
+}

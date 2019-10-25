@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scrpits\Stage1\Controller\mouse_test.cs" />
     <Compile Include="Assets\Scrpits\Stage1\Controller\Player.cs" />
     <Compile Include="Assets\Scrpits\stage2\eyesight_baby.cs" />
+    <Compile Include="Assets\Scrpits\stage2\FollowCamera.cs" />
     <Compile Include="Assets\Scrpits\stage2\Light_test.cs" />
     <Compile Include="Assets\Scrpits\stage2\Test_eyeside.cs" />
     <Compile Include="Assets\Scrpits\TitleButton.cs" />

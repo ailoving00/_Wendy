@@ -7,7 +7,7 @@ public class Light_test : MonoBehaviour
 
     private GameObject target;
 
-    private bool state;
+  //  private bool state;
 
     public GameObject[] _Pointstate;
 
@@ -17,7 +17,7 @@ public class Light_test : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        state = true;
+       // state = true;
     }
 
     private GameObject GetClickedObject()
@@ -44,13 +44,13 @@ public class Light_test : MonoBehaviour
         {
             target = GetClickedObject();
 
-            if (state == true)
-            { 
+          //  if (state == true)
+          //  { 
                  if (target.Equals(gameObject))
                   {
                       //print("마우스 입력 받았음");
-                      if (state == true)
-                     {
+                   //   if (state == true)
+                    // {
                         if (_Pointstate[0].activeInHierarchy == true)
                         {
                             _Pointstate[0].gameObject.SetActive(false);
@@ -75,11 +75,11 @@ public class Light_test : MonoBehaviour
 
 
                         //print("사라져");
-                        state = false;
-                  }
+                       // state = false;
+                 // }
               }
             }
-            else
+         /*   else
             {
                 if (_Pointstate[0].activeInHierarchy == true)
                 {
@@ -102,10 +102,8 @@ public class Light_test : MonoBehaviour
 
 
                 state = true;
-            }
+            }*/
         }
     }
 
 
-
-}

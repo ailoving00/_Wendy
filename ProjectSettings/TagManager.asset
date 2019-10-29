@@ -7,7 +7,6 @@ TagManager:
   - Block
   - Wall
   - Exit
-  - Key
   layers:
   - Default
   - TransparentFX

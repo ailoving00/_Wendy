@@ -1,36 +1,19 @@
 ﻿//
-//2019-10-22
-//블럭 충돌 관련
+//2019-10-29
+//도착지에 들어가야하는 블럭
 //
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class KeyBlock : MonoBehaviour
 {
-    //private Vector3 ColPos;
-
     public GameObject winText;
 
-    void Start()
+    void start()
     {
-        
+        GetComponent<Block>().bType = 0;
     }
-
-    void Update()
-    {
-        
-    }
-
-    //void OnCollisionEnter(Collision coll)
-    //{
-    //    Debug.Log("__Exit__");
-
-    //    if (coll.gameObject.tag == "Exit")
-    //    {
-    //        Debug.Log("__Exit__");
-    //    }
-    //}
 
     void OnTriggerEnter(Collider coll)
     {

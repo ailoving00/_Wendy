@@ -1,7 +1,8 @@
 ﻿//
-//2019-11-05
+//2019-11-14
 //[완]블럭 이동 관련 o 
 //추가할 내용 : 도착지점 트리거에 오면 도착위치에 알맞게 좀더 이동
+//블럭 위치를 저장한 배열 location을 public 으로 변경,
 //
 using System.Collections;
 using System.Collections.Generic;
@@ -29,11 +30,13 @@ public class Block : MonoBehaviour
 
     private bool clear;
 
-    private int[] location;
+    public int[] location; //private->public, 인스펙터상 설정
     private bool init;
     DirType dirType;
 
     private BlockManager blockManager;
+
+    private MouseController_CarPuzzle mouseController;
 
     void Start()
     {
@@ -47,16 +50,17 @@ public class Block : MonoBehaviour
 
         clear = false;
 
-        if ((int)blockType % 2 == 0)
-            location = new int[2];
-        else
-            location = new int[3];
-
-        System.Array.Clear(location, 0, location.Length);
-
-        init = false;
+        //BlockUnit의 트리거로 초기화를 했을때 필요
+        //if ((int)blockType % 2 == 0)
+        //    location = new int[2];
+        //else
+        //    location = new int[3];
+        //System.Array.Clear(location, 0, location.Length);
+        //init = false;
 
         blockManager = GameObject.Find("BlockManager").GetComponent<BlockManager>();
+
+        mouseController = GameObject.Find("MouseCotroller").GetComponent<MouseController_CarPuzzle>();
     }
 
     void Update()
@@ -99,6 +103,17 @@ public class Block : MonoBehaviour
             //    return;
 
             destination = transform.position + (direction * 1.3f);
+
+            if (d == 0) //왼쪽으로 이동
+            {
+                if (location[0] == 12 && blockType == BlockType.Me) //도착지점!!
+                {
+                    destination = transform.position + (direction * 2.6f);
+
+                    //destination += (direction * 1.3f);
+                    mouseController.GameClear = true;
+                }
+            }
 
             Set_location();
 
@@ -169,7 +184,7 @@ public class Block : MonoBehaviour
                 location[i] = _l;
                 _l++;
             }
-            else if(blockType == BlockType.V2 || blockType == BlockType.V3)
+            else if (blockType == BlockType.V2 || blockType == BlockType.V3)
             {
                 location[i] = _l;
                 _l += 6;

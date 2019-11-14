@@ -1,5 +1,5 @@
 ﻿//
-//2019-10-29
+//2019-11-14
 //도착지에 들어가야하는 블럭
 //
 using System.Collections;
@@ -12,7 +12,7 @@ public class KeyBlock : MonoBehaviour
 
     void start()
     {
-        GetComponent<Block>().bType = 0;
+        //GetComponent<Block>().bType = 0;
     }
 
     void OnTriggerEnter(Collider coll)

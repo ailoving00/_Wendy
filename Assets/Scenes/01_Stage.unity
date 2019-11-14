@@ -5521,6 +5521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 4
+  location: 1000000011000000
 --- !u!114 &1723051584753482324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5658,6 +5659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 0
+  location: 1a0000001b000000
 --- !u!4 &1723051584938885585
 Transform:
   m_ObjectHideFlags: 0
@@ -5876,6 +5878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 1
+  location: 150000001600000017000000
 --- !u!4 &1723051585178363443
 Transform:
   m_ObjectHideFlags: 0
@@ -6012,6 +6015,7 @@ MonoBehaviour:
   _mainCam: {fileID: 1100978265}
   _exit: {fileID: 1723051586414346425}
   _me: {fileID: 1723051584753482326}
+  GameClear: 0
 --- !u!4 &1723051585248143427
 Transform:
   m_ObjectHideFlags: 0
@@ -6100,6 +6104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 0
+  location: 1c0000001d000000
 --- !u!4 &1723051585321131761
 Transform:
   m_ObjectHideFlags: 0
@@ -6443,6 +6448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 0
+  location: 0300000004000000
 --- !u!4 &1723051585649108831
 Transform:
   m_ObjectHideFlags: 0
@@ -6545,6 +6551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 2
+  location: 0e00000014000000
 --- !u!4 &1723051585839494300
 Transform:
   m_ObjectHideFlags: 0
@@ -6858,6 +6865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 2
+  location: 050000000b000000
 --- !u!4 &1723051586213553703
 Transform:
   m_ObjectHideFlags: 0
@@ -7029,6 +7037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 2
+  location: 1300000019000000
 --- !u!4 &1723051586357029201
 Transform:
   m_ObjectHideFlags: 0
@@ -7319,6 +7328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 0
+  location: 0100000002000000
 --- !u!4 &1723051586518985483
 Transform:
   m_ObjectHideFlags: 0
@@ -7442,6 +7452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 1
+  location: 060000000700000008000000
 --- !u!4 &1723051586539504379
 Transform:
   m_ObjectHideFlags: 0
@@ -7565,6 +7576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   bType: 3
+  location: 0c0000001200000018000000
 --- !u!4 &1723051586599443062
 Transform:
   m_ObjectHideFlags: 0

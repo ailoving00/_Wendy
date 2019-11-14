@@ -35,6 +35,8 @@ public class MouseController_CarPuzzle : MonoBehaviour
     private Vector3 absVec;
     private float subXY;
 
+    public bool GameClear;
+
     void Start()
     {
         if (_blocks == null)
@@ -53,10 +55,15 @@ public class MouseController_CarPuzzle : MonoBehaviour
         subVecs = Vector3.zero;
         absVec = Vector3.zero;
         subXY = 0f;
+
+        GameClear = false;
     }
 
     void Update()
     {
+        if (GameClear)
+            return;
+
         if (Input.GetMouseButtonDown(0)) //OnMouseDown()
         {
             target = GetClickedObject();

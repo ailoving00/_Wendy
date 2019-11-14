@@ -1,7 +1,8 @@
 ﻿//
-//2019-11-05
+//2019-11-14
 //[완]보드 타일화 유닛
 //블럭배열을 초기화할시에 필요한 bool 변수 제거, 블럭으로 위치 변경.
+//기존의 트리거로 블럭 위치 초기화한 부분을 사용 X, Block.cs 로 이동
 //
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ public class BlockUnit : MonoBehaviour
         {
             script.isBlock(unitNumber);
 
-            coll.gameObject.GetComponent<Block>().initializeLocation(unitNumber);
+            //coll.gameObject.GetComponent<Block>().initializeLocation(unitNumber);
         }
     }
 

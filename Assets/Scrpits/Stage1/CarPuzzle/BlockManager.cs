@@ -1,5 +1,5 @@
 ﻿//
-//2019-11-05
+//2019-11-14
 //[완]보드 타일화
 //
 using System.Collections;
@@ -9,6 +9,8 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
     private int[] blockArray = new int[36];
+
+   // public GameObject[] blockArray = new int[36];
 
     void Start()
     {
@@ -58,7 +60,6 @@ public class BlockManager : MonoBehaviour
 
                 if ((start % 6) != 0)
                 {
-
                     if (blockArray[index] == 1)
                         return true;
                     else

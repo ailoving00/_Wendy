@@ -9,7 +9,7 @@ public class TitleButton : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("01_Stage");
+        SceneManager.LoadScene("02_3_Stage copy");
     }
 
     public void ExitButton()

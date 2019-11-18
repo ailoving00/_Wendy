@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class TitleButton : MonoBehaviour
 {
-
     public void StartButton()
     {
         SceneManager.LoadScene("02_3_Stage copy");
@@ -16,8 +15,12 @@ public class TitleButton : MonoBehaviour
     {
         Application.Quit();
     }
-    
-    // Update is called once per frame
+
+    void Start()
+    {
+        Screen.SetResolution(1920, 1080, false);
+    }
+
     void Update()
     {
         

@@ -18,14 +18,21 @@ public class MouseAimCamera_temp : MonoBehaviour
 
     float angle;
 
+    public bool gameEnd;
+
     void Start()
     {
         followCamera = GameObject.Find("MainCamera").GetComponent<FollowCamera_temp>();
         offset = followCamera.offset;
+
+        gameEnd = false;
     }
 
     void LateUpdate()
     {
+        if (gameEnd)
+            return;
+
         if (Input.GetMouseButton(1))
         {
             offset = followCamera.offset;

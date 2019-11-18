@@ -25,9 +25,13 @@ public class Player : MonoBehaviour
 
     Animator _animator = null;
 
+    public bool gameEnd;
+
     void Start()
     {
         _animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>();
+
+        gameEnd = false;
     }
 
     //protected override void Update() //활동제한
@@ -42,6 +46,9 @@ public class Player : MonoBehaviour
     //}
     void Update()
     {
+        if (gameEnd)
+            return;
+
         GetInput();
     }
 

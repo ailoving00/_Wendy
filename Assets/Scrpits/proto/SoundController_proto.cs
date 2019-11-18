@@ -27,7 +27,7 @@ public class SoundController_proto : MonoBehaviour
         _SFX[1].Play();
     }
 
-    public void play_kitchen()
+    public void play_reset()
     {
         _SFX[2].Play();
     }

@@ -14,6 +14,8 @@ public class ResetButton : MonoBehaviour
 
     private bool state; //추가***
 
+    SoundController_proto soundController;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +28,12 @@ public class ResetButton : MonoBehaviour
 
         state = false; //추가***
         layermask = 1 << LayerMask.NameToLayer("Light"); //추가***
-    }
 
+        soundController = FindObjectOfType<SoundController_proto>();
+    }
 
     private GameObject GetClickedObject()
     {
-
         RaycastHit hit;
         GameObject _ResetButton = null;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //마우스 포인트 근처 좌표를 만든다. 
@@ -60,6 +62,8 @@ public class ResetButton : MonoBehaviour
             {
                 if (_ResetButton.Equals(gameObject))
                 {
+                    soundController.play_reset();
+
                     for (int i = 0; i <= 7; i++)
                     {
                         //  Debug.Log(i);

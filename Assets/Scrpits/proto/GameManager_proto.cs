@@ -26,6 +26,9 @@ public class GameManager_proto : MonoBehaviour
 
     public bool[] LightPuzzleClearCheck;
 
+    MouseAimCamera_temp mouseAimCamera;
+    Player playerScript;
+
     private void Awake()
     {
         timer = 120f; //120
@@ -41,6 +44,11 @@ public class GameManager_proto : MonoBehaviour
 
         LightPuzzleClearCheck = new bool[8];
         System.Array.Clear(LightPuzzleClearCheck, 0, LightPuzzleClearCheck.Length);
+
+        mouseAimCamera = GameObject.Find("MainCamera").GetComponent<MouseAimCamera_temp>();
+        playerScript = GameObject.Find("Player").GetComponent<Player>();
+
+        Screen.SetResolution(1920, 1080, false);
     }
 
     private void Update()
@@ -64,10 +72,13 @@ public class GameManager_proto : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 0;
+                //Time.timeScale = 0;
                 gameover = true;
 
                 GameOver.gameObject.SetActive(true);
+
+                mouseAimCamera.gameEnd = true;
+                playerScript.gameEnd = true;
             }
 
             //출력
@@ -90,8 +101,6 @@ public class GameManager_proto : MonoBehaviour
                     GamePlay.gameObject.SetActive(true);
                     gamestart = true;
                 }
-
-                //Application.Quit();
             }
         }
     }
@@ -109,10 +118,13 @@ public class GameManager_proto : MonoBehaviour
                 return;
         }
 
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         gameclear = true;
 
         GameClear.gameObject.SetActive(true);
+
+        mouseAimCamera.gameEnd = true;
+        playerScript.gameEnd = true;
     }
 }
 

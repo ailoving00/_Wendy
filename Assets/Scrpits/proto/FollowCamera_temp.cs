@@ -12,7 +12,7 @@ public class FollowCamera_temp : MonoBehaviour
     public float desiredAngle;
     public float angle;
 
-    public float zPosMin = 0.2f;
+    public float zPosMin = 1.2f; //0.2가 최대
     public float zPosMax = 2.4f;
     float zOffset;
 
@@ -90,9 +90,6 @@ public class FollowCamera_temp : MonoBehaviour
                 }
             }
         }
-
-
-
     }
 
     Vector3 ClampOffset(Vector3 ofs, Vector3 vec, float zMin, float ZMax, int a) //a는 min max 중에 어떤 것을 검사할 건지

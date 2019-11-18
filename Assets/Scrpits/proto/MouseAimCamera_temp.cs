@@ -1,5 +1,5 @@
 ﻿//
-//2019-10-13
+//2019-11-18
 //우클릭으로 카메라 에임 돌리기
 //
 
@@ -10,10 +10,13 @@ using UnityEngine;
 public class MouseAimCamera_temp : MonoBehaviour
 {
     public GameObject target;
-    public float rotateSpeed = 5;
+    public GameObject player;
+    public float rotateSpeed = 1;
 
     FollowCamera_temp followCamera;
     Vector3 offset;
+
+    float angle;
 
     void Start()
     {
@@ -28,11 +31,17 @@ public class MouseAimCamera_temp : MonoBehaviour
             offset = followCamera.offset;
 
             float horizontal = Input.GetAxis("Mouse X") * rotateSpeed;
-            target.transform.Rotate(0, horizontal, 0);
+            player.transform.Rotate(0, horizontal, 0);
 
+            float currentAngle = transform.eulerAngles.y;
             float desiredAngleY = target.transform.eulerAngles.y;
-            Quaternion rotation = Quaternion.Euler(0, desiredAngleY, 0);
+
+            angle = Mathf.LerpAngle(currentAngle, desiredAngleY, Time.deltaTime * followCamera.damping);
+
+            Quaternion rotation = Quaternion.Euler(0, angle, 0);
             transform.position = target.transform.position - (rotation * offset);
+
+            transform.LookAt(target.transform);
         }
     }
 }

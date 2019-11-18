@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>();
     }
 
     //protected override void Update() //활동제한
@@ -64,6 +64,15 @@ public class Player : MonoBehaviour
 
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
+
+        //Animation transition
+        if (h == 0 && v == 0)
+        {
+            _animator.SetBool("IsWalking", false);
+            //Debug.Log("Right Arrow Button Released");
+        }
+        else
+            _animator.SetBool("IsWalking", true);
 
         //Move
         float horizontal = h * turningSpeed * Time.deltaTime;

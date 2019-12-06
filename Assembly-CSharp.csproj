@@ -68,6 +68,8 @@
      <Compile Include="Assets\Scrpits\Stage1\CarPuzzle\MouseController_CarPuzzle.cs" />
      <Compile Include="Assets\Scrpits\Stage1\ChangeScene01.cs" />
      <Compile Include="Assets\Scrpits\Stage1\Controller\Player.cs" />
+     <Compile Include="Assets\Scrpits\Stage1\Controller\Player_1stage.cs" />
+     <Compile Include="Assets\Scrpits\Stage1\Controller\ThreePersonCamera_1stage.cs" />
      <Compile Include="Assets\Scrpits\stage2\Animation\Camera_Babysee.cs" />
      <Compile Include="Assets\Scrpits\stage2\CameraFollow.cs" />
      <Compile Include="Assets\Scrpits\stage2\eyesight_baby.cs" />

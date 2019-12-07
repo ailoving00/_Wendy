@@ -2000,7 +2000,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 049886ac1c9be8d4db643c92eee3880f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4458,7 +4458,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -4515,13 +4515,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741973791}
-  m_LocalRotation: {x: -0.0002627615, y: -0.9063077, z: 0.42261812, w: -0.0005630143}
+  m_LocalRotation: {x: -0.15035288, y: -0.8259431, z: 0.4768585, w: -0.26041883}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50.000004, y: -180.07098, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: -215, z: 0}
 --- !u!1 &1756128044
 GameObject:
   m_ObjectHideFlags: 0
@@ -4534,6 +4534,9 @@ GameObject:
   - component: {fileID: 1756128046}
   - component: {fileID: 1756128045}
   - component: {fileID: 1756128048}
+  - component: {fileID: 1756128051}
+  - component: {fileID: 1756128050}
+  - component: {fileID: 1756128049}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -4558,8 +4561,8 @@ Camera:
   m_GameObject: {fileID: 1756128044}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4600,7 +4603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756128044}
   m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 0, y: 12.8, z: 24.85}
+  m_LocalPosition: {x: 0, y: 13, z: 25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4625,6 +4628,171 @@ MonoBehaviour:
   desiredAngle: 0
   angle: 0
   Criteria: {fileID: 8041022912120263389}
+--- !u!114 &1756128049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756128044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18a7ad8e37fa4e2297253d9ab6798c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1756128050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756128044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3646e1a2090b4cb69abab93707e342b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sun: {fileID: 1741973791}
+  _enableWMAPI: 0
+  _forceForwardRenderingPath: 0
+  _debugSnow: 0
+  _deferredCameraEvent: 0
+  _showSnowInSceneView: 0
+  _forceSPSR: 0
+  _minimumAltitude: -10
+  _minimumAltitudeVegetationOffset: 0
+  _snowTint: {r: 1, g: 1, b: 1, a: 1}
+  _altitudeScatter: 20
+  _altitudeBlending: 25
+  _distanceOptimization: 0
+  _detailDistance: 100
+  _distanceSnowColor: {r: 0.7882, g: 0.8235, b: 0.9921, a: 1}
+  _distanceIgnoreNormals: 0
+  _distanceIgnoreCoverage: 0
+  _showCoverageGizmo: 0
+  _smoothCoverage: 1
+  _coverageExtension: 1
+  _coverageResolution: 1
+  _groundCoverage: 0
+  _slopeThreshold: 0.7
+  _slopeSharpness: 0.5
+  _slopeNoise: 0.5
+  _distanceSlopeThreshold: 0.7
+  _coverageMask: 0
+  _coverageMaskTexture: {fileID: 0}
+  _coverageMaskWorldSize: {x: 2000, y: 0, z: 2000}
+  _coverageMaskWorldCenter: {x: 0, y: 0, z: 0}
+  _snowQuality: 30
+  _coverageUpdateMethod: 1
+  coverageDepthDebug: 0
+  _reliefAmount: 0.3
+  _occlusion: 1
+  _occlusionIntensity: 1.2
+  _glitterStrength: 0.75
+  _footprints: 0
+  _footprintsTexture: {fileID: 2800000, guid: f8375a98c165e4a499451f9b2ed39ca2, type: 3}
+  _footprintsAutoFPS: 1
+  _footprintsDuration: 60
+  _footprintsScale: 1
+  _footprintsObscurance: 0.1
+  _snowfall: 1
+  _snowfallIntensity: 0.1
+  _snowfallSpeed: 1
+  _snowfallDistance: 100
+  _snowfallUseIllumination: 0
+  _snowfallReceiveShadows: 0
+  _maxExposure: 0.85
+  _smoothness: 0.9
+  _snowAmount: 1
+  _enableHotKeys: 0
+  _cameraFrost: 1
+  _cameraFrostIntensity: 0.35
+  _cameraFrostSpread: 1.2
+  _cameraFrostDistortion: 0.25
+  _allowBatchedMeshes: 0
+  _floatingPointNormalsBuffer: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _excludedCastShadows: 1
+  _zenithalMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _defaultExclusionLayer: 27
+  _terrainMarks: 0
+  _terrainMarksDuration: 180
+  _terrainMarksDefaultSize: 0.25
+  _terrainMarksAutoFPS: 0
+  _terrainMarksViewDistance: 200
+  _terrainMarksStepMaxDistance: 20
+  _terrainMarksRotationThreshold: 3
+  terrainMarksTextureSize: 2048
+  _updateSpeedTree: 0
+  _speedTreeRemoveLeaves: 0
+  _fixMaterials: 0
+  _opaqueCutout: 0
+  _fixTreeOpaque: 0
+  _billboardCoverage: 1.4
+  _grassCoverage: 0.75
+  _groundCheck: 0
+  _characterController: {fileID: 0}
+  _groundDistance: 1
+  _maskEditorEnabled: 0
+  _maskTextureResolution: 1024
+  _maskBrushMode: 1
+  _maskBrushWidth: 20
+  _maskBrushFuzziness: 0.5
+  _maskBrushOpacity: 0.25
+--- !u!114 &1756128051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756128044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d4149521456498592a8e5f7798456e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _effectType: 0
+  _preset: 7
+  _profile: {fileID: 0}
+  _profileSync: 0
+  _useFogVolumes: 0
+  _enableDithering: 0
+  _ditherStrength: 0.03
+  _alpha: 1
+  _noiseStrength: 0.7
+  _noiseScale: 0.1
+  _distance: 0
+  _distanceFallOff: 0
+  _maxDistance: 0.999
+  _maxDistanceFallOff: 0
+  _height: 1
+  _maxHeight: 100
+  _heightFallOff: 1
+  _baselineHeight: 0
+  _clipUnderBaseline: 0
+  _turbulence: 0.4
+  _speed: 0.005
+  _windDirection: {x: 1, y: 0, z: 1}
+  _color: {r: 0.89, g: 0.89, b: 0.89, a: 1}
+  _color2: {r: 0.89, g: 0.89, b: 0.89, a: 1}
+  _skyHaze: 35
+  _skySpeed: 0.3
+  _skyNoiseStrength: 0.32
+  _skyAlpha: 0.33
+  _sun: {fileID: 0}
+  _fogOfWarEnabled: 0
+  _fogOfWarCenter: {x: 0, y: 0, z: 0}
+  _fogOfWarSize: {x: 1024, y: 0, z: 1024}
+  _fogOfWarTextureSize: 256
+  _useSinglePassStereoRenderingMatrix: 0
+  _useXZDistance: 0
+  _scattering: 0.7
+  _scatteringColor: {r: 1, g: 1, b: 0.8, a: 1}
+  fogMat: {fileID: 0}
 --- !u!1 &1840927556
 GameObject:
   m_ObjectHideFlags: 0
@@ -7986,6 +8154,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &2150268952132076326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2150268952132076345}
+  m_Layer: 0
+  m_Name: standard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2150268952132076345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2150268952132076326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_Children: []
+  m_Father: {fileID: 8041022913004450782}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8041022911818310844
 Transform:
   m_ObjectHideFlags: 0
@@ -8084,8 +8282,7 @@ MonoBehaviour:
   desiredAngle: 0
   angle: 0
   target: {fileID: 8041022911818310845}
-  standard: {fileID: 3623278564003537605, guid: aeb6e95269069094d8f58199bedfd8b6,
-    type: 3}
+  standard: {fileID: 2150268952132076326}
   atanAngle: 0
   zangle: 0
   desiredZAngle: 0
@@ -8108,6 +8305,7 @@ Transform:
   m_Children:
   - {fileID: 8041022912120263388}
   - {fileID: 8041022911818310844}
+  - {fileID: 2150268952132076345}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

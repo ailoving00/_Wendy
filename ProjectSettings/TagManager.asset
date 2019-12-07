@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Exit
   - Floor
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - CameraObstacle
   - Light
-  - 
+  - Item
   - 
   - 
   - 

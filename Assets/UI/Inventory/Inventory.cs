@@ -1,7 +1,7 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -15,19 +15,29 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject go_SlotsParent;
 
-    // 슬롯들.
+
+    // 슬롯들
     private Slot[] slots;
+
 
 
     // Use this for initialization
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
+      
+
+        // up_Light.GetComponent<SpriteRenderer>().sprite = Resources.Load("up_", typeof(Sprite)) as Sprite;
+        // down_Light.GetComponent<SpriteRenderer>().sprite = Resources.Load("down_", typeof(Sprite)) as Sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+
+
 
     }
 
@@ -58,6 +68,10 @@ public class Inventory : MonoBehaviour
         }
     }
 }
+
+
+
+
 
 ////본인코드 
 //using System.Collections;

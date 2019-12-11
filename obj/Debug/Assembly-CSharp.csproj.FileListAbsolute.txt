@@ -265,3 +265,6 @@ C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\nunit.framework.xml
 C:\Users\User01\Desktop\_Wendy\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\User01\Desktop\_Wendy\obj\Debug\Assembly-CSharp.dll
 C:\Users\User01\Desktop\_Wendy\obj\Debug\Assembly-CSharp.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.UI.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.UI.xml

@@ -100,11 +100,14 @@
     <Compile Include="Assets\Scrpits\stage2\Test_eyeside.cs" />
     <Compile Include="Assets\Scrpits\TitleButton.cs" />
     <Compile Include="Assets\UI\Inventory\ActionController.cs" />
+    <Compile Include="Assets\UI\Inventory\Box_Block.cs" />
+    <Compile Include="Assets\UI\Inventory\down_Wheel_sprite.cs" />
     <Compile Include="Assets\UI\Inventory\GameMgr.cs" />
     <Compile Include="Assets\UI\Inventory\Inventory.cs" />
     <Compile Include="Assets\UI\Inventory\Item.cs" />
     <Compile Include="Assets\UI\Inventory\ItemPickUp.cs" />
     <Compile Include="Assets\UI\Inventory\Slot.cs" />
+    <Compile Include="Assets\UI\Inventory\up_Wheel_sprite.cs" />
     <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFOOrthogonal.shader" />
     <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMUnlit.shader" />
     <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DepthBlur.shader" />

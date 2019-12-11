@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameMgr : MonoBehaviour
     GameObject[] hi;
     //일시정지 여부를 판단하는 변수
     private bool isPaused;
+
 
     //Inventory 의 CanvasGroup 컴포넌트를 저장할 변수 
     public CanvasGroup inventoryCG;

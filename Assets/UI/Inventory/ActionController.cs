@@ -42,7 +42,7 @@ public class ActionController : MonoBehaviour
 
     private void TryAction()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetMouseButtonDown(0))
         {
             CheckItem();
             CanPickUp();
@@ -82,7 +82,7 @@ public class ActionController : MonoBehaviour
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "휙득" + "[E]";
+        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "휙득" + "[Click]";
 
     }
 

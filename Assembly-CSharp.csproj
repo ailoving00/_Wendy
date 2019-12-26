@@ -176,6 +176,7 @@
     <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGDesktopPlus.shader" />
     <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\EraseGeometry.shader" />
     <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFOSimple.shader" />
+    <None Include="Assets\Grimoire\ReadMe.txt" />
     <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DynamicFogDither.cginc" />
     <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMStandardShaderSolid.shader" />
     <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\EraseShader.shader" />

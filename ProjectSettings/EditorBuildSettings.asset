@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/proto/00_Title copy.unity
+    path: Assets/Dummy/ProtoScenes/00_Title copy.unity
     guid: 718959b4d9cb11545a589e04b1ab6724
   - enabled: 1
-    path: Assets/Scenes/proto/02_3_Stage copy.unity
+    path: Assets/Dummy/ProtoScenes/02_3_Stage copy.unity
     guid: dce73ffbb354c974e8f945ee5b302528
   m_configObjects: {}

@@ -10,7 +10,6 @@ public class GameMgr : MonoBehaviour
     public GameObject Inventory_Panel;
     public RectTransform scrollRectView;
     private Slot[] slots;
-    public CanvasGroup[] inventoryCG;
     private bool check;
 
 
@@ -20,7 +19,6 @@ public class GameMgr : MonoBehaviour
 
     void Start()
     {
-        OnInventoryOpen(false);
         check = false;
 
         RectTransform scrollRectView = GetComponent<RectTransform>();
@@ -47,7 +45,7 @@ public class GameMgr : MonoBehaviour
                 check = true;
                 SlideInventory(true);
             }
-                OnInventoryOpen(check);
+              
         }
 
         //Move scroll
@@ -69,15 +67,7 @@ public class GameMgr : MonoBehaviour
     }
 
 
-    public void OnInventoryOpen(bool isOpened)
-    {
-        for (int i = 0; i<4; i++)
-        {
-            inventoryCG[i].alpha = (isOpened) ? 1.0f : 0.0f;
-            inventoryCG[i].interactable = isOpened;
-            inventoryCG[i].blocksRaycasts = isOpened;
-        }
-    }
+
 
 
     public void SlideInventory(bool is2Opened)

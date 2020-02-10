@@ -862,3 +862,5 @@ C:\Users\505-163\Desktop\졸업작품\_Wendy\Temp\bin\Debug\UnityEditor.iOS.Exte
 C:\Users\505-163\Desktop\졸업작품\_Wendy\obj\Debug\Assembly-CSharp-Editor.csprojResolveAssemblyReference.cache
 C:\Users\505-163\Desktop\졸업작품\_Wendy\obj\Debug\Assembly-CSharp-Editor.dll
 C:\Users\505-163\Desktop\졸업작품\_Wendy\obj\Debug\Assembly-CSharp-Editor.pdb
+C:\Users\505-163\Desktop\Wendy\_Wendy\obj\Debug\Assembly-CSharp-Editor.dll
+C:\Users\505-163\Desktop\Wendy\_Wendy\obj\Debug\Assembly-CSharp-Editor.pdb

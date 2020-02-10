@@ -6,11 +6,7 @@ public class Flashlight_PRO : MonoBehaviour
 {
 	[Space(10)]
 	[SerializeField()] GameObject Lights; // all light effects and spotlight
-	[SerializeField()] AudioSource switch_sound; // audio of the switcher
-	[SerializeField()] ParticleSystem dust_particles; // dust particles
 
-    [SerializeField]
-    private string Switch_sound;
 
 	private Light spotlight;
 	private Material ambient_light_material;
@@ -33,7 +29,6 @@ public class Flashlight_PRO : MonoBehaviour
     void Start () 
 	{
         value = true;
-        Enable_Particles(true);
         Switch(true);
         // cache components
         spotlight = Lights.transform.Find ("Spotlight").GetComponent<Light> ();
@@ -59,7 +54,7 @@ public class Flashlight_PRO : MonoBehaviour
                 value = false;
                 Switch(false);
                 // Enable_Particles(false);
-                SoundManger.instance.PlaySound(Switch_sound);
+                SoundManger.instance.PlaySound("Switch");
             }
 
             else
@@ -68,7 +63,7 @@ public class Flashlight_PRO : MonoBehaviour
                 value = true;
                 Switch(true);
                 // Enable_Particles(true);
-                SoundManger.instance.PlaySound(Switch_sound);
+                SoundManger.instance.PlaySound("Switch");
 
             }
             Switch(value);
@@ -116,26 +111,6 @@ public class Flashlight_PRO : MonoBehaviour
 
 
 
-
-	/// <summary>
-	/// enables the particles.
-	/// </summary>
-	public void Enable_Particles(bool value)
-	{
-		if(dust_particles != null)
-		{
-			if(value)
-			{
-				dust_particles.gameObject.SetActive(true);
-				dust_particles.Play();
-			}
-			else
-			{
-				dust_particles.Stop();
-				dust_particles.gameObject.SetActive(false);
-			}
-		}
-	}
 
 
     private void FlashLightAppear()

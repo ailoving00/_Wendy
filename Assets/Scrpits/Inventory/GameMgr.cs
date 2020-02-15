@@ -9,28 +9,17 @@ public class GameMgr : MonoBehaviour
     public Transform[] points;
     public GameObject Inventory_Panel;
     public RectTransform scrollRectView;
-    private Slot[] slots;
     private bool check;
-
-
-    private bool isPaused;
-
 
 
     void Start()
     {
         check = false;
-
         RectTransform scrollRectView = GetComponent<RectTransform>();
         RectTransform Inventory_Panel = GetComponent<RectTransform>();
-
-        //Vector2 Inventory_false = Inventory_Panel.anchoredPosition - new Vector2(46, 0);
-       // Vector2 Inventory_true = Inventory_Panel.anchoredPosition + new Vector2(46, 0);
-       // 부드러운 이동은 ~ 언제나 애니메이션이 답이야! 
     }
 
    
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -57,19 +46,6 @@ public class GameMgr : MonoBehaviour
     }
 
 
-    //Need to modify
-    public void OnPauseClick()
-    {
-        isPaused = !isPaused;
-        Time.timeScale = (isPaused) ? 0.0f : 1.0f;
-
-        var playObj = GameObject.FindGameObjectsWithTag("Camera");
-    }
-
-
-
-
-
     public void SlideInventory(bool is2Opened)
     {
         Animator animator = Inventory_Panel.GetComponent<Animator>();
@@ -80,7 +56,4 @@ public class GameMgr : MonoBehaviour
             animator.SetBool("open", !isOpen);
         }
     }
-
-
-
 }

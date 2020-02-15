@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public static bool inventoryActivated = false;
+    static public Inventory instance;
 
     [SerializeField]
     private GameObject go_InventoryBase;
@@ -15,51 +15,51 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private GameObject go_SlotsParent;
 
-
-
     private Slot[] slots;
-    public GameObject[] NoteItemCG;
-    public GameObject CarPuzzle;
 
-    int BlockCount = 0;
-    bool check;
-
-
+    private bool remove_count = false;
+    public bool Remove_Count { get { return remove_count; } } 
 
     void Start()
     {
         slots = go_SlotsParent.GetComponentsInChildren<Slot>();
-        CarPuzzle.SetActive(false);
     }
 
-
-    public void AcquireItem(Item _item, int _count = 1)
+    public void RemoveSlot(Item _item)
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (Item.ItemType.Read  != _item.itemType)
+            if (slots[i].item != null)
             {
-                if(Item.ItemType.Equipment != _item.itemType)
+                if (slots[i].item == _item)
                 {
-                    if (slots[i].item == null)
-                    {
-                        slots[i].AddItem(_item, _count);
+                    slots[i].RemoveItem(_item);
+                    remove_count = true;
+                    Debug.Log(remove_count);
+                    return;
+                }
+                else { Debug.Log("인벤토리에 해당 아이템이 없습니다"); remove_count = false; }
+            }
+            remove_count = false;
+        }
 
-
-                        if (Item.ItemType.Puzzle == _item.itemType)
-                        {
-                            BlockCount++;
-                            if (BlockCount == 4) { CarPuzzle.SetActive(true); }
-                        }
-
-                        return;
-                    }
+    }
+    public void AcquireItem(Item _item)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (Item.ItemType.Read != _item.itemType && Item.ItemType.Equipment != _item.itemType)
+            {
+                if (slots[i].item == null)
+                {
+                    slots[i].AddItem(_item);
+                    return;
                 }
             }
         }
     }
-
 }
+
 
 
 

@@ -84,10 +84,7 @@ public class Flashlight_PRO : MonoBehaviour
     public void Change_Intensivity(float percentage)
 	{
 		percentage = Mathf.Clamp (percentage, 0, 100);
-
-
 		spotlight.intensity = (8 * percentage) / 100;
-
 		ambient_light_material.SetColor ("_TintColor", new Color(ambient_mat_color.r , ambient_mat_color.g , ambient_mat_color.b , percentage/2000)); 
 	}
 

@@ -5146,7 +5146,6 @@ GameObject:
   - component: {fileID: 1756128047}
   - component: {fileID: 1756128046}
   - component: {fileID: 1756128045}
-  - component: {fileID: 1756128052}
   - component: {fileID: 1756128048}
   - component: {fileID: 1756128051}
   - component: {fileID: 1756128050}
@@ -5154,7 +5153,7 @@ GameObject:
   - component: {fileID: 1756128054}
   - component: {fileID: 1756128053}
   - component: {fileID: 1756128055}
-  - component: {fileID: 1756128056}
+  - component: {fileID: 1756128052}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5420,21 +5419,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1756128044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309489c756fd75940a8fd00a6ce4c2a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6fffd0daa9f50e646bab05a7d42b56d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   theInventory: {fileID: 8299617437017492790}
-  range: 20
+  range: 2.5
   layerMask:
     serializedVersion: 2
-    m_Bits: 3072
+    m_Bits: 1024
   actionText: {fileID: 5179229483809243482}
-  Read_itemPlane: {fileID: 8299617435710080423}
-  Note1: {fileID: 8299617436034707266}
-  Note2: {fileID: 8299617436034207185}
-  Note3: {fileID: 8299617435884457729}
-  Note4: {fileID: 8299617436433963972}
-  FlashlightItem: {fileID: 0}
 --- !u!114 &1756128053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5499,30 +5492,6 @@ MonoBehaviour:
   rendererList:
   - {fileID: 646455451}
   index: 2
---- !u!114 &1756128056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756128044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309489c756fd75940a8fd00a6ce4c2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theInventory: {fileID: 8299617437017492790}
-  range: 2.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1024
-  actionText: {fileID: 5179229483809243482}
-  Read_itemPlane: {fileID: 8299617435710080423}
-  Note1: {fileID: 8299617436034707266}
-  Note2: {fileID: 8299617436034207185}
-  Note3: {fileID: 8299617435884457729}
-  Note4: {fileID: 8299617436433963972}
-  FlashlightItem: {fileID: 0}
 --- !u!1001 &1791860113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9613,10 +9582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617436368211602}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435121242058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9686,10 +9652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617436540362116}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435206749841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10088,10 +10051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617435914168230}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435534462331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10134,10 +10094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617435817840573}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435555659305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10456,10 +10413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617437152055636}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435675317904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10989,10 +10943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617435476625938}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435923898307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11082,10 +11033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617436933632262}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435971962877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11183,10 +11131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617437117534141}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617435978841835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11276,10 +11221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617436734464731}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617436002651675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11574,10 +11516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617436931974750}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!1 &8299617436368211600
 GameObject:
   m_ObjectHideFlags: 0
@@ -12240,10 +12179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617437194760136}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!1 &8299617436840017715
 GameObject:
   m_ObjectHideFlags: 0
@@ -12533,10 +12469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617436836729865}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617436944323526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12634,8 +12567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go_InventoryBase: {fileID: 8299617435735744335}
   go_SlotsParent: {fileID: 8299617436588144653}
-  NoteItemCG: []
-  CarPuzzle: {fileID: 0}
 --- !u!1 &8299617437017492793
 GameObject:
   m_ObjectHideFlags: 0
@@ -12767,10 +12698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617435386263880}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617437082618967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13242,10 +13170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 0}
-  itemCount: 0
   itemImage: {fileID: 8299617435643990517}
-  text_Count: {fileID: 0}
-  go_CountImage: {fileID: 0}
 --- !u!114 &8299617437226057118
 MonoBehaviour:
   m_ObjectHideFlags: 0

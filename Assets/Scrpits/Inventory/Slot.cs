@@ -5,15 +5,8 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour
 {
-    public Item item; 
-    public int itemCount;
+    public Item item;
     public Image itemImage;
-
-
-    [SerializeField]
-    private Text text_Count;
-    [SerializeField]
-    private GameObject go_CountImage;
 
 
     //slot item alpha
@@ -25,19 +18,24 @@ public class Slot : MonoBehaviour
     }
 
 
-    public void AddItem(Item _item, int _count = 1)
+    public void AddItem(Item _item)
     {
         item = _item;
-        itemCount = _count;
         itemImage.sprite = item.itemImage;
 
         SetColor(1);
     }
-    
+
+    public void RemoveItem(Item _item)
+    {
+        item = null;
+        itemImage.sprite = null;
+        SetColor(0);
+    }
 
     public void EquipmentItem()
     {
-        if(item != null)
+        if (item != null)
         {
             if (item.itemType == Item.ItemType.Equipment)
             {
@@ -50,12 +48,11 @@ public class Slot : MonoBehaviour
     private void ClearSlot()
     {
         item = null;
-        itemCount = 0;
+
         itemImage.sprite = null;
         SetColor(0);
 
-        text_Count.text = "0";
-        go_CountImage.SetActive(false);
+
     }
 }
 

@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - Floor
   - Item
+  - ItemSet
   layers:
   - Default
   - TransparentFX

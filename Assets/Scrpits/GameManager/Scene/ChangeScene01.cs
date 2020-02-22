@@ -41,13 +41,10 @@ public class ChangeScene01 : MonoBehaviour
             _Cleardoor = GetClickedObject();
 
 
-            if (_Cleardoor.Equals(gameObject))
-            {
-
-                SceneManager.LoadScene("02_3_Stage");
-
-
-            }
+            //if (_Cleardoor.Equals(gameObject))
+            //{
+            //    SceneManager.LoadScene("02_3_Stage");
+            //}
         }
     }
 }

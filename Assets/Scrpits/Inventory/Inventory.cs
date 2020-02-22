@@ -35,16 +35,20 @@ public class Inventory : MonoBehaviour
                 {
                     slots[i].RemoveItem(_item);
                     remove_count = true;
-                    Debug.Log(remove_count);
+                    //Debug.Log(remove_count);
                     return;
                 }
-                else { Debug.Log("인벤토리에 해당 아이템이 없습니다"); remove_count = false; }
+                else
+                {
+                    //Debug.Log("인벤토리에 해당 아이템이 없습니다"); 
+                    remove_count = false;
+                }
             }
             remove_count = false;
         }
 
     }
-    public void AcquireItem(Item _item)
+    public bool AcquireItem(Item _item)
     {
         for (int i = 0; i < slots.Length; i++)
         {
@@ -53,10 +57,31 @@ public class Inventory : MonoBehaviour
                 if (slots[i].item == null)
                 {
                     slots[i].AddItem(_item);
-                    return;
+                    return true;
                 }
             }
         }
+        return false;
+    }
+
+    // - 아이템 사용하기
+    public GameObject get_Item(int index) // 아이템 게임오브젝트 얻기
+    {
+        return slots[index].item.itemPrefab;
+    }
+    public int get_ItemCode(int index) // 아이템 코드 얻기
+    {
+        return slots[index].item.itemCode;
+    }
+
+    public void clear_Slot(int index) 
+    {
+        slots[index].ClearSlot();
+    }
+
+    public bool IsVoid_Slot(int index)
+    {
+        return slots[index].IsVoid();
     }
 }
 

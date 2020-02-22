@@ -5,4 +5,9 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public Item item;
+
+    public int get_itemCode()
+    {
+        return item.itemCode;
+    }
 }

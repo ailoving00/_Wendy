@@ -10,6 +10,7 @@ TagManager:
   - Floor
   - Item
   - ItemSet
+  - Location
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Light
   - Item
   - Item_HJ
-  - 
-  - 
+  - Doll
+  - Display
   - 
   - 
   - 

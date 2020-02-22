@@ -8,6 +8,9 @@ public class Slot : MonoBehaviour
     public Item item;
     public Image itemImage;
 
+    //슬롯이 비었는지? -> 비었으면 true
+    private bool voidState = true;
+
 
     //slot item alpha
     private void SetColor(float _alpha)
@@ -17,13 +20,14 @@ public class Slot : MonoBehaviour
         itemImage.color = color;
     }
 
-
     public void AddItem(Item _item)
     {
         item = _item;
         itemImage.sprite = item.itemImage;
 
         SetColor(1);
+
+        voidState = false;
     }
 
     public void RemoveItem(Item _item)
@@ -44,15 +48,19 @@ public class Slot : MonoBehaviour
         }
     }
 
-
-    private void ClearSlot()
+    public void ClearSlot()
     {
         item = null;
 
         itemImage.sprite = null;
         SetColor(0);
 
+        voidState = true;
+    }
 
+    public bool IsVoid()
+    {
+        return voidState;
     }
 }
 

@@ -6,7 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New item", menuName = "New item/item")]
 public class Item : ScriptableObject
 {
-    public string itemName; 
+    public int itemCode; 
+    public string itemName;
     public ItemType itemType;
     public Sprite itemImage;
     public GameObject itemPrefab; 

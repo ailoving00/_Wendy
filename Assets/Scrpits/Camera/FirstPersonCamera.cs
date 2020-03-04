@@ -13,12 +13,12 @@ public class FirstPersonCamera : MonoBehaviour
     private float x = 0.0f;
     private float y = 0.0f;
 
-    public float yMinLimit = -20f;
-    public float yMaxLimit = 60f;
+    private float yMinLimit = -40f;
+    private float yMaxLimit = 60f;
 
     public bool jumpScare_state = false; //화면 고정, translateTest에서 값 바뀜
 
-    float m_FieldOfView = 50f; //50f, 30f
+    float m_FieldOfView = 58f; //50f, 30f
     public Camera cameraOption;
 
     float ClampAngle(float angle, float min, float max)
@@ -49,8 +49,8 @@ public class FirstPersonCamera : MonoBehaviour
             return;
         }
 
-        m_FieldOfView = 50f;
-        cameraOption.fieldOfView = m_FieldOfView;
+        //m_FieldOfView = 58f;
+        //cameraOption.fieldOfView = m_FieldOfView;
 
         x += Input.GetAxis("Mouse X") * xSpeed * 0.015f;
         y -= Input.GetAxis("Mouse Y") * ySpeed * 0.015f;

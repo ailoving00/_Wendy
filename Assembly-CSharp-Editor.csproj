@@ -65,6 +65,11 @@
      <Compile Include="Assets\Editor\GlobalSnowEditor.cs" />
      <Compile Include="Assets\Editor\GlobalSnowEditorStyles.cs" />
      <Compile Include="Assets\Editor\GlobalSnowIgnoreCoverageEditor.cs" />
+     <Compile Include="Assets\Editor\NavMeshComponentsGUIUtility.cs" />
+     <Compile Include="Assets\Editor\NavMeshLinkEditor.cs" />
+     <Compile Include="Assets\Editor\NavMeshModifierEditor.cs" />
+     <Compile Include="Assets\Editor\NavMeshModifierVolumeEditor.cs" />
+     <Compile Include="Assets\Editor\NavMeshSurfaceEditor.cs" />
      <None Include="Assets\Editor\Resources\DepthTexPreview.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

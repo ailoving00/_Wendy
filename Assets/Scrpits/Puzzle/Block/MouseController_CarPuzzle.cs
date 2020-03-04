@@ -72,7 +72,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
             {
                 if (target.tag == "Block")
                 {
-                    Debug.Log(target.GetComponent<Collider>().name);
+                    //Debug.Log(target.GetComponent<Collider>().name);
 
                     _targetState = true; //타겟 선택
                     mouseDrag = true;

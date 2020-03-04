@@ -76,6 +76,10 @@
      <Compile Include="Assets\Scrpits\_Proto\GameManager_proto.cs" />
      <Compile Include="Assets\Scrpits\_Proto\MouseAimCamera_temp.cs" />
      <Compile Include="Assets\Scrpits\_Proto\SoundController_proto.cs" />
+     <Compile Include="Assets\Scrpits\AI\NavMeshLink.cs" />
+     <Compile Include="Assets\Scrpits\AI\NavMeshModifier.cs" />
+     <Compile Include="Assets\Scrpits\AI\NavMeshModifierVolume.cs" />
+     <Compile Include="Assets\Scrpits\AI\NavMeshSurface.cs" />
      <Compile Include="Assets\Scrpits\Camera\CameraFollow.cs" />
      <Compile Include="Assets\Scrpits\Camera\FirstPersonCamera.cs" />
      <Compile Include="Assets\Scrpits\Camera\FollowCamera.cs" />

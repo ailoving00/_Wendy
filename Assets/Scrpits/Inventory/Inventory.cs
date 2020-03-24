@@ -69,8 +69,16 @@ public class Inventory : MonoBehaviour
     {
         return slots[index].item.itemPrefab;
     }
+
+    public Item get_ItemInfo(int index) // 아이템 얻기
+    {
+        return slots[index].item;
+    }
+
     public int get_ItemCode(int index) // 아이템 코드 얻기
     {
+        if (slots[index].item == null)
+            return 99;
         return slots[index].item.itemCode;
     }
 

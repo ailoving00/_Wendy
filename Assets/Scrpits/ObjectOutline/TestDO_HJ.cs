@@ -68,8 +68,8 @@ public class TestDO_HJ : MonoBehaviour
                 TestItem_HJ testScript = target.GetComponent<TestItem_HJ>(); ;
                 index = testScript.ItemType;
 
-                Debug.Log(index.ToString());
-                Debug.Log("===");
+                //Debug.Log(index.ToString());
+                //Debug.Log("===");
 
                 OutlineController.set_enabled(index, true);
             }

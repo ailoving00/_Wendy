@@ -13,9 +13,9 @@ public class ActionController_01 : MonoBehaviour
     public Inventory theInventory;
 
     [SerializeField]
-    private float range; // 충돌 체크 구의 반경
+    private float range = 10f; // 충돌 체크 구의 반경
     [SerializeField]
-    private float length = 3f ; // 충돌 체크의 최대 거리 
+    private float length = 10f; // 충돌 체크의 최대 거리 
 
     [SerializeField]
     private LayerMask layerMask;
@@ -45,28 +45,59 @@ public class ActionController_01 : MonoBehaviour
     // item event
 
     // item event count
-    private int BlockCount = 0;
 
+
+    //- 외곽선
+    private Camera mainCam;
+
+    private bool PuzzleOn = false;
+    private int BlockCount = 0;
+    public int UseCount = 0;
+
+    private DrawOutline_HJ OutlineController;
+    private int pre_ol_index = 0; //이전 아웃라인 인덱스
+
+    // - 퍼즐카메라로 이동
+    private GameObject spotlight; //이미지
+    public Text puzzleText;
+    FadeAni_text text_script;
+
+    SelectSlot selectSlot_script;
+    public GameObject puzzleKey;
+
+    ChangeCam_1stage ChangeCam_script;
 
     void Start()
     {
-    }
+        mainCam = GetComponent<Camera>();//Camera.main;
+        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
+        //layerMask = 1 << LayerMask.NameToLayer("Item");
 
+        selectSlot_script = GameObject.FindObjectOfType<SelectSlot>();
+
+        text_script = puzzleText.gameObject.GetComponent<FadeAni_text>();
+
+        ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_1stage>();
+    }
 
     void Update()
     {
+        if (ChangeCam_script.get_PuzzlPlay())
+            return;
+
         CheckItem();
         TryAction();
-
     }
-    private void OnDrawGizmos()
+
+    private void OnDrawGizmos()  //OnDrawGizmosSelected()
     {
         Handles.color = isCollision ? _red : _blue;
-        Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, angleRange / 2, distance); 
+        Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, angleRange / 2, distance);
         //                     타겟에의 위치에서, 타겟의 위치 앞전방으로,위아래 판별, 각도는 몇만큼, 방향은 몇만큼
         Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, -angleRange / 2, distance);
         //                     타겟에의 위치에서, 타겟의 위치 앞전방으로 ,위아래 판별, 각도는 몇만큼의 -, 방향은 몇만큼. 
 
+        Gizmos.DrawSphere(P_target.transform.position, range);
     }
 
 
@@ -75,7 +106,7 @@ public class ActionController_01 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            CheckItem();
+            //CheckItem();
             CanPickUp();
         }
     }
@@ -86,99 +117,179 @@ public class ActionController_01 : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
-                if (hitInfo.transform.tag == "ItemSet")
+                if (hitInfo.transform.CompareTag("Item"))
                 {
-                    theInventory.RemoveSlot(hitInfo.transform.GetComponent<ItemSetUp>().item);
+                    int hit_itemCode = hitInfo.transform.GetComponent<ItemPickUp>().item.itemCode;
 
-                    if (theInventory.Remove_Count)
+                    // - 습득
+                    if (hit_itemCode == 10) //퍼즐조각 일때
                     {
-                        hitInfo.transform.GetComponent<ItemSetUp>().SetItem.SetActive(true);
-                        if (hitInfo.transform.GetComponent<ItemSetUp>().item.itemName == "Block")
+                        //Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "획득했습니다");
+                        Item hit_item = hitInfo.transform.GetComponent<ItemPickUp>().item;
+
+                        // - 퍼즐조각 수집 개수 증가
+                        if (BlockCount < 2)
                         {
                             BlockCount++;
                         }
-                    }
-                }
 
-                if (hitInfo.transform.tag == "Item")
-                {
-                    Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "획득했습니다");
-                    theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item);
-                    Destroy(hitInfo.transform.gameObject);
-                    InfoDisappear();
+                        // - 퍼즐조각 습득
+                        theInventory.AcquireItem(hit_item);
+
+                        // - 외곽선 없애기
+                        hitInfo.transform.gameObject.SetActive(false);
+                        OutlineController.set_enabled(pre_ol_index, false);
+                        //OutlineController.set_destroy(pre_ol_index); //필요없을수도
+
+                        // - info 사라짐
+                        InfoDisappear();
+                    }
+
+                    // - 사용
+                    else if (hit_itemCode == 11) //조각 배치
+                    {
+                        if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
+                        {
+                            // - 텍스트 출력
+                            puzzleText.text = "퍼즐조각이 필요하다";
+                            //페이드아웃
+                            text_script.InStartFadeAnim();
+
+                            return;
+                        }
+
+                        int select_itemCode = theInventory.get_ItemCode(selectSlot_script.get_index());
+
+                        // - 퍼즐 배치
+                        if (select_itemCode == 10)
+                        {
+                            // - 텍스트 출력
+                            puzzleText.text = "퍼즐조각을 배치했다";
+                            //페이드아웃
+                            text_script.InStartFadeAnim();
+
+                            UseCount++;
+
+                            // - 사용
+                            Item selectItem = theInventory.get_ItemInfo(selectSlot_script.get_index());
+                            theInventory.RemoveSlot(selectItem);
+                            if (UseCount >= 2)
+                            {
+                                // - 퍼즐조각을 다 모았을때, 퍼즐 클릭가능한 상태가 된다
+                                PuzzleOn = true;
+
+                                // - info
+
+                                // - 외곽선 , 빈퍼즐블럭 없애기
+                                hitInfo.transform.gameObject.SetActive(false);
+                                OutlineController.set_enabled(pre_ol_index, false);
+                                puzzleKey.gameObject.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            // - 텍스트 출력
+                            puzzleText.text = "퍼즐조각이 필요하다";
+                            //페이드아웃
+                            text_script.InStartFadeAnim();
+                        }
+                    }
+                    else if (hit_itemCode == 12) //퍼즐 완
+                    {
+                        // - 카메라 이동
+                        ChangeCam_script.change_Camera(1);
+
+                        // - info 없애기
+                        InfoDisappear();
+                        text_script.stop_coroutine();
+
+                    }
                 }
             }
         }
     }
 
-
     private void CheckItem()
     {
-        if (Physics.SphereCast(P_target.transform.position, range, Vector3.up , out hitInfo, length, layerMask))
+        if (Physics.SphereCast(P_target.transform.position, range, Vector3.up, out hitInfo, length, layerMask))
         {
             //                 레이저 발사 위치            , 구의 반경, 발사 방향,      충돌 결과,     최대거리, 레이어마스크
-            ItemInfoAppear();
-            CheckSectorform();
 
-            Debug.Log("검토작업시작");
-            if (isCollision)
+            // = 외곽선 =
+            ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
+
+            if (CheckAllSectorform(hitInfo)) //hitInfo가 범위 안에 있으면 true
             {
-                if (hitInfo.transform.tag == "Item")
-                {
-                    ItemInfoAppear();
-                    Debug.Log("이건 되고있나?");
-                }
+                // - info 띄우기
+                ItemInfoAppear(pieceItem_script.item);
 
-                if (hitInfo.transform.tag == "ItemSet")
-                {
-                    DoorBlockSet();
-                }
-
+                // - 외곽선
+                OutlineController.set_enabled(pieceItem_script.outlineIndex, true);
+                pre_ol_index = pieceItem_script.outlineIndex;
             }
+            else
+            {
+                // - info 사라지게
+                InfoDisappear();
 
+                // - 외곽선 사라짐
+                OutlineController.set_enabled(pre_ol_index, false);
 
+                isCollision = false;
+            }
         }
-
         else
         {
             InfoDisappear();
             isCollision = false;
-            
+            OutlineController.set_enabled(pre_ol_index, false);
         }
-
-
     }
 
-
-    private void CheckSectorform()
+    private bool CheckAllSectorform(RaycastHit tempHit) //범위안에 드는지 검사
     {
-        dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2)); //코사인을 구하는것....안의 각도를 구하는것
-        direction = hitInfo.transform.position - target.transform.position; 
-        if (direction.magnitude < distance) 
+        dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
+        direction = tempHit.transform.position - target.transform.position;
+        if (direction.magnitude < distance)
         {
-            if (Vector3.Dot(direction.normalized, target.transform.forward) > dotValue) 
+            if (Vector3.Dot(direction.normalized, target.transform.forward) > dotValue)
             {
                 isCollision = true;
-                Debug.Log("충돌중");
+                return true;
             }
             else
             {
                 isCollision = false;
-                Debug.Log("충돌안함");
+                return false;
             }
         }
         else
+        {
             isCollision = false;
+            return false;
+        }
     }
 
-
     // Need to modify
-
-    private void ItemInfoAppear()
+    private void ItemInfoAppear(Item tempItem)
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "획득" + "[Click]";
+
+        int temp_IC = tempItem.itemCode;
+
+        if (temp_IC == 10) //Puzzle Block Piece
+        {
+            actionText.text = tempItem.itemName + "  획득" + " [Click]";
+        }
+        else if (temp_IC == 11) //Door Block Piece
+        {
+            actionText.text = "블럭 배치" + " [Click]";
+        }
+        else if (temp_IC == 12)
+        {
+            actionText.text = "퍼즐 풀기" + " [Click]";
+        }
     }
 
     public void InfoDisappear()
@@ -186,16 +297,4 @@ public class ActionController_01 : MonoBehaviour
         pickupActivated = false;
         actionText.gameObject.SetActive(false);
     }
-
-
-    public void DoorBlockSet()
-    {
-        pickupActivated = true;
-        actionText.gameObject.SetActive(true);
-        actionText.text = "문에 블럭 꽂기";
-
-    }
-
-
-
 }

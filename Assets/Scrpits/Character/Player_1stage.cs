@@ -1,85 +1,70 @@
-﻿//
-//2019-12-06
-//3인칭용 (1스테이지용)
-//
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_1stage : MonoBehaviour
 {
-    [SerializeField]
-    private Transform[] exitPoints;
-    private int exitIndex = 0;
-
     private Vector3 min, max;
-
-    [SerializeField]
-    public Transform myTarget { get; set; } //마우스로 선택한 오브젝트
 
     float h, v;
 
-    public float movementSpeed = 2;
-    public float turningSpeed = 5;
+    public float movementSpeed = 5;
+    public float turningSpeed = 10;
 
     Animator _animator = null;
 
-    public float latestKeyCheck;
-
-    int rudder;
+    //int rudder;
     bool check;
 
     float MaxDistance = 8f;
 
-    public float currentAngle;
-    public float desiredAngle;
-    public float angle;
+    private float currentAngle;
+    private float desiredAngle;
+    private float angle;
     public GameObject target;
 
     Ray ray;
 
     public GameObject standard;
 
-    private Vector3[] s_vec;
-    private Vector3 t_vec; //타겟기준벡터
-    private Vector3 tv_vec; //타겟기준벡터
-
-    public float atanAngle;
+    private float atanAngle;
 
     int anglecheck;
 
-    Vector3 dir;
+    private Vector3 dir;
 
-    public float zangle;
+    private float zangle;
     private float zMin;
     private float zMax;
-    public float desiredZAngle;
-    public float currentZAngle;
+    private float desiredZAngle;
+    private float currentZAngle;
     public GameObject center;
-    public float ZturningSpeed = 1;
-    private bool ZCheck; //안씀 check를 사용한다
+    public float ZturningSpeed = 20;
 
-    public float xangle;
+    private float xangle;
     private float xMin;
     private float xMax;
-    public float desiredXAngle;
-    public float currentXAngle;
+    private float desiredXAngle;
+    private float currentXAngle;
 
-    float th, tv;
+    public Transform target_modeling;
+    public GameObject modelingParent;
+    private bool cr_check = false;
+    private bool cr_in_check = false;
+    private IEnumerator coroutine = null; //Coroutine
+
+
+    //footprint를 사용하기 위한 컨트롤러
+    CharacterController controller;
+    private Vector3 moveDirection = Vector3.zero;
 
     void Start()
     {
-        _animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>();
+        //_animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>(); 
+        _animator = modelingParent.GetComponent<Animator>();
         //_animator = GetComponent<Animator>();
 
         check = false;
-
-        s_vec = new Vector3[4];
-        s_vec[0] = standard.transform.forward - standard.transform.position;
-        s_vec[1] = -standard.transform.right - standard.transform.position;
-        s_vec[2] = -standard.transform.forward - standard.transform.position;
-        s_vec[3] = standard.transform.right - standard.transform.position;
 
         atanAngle = 0.0f;
         anglecheck = 0;
@@ -92,7 +77,9 @@ public class Player_1stage : MonoBehaviour
         xMin = -7f;
         xMax = 7f;
 
-        ZCheck = false;
+        dir = Vector3.zero;
+
+        controller = GetComponent<CharacterController>();
     }
 
     void Update()
@@ -105,83 +92,133 @@ public class Player_1stage : MonoBehaviour
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
 
-        standard.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-        
+        //standard.transform.position = new Vector3(transform.position.x, 0, transform.position.z); 
+
         if (v == 0 & h == 0)
         {
-            _animator.SetBool("IsWalking", false);
-            check = true;
+            if (!check)
+            {
+                _animator.SetBool("IsWalking", false);
+                check = true;
+
+                dir = Vector3.zero;
+
+                desiredXAngle = 0f;
+                desiredZAngle = 0f;
+            }
+
+            //lerp때문에
+            {
+                //타겟모델링 기준
+                currentXAngle = target_modeling.transform.eulerAngles.x;
+                xangle = Mathf.LerpAngle(currentXAngle, desiredXAngle, Time.deltaTime * ZturningSpeed);
+                currentZAngle = target_modeling.transform.eulerAngles.z;
+                zangle = Mathf.LerpAngle(currentZAngle, desiredZAngle, Time.deltaTime * ZturningSpeed);
+            }
+
         }
         else //if (v != 0)
         {
-            tv = v; th = h;
-            dir = h * Vector3.left + v * Vector3.back;
+            // - 이전 방향키나 방향이 같으면? => 동일한 값일경우 , 쓸데없는 연산을 줄여야함 @ 수정필요
+
+            //애니메이션
+            if (check)
+            {
+                _animator.SetBool("IsWalking", true);
+                check = false;
+            }
+
+            //이동
+            //ver1
+            dir = h * Vector3.left + v * Vector3.back; // 회전방향
             transform.position = transform.position + dir * movementSpeed * Time.deltaTime;
+            //ver2 캐릭터컨트롤러 이용
+            //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            ////moveDirection = transform.position + dir;
+            //moveDirection = transform.TransformDirection(moveDirection);
+            //moveDirection *= 0.001f;
+            //controller.Move(dir * Time.deltaTime);
 
-            _animator.SetBool("IsWalking", true);
-            check = false;
-
-            if (v == -1) //앞
+            //캐릭터의 원회전
             {
-                desiredXAngle = xMin;
-            }
-            else if (v == 1)
-            {
-                desiredXAngle = xMax;
-            }
-            else if (v == 0)
-            {
-                desiredXAngle = 0;
+                if (v == -1) //앞
+                {
+                    desiredXAngle = 7f;
+                }
+                else if (v == 1)
+                {
+                    desiredXAngle = 7f;
+                }
+                else if (v == 0)
+                {
+                    desiredXAngle = 0;
+                }
+
+                if (h == -1) //left
+                {
+                    if (v == -1) //(v != 0)
+                    {
+                        desiredXAngle = 7f;
+                        desiredZAngle = -3f;
+                    }
+                    if (v == 1)
+                    {
+                        desiredXAngle = 7f;
+                        desiredZAngle = 3f;
+                    }
+                    else
+                    {
+                        desiredXAngle = 7f;
+                    }
+                }
+                else if (h == 1)
+                {
+                    if (v == -1) //(v != 0)
+                    {
+                        desiredXAngle = 7f;
+                        desiredZAngle = 3f;
+                    }
+                    if (v == 1)
+                    {
+                        desiredXAngle = 7f;
+                        desiredZAngle = -3f;
+                    }
+                    else
+                    {
+                        desiredXAngle = 7f;
+                    }
+                }
+                else if (h == 0) //여긴 안들어감
+                {
+                    desiredZAngle = 0f;
+                }
             }
 
-            currentXAngle = target.transform.eulerAngles.x; //center
-            xangle = Mathf.LerpAngle(currentXAngle, desiredXAngle, Time.deltaTime * ZturningSpeed);
-
-            if (h == -1) //left
-            {
-                desiredZAngle = zMin;
-                ZCheck = true;
-            }
-            else if (h == 1)
-            {
-                desiredZAngle = zMax;
-                ZCheck = true;
-            }
-            else if (h == 0)
-            {
-                desiredZAngle = 0;
-                ZCheck = false;
-            }
-
-            currentZAngle = target.transform.eulerAngles.z; //center
-            zangle = Mathf.LerpAngle(currentZAngle, desiredZAngle, Time.deltaTime * ZturningSpeed);
-
-            //캐릭터의 회전 ***********
-
+            // y , 캐릭터가 향하는방향
             atanAngle = CalculateAngle(-standard.transform.forward, dir);
-
             currentAngle = target.transform.eulerAngles.y;
             desiredAngle = atanAngle;
-
             angle = Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * turningSpeed);
 
-            Quaternion rotation = Quaternion.Euler(xangle, angle, zangle);
-            target.transform.rotation = rotation;
-            
-            Debug.DrawRay(standard.transform.position, dir * MaxDistance, Color.blue, 0.3f);
+
+            //원 회전
+            currentXAngle = target_modeling.transform.eulerAngles.x; //center
+            xangle = Mathf.LerpAngle(currentXAngle, desiredXAngle, Time.deltaTime * ZturningSpeed);
+            // z
+            currentZAngle = target_modeling.transform.eulerAngles.z; //center
+            zangle = Mathf.LerpAngle(currentZAngle, desiredZAngle, Time.deltaTime * ZturningSpeed);
+
+
+            //디버그
+            //Debug.DrawRay(standard.transform.position, dir * MaxDistance, Color.blue, 0.3f);
         }
 
-        if (check)
-        {
-            currentXAngle = target.transform.eulerAngles.x;
-            xangle = Mathf.LerpAngle(currentXAngle, 0, Time.deltaTime * ZturningSpeed);
+        // - 회전 적용
+        Quaternion rotation = Quaternion.Euler(0, angle, 0);
+        target.transform.rotation = rotation; 
 
-            currentZAngle = target.transform.eulerAngles.z;
-            zangle = Mathf.LerpAngle(currentZAngle, 0, Time.deltaTime * ZturningSpeed);
-
-            Quaternion rotation2 = Quaternion.Euler(xangle, target.transform.eulerAngles.y, zangle);
-            target.transform.rotation = rotation2;
-        }
+        Quaternion rotation2 = Quaternion.Euler(xangle, 0, zangle);
+        target_modeling.localRotation = rotation2;
     }
 
     public void SetLimits(Vector3 min, Vector3 max)
@@ -209,5 +246,27 @@ public class Player_1stage : MonoBehaviour
         if (angle > max)
             angle = max;
         return Mathf.Clamp(angle, min, max);
+    }
+
+    IEnumerator RotateAround_modeling() //코루틴이 진행되는 동안만 원회전 된다
+    {
+        cr_check = true; //코루틴 시작
+        cr_in_check = true;
+
+        while (cr_in_check) //코루틴 진행
+        {
+            if (Mathf.Abs(zangle) == 5f)
+            {
+                cr_in_check = false;
+
+                desiredZAngle = 0f;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        cr_check = false;
     }
 }

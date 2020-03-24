@@ -575,6 +575,14 @@ namespace GlobalSnowEffect {
                 }
             }
         }
+        public void Coverage_On() //추가
+        {
+            _coverageUpdateMethod = SNOW_COVERAGE_UPDATE_METHOD.Discrete;
+        }
+        public void Coverage_Off() //추가
+        {
+            _coverageUpdateMethod = SNOW_COVERAGE_UPDATE_METHOD.Disabled;
+        }
 
         public bool coverageDepthDebug;
 
@@ -3112,5 +3120,4 @@ namespace GlobalSnowEffect {
 #endregion
 
     }
-
 }

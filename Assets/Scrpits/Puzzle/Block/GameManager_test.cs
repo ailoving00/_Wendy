@@ -11,10 +11,10 @@ public class GameManager_test : MonoBehaviour
     void Awake()
     {
 
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        //Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
         //Screen.SetResolution(1920, 1080, true);
-        Screen.SetResolution(500, 600, true);
+        //Screen.SetResolution(500, 600, true);
         //Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true);
 
     }

@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class MouseController_CarPuzzle : MonoBehaviour
 {
-    public Camera _mainCam = null;
+    public Camera _PuzzleCam = null;
 
     private GameObject target = null; //mouse target
 
@@ -79,7 +79,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
 
                     blockScript = target.GetComponent<Block>();
 
-                    startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //혹은 target 의 위치
+                    startPos = _PuzzleCam.ScreenToWorldPoint(Input.mousePosition); //혹은 target 의 위치
                 }
             }
         }
@@ -151,7 +151,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
 
         GameObject target = null;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = _PuzzleCam.ScreenPointToRay(Input.mousePosition);
 
         if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))
         {
@@ -167,9 +167,9 @@ public class MouseController_CarPuzzle : MonoBehaviour
         //print(MousePos);
 
         //마우스 포인터 위치
-        MousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
+        MousePos = _PuzzleCam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,
                                                               Input.mousePosition.y,
-                                                              -Camera.main.transform.position.z));
+                                                              -_PuzzleCam.transform.position.z));
         //Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z);
 
         //이동

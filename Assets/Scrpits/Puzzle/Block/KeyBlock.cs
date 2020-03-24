@@ -17,11 +17,10 @@ public class KeyBlock : MonoBehaviour
 
     void OnTriggerEnter(Collider coll)
     {
-        if (coll.gameObject.tag == "Exit")
-        //if (coll.gameObject.CompareTag("Exit"))
+        //if (coll.gameObject.tag == "Exit")
+        if (coll.gameObject.CompareTag("Exit"))
         {
-            winText.SetActive(true);
-            Debug.Log("__Exit__");
+            //Debug.Log("__Exit__");
         }
     }
 }

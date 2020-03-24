@@ -30,6 +30,14 @@ public class DrawOutline_HJ : MonoBehaviour
        systems[index].enabled = enabled;
     }
 
+    public void set_destroy(int index)
+    {
+        EasyOutlineSystem tempOutline = systems[index];
+        systems.RemoveAt(index);
+
+        Destroy(tempOutline);
+    }
+
     public void Set()
     {
 

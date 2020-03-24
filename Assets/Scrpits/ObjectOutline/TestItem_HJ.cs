@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType { None, TypeA, TypeB, TypeC }
+//public enum ItemType { None, TypeA, TypeB, TypeC }
 
 public class TestItem_HJ : MonoBehaviour
 {

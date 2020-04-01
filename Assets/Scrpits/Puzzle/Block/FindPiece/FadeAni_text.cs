@@ -62,7 +62,6 @@ public class FadeAni_text : MonoBehaviour
 
         Color fadecolor = fadeImg.color;
 
-        Debug.Log("dfasdf");
         yield return new WaitForSeconds(1f);
 
         while (fadecolor.a > 0.01f)

@@ -18,7 +18,7 @@ public class KeyBlock : MonoBehaviour
     void OnTriggerEnter(Collider coll)
     {
         //if (coll.gameObject.tag == "Exit")
-        if (coll.gameObject.CompareTag("Exit"))
+        if (coll.gameObject.CompareTag("Destination"))
         {
             //Debug.Log("__Exit__");
         }

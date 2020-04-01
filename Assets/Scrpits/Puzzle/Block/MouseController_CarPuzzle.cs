@@ -37,6 +37,10 @@ public class MouseController_CarPuzzle : MonoBehaviour
 
     public bool GameClear;
 
+    int layerMask;
+
+    ChangeCam_1stage ChangeCam_script;
+
     void Start()
     {
         if (_blocks == null)
@@ -57,6 +61,10 @@ public class MouseController_CarPuzzle : MonoBehaviour
         subXY = 0f;
 
         GameClear = false;
+
+        layerMask = 1 << LayerMask.NameToLayer("BlockPuzzle");
+
+        ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_1stage>();
     }
 
     void Update()
@@ -70,6 +78,13 @@ public class MouseController_CarPuzzle : MonoBehaviour
 
             if (target != null)
             {
+              if (target.transform.CompareTag("Exit"))
+                {
+                    // - 카메라 이동
+                    ChangeCam_script.change_Camera(0);
+                    return;
+                }
+
                 if (target.tag == "Block")
                 {
                     //Debug.Log(target.GetComponent<Collider>().name);
@@ -98,7 +113,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
 
         if (true == mouseDrag) //드래그를 한 상태
         {
-            OnMouseDrag();
+            MouseDrag();
         }
 
         if (true == mouseUp)
@@ -153,7 +168,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
 
         Ray ray = _PuzzleCam.ScreenPointToRay(Input.mousePosition);
 
-        if (true == (Physics.Raycast(ray.origin, ray.direction * 10, out hit)))
+        if (true == (Physics.Raycast(ray.origin, ray.direction, out hit, 10f, layerMask)))
         {
             target = hit.collider.gameObject;
         }
@@ -161,7 +176,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
         return target;
     }
 
-    void OnMouseDrag()
+    void MouseDrag()
     {
         //Debug.Log("Drag!!"); //print("Drag!!");
         //print(MousePos);

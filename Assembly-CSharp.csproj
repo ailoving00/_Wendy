@@ -91,6 +91,7 @@
      <Compile Include="Assets\Scrpits\Character\Player_1stage.cs" />
      <Compile Include="Assets\Scrpits\Character\Player_HJ.cs" />
      <Compile Include="Assets\Scrpits\Character\ThreePersonCamera_1stage.cs" />
+     <Compile Include="Assets\Scrpits\Decorating\Box_1stage\BoxOpen.cs" />
      <Compile Include="Assets\Scrpits\GameManager\Audio\SoundManager\SoundManger.cs" />
      <Compile Include="Assets\Scrpits\GameManager\Scene\ChangeScene01.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_01.cs" />
@@ -113,13 +114,11 @@
      <Compile Include="Assets\Scrpits\ObjectOutline\TestItem_HJ.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\Block.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\BlockManager.cs" />
-     <Compile Include="Assets\Scrpits\Puzzle\Block\BlockPuzzleManager.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\BlockUnit.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\FindPiece\ChangeCam_1stage.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\FindPiece\FadeAni_Spotlight.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\FindPiece\FadeAni_text.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\FindPiece\FadeInOut.cs" />
-     <Compile Include="Assets\Scrpits\Puzzle\Block\FindPiece\return_mainCam.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\GameManager_test.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\KeyBlock.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\MouseController_CarPuzzle.cs" />
@@ -769,6 +768,12 @@
  <Reference Include="System.Xml.Serialization">
  <HintPath>E:/Programs/Unity/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{D74E4E6A-A00D-E419-9AFE-ABEF97A128F5}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -20,7 +20,8 @@ public class Item : ScriptableObject
         Used,       
         Read,       
         Puzzle,     
-        Doll         
+        Doll,
+        One_time,
     }
 
 }

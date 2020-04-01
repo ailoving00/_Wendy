@@ -67,6 +67,8 @@ public class ActionController_01 : MonoBehaviour
 
     ChangeCam_1stage ChangeCam_script;
 
+    BoxOpen boxOpen_script;
+
     void Start()
     {
         mainCam = GetComponent<Camera>();//Camera.main;
@@ -78,12 +80,14 @@ public class ActionController_01 : MonoBehaviour
         text_script = puzzleText.gameObject.GetComponent<FadeAni_text>();
 
         ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_1stage>();
+
+        boxOpen_script = GameObject.FindObjectOfType<BoxOpen>();
     }
 
     void Update()
     {
-        if (ChangeCam_script.get_PuzzlPlay())
-            return;
+        //if (ChangeCam_script.get_PuzzlPlay())
+        //    return;
 
         CheckItem();
         TryAction();
@@ -97,10 +101,8 @@ public class ActionController_01 : MonoBehaviour
         Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, -angleRange / 2, distance);
         //                     타겟에의 위치에서, 타겟의 위치 앞전방으로 ,위아래 판별, 각도는 몇만큼의 -, 방향은 몇만큼. 
 
-        Gizmos.DrawSphere(P_target.transform.position, range);
+        //Gizmos.DrawSphere(P_target.transform.position, range);
     }
-
-
 
     private void TryAction()
     {
@@ -122,7 +124,7 @@ public class ActionController_01 : MonoBehaviour
                     int hit_itemCode = hitInfo.transform.GetComponent<ItemPickUp>().item.itemCode;
 
                     // - 습득
-                    if (hit_itemCode == 10) //퍼즐조각 일때
+                    if (hit_itemCode == 110) //퍼즐조각 일때
                     {
                         //Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "획득했습니다");
                         Item hit_item = hitInfo.transform.GetComponent<ItemPickUp>().item;
@@ -146,7 +148,7 @@ public class ActionController_01 : MonoBehaviour
                     }
 
                     // - 사용
-                    else if (hit_itemCode == 11) //조각 배치
+                    else if (hit_itemCode == 111) //조각 배치
                     {
                         if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
                         {
@@ -161,7 +163,7 @@ public class ActionController_01 : MonoBehaviour
                         int select_itemCode = theInventory.get_ItemCode(selectSlot_script.get_index());
 
                         // - 퍼즐 배치
-                        if (select_itemCode == 10)
+                        if (select_itemCode == 110)
                         {
                             // - 텍스트 출력
                             puzzleText.text = "퍼즐조각을 배치했다";
@@ -194,7 +196,7 @@ public class ActionController_01 : MonoBehaviour
                             text_script.InStartFadeAnim();
                         }
                     }
-                    else if (hit_itemCode == 12) //퍼즐 완
+                    else if (hit_itemCode == 112) //퍼즐 완
                     {
                         // - 카메라 이동
                         ChangeCam_script.change_Camera(1);
@@ -203,6 +205,21 @@ public class ActionController_01 : MonoBehaviour
                         InfoDisappear();
                         text_script.stop_coroutine();
 
+                    }
+                    if (hit_itemCode == 113) //상자 일때
+                    {
+                        // - 콜라이더 비활성화
+                        hitInfo.collider.enabled = false;
+
+                        // - 외곽선 없애기
+                        //hitInfo.transform.gameObject.SetActive(false);
+                        OutlineController.set_enabled(pre_ol_index, false);
+
+                        // - info 없애기
+                        InfoDisappear();
+
+                        // - 상자 애니메이션
+                        boxOpen_script.set_aniBool();
                     }
                 }
             }
@@ -278,17 +295,21 @@ public class ActionController_01 : MonoBehaviour
 
         int temp_IC = tempItem.itemCode;
 
-        if (temp_IC == 10) //Puzzle Block Piece
+        if (temp_IC == 110) //Puzzle Block Piece
         {
             actionText.text = tempItem.itemName + "  획득" + " [Click]";
         }
-        else if (temp_IC == 11) //Door Block Piece
+        else if (temp_IC == 111) //Door Block Piece
         {
             actionText.text = "블럭 배치" + " [Click]";
         }
-        else if (temp_IC == 12)
+        else if (temp_IC == 112)
         {
             actionText.text = "퍼즐 풀기" + " [Click]";
+        }
+        else if (temp_IC == 113)
+        {
+            actionText.text = "상자 열기" + " [Click]";
         }
     }
 

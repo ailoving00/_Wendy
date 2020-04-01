@@ -14,7 +14,8 @@ public class ChangeCam_1stage : MonoBehaviour
 
     FadeAni_Spotlight spotlight_script;
     ActionController_01 actionController;
-
+    MouseController_CarPuzzle carPuzzle_script;
+    Player_1stage playerController;
     void Start()
     {
         mainCamera = Camera.main;
@@ -29,6 +30,9 @@ public class ChangeCam_1stage : MonoBehaviour
 
         spotlight_script = GameObject.FindObjectOfType<FadeAni_Spotlight>();
         actionController = mainCamera.GetComponent<ActionController_01>();
+        carPuzzle_script = GameObject.FindObjectOfType<MouseController_CarPuzzle>();
+
+        playerController = GameObject.FindObjectOfType<Player_1stage>();
     }
 
     void Update()
@@ -41,6 +45,7 @@ public class ChangeCam_1stage : MonoBehaviour
         if (type == 1) //퍼즐 카메라 on
         {
             actionController.enabled = false;
+            carPuzzle_script.enabled = true;
 
             spotlight_script.InStartFadeAnim();
 
@@ -49,27 +54,41 @@ public class ChangeCam_1stage : MonoBehaviour
             fpCamera.enabled = true;
             fpListener.enabled = true;
 
-            mainCamera.enabled = false;
+            //mainCamera.enabled = false;
             mainListener.enabled = false;
+
+            playerController.enabled = false;
         }
         else //if(type == 0) //다시 돌아가기
         {
-            actionController.enabled = false;
+            Debug.Log("sdfadf");
+
+            carPuzzle_script.enabled = false;
 
             spotlight_script.stop_coroutine();
 
             PuzzlPlay = false;
 
-            mainCamera.enabled = true;
+            //mainCamera.enabled = true;
             mainListener.enabled = true;
 
             fpCamera.enabled = false;
             fpListener.enabled = false;
+
+            StartCoroutine(TimetoWaitFor());
         }
     }
 
     public bool get_PuzzlPlay()
     {
         return PuzzlPlay;
+    }
+
+    IEnumerator TimetoWaitFor()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        playerController.enabled = true;
+        actionController.enabled = true;
     }
 }

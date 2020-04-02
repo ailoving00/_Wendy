@@ -20,9 +20,12 @@ public class Player_HJ : MonoBehaviour
     private Vector3 targetForward;
     private Vector3 targetNormal_Forward;
 
+    public GameObject playerModeling;
+
     void Start()
     {
-        _animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>();
+        //_animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>();
+        _animator = playerModeling.GetComponent<Animator>();
 
         gameEnd = false;
     }

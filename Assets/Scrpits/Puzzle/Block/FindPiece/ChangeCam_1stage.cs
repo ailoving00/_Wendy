@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeCam_1stage : MonoBehaviour
 {
     private Camera mainCamera;
-    private Camera fpCamera;
+    private Camera bpCamera;
 
     private AudioListener mainListener;
     private AudioListener fpListener;
@@ -19,7 +19,7 @@ public class ChangeCam_1stage : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        fpCamera = GetComponent<Camera>();
+        bpCamera = GetComponent<Camera>();
 
         mainListener = mainCamera.GetComponent<AudioListener>();
         fpListener = GetComponent<AudioListener>();
@@ -51,7 +51,7 @@ public class ChangeCam_1stage : MonoBehaviour
 
             PuzzlPlay = true;
 
-            fpCamera.enabled = true;
+            bpCamera.enabled = true;
             fpListener.enabled = true;
 
             //mainCamera.enabled = false;
@@ -61,8 +61,6 @@ public class ChangeCam_1stage : MonoBehaviour
         }
         else //if(type == 0) //다시 돌아가기
         {
-            Debug.Log("sdfadf");
-
             carPuzzle_script.enabled = false;
 
             spotlight_script.stop_coroutine();
@@ -72,7 +70,7 @@ public class ChangeCam_1stage : MonoBehaviour
             //mainCamera.enabled = true;
             mainListener.enabled = true;
 
-            fpCamera.enabled = false;
+            bpCamera.enabled = false;
             fpListener.enabled = false;
 
             StartCoroutine(TimetoWaitFor());

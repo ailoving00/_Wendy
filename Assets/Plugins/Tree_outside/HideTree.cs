@@ -14,6 +14,8 @@ public class HideTree : MonoBehaviour
     {
         if (IsCharacter(collider))//if(currentCharacter == character)
         {
+            Debug.Log("asf");
+
             //- 투명해짐(렌더링모드바꿈)
             real_Tree.SetActive(false);
             //SetMaterialTransparent();

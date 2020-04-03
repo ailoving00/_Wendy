@@ -71,24 +71,24 @@ public class Player_HJ : MonoBehaviour
         }
 
         // - 디버그
-        Debug.DrawRay(playerObj.transform.position, targetForward, Color.blue);
+        //Debug.DrawRay(playerObj.transform.position, targetForward, Color.blue);
 
         // - 움직임2
         //앞뒤
-        if (v == 1)
+        if (h == 1)
         {
             transform.Translate(-targetForward.x * movementSpeed * Time.deltaTime, 0, -targetForward.z * movementSpeed * Time.deltaTime);
         }
-        else if (v == -1)
+        else if (h == -1)
         {
             transform.Translate(targetForward.x * movementSpeed * Time.deltaTime, 0, targetForward.z * movementSpeed * Time.deltaTime);
         }
         //좌우
-        if (h == 1)
+        if (v == -1)
         {
             transform.Translate(-targetNormal_Forward.x * movementSpeed * Time.deltaTime, 0, -targetNormal_Forward.z * movementSpeed * Time.deltaTime);
         }
-        else if (h == -1)
+        else if (v == 1)
         {
             transform.Translate(targetNormal_Forward.x * movementSpeed * Time.deltaTime, 0, targetNormal_Forward.z * movementSpeed * Time.deltaTime);
         }

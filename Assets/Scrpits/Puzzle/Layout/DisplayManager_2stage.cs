@@ -21,6 +21,11 @@ public class DisplayManager_2stage : MonoBehaviour
 
         // - DisplayLocation 스크립트 배열
         displayLocation_script = GetComponentsInChildren<DisplayLocation>();
+
+        for (int i = 0; i < displayLocation_script.Length; i++)
+        {
+            displayLocation_script[i].set_locaNum(i);
+        }
     }
 
     void Update()
@@ -31,8 +36,6 @@ public class DisplayManager_2stage : MonoBehaviour
     public void set_DisplayArry(int index, int code)
     {
         input_Arry[index] = code;
-
-        int tempCode = code - 30;//code % 30;
     }
 
     public void reset_DisplayArry(int index)
@@ -44,4 +47,14 @@ public class DisplayManager_2stage : MonoBehaviour
     {
         return input_Arry;
     }
+
+    public void destroy_colliders()
+    {
+        for (int i = 0; i < displayLocation_script.Length; i++)
+        {
+            displayLocation_script[i].complete_layout();
+        }
+    }
+
+
 }

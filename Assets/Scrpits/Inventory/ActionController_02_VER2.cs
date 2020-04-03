@@ -35,15 +35,25 @@ public class ActionController_02_VER2 : MonoBehaviour
     private bool PickUp_state = false;
 
     // - 배치퍼즐 관리자
-    public DisplayManager_2stage displayManager_script;
-    public DisplayManager_3stage displayManager_script2;
-    public GameObject inputButton;
+    private DisplayManager_2stage displayManager_script;
+    private DisplayManager_3stage displayManager_script2;
     private RaycastHit hitInfo2;
     private bool enter_3stage = false;
 
+    private ActionController_03 actionController_3stage_script;
+
+    // - 지하실과 2층으로 가는 길목 @ -> 이후에 네비메시 실시간 베이킹으로 바꾸기 
+    public GameObject tempDoor;
+    public GameObject tempStairs;
 
     void Start()
     {
+        displayManager_script = GameObject.FindObjectOfType<DisplayManager_2stage>();
+        displayManager_script2 = GameObject.FindObjectOfType<DisplayManager_3stage>();
+
+        displayManager_script2.enabled = false;
+
+        actionController_3stage_script = FindObjectOfType<ActionController_03>();
     }
 
 
@@ -61,9 +71,7 @@ public class ActionController_02_VER2 : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // - 아이템 습득
-            //CheckItem();
             CanPickUp();
-
 
             // - 아이템 사용
             Check_use_Item();
@@ -94,13 +102,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                             int display_index = location_script.location_Num;
 
                             // #
-                            //// 2스테이지
-                            //if (!enter_3stage)
-                            //    displayManager_script.reset_DisplayArry(display_index);
-                            //// 3스테이지
-                            //else//enter_3stage == true
-                            //    displayManager_script2.reset_DisplayArry(display_index);
-
+                            displayManager_script.reset_DisplayArry(display_index);
                         }
                     }
                 }
@@ -155,7 +157,7 @@ public class ActionController_02_VER2 : MonoBehaviour
 
                     // #
                     //if (!enter_3stage)
-                    //    displayManager_script.count--;
+                    displayManager_script.count--;
                 }
                 else
                 {
@@ -172,41 +174,42 @@ public class ActionController_02_VER2 : MonoBehaviour
 
 
                             // - 장식장 비교를 위한 변수
+
                             // 아이템 코드
                             int doll_itemCode = theInventory.get_ItemCode(use_index);
                             // 장식장 위치 넘버
                             int display_index = location_script.location_Num;
 
                             // - 아이템 코드 저장 #
-                            // 2스테이지
-                            //if (!enter_3stage)
-                            //    displayManager_script.set_DisplayArry(display_index, doll_itemCode);
-                            //// 3스테이지
-                            //else //enter_3stage  == true
-                            //    displayManager_script2.set_DisplayArry(display_index, doll_itemCode);
-
+                            displayManager_script.set_DisplayArry(display_index, doll_itemCode);
 
                             // - 아이템사용 후, 슬롯 클리어  O
                             theInventory.clear_Slot(use_index);
 
-
                             // - count 증가 #
-                            //if (!enter_3stage)
-                            //    displayManager_script.count++;
-
+                            displayManager_script.count++;
 
                             // - 2스테이지 장식장 배치가 3스테이지로 옮겨짐. 한번만 실행 #
-                            //if (!enter_3stage)
-                            //{
-                            //    if (displayManager_script.count == 8)
-                            //    {
-                            //        displayManager_script2.init_inputArry(displayManager_script.get_inputArry());
-                            //        displayManager_script2.Create_sameOne();
-                            //        enter_3stage = true;
+                            if (displayManager_script.count == 8)
+                            {
+                                //2스테이지 배치퍼즐 off
+                                displayManager_script.enabled = false;
+                                displayManager_script.destroy_colliders();
 
-                            //    }
-                            //}
+                                //3스테이지 배치퍼즐 on
+                                displayManager_script2.enabled = true;
+                                displayManager_script2.init_inputArry(displayManager_script.get_inputArry());
+                                displayManager_script2.Create_sameOne();
 
+                                //지하실, 2층계단 오픈
+                                tempDoor.SetActive(false);
+                                tempStairs.SetActive(false);
+
+                                enter_3stage = true;
+
+                                //3스테이지 카메라 스크립트 on
+                                actionController_3stage_script.enabled = true;
+                            }
                         }
                     }
                 }

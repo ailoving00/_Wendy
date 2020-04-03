@@ -6,6 +6,9 @@ public class DisplayLocation : MonoBehaviour
 {
     public bool state = false; //있으면 true, 없으면 false
     public int location_Num = 0;
+    
+    GameObject clone;
+    BoxCollider[] colliders;
 
     void Start()
     {
@@ -18,7 +21,9 @@ public class DisplayLocation : MonoBehaviour
 
     public void setup_Doll(GameObject obj)
     {
-        Instantiate(obj, gameObject.transform.position, Quaternion.identity);
+        //Instantiate(obj, gameObject.transform.position, Quaternion.identity);
+        clone = Instantiate(obj, gameObject.transform.position, transform.rotation);
+        colliders = clone.GetComponents<BoxCollider>();
 
         state = true;
     }
@@ -34,5 +39,18 @@ public class DisplayLocation : MonoBehaviour
             return false;
         else
             return true;
+    }
+
+    public void set_locaNum(int num)
+    {
+        location_Num = num;
+    }
+
+    public void complete_layout()
+    {
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].enabled = false;
+        }
     }
 }

@@ -5,9 +5,9 @@ using System;
 
 public class DisplayManager_3stage : MonoBehaviour
 {
-    private int[] answer_Arry = new int[8]; // 정답
+    public int[] answer_Arry = new int[8]; // 정답
 
-    private int[] input_Arry = new int[8]; // 장식장에 놓여진 인형들의 아이템 코드들
+    public int[] input_Arry = new int[8]; // 장식장에 놓여진 인형들의 아이템 코드들
     private GameObject[] input_DollArry = new GameObject[8];
 
     private DisplayLocation[] displayLocation_script;
@@ -56,7 +56,7 @@ public class DisplayManager_3stage : MonoBehaviour
     {
         input_Arry[index] = code;
 
-        int tempCode = code - 30;//code % 30;
+        //int tempCode = code - 30;//code % 30;
     }
 
     public void reset_DisplayArry(int index)
@@ -87,8 +87,7 @@ public class DisplayManager_3stage : MonoBehaviour
                 }
             }
 
-
-            //콜라이더 삭제
+            //콜라이더 삭제 -> 다른 스크립트에서 함
             //input_DollArry[index].GetComponent<BoxCollider>()
         }
     }

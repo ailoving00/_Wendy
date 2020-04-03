@@ -12,6 +12,7 @@ TagManager:
   - ItemSet
   - Location
   - Destination
+  - Enter
   layers:
   - Default
   - TransparentFX

@@ -97,6 +97,7 @@
      <Compile Include="Assets\Scrpits\Inventory\ActionController_01.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_02.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_02_VER2.cs" />
+     <Compile Include="Assets\Scrpits\Inventory\ActionController_03.cs" />
      <Compile Include="Assets\Scrpits\Inventory\Box_Block.cs" />
      <Compile Include="Assets\Scrpits\Inventory\down_Wheel_sprite.cs" />
      <Compile Include="Assets\Scrpits\Inventory\GameMgr.cs" />
@@ -122,10 +123,10 @@
      <Compile Include="Assets\Scrpits\Puzzle\Block\GameManager_test.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\KeyBlock.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\MouseController_CarPuzzle.cs" />
-     <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayInputButton.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayLocation.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayManager_2stage.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayManager_3stage.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Layout\RewardDoor_Open.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Light\Light_test.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Light\ResetButton.cs" />
      <Compile Include="Assets\Scrpits\UI\TitleButton.cs" />

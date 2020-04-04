@@ -13,6 +13,8 @@ TagManager:
   - Location
   - Destination
   - Enter
+  - EnterButton_CP
+  - InputButton_CP
   layers:
   - Default
   - TransparentFX
@@ -32,7 +34,7 @@ TagManager:
   - Obstacle
   - Player
   - BlockPuzzle
-  - 
+  - ClockPuzzle
   - 
   - 
   - 

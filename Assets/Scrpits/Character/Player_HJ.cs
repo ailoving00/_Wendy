@@ -22,6 +22,9 @@ public class Player_HJ : MonoBehaviour
 
     public GameObject playerModeling;
 
+    private bool cp_start = false;
+
+
     void Start()
     {
         //_animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>();
@@ -98,5 +101,10 @@ public class Player_HJ : MonoBehaviour
     {
         this.min = min;
         this.max = max;
+    }
+
+    public void set_cp_start(bool b)
+    {
+        cp_start = b;
     }
 }

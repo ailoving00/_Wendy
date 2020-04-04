@@ -70,6 +70,8 @@
      <Compile Include="Assets\Editor\NavMeshModifierEditor.cs" />
      <Compile Include="Assets\Editor\NavMeshModifierVolumeEditor.cs" />
      <Compile Include="Assets\Editor\NavMeshSurfaceEditor.cs" />
+     <Compile Include="Assets\MotionBlur\Editor\MotionBlurEditor.cs" />
+     <Compile Include="Assets\MotionBlur\Editor\MotionBlurGraphDrawer.cs" />
      <None Include="Assets\Editor\Resources\DepthTexPreview.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

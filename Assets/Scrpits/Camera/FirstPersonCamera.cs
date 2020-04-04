@@ -20,6 +20,7 @@ public class FirstPersonCamera : MonoBehaviour
 
     float m_FieldOfView = 58f; //50f, 30f
     public Camera cameraOption;
+    bool once = false;
 
     float ClampAngle(float angle, float min, float max)
     {
@@ -37,15 +38,14 @@ public class FirstPersonCamera : MonoBehaviour
 
         x = angles.y;
         y = angles.x;
+
+        cameraOption = GetComponent<Camera>();
     }
 
     void Update()
     {
         if (jumpScare_state)
         {
-            m_FieldOfView = 30f;
-            cameraOption.fieldOfView = m_FieldOfView;
-
             return;
         }
 
@@ -65,12 +65,28 @@ public class FirstPersonCamera : MonoBehaviour
         transform.position = position;
     }
 
+    public void start_JumpScare()
+    {
+        // - 화면 확대
+        if (!once)
+        {
+            m_FieldOfView = 50f;
+            cameraOption.fieldOfView = m_FieldOfView;
+        }
 
-    //void OnTriggerEnter(Collider col)
-    //{
-    //    if(col.gameObject.tag == "JumpScare") //뻐꾸기애니메이션이 끝났을때
-    //    {
-    //        Debug.Log("col");
-    //    }
-    //}
+        jumpScare_state = true;
+    }
+
+    public void end_JumpScare()
+    {
+        // - 화면 축소 (기본값)
+        if (!once)
+        {
+            m_FieldOfView = 58f;
+            cameraOption.fieldOfView = m_FieldOfView;
+            once = true;
+        }
+
+        jumpScare_state = false;
+    }
 }

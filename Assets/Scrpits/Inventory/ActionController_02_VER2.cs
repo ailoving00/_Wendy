@@ -46,14 +46,24 @@ public class ActionController_02_VER2 : MonoBehaviour
     public GameObject tempDoor;
     public GameObject tempStairs;
 
+    // - 손전등
+    public GameObject FlashlightItem;
+    Flashlight_PRO flash_script;
+
     void Start()
     {
+        //배치퍼즐
         displayManager_script = GameObject.FindObjectOfType<DisplayManager_2stage>();
         displayManager_script2 = GameObject.FindObjectOfType<DisplayManager_3stage>();
 
         displayManager_script2.enabled = false;
 
         actionController_3stage_script = FindObjectOfType<ActionController_03>();
+
+        //손전등
+        FlashlightItem.SetActive(false);
+        flash_script = FlashlightItem.GetComponent<Flashlight_PRO>();
+        flash_script.enabled = false;
     }
 
 
@@ -105,6 +115,18 @@ public class ActionController_02_VER2 : MonoBehaviour
                             displayManager_script.reset_DisplayArry(display_index);
                         }
                     }
+
+                    if (hitInfo.transform.GetComponent<ItemPickUp>().item.itemName == "FlashlightItem")
+                    {
+                        Destroy(hitInfo.transform.gameObject); //아이템 삭제, 나중엔 코루틴으로 #
+
+                        FlashlightItem.SetActive(true);
+                        flash_script.enabled = true;
+                    }
+                }
+                else
+                {
+
                 }
             }
         }

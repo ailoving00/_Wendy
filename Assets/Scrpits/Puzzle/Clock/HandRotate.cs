@@ -50,24 +50,35 @@ public class HandRotate : MonoBehaviour
     {
         //yield return new WaitForSeconds(3f); //30초 -> 이걸 게이지로 #
 
-        avoid_GimbalLockTemp.Rotate(Vector3.right * rotateValue);
+        avoid_GimbalLockTemp.Rotate(rotateValue, 0, 0);
+        //avoid_GimbalLockTemp.Rotate(Vector3.right * rotateValue);
 
         rotState = true;
 
+        float temp;
+
         while (transform.rotation.eulerAngles.x != avoid_GimbalLockTemp.rotation.eulerAngles.x)
         {
+            yield return new WaitForSeconds(0.01f);
+
             float step = speed * Time.deltaTime;
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, avoid_GimbalLockTemp.rotation, step);
 
-            yield return new WaitForSeconds(0.01f);
+            temp = (transform.rotation.eulerAngles.x) - (avoid_GimbalLockTemp.rotation.eulerAngles.x);
+            temp = Mathf.Abs(temp);
+
+            if(temp <= 0.25f)
+            {
+                break;
+            }
         }
 
         rotState = false;
 
         //index값
-        hand1_index += dirType;
-        hand2_index += dirType;
+        hand1_index += (dirType);
+        hand2_index += (dirType);
 
         checkIndexOver();
         ChangeAnswer();

@@ -55,6 +55,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_INGINGING\Frame\script\backGear_Move.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\Drawing_Move.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\DrawingTarget.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\FramePuzzle_ChangeCam.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\FramePuzzle_Controller.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\FramePuzzle_Enter.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\Gear_Move.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\GearManager.cs" />
+     <Compile Include="Assets\_INGINGING\Frame\script\Subtitle_Controller.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />
      <Compile Include="Assets\_PurchasedAsset\3DTOYS\rotatecamera.cs" />
      <Compile Include="Assets\_PurchasedAsset\Fog\Scripts\DynamicFog.cs" />

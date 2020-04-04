@@ -143,7 +143,6 @@ public class CustomFan : MonoBehaviour
     public void Set_fill()
     {
         fill += reverseFan * 0.00425f; //0.033f;//reverseFan * percent * Time.deltaTime;
-        //fill = 0;
     }
 
     public bool Set_reverseFan() //void 

@@ -15,6 +15,7 @@ TagManager:
   - Enter
   - EnterButton_CP
   - InputButton_CP
+  - Frame
   layers:
   - Default
   - TransparentFX
@@ -35,8 +36,8 @@ TagManager:
   - Player
   - BlockPuzzle
   - ClockPuzzle
-  - 
-  - 
+  - FramePuzzle
+  - Gear
   - 
   - 
   - 

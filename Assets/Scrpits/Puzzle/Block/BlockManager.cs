@@ -90,10 +90,6 @@ public class BlockManager : MonoBehaviour
             {
                 int index = start - 6;
 
-                Debug.Log(start);
-                Debug.Log(end);
-                Debug.Log(index);
-
                 if ((start / 6) != 0 && index >= 0)
                 {
                     if (blockArray[index] == 1)

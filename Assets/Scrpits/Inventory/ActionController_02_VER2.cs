@@ -231,6 +231,9 @@ public class ActionController_02_VER2 : MonoBehaviour
 
                                 //3스테이지 카메라 스크립트 on
                                 actionController_3stage_script.enabled = true;
+
+                                //손전등 없어지기
+                                FlashlightItem.SetActive(false);
                             }
                         }
                     }

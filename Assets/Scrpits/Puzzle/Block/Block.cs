@@ -109,6 +109,7 @@ public class Block : MonoBehaviour
                 if (location[0] == 12 && blockType == BlockType.Me) //도착지점!!
                 {
                     destination = transform.position + (direction * 2.6f);
+                    speed = 15f;
 
                     //destination += (direction * 1.3f);
                     mouseController.GameClear = true;

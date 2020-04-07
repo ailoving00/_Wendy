@@ -55,15 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\_INGINGING\Frame\script\backGear_Move.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\Drawing_Move.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\DrawingTarget.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\FramePuzzle_ChangeCam.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\FramePuzzle_Controller.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\FramePuzzle_Enter.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\Gear_Move.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\GearManager.cs" />
-     <Compile Include="Assets\_INGINGING\Frame\script\Subtitle_Controller.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />
      <Compile Include="Assets\_PurchasedAsset\3DTOYS\rotatecamera.cs" />
      <Compile Include="Assets\_PurchasedAsset\Fog\Scripts\DynamicFog.cs" />
@@ -103,10 +94,13 @@
      <Compile Include="Assets\Scrpits\Decorating\Box_1stage\BoxOpen.cs" />
      <Compile Include="Assets\Scrpits\GameManager\Audio\SoundManager\SoundManger.cs" />
      <Compile Include="Assets\Scrpits\GameManager\Scene\ChangeScene01.cs" />
+     <Compile Include="Assets\Scrpits\GameManager\Scene\NewScene_Loading.cs" />
+     <Compile Include="Assets\Scrpits\GameManager\Scene\NextStage_01.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_01.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_02.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_02_VER2.cs" />
      <Compile Include="Assets\Scrpits\Inventory\ActionController_03.cs" />
+     <Compile Include="Assets\Scrpits\Inventory\ActionController_Ending.cs" />
      <Compile Include="Assets\Scrpits\Inventory\Box_Block.cs" />
      <Compile Include="Assets\Scrpits\Inventory\down_Wheel_sprite.cs" />
      <Compile Include="Assets\Scrpits\Inventory\GameMgr.cs" />
@@ -146,9 +140,19 @@
      <Compile Include="Assets\Scrpits\Puzzle\Clock\HandRotate.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Clock\InputClockAnswer.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Clock\Move_Cuckoo.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\backGear_Move.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\Drawing_Move.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\DrawingTarget.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\FramePuzzle_ChangeCam.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\FramePuzzle_Controller.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\FramePuzzle_Enter.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\Gear_Move.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\GearManager.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Frame\Subtitle_Controller.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayLocation.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayManager_2stage.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\DisplayManager_3stage.cs" />
+     <Compile Include="Assets\Scrpits\Puzzle\Layout\RewardBook_Open.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Layout\RewardDoor_Open.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Light\Light_test.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Light\ResetButton.cs" />

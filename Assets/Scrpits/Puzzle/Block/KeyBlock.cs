@@ -1,26 +1,21 @@
-﻿//
-//2019-11-14
-//도착지에 들어가야하는 블럭
-//
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyBlock : MonoBehaviour
 {
-    public GameObject winText;
+    public NextStage_01 nextStage;
 
     void start()
     {
-        //GetComponent<Block>().bType = 0;
+        //nextStage = GameObject.FindObjectOfType<NextStage_01>();
     }
 
     void OnTriggerEnter(Collider coll)
     {
-        //if (coll.gameObject.tag == "Exit")
         if (coll.gameObject.CompareTag("Destination"))
         {
-            //Debug.Log("__Exit__");
+            nextStage.InStartFadeAnim();
         }
     }
 }

@@ -23,6 +23,8 @@ public class ClockPuzzle_Manager : MonoBehaviour
     DoorAni_reward reward_script;
     CustomFan fan_script;
 
+    public GameObject reward;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -77,6 +79,9 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
                     // - 시계판 열리는 애니메이션
                     reward_script.set_Ani_param();
+
+                    // - 피터팬인형 활성화
+                    reward.SetActive(true);
                 }
             }
         }

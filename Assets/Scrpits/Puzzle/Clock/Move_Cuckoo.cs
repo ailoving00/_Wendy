@@ -26,6 +26,11 @@ public class Move_Cuckoo : MonoBehaviour
     private bool aniState = false;
     //private static string AniName = "cuckoo_dundun";
 
+    // - 애니메이션 이름
+    private static string AniName_idle = "angmu_idle";
+    private static string AniName_start = "angmu_standby";
+    private static string AniName_end = "angmu_fly";
+
     //X
     private static int AniNameHash; //X
     //private static string AniLayerName_string = "Base Layer";
@@ -104,8 +109,10 @@ public class Move_Cuckoo : MonoBehaviour
         doorAni_script.set_Ani_param(true);
 
         // - 카메라와 캐릭터 이동 해제
-        fpCam_Script.start_JumpScare();
-        player_script.set_cp_start(true);
+        //fpCam_Script.start_JumpScare();
+        //player_script.set_cp_start(true);
+        fpCam_Script.enabled = false;
+        player_script.enabled = false;
 
         // - 버튼을 각도 구하기
         mainCam_pos = cpManager_script.get_mainCam_pos();
@@ -215,11 +222,6 @@ public class Move_Cuckoo : MonoBehaviour
         moveAniState = false;
     }
 
-    private static string AniName_idle = "angmu_idle";
-    private static string AniName_start = "angmu_standby";
-    private static string AniName_end = "angmu_fly";
-
-
     IEnumerator check_aniState()
     {
         // - 앵무새 애니메이션 시작
@@ -272,7 +274,7 @@ public class Move_Cuckoo : MonoBehaviour
             yield return null;
         }
 
-        float endtime = 0.5f;
+        float endtime = 0.15f;
         float deltat = 0.0f;
         animator.speed = 0; //멈춤
         while (true)
@@ -334,8 +336,10 @@ public class Move_Cuckoo : MonoBehaviour
     public void set_active()
     {
         active = false;
-        fpCam_Script.end_JumpScare();
-        player_script.set_cp_start(false);
+        //fpCam_Script.end_JumpScare();
+        //player_script.set_cp_start(false);
+        fpCam_Script.enabled = true;
+        player_script.enabled = true;
     }
 
     // - 두점 사이 각도 : 앵무새 회전하면서 들어가는것때문에

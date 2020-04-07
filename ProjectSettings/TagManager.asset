@@ -16,6 +16,8 @@ TagManager:
   - EnterButton_CP
   - InputButton_CP
   - Frame
+  - Book_EB
+  - Key_EB
   layers:
   - Default
   - TransparentFX
@@ -38,7 +40,7 @@ TagManager:
   - ClockPuzzle
   - FramePuzzle
   - Gear
-  - 
+  - Ending
   - 
   - 
   - 

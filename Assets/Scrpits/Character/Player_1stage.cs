@@ -132,12 +132,6 @@ public class Player_1stage : MonoBehaviour
             //ver1
             dir = h * Vector3.left + v * Vector3.back; // 회전방향
             transform.position = transform.position + dir * movementSpeed * Time.deltaTime;
-            //ver2 캐릭터컨트롤러 이용
-            //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            ////moveDirection = transform.position + dir;
-            //moveDirection = transform.TransformDirection(moveDirection);
-            //moveDirection *= 0.001f;
-            //controller.Move(dir * Time.deltaTime);
 
             //캐릭터의 원회전
             {
@@ -200,14 +194,12 @@ public class Player_1stage : MonoBehaviour
             desiredAngle = atanAngle;
             angle = Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * turningSpeed);
 
-
             //원 회전
             currentXAngle = target_modeling.transform.eulerAngles.x; //center
             xangle = Mathf.LerpAngle(currentXAngle, desiredXAngle, Time.deltaTime * ZturningSpeed);
             // z
             currentZAngle = target_modeling.transform.eulerAngles.z; //center
             zangle = Mathf.LerpAngle(currentZAngle, desiredZAngle, Time.deltaTime * ZturningSpeed);
-
 
             //디버그
             //Debug.DrawRay(standard.transform.position, dir * MaxDistance, Color.blue, 0.3f);

@@ -5,7 +5,7 @@ using System;
 
 public class DisplayManager_3stage : MonoBehaviour
 {
-    public int[] answer_Arry = new int[8]; // 정답
+    private int[] answer_Arry = new int[8]; // 정답
 
     public int[] input_Arry = new int[8]; // 장식장에 놓여진 인형들의 아이템 코드들
     private GameObject[] input_DollArry = new GameObject[8];

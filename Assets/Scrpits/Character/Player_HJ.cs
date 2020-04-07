@@ -76,25 +76,54 @@ public class Player_HJ : MonoBehaviour
         // - 디버그
         //Debug.DrawRay(playerObj.transform.position, targetForward, Color.blue);
 
-        // - 움직임2
+        // - 움직임
+
+        float moveX = 0f;
+        float moveZ = 0f;
+        float speed = 0f;
+
         //앞뒤
         if (h == 1)
         {
             transform.Translate(-targetForward.x * movementSpeed * Time.deltaTime, 0, -targetForward.z * movementSpeed * Time.deltaTime);
+
+            //moveX = -targetForward.x * Time.deltaTime;
+            //moveZ = -targetForward.z * Time.deltaTime;
+            //speed = movementSpeed;
         }
         else if (h == -1)
         {
             transform.Translate(targetForward.x * movementSpeed * Time.deltaTime, 0, targetForward.z * movementSpeed * Time.deltaTime);
+
+            //moveX = targetForward.x * Time.deltaTime;
+            //moveZ = targetForward.z * Time.deltaTime;
+            //speed = movementSpeed;
         }
         //좌우
         if (v == -1)
         {
             transform.Translate(-targetNormal_Forward.x * movementSpeed * Time.deltaTime, 0, -targetNormal_Forward.z * movementSpeed * Time.deltaTime);
+
+            //moveX = -targetNormal_Forward.x * Time.deltaTime;
+            //moveZ = -targetNormal_Forward.z * Time.deltaTime;
+            //if (speed == 0)
+            //    speed = movementSpeed;
+            //else //(speed != 0)
+            //    speed = movementSpeed / 2;
         }
         else if (v == 1)
         {
             transform.Translate(targetNormal_Forward.x * movementSpeed * Time.deltaTime, 0, targetNormal_Forward.z * movementSpeed * Time.deltaTime);
+
+           // moveX = targetNormal_Forward.x * Time.deltaTime;
+           // moveZ = targetNormal_Forward.z * Time.deltaTime;
+           // if (speed == 0)
+           //    speed = movementSpeed;
+           //else
+           //     speed = movementSpeed / 2;
         }
+
+        //transform.Translate(moveX * movementSpeed, 0, moveZ * movementSpeed);
     }
 
     public void SetLimits(Vector3 min, Vector3 max)

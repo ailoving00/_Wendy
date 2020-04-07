@@ -34,6 +34,10 @@ public class ActionController_03 : MonoBehaviour
 
     RewardDoor_Open doorAnimation;
 
+    // - 책을 습득하기 위한 새로운 스크립트
+    //bool end = false;
+    ActionController_Ending endingCtrller_script;
+
     void Start()
     {
         displayManager_script2 = GameObject.FindObjectOfType<DisplayManager_3stage>();
@@ -42,12 +46,16 @@ public class ActionController_03 : MonoBehaviour
         actionController_2stage_script.enabled = false;
 
         doorAnimation = GameObject.FindObjectOfType<RewardDoor_Open>();
+
+        endingCtrller_script = GameObject.FindObjectOfType<ActionController_Ending>();
     }
 
     void Update()
     {
         CheckItem();
-        Check_Location();
+
+        //if (end)
+            Check_Location();
 
         TryAction();
     }
@@ -89,10 +97,13 @@ public class ActionController_03 : MonoBehaviour
 
                             // #
                             displayManager_script2.reset_DisplayArry(display_index);
-
                         }
                     }
                 }
+                //else if (hitInfo.transform.tag == "Book") //compare @
+                //{
+
+                //}
             }
         }
     }
@@ -149,7 +160,6 @@ public class ActionController_03 : MonoBehaviour
                     {
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
-
                             // - 아이템 생성  O
                             location_script.setup_Doll(theInventory.get_Item(use_index));
 
@@ -174,17 +184,18 @@ public class ActionController_03 : MonoBehaviour
             }
             else if (hitInfo2.transform.tag == "Enter") //compare @
             {
-                if(displayManager_script2.compare_Answer())
+                // Enter 버튼을 누르고,
+                if (displayManager_script2.compare_Answer()) // 맞았을때,
                 {
                     doorAnimation.play_doorAni();
                     this.enabled = false;
 
-                    Debug.Log("clear - layout puzzle - 3stage");
-
+                    endingCtrller_script.enabled = true;
+                    //Debug.Log("clear - layout puzzle - 3stage");
                 }
-                else
+                else // 틀렸을때
                 {
-                    Debug.Log("wrong answer - layout puzzle - 3stage");
+                    //Debug.Log("wrong answer - layout puzzle - 3stage");
                 }
             }
 
@@ -203,4 +214,10 @@ public class ActionController_03 : MonoBehaviour
 
         }
     }
+
+    //public void set_ending()
+    //{
+    //    end = true;
+    //    hitInfo2 = null;
+    //}
 }

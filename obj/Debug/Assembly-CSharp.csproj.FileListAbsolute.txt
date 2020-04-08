@@ -1339,3 +1339,13 @@ C:\Users\User01\Desktop\_Wendy (2)\_Wendy (2)\obj\Debug\Assembly-CSharp.pdb
 C:\Users\User01\Desktop\_Wendy (2)\_Wendy (2)\Temp\bin\Debug\Boo.Lang.dll
 C:\Users\User01\Desktop\_Wendy (2)\_Wendy (2)\Temp\bin\Debug\UnityEditor.UI.dll
 C:\Users\User01\Desktop\_Wendy (2)\_Wendy (2)\Temp\bin\Debug\UnityEditor.UI.xml
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Postprocessing.Editor.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Postprocessing.Runtime.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.UI.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\PathCreator.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\PathCreatorEditor.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Postprocessing.Editor.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Postprocessing.Runtime.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.UI.xml

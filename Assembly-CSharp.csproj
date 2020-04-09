@@ -93,6 +93,9 @@
      <Compile Include="Assets\Scrpits\Camera\FirstPersonCamera.cs" />
      <Compile Include="Assets\Scrpits\Camera\FollowCamera.cs" />
      <Compile Include="Assets\Scrpits\Camera\SnowController.cs" />
+     <Compile Include="Assets\Scrpits\Cellar\CellarDoorCollider.cs" />
+     <Compile Include="Assets\Scrpits\Cellar\ChangeCam_2stage.cs" />
+     <Compile Include="Assets\Scrpits\Cellar\Fade\FadeManager.cs" />
      <Compile Include="Assets\Scrpits\Character\Player.cs" />
      <Compile Include="Assets\Scrpits\Character\Player_1stage.cs" />
      <Compile Include="Assets\Scrpits\Character\Player_HJ.cs" />

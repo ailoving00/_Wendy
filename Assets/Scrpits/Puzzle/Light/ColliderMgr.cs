@@ -11,6 +11,7 @@ public class ColliderMgr : MonoBehaviour
 
     public GameObject[] lamp;
 
+    public GameObject bell_Doll;
 
     public GameObject MCamera;
 
@@ -26,6 +27,7 @@ public class ColliderMgr : MonoBehaviour
     private RaycastHit puzzleInfo;
 
 
+    private int CheckOnL = 0 ;
     LampLight lamplight;
 
     //public GameObject[] _Pointstate;
@@ -33,8 +35,10 @@ public class ColliderMgr : MonoBehaviour
 
     void Start()
     {
-        
-     //   Animation Tinkerbell_ani = gameObject.GetComponent<Animation>();
+
+        bell_Doll.SetActive(false);
+
+        //   Animation Tinkerbell_ani = gameObject.GetComponent<Animation>();
         lamplight = FindObjectOfType<LampLight>();
         lamp[0].SetActive(true);
         lamp[7].SetActive(true);
@@ -48,6 +52,8 @@ public class ColliderMgr : MonoBehaviour
         lamp[0].SetActive(true);
         lamp[7].SetActive(true);
         lamp[1].SetActive(true);
+
+        CheckOnL = 3;
     }
     
     // Update is called once per frame
@@ -55,7 +61,7 @@ public class ColliderMgr : MonoBehaviour
     {
         CheckLamp();
         TryAction();
-
+        End_LampP();
 
     }
     private void TryAction()
@@ -63,6 +69,18 @@ public class ColliderMgr : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             CanLocation();
+        }
+    }
+
+    private void End_LampP()
+    {
+        if (CheckOnL == 8)
+        {
+            Debug.Log("램프가 끝났지롱");
+            bell_Doll.SetActive(true);
+            InfoDisappear();
+            this.gameObject.GetComponent<ColliderMgr>().enabled = false;
+            
         }
     }
 
@@ -78,71 +96,104 @@ public class ColliderMgr : MonoBehaviour
 
                     int Lampnumber = puzzleInfo.transform.GetComponent<LampLight>().LampNum;
 
-   
-                    if(Lampnumber - 1 < 0 )
+                    if (Lampnumber != 9)
                     {
-                        if (lamp[7].activeInHierarchy == true)
+                        if (Lampnumber - 1 < 0)
                         {
+                            if (lamp[7].activeInHierarchy == true)
+                            {
 
-                            lamp[7].gameObject.SetActive(false);
+                                lamp[7].gameObject.SetActive(false);
+                                CheckOnL--;
+
+                            }
+                            else
+                            {
+                                lamp[7].gameObject.SetActive(true);
+                                CheckOnL++;
+                            }
 
                         }
                         else
                         {
-                            lamp[7].gameObject.SetActive(true);
+
+                            if (lamp[Lampnumber - 1].activeInHierarchy == true)
+                            {
+
+                                lamp[Lampnumber - 1].gameObject.SetActive(false);
+                                CheckOnL--;
+
+                            }
+                            else
+                            {
+                                lamp[Lampnumber - 1].gameObject.SetActive(true);
+                                CheckOnL++;
+
+                            }
                         }
 
+
+
+                        if (lamp[Lampnumber].activeInHierarchy == true)
+                        {
+                            lamp[Lampnumber].gameObject.SetActive(false);
+                            CheckOnL--;
+
+                        }
+                        else
+                        {
+                            lamp[Lampnumber].gameObject.SetActive(true);
+                            CheckOnL++;
+
+                        }
+
+
+                        if (Lampnumber + 1 > 7)
+                        {
+                            if (lamp[0].activeInHierarchy == true)
+                            {
+                                lamp[0].gameObject.SetActive(false);
+                                CheckOnL--;
+
+                            }
+                            else
+                            {
+                                lamp[0].gameObject.SetActive(true);
+                                CheckOnL++;
+
+                            }
+
+                        }
+                        else
+                        {
+                            if (lamp[Lampnumber + 1].activeInHierarchy == true)
+                            {
+                                lamp[Lampnumber + 1].gameObject.SetActive(false);
+                                CheckOnL--;
+
+                            }
+                            else
+                            {
+                                lamp[Lampnumber + 1].gameObject.SetActive(true);
+                                CheckOnL++;
+
+                            }
+
+
+                        }
                     }
+
                     else
                     {
-
-                        if (lamp[Lampnumber - 1].activeInHierarchy == true)
+                        for (int i = 0; i < 8; i++)
                         {
-
-                            lamp[Lampnumber - 1].gameObject.SetActive(false);
-
-                        }
-                        else
-                        {
-                            lamp[Lampnumber - 1].gameObject.SetActive(true);
-                        }
-                    }
-
-
-
-                    if (lamp[Lampnumber].activeInHierarchy == true)
-                    {
-                        lamp[Lampnumber].gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        lamp[Lampnumber].gameObject.SetActive(true);
-                    }
-
-
-                    if (Lampnumber + 1 > 7)
-                    {
-                        if (lamp[0].activeInHierarchy == true)
-                        {
-                            lamp[0].gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            lamp[0].gameObject.SetActive(true);
+                            lamp[i].SetActive(false);
                         }
 
-                    }
-                    else
-                    {
-                        if (lamp[Lampnumber + 1].activeInHierarchy == true)
-                        {
-                            lamp[Lampnumber + 1].gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            lamp[Lampnumber + 1].gameObject.SetActive(true);
-                        }
-
+                        lamp[0].SetActive(true);
+                        lamp[7].SetActive(true);
+                        lamp[1].SetActive(true);
+                        CheckOnL = 3;
 
                     }
 

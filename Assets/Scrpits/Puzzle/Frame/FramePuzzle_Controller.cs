@@ -45,6 +45,7 @@ public class FramePuzzle_Controller : MonoBehaviour
 
     public GameObject noEntry_obj;
     public GameObject Flash_obj;
+    public GameObject _reward;
 
 
     void Start()
@@ -183,6 +184,7 @@ public class FramePuzzle_Controller : MonoBehaviour
                                 puzzleEnter_script.set_puzzleEnd();
                                 noEntry_obj.SetActive(false);
                                 Flash_obj.SetActive(true);
+                                _reward.SetActive(true);
                             }
 
                             // - 톱니 해제 , 유예기간 지난후에 톱니가 해제됨.

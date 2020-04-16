@@ -101,7 +101,7 @@ public class ActionController_01 : MonoBehaviour
         Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, -angleRange / 2, distance);
         //                     타겟에의 위치에서, 타겟의 위치 앞전방으로 ,위아래 판별, 각도는 몇만큼의 -, 방향은 몇만큼. 
 
-        //Gizmos.DrawSphere(P_target.transform.position, range);
+        Gizmos.DrawSphere(P_target.transform.position, range);
     }
 
     private void TryAction()

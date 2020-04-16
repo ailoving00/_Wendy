@@ -19,6 +19,7 @@ TagManager:
   - Book_EB
   - Key_EB
   - Puzzle
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -43,7 +44,7 @@ TagManager:
   - Gear
   - Ending
   - GlowEffect
-  - 
+  - Render
   - 
   - 
   - 

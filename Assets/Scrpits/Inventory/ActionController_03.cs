@@ -36,7 +36,7 @@ public class ActionController_03 : MonoBehaviour
 
     // - 책을 습득하기 위한 새로운 스크립트
     //bool end = false;
-    ActionController_Ending endingCtrller_script;
+    ActionController_GetKey getKey_script;
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class ActionController_03 : MonoBehaviour
 
         doorAnimation = GameObject.FindObjectOfType<RewardDoor_Open>();
 
-        endingCtrller_script = GameObject.FindObjectOfType<ActionController_Ending>();
+        getKey_script = GameObject.FindObjectOfType<ActionController_GetKey>();
     }
 
     void Update()
@@ -55,7 +55,7 @@ public class ActionController_03 : MonoBehaviour
         CheckItem();
 
         //if (end)
-            Check_Location();
+        Check_Location();
 
         TryAction();
     }
@@ -190,7 +190,7 @@ public class ActionController_03 : MonoBehaviour
                     doorAnimation.play_doorAni();
                     this.enabled = false;
 
-                    endingCtrller_script.enabled = true;
+                    getKey_script.enabled = true;
                     //Debug.Log("clear - layout puzzle - 3stage");
                 }
                 else // 틀렸을때

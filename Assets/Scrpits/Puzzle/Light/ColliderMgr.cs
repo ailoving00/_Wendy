@@ -76,7 +76,7 @@ public class ColliderMgr : MonoBehaviour
     {
         if (CheckOnL == 8)
         {
-            Debug.Log("램프가 끝났지롱");
+            //Debug.Log("램프가 끝났지롱");
             bell_Doll.SetActive(true);
             InfoDisappear();
             this.gameObject.GetComponent<ColliderMgr>().enabled = false;
@@ -304,7 +304,7 @@ public class ColliderMgr : MonoBehaviour
     {
         pickupActivated = true;
         actionText.gameObject.SetActive(true);
-        actionText.text = "등불 크기, 켜기 [Click]";
+        actionText.text = "등불 끄기, 켜기 [Click]";
     }
 
 

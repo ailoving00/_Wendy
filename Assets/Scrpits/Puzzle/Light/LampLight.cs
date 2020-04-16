@@ -59,7 +59,7 @@ public class LampLight : MonoBehaviour
                 }
                 */
 
-        Debug.Log(LampNum);
+        //Debug.Log(LampNum);
         
     }
 }

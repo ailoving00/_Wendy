@@ -50,6 +50,9 @@ public class ActionController_02_VER2 : MonoBehaviour
     public GameObject FlashlightItem;
     Flashlight_PRO flash_script;
 
+    // - 라이트
+    LightOn_3stage _lightOn_script;
+
     void Start()
     {
         //배치퍼즐
@@ -64,6 +67,9 @@ public class ActionController_02_VER2 : MonoBehaviour
         FlashlightItem.SetActive(false);
         flash_script = FlashlightItem.GetComponent<Flashlight_PRO>();
         flash_script.enabled = false;
+
+        //라이트
+        _lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
     }
 
 
@@ -222,6 +228,9 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 displayManager_script2.enabled = true;
                                 displayManager_script2.init_inputArry(displayManager_script.get_inputArry());
                                 displayManager_script2.Create_sameOne();
+
+                                //라이트
+                                _lightOn_script.LightOn();
 
                                 //지하실, 2층계단 오픈
                                 tempDoor.SetActive(false);

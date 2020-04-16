@@ -15,6 +15,10 @@ public class RewardBook_Open : MonoBehaviour
     // - 속성
     public float moveSpeed;
     public float rotSpeed;
+    public float moveSpeed_return;
+    public float rotSpeed_return;
+    private float speedFactor = 0.0f; //보정값
+    public float customFactor;
 
     // - 애니메이션
     private Animator animator;
@@ -31,14 +35,14 @@ public class RewardBook_Open : MonoBehaviour
     //public Collider flip_colider; // 페이지 넘길때의 콜라이더 -> 화면 반을 잘라서 오른쪽을 클릭하는것으로 변경
     private Collider book_colider; // 책 팝업시 콜라이더
 
-    private ActionController_Ending endingCtrller_script;
+    private ActionController_GetKey getKey_script;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         book_colider = GetComponent<BoxCollider>();
 
-        endingCtrller_script = Camera.main.GetComponent<ActionController_Ending>();
+        getKey_script = Camera.main.GetComponent<ActionController_GetKey>();
     }
 
     void Update()
@@ -95,18 +99,26 @@ public class RewardBook_Open : MonoBehaviour
                 StartCoroutine(bookFlipAni());
                 break;
 
-            case 4: // 넘기기 취소 (책 펼쳐져있을때)
-                isFlip = false;
-                StartCoroutine(bookFlipAni());
-                break;
+            //case 4: // 넘기기 취소 (책 펼쳐져있을때)
+            //    isFlip = false;
+            //    StartCoroutine(bookFlipAni());
+            //    break;
 
             default:
                 break;
         }
     }
 
+    void SetNewSpeedFactor()
+    {
+        float distance = (endTarget.position - startTarget.position).magnitude;
+        speedFactor = (distance / customFactor);
+    }
+
     IEnumerator MoveBook()
     {
+        SetNewSpeedFactor();
+
         if (!popup) // end 지점으로 갈때
         {
             Cursor.lockState = CursorLockMode.None; //커서 고정 해제
@@ -117,7 +129,7 @@ public class RewardBook_Open : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
 
                 // - 이동
-                float step_m = moveSpeed * Time.deltaTime;
+                float step_m = moveSpeed * speedFactor * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, endTarget.position, step_m);
 
                 // - 회전
@@ -149,11 +161,11 @@ public class RewardBook_Open : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
 
                 // - 이동
-                float step_m = moveSpeed * Time.deltaTime;
+                float step_m = moveSpeed_return * speedFactor * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, startTarget.position, step_m);
 
                 // - 회전
-                float step_r = rotSpeed * Time.deltaTime;
+                float step_r = rotSpeed_return * Time.deltaTime;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startTarget.rotation, step_r);
 
                 if (Vector3.Distance(transform.position, startTarget.position) < 0.1f)
@@ -171,7 +183,7 @@ public class RewardBook_Open : MonoBehaviour
 
             Cursor.lockState = CursorLockMode.Locked; //커서 고정
 
-            endingCtrller_script.reset_BookState();
+            getKey_script.reset_BookState();
         }
     }
 
@@ -257,9 +269,9 @@ public class RewardBook_Open : MonoBehaviour
 
         //if (isFlip)
         //{
-            nTime = 0.85f;
-            animator.SetFloat("speed", 1f);
-            animator.Play(AniName_filp, 0, 0.0f);
+        nTime = 0.85f;
+        animator.SetFloat("speed", 1f);
+        animator.Play(AniName_filp, 0, 0.0f);
         //}
         //else
         //{
@@ -282,6 +294,6 @@ public class RewardBook_Open : MonoBehaviour
         // - 애니메이션 완료
         state = false;
 
-        endingCtrller_script.set_isLastPage(); // 열쇠를 얻을수있는 상태
+        getKey_script.set_isLastPage(); // 열쇠를 얻을수있는 상태
     }
 }

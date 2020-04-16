@@ -45,7 +45,7 @@ public class OntriggerLamp : MonoBehaviour
         {
             if (other.transform.CompareTag("Player"))
             {
-                Debug.Log("충돌! 액자 퍼즐 깻는가 안 깻는가에 대해서!");
+                //Debug.Log("충돌! 액자 퍼즐 깻는가 안 깻는가에 대해서!");
 
                 ColliderStay = true;
                 PathObject.GetComponent<PathFollower>().enabled = true;
@@ -72,8 +72,9 @@ public class OntriggerLamp : MonoBehaviour
     IEnumerator LampLightDelay(float Set)
     {
         PlayerMove.GetComponent<Player_HJ>().enabled = false;
+        PlayerMove.GetComponent<Collider>().enabled = false;
 
-       // StartCoroutine(FadeInTinkerBell());
+        // StartCoroutine(FadeInTinkerBell());
 
 
         yield return new WaitForSeconds(Set);
@@ -83,8 +84,7 @@ public class OntriggerLamp : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         PlayerMove.GetComponent<Player_HJ>().enabled = true;
-
-
+        PlayerMove.GetComponent<Collider>().enabled = true;
     }
 
     void Fadein()
@@ -112,7 +112,7 @@ public class OntriggerLamp : MonoBehaviour
         {
             time += Time.deltaTime / 1f;
             alphaColor.a = Mathf.Lerp(1, 0, time);
-            Debug.Log("줄어드는중");
+            //Debug.Log("줄어드는중");
 
             foreach (Renderer rend in renderer)
                rend.material.color = alphaColor ;

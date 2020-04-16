@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbccf3d664868e4c87f5d25652cc779, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
-  itemCode: 0
+  itemCode: 40
   itemName: Key
   itemType: 3
-  itemImage: {fileID: 21300000, guid: e0067e1a81416744f85264474977da2c, type: 3}
-  itemPrefab: {fileID: 0}
+  itemImage: {fileID: 21300000, guid: 5fbbf1d74a2b39443aa7393932faeaf4, type: 3}
+  itemPrefab: {fileID: 1526430835690376558, guid: 77d1aa702f76fc241af30bb55f487104,
+    type: 3}
   weaponType: 

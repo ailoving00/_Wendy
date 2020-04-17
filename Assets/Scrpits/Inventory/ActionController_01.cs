@@ -71,6 +71,8 @@ public class ActionController_01 : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+
         mainCam = GetComponent<Camera>();//Camera.main;
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
         //layerMask = 1 << LayerMask.NameToLayer("Item");

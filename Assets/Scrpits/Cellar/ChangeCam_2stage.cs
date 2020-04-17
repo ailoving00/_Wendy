@@ -58,10 +58,6 @@ public class ChangeCam_2stage : MonoBehaviour
 
         Fade_script = FindObjectOfType<FadeManager>();
         actionController = mainCamera.GetComponent<ActionController_02_VER2>();
-
-
-
-
     }
 
 
@@ -81,7 +77,6 @@ public class ChangeCam_2stage : MonoBehaviour
 
                     }
                 }
-
                 else
                     StartCoroutine(CameraFadeOut(1.6f));
 

@@ -6,8 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
-
-
 public class ActionController_01 : MonoBehaviour
 {
     public Inventory theInventory;
@@ -36,7 +34,8 @@ public class ActionController_01 : MonoBehaviour
 
 
     [SerializeField]
-    private Text actionText;
+    //private Text actionText;
+    private Image actionImage;
 
     /// acquire true - false 
     public bool pickupActivated = false;
@@ -61,6 +60,9 @@ public class ActionController_01 : MonoBehaviour
     private GameObject spotlight; //이미지
     public Text puzzleText;
     FadeAni_text text_script;
+    public Image puzzleImage;
+    FadeAni_guide guide_script;
+    GuideCaption_Controller guideController_script;
 
     SelectSlot selectSlot_script;
     public GameObject puzzleKey;
@@ -80,6 +82,8 @@ public class ActionController_01 : MonoBehaviour
         selectSlot_script = GameObject.FindObjectOfType<SelectSlot>();
 
         text_script = puzzleText.gameObject.GetComponent<FadeAni_text>();
+        guide_script = puzzleImage.gameObject.GetComponent<FadeAni_guide>();
+        guideController_script = puzzleImage.gameObject.GetComponent<GuideCaption_Controller>();
 
         ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_1stage>();
 
@@ -132,9 +136,16 @@ public class ActionController_01 : MonoBehaviour
                         Item hit_item = hitInfo.transform.GetComponent<ItemPickUp>().item;
 
                         // - 퍼즐조각 수집 개수 증가
-                        if (BlockCount < 2)
+                        BlockCount++;
+                        if (BlockCount == 1)
                         {
-                            BlockCount++;
+                            guideController_script.change_sprite(1);
+                            guide_script.InStartFadeAnim();
+                        }
+                        else
+                        {
+                            guideController_script.change_sprite(3);
+                            guide_script.InStartFadeAnim();
                         }
 
                         // - 퍼즐조각 습득
@@ -154,10 +165,13 @@ public class ActionController_01 : MonoBehaviour
                     {
                         if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
                         {
-                            // - 텍스트 출력
-                            puzzleText.text = "퍼즐조각이 필요하다";
-                            //페이드아웃
-                            text_script.InStartFadeAnim();
+                            //// - 텍스트 출력
+                            //puzzleText.text = "퍼즐조각이 필요하다";
+                            ////페이드아웃
+                            //text_script.InStartFadeAnim();
+
+                            guideController_script.change_sprite(2);
+                            guide_script.InStartFadeAnim();
 
                             return;
                         }
@@ -167,17 +181,21 @@ public class ActionController_01 : MonoBehaviour
                         // - 퍼즐 배치
                         if (select_itemCode == 110)
                         {
-                            // - 텍스트 출력
-                            puzzleText.text = "퍼즐조각을 배치했다";
-                            //페이드아웃
-                            text_script.InStartFadeAnim();
+                            //// - 텍스트 출력
+                            //puzzleText.text = "퍼즐조각을 배치했다";
+                            ////페이드아웃
+                            //text_script.InStartFadeAnim();
 
                             UseCount++;
 
                             // - 사용
                             Item selectItem = theInventory.get_ItemInfo(selectSlot_script.get_index());
                             theInventory.RemoveSlot(selectItem);
-                            if (UseCount >= 2)
+                            if (UseCount == 1)
+                            {
+
+                            }
+                            else if (UseCount >= 5)
                             {
                                 // - 퍼즐조각을 다 모았을때, 퍼즐 클릭가능한 상태가 된다
                                 PuzzleOn = true;
@@ -192,10 +210,13 @@ public class ActionController_01 : MonoBehaviour
                         }
                         else
                         {
-                            // - 텍스트 출력
-                            puzzleText.text = "퍼즐조각이 필요하다";
-                            //페이드아웃
-                            text_script.InStartFadeAnim();
+                            //// - 텍스트 출력
+                            //puzzleText.text = "퍼즐조각이 필요하다";
+                            ////페이드아웃
+                            //text_script.InStartFadeAnim();
+
+                            guideController_script.change_sprite(2);
+                            guide_script.InStartFadeAnim();
                         }
                     }
                     else if (hit_itemCode == 112) //퍼즐 완
@@ -205,8 +226,8 @@ public class ActionController_01 : MonoBehaviour
 
                         // - info 없애기
                         InfoDisappear();
-                        text_script.stop_coroutine();
-
+                        //text_script.stop_coroutine();
+                        guide_script.stop_coroutine();
                     }
                     if (hit_itemCode == 113) //상자 일때
                     {
@@ -293,31 +314,33 @@ public class ActionController_01 : MonoBehaviour
     private void ItemInfoAppear(Item tempItem)
     {
         pickupActivated = true;
-        actionText.gameObject.SetActive(true);
+        actionImage.gameObject.SetActive(true);
+        //actionText.gameObject.SetActive(true);
 
-        int temp_IC = tempItem.itemCode;
+        //int temp_IC = tempItem.itemCode;
 
-        if (temp_IC == 110) //Puzzle Block Piece
-        {
-            actionText.text = tempItem.itemName + "  획득" + " [Click]";
-        }
-        else if (temp_IC == 111) //Door Block Piece
-        {
-            actionText.text = "블럭 배치" + " [Click]";
-        }
-        else if (temp_IC == 112)
-        {
-            actionText.text = "퍼즐 풀기" + " [Click]";
-        }
-        else if (temp_IC == 113)
-        {
-            actionText.text = "상자 열기" + " [Click]";
-        }
+        //if (temp_IC == 110) //Puzzle Block Piece
+        //{
+        //    actionText.text = tempItem.itemName + "  획득" + " [Click]";
+        //}
+        //else if (temp_IC == 111) //Door Block Piece
+        //{
+        //    actionText.text = "블럭 배치" + " [Click]";
+        //}
+        //else if (temp_IC == 112)
+        //{
+        //    actionText.text = "퍼즐 풀기" + " [Click]";
+        //}
+        //else if (temp_IC == 113)
+        //{
+        //    actionText.text = "상자 열기" + " [Click]";
+        //}
     }
 
     public void InfoDisappear()
     {
         pickupActivated = false;
-        actionText.gameObject.SetActive(false);
+        actionImage.gameObject.SetActive(false);
+        //actionText.gameObject.SetActive(false);
     }
 }

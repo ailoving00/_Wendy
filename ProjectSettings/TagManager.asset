@@ -20,6 +20,7 @@ TagManager:
   - Key_EB
   - Puzzle
   - Door
+  - SubClock
   layers:
   - Default
   - TransparentFX
@@ -46,8 +47,8 @@ TagManager:
   - GlowEffect
   - Render
   - Basement
-  - 
-  - 
+  - Flash
+  - Snow
   - 
   - 
   - 

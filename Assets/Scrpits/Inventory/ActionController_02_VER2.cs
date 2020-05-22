@@ -77,6 +77,7 @@ public class ActionController_02_VER2 : MonoBehaviour
 
         //외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
+
     }
 
 

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Gear_Move : MonoBehaviour
 {
+    [SerializeField]
+    private string gearSound;
+
+    [SerializeField]
+    private string pictureFrame;
+
     private bool gearOn = false;
     private bool inRotation = false;
     public int gearNumber; //인덱스
@@ -111,9 +117,14 @@ public class Gear_Move : MonoBehaviour
         {
             //이미지 내리기 *************
             drawingMove_script.Play(true, firstTime); //안됨?
+            SoundManger.instance.PlaySound(pictureFrame);
+
+
         }
         else if (matchType == 2) //사운드
         {
+            SoundManger.instance.PlaySound(gearSound);
+
             //sound On
         }
     }
@@ -127,9 +138,12 @@ public class Gear_Move : MonoBehaviour
         {
             //이미지 올리기
             drawingMove_script.Play(false, firstTime);
+            SoundManger.instance.PlaySound(pictureFrame);
+
         }
         else if (matchType == 2) //사운드
         {
+            SoundManger.instance.StopEffectSound(gearSound);
             //sound Off
         }
     }

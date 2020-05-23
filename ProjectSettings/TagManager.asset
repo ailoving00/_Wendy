@@ -24,6 +24,7 @@ TagManager:
   - Note_EB
   - Door_EB
   - Action
+  - Wendy
   layers:
   - Default
   - TransparentFX

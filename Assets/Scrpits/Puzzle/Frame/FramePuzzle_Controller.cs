@@ -46,6 +46,7 @@ public class FramePuzzle_Controller : MonoBehaviour
     public GameObject noEntry_obj;
     public GameObject Flash_obj;
     public GameObject _reward;
+    Drawer_FP _drawer_script;
 
 
     void Start()
@@ -61,6 +62,8 @@ public class FramePuzzle_Controller : MonoBehaviour
 
         //subtitle_script = GameObject.FindObjectOfType<Subtitle_Controller>();
         puzzleEnter_script = GameObject.FindObjectOfType<FramePuzzle_Enter>();
+
+        _drawer_script = GameObject.FindObjectOfType<Drawer_FP>();
     }
 
 
@@ -183,6 +186,9 @@ public class FramePuzzle_Controller : MonoBehaviour
                             {
                                 puzzleEnter_script.set_puzzleEnd();
                                 noEntry_obj.SetActive(false);
+
+                                // 보상
+                                _drawer_script.RewardActive();
                                 Flash_obj.SetActive(true);
                                 _reward.SetActive(true);
                             }

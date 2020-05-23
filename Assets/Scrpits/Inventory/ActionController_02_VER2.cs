@@ -57,6 +57,9 @@ public class ActionController_02_VER2 : MonoBehaviour
     private DrawOutline_HJ OutlineController;
     private int pre_ol_index = 0; //이전 아웃라인 인덱스
 
+    // - Wendy AI
+    WendyAI wendyAI_Script;
+
     void Start()
     {
         //배치퍼즐
@@ -78,6 +81,8 @@ public class ActionController_02_VER2 : MonoBehaviour
         //외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
+        //웬디
+        wendyAI_Script = GameObject.FindObjectOfType<WendyAI>();
     }
 
 
@@ -257,6 +262,10 @@ public class ActionController_02_VER2 : MonoBehaviour
 
                                 //손전등 없어지기
                                 FlashlightItem.SetActive(false);
+
+                                //웬디 AI on
+                                wendyAI_Script.ClearLayoutPuzzle();
+                                wendyAI_Script.colliderChange();
                             }
                         }
                     }

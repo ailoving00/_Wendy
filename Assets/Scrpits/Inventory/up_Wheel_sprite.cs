@@ -9,6 +9,9 @@ public class up_Wheel_sprite : MonoBehaviour
     public Sprite sprite1;
     public Sprite sprite2;
 
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,4 +28,6 @@ public class up_Wheel_sprite : MonoBehaviour
         else   { gameObject.GetComponent<Image>().sprite = sprite1;  }
 
     }
+
+
 }

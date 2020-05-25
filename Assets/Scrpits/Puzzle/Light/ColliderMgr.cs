@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ColliderMgr : MonoBehaviour
 {
-    //  public Animation Tinkerbell_ani;
+  //  public Animation Tinkerbell_ani;
     // Start is called before the first frame update
 
     public GameObject[] lamp;
@@ -27,7 +27,7 @@ public class ColliderMgr : MonoBehaviour
     private RaycastHit puzzleInfo;
 
 
-    private int CheckOnL = 0;
+    private int CheckOnL = 0 ;
     LampLight lamplight;
 
     //public GameObject[] _Pointstate;
@@ -44,7 +44,7 @@ public class ColliderMgr : MonoBehaviour
         lamp[7].SetActive(true);
         lamp[1].SetActive(true);
 
-        for (int i = 0; i < 8; i++)
+        for(int i = 0; i<8; i++)
         {
             lamp[i].SetActive(false);
         }
@@ -55,7 +55,7 @@ public class ColliderMgr : MonoBehaviour
 
         CheckOnL = 3;
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -80,7 +80,7 @@ public class ColliderMgr : MonoBehaviour
             bell_Doll.SetActive(true);
             InfoDisappear();
             this.gameObject.GetComponent<ColliderMgr>().enabled = false;
-
+            
         }
     }
 
@@ -272,16 +272,16 @@ public class ColliderMgr : MonoBehaviour
 
             }
 
+                }
+
         }
 
-    }
+        
 
+    
 
-
-
-
-
-
+        
+    
 
 
     private void CheckLamp()
@@ -294,28 +294,26 @@ public class ColliderMgr : MonoBehaviour
             }
         }
         else
-        {
             InfoDisappear();
-        }
     }
+
 
 
     // Need to modify
     private void LampInfoAppear()
     {
         pickupActivated = true;
-
-        //info
-        //actionText.gameObject.SetActive(true);
-        //actionText.text = "등불 끄기, 켜기 [Click]";
+        actionText.gameObject.SetActive(true);
+        actionText.text = "등불 끄기, 켜기 [Click]";
     }
 
 
     public void InfoDisappear()
     {
         pickupActivated = false;
-
-        //info
-        //actionText.gameObject.SetActive(false);
+        actionText.gameObject.SetActive(false);
     }
+
+
+
 }

@@ -16,12 +16,6 @@ public class FramePuzzle_Enter : MonoBehaviour
 
     bool puzzleEnd = false;
 
-    bool test = false;
-
-    // - 외곽선
-    private DrawOutline_HJ OutlineController;
-    public int pre_ol_index = -1; //이전 아웃라인 인덱스
-
     void Start()
     {
         camera = GetComponent<Camera>(); //메인카메라
@@ -30,45 +24,16 @@ public class FramePuzzle_Enter : MonoBehaviour
         CamObstacle_layerMask = (1 << LayerMask.NameToLayer("Obstacle")) + (1 << LayerMask.NameToLayer("FramePuzzle"));
 
         fpCameraController = GameObject.FindObjectOfType<FramePuzzle_ChangeCam>();
-
-        //외곽선
-        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
     }
+
+    bool test = false;
 
     void Update()
     {
-        LookAtFrame();
         TryAction();
 
         //if (test)
         //    Debug.DrawRay(Mouse_ray.origin, Mouse_ray.direction * range, Color.red, range);
-    }
-
-    private void LookAtFrame()
-    {
-        Mouse_ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(Mouse_ray, out hitInfo, range, CamObstacle_layerMask))
-        {
-            if (hitInfo.transform.CompareTag("Frame"))
-            {
-                //외곽선 그리기
-                if (pre_ol_index == -1)
-                {
-                    SetOutline setoutlin_script = hitInfo.transform.GetComponent<SetOutline>();
-                    OutlineController.set_enabled(setoutlin_script._index, true);
-                    pre_ol_index = setoutlin_script._index;
-                }
-            }
-        }
-        else
-        {
-            if (pre_ol_index != -1)
-            {
-                //외곽선 해제
-                OutlineController.set_enabled(pre_ol_index, false);
-                pre_ol_index = -1;
-            }
-        }
     }
 
     void TryAction()
@@ -94,7 +59,6 @@ public class FramePuzzle_Enter : MonoBehaviour
         {
             if (hitInfo.transform.CompareTag("Frame"))
             {
-                //카메라 변경
                 fpCameraController.change_Camera(true);
             }
         }

@@ -25,11 +25,6 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
     public GameObject reward;
 
-    // - 외곽선
-    private DrawOutline_HJ OutlineController;
-    public int pre_ol_index = -1; //이전 아웃라인 인덱스
-
-
     void Start()
     {
         mainCamera = Camera.main;
@@ -40,56 +35,11 @@ public class ClockPuzzle_Manager : MonoBehaviour
         enterBtn_script = GameObject.FindObjectOfType<EnterClockAnswer>();
         reward_script = GameObject.FindObjectOfType<DoorAni_reward>();
         fan_script = GameObject.FindObjectOfType<CustomFan>();
-
-        //외곽선
-        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
     }
 
     void Update()
     {
-        LookAtClock();
         check_click();
-    }
-
-    private void LookAtClock()
-    {
-        if (Physics.Raycast(mCT.position, mCT.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
-        {
-            if (hitInfo.transform.CompareTag("InputButton_CP"))
-            {
-                DrawOutline();
-            }
-            else if (hitInfo.transform.tag == "EnterButton_CP")
-            {
-                DrawOutline();
-            }
-        }
-        else
-        {
-            if (pre_ol_index != -1)
-            {
-                //외곽선 해제
-                OutlineController.set_enabled(pre_ol_index, false);
-                pre_ol_index = -1;
-            }
-        }
-    }
-
-    private void DrawOutline()
-    {
-        //외곽선 그리기
-        SetOutline setoutlin_script = hitInfo.transform.GetComponent<SetOutline>();
-        if (pre_ol_index == -1)
-        {
-            OutlineController.set_enabled(setoutlin_script._index, true);
-            pre_ol_index = setoutlin_script._index;
-        }
-        else
-        {
-            OutlineController.set_enabled(pre_ol_index, false);
-            OutlineController.set_enabled(setoutlin_script._index, true);
-            pre_ol_index = setoutlin_script._index;
-        }
     }
 
     private void check_click()
@@ -108,17 +58,16 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
     private void check_collider()
     {
-        //if (Physics.Raycast(mCT.position, mCT.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
-        if (hitInfo.transform != null)
+        if (Physics.Raycast(mCT.position, mCT.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
         {
             if (hitInfo.transform.tag == "InputButton_CP")
             {
                 InputClockAnswer input_script = hitInfo.transform.GetComponent<InputClockAnswer>();
-                input_script.click_button();
+                input_script.click_button();                
             }
             else if (hitInfo.transform.tag == "EnterButton_CP")
             {
-                if (!enterBtn_script.get_result())
+                if(!enterBtn_script.get_result())
                 {
                     cuckoo_script.start_cuckooAni();
                 }

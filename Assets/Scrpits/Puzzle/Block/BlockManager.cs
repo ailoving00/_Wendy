@@ -9,12 +9,16 @@ using UnityEngine;
 public class BlockManager : MonoBehaviour
 {
     private int[] blockArray = new int[36];
+    public int[] originArray = new int[36];
 
-   // public GameObject[] blockArray = new int[36];
+    public GameObject blockParent;
+    private Block[] block_scripts;
 
     void Start()
     {
         System.Array.Clear(blockArray, 0, blockArray.Length);
+
+        block_scripts = blockParent.GetComponentsInChildren<Block>();
     }
 
     void Update()
@@ -115,5 +119,21 @@ public class BlockManager : MonoBehaviour
         return true;
     }
 
+    public void Reset()
+    {
+        //blockParent.transform.Translate(Vector3.forward * 2f);
 
+        for (int i = 0; i < block_scripts.Length; i++)
+        {
+            block_scripts[i].ResetPosition();
+        }
+
+        //blockParent.transform.Translate(Vector3.back * 2f);
+
+        //System.Array.Clear(blockArray, 0, blockArray.Length);
+        for (int i = 0; i < blockArray.Length; i++)
+        {
+            blockArray[i] = originArray[i];
+        }
+    }
 }

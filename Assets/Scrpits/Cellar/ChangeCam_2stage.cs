@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class ChangeCam_2stage : MonoBehaviour
 {
 
-
+    static public ChangeCam_2stage instance;
 
     private Camera mainCamera;
     private Camera CellarCamera;
+    public GameObject FlashPack;
     public GameObject Target_Player;
     public GameObject Mid_Canva;
     public GameObject OutLineScript;
@@ -31,6 +32,9 @@ public class ChangeCam_2stage : MonoBehaviour
     float movetime = 0f;
     float time = 0f;
 
+    private bool checkstage = false;
+    public bool CheckStage { get { return checkstage; } }
+
 
     public RectTransform Up_Panel;
     public RectTransform Down_Panel;
@@ -40,8 +44,11 @@ public class ChangeCam_2stage : MonoBehaviour
 
     private int count = 0;
 
- //   private bool Fadstate = true;
-  //  private bool test = true;
+    //   private bool Fadstate = true;
+    //  private bool test = true;
+
+    public Camera flashCamera;
+    //public Camera uiCamera;
 
 
     void Start()
@@ -58,7 +65,12 @@ public class ChangeCam_2stage : MonoBehaviour
 
         Fade_script = FindObjectOfType<FadeManager>();
         actionController = mainCamera.GetComponent<ActionController_02_VER2>();
+
+
+
+
     }
+
 
 
     public void change_Camera(int type)
@@ -77,6 +89,7 @@ public class ChangeCam_2stage : MonoBehaviour
 
                     }
                 }
+
                 else
                     StartCoroutine(CameraFadeOut(1.6f));
 
@@ -91,7 +104,7 @@ public class ChangeCam_2stage : MonoBehaviour
     {
 
 
-         mainCamera.WorldToScreenPoint(new Vector3(-1.428f, 1.218f,-15.728f));
+        mainCamera.WorldToScreenPoint(new Vector3(-1.428f, 1.218f, -15.728f));
 
 
         yield return null;
@@ -102,7 +115,9 @@ public class ChangeCam_2stage : MonoBehaviour
     IEnumerator MoveOutPanel(float duration)
     {
         time = 0f;
-        Debug.Log("실행됨!!!!!");
+
+
+
 
         WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
         // Vector2 EWallEndPos = Wall_E.transform.localPosition + new Vector3(2, 0, 0);
@@ -140,7 +155,6 @@ public class ChangeCam_2stage : MonoBehaviour
     IEnumerator MoveInPanel(float duration)
     {
         time = 0f;
-        Debug.Log("실행됨!!!!!");
 
         WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
         // Vector2 EWallEndPos = Wall_E.transform.localPosition + new Vector3(2, 0, 0);
@@ -185,14 +199,11 @@ public class ChangeCam_2stage : MonoBehaviour
         FadeIng = true;
         time = 0f;
 
-
-
-
         //플레이어 이동 스크립트 끄기
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = false;
         mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
         OutLineScript.SetActive(false);
-        
+
         StartCoroutine(MoveOutPanel(4f));
         yield return new WaitForSeconds(0.5f);
         //카메라 확대, 이동이 들어감
@@ -207,8 +218,10 @@ public class ChangeCam_2stage : MonoBehaviour
         movetime = duration;
         WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
 
-
+        //손전등 카메라, 에임 끔
+        FlashPack.SetActive(false);
         Mid_Canva.SetActive(false);
+        flashCamera.enabled = false;
 
         while (duration > 0.0f) // 선형보간이 진행됩니다. 선형보간의 이동이 끝날때까지! 
         {
@@ -223,29 +236,20 @@ public class ChangeCam_2stage : MonoBehaviour
 
             mainCamera.transform.position = Vector3.Lerp(SavePoint, SetPoint, time / movetime);
             mainCamera.transform.eulerAngles = Vector3.Lerp(SaveRotationPoint, SetRotationPoint, time / movetime);
-
-
-
-
         }
 
-
-
         Fade_script.FadeOut();
-
-        //메인 카메라 끔, 십자선 끔 
-
 
 
         yield return new WaitForSeconds(2f);
 
+        //메인 카메라/손전등 카메라 끔, 십자선 끔 
         mainCamera.enabled = false;
         mainListener.enabled = false;
-        //지하실 카메라 겸
+
+        //지하실 카메라 켬
         CellarCamera.enabled = true;
         CellarListener.enabled = true;
-
-
 
         Fade_script.FadeIn();
         yield return new WaitForSeconds(1f);
@@ -254,18 +258,14 @@ public class ChangeCam_2stage : MonoBehaviour
         mainCamera.transform.eulerAngles = SaveRotationPoint;
         mainCamera.fieldOfView = FieldSave;
 
-
         See_Wendy = true;
 
         FadeIng = false;
-
     }
 
     IEnumerator CameraFadeIn()
     {
-
         FadeIng = true;
-
 
         // 페이드 아웃 실행
         Fade_script.FadeOut();
@@ -278,21 +278,15 @@ public class ChangeCam_2stage : MonoBehaviour
         Fade_script.FadeIn();
         yield return new WaitForSeconds(1f);
 
-
         StartCoroutine(MoveInPanel(4f));
 
-
         yield return new WaitForSeconds(1f);
-
-
 
         // 플레이어 움직이는 스크립트 켬
         OutLineScript.SetActive(true);
         Mid_Canva.SetActive(true);
-
-
-
-
+        FlashPack.SetActive(true);
+        flashCamera.enabled = true;
 
         count = 0;
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = true;

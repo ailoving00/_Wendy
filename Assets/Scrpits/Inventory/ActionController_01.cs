@@ -68,6 +68,7 @@ public class ActionController_01 : MonoBehaviour
     public GameObject puzzleKey;
 
     ChangeCam_1stage ChangeCam_script;
+    MouseController_CarPuzzle CarPuzzle_script;
 
     BoxOpen boxOpen_script;
 
@@ -86,6 +87,7 @@ public class ActionController_01 : MonoBehaviour
         guideController_script = puzzleImage.gameObject.GetComponent<GuideCaption_Controller>();
 
         ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_1stage>();
+        CarPuzzle_script = GameObject.FindObjectOfType<MouseController_CarPuzzle>();
 
         boxOpen_script = GameObject.FindObjectOfType<BoxOpen>();
     }
@@ -223,6 +225,9 @@ public class ActionController_01 : MonoBehaviour
                     {
                         // - 카메라 이동
                         ChangeCam_script.change_Camera(1);
+
+                        // - 스크립트 on
+                        CarPuzzle_script.enabled = true;
 
                         // - info 없애기
                         InfoDisappear();

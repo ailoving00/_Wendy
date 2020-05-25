@@ -133,7 +133,7 @@ public class Move_Cuckoo : MonoBehaviour
             magicVec = new Vector3(0, 1, 0);
         }
 
-        Debug.Log(angle.ToString());
+        //Debug.Log(angle.ToString());
 
         StartCoroutine(cuckoo_come_camera_front(true));
     }

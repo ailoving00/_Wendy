@@ -64,8 +64,14 @@
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.Recorder.Editor">
+ <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Recorder">
+ <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
  <HintPath>E:/UnityProject/__WENDY_FINALPROJECT/_Wendy/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>

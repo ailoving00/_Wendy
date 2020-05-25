@@ -12,7 +12,7 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
     private AudioListener fpListener;
 
     //public GameObject Aim; //카메라깊이를 이용하게 되면서 필요없게됨
-    public Text _textSub;
+    public GameObject _textSub;
     public GameObject _Aim;
     public GameObject _info;
 
@@ -39,9 +39,7 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
         puzzleEnter_script = Camera.main.GetComponent<FramePuzzle_Enter>();
         fpController = GameObject.FindObjectOfType<FramePuzzle_Controller>();
 
-        playerController = GameObject.FindObjectOfType<Player_HJ>();
-
-        
+        playerController = GameObject.FindObjectOfType<Player_HJ>();        
         
         //초기화
         //mainListener.enabled = true;
@@ -74,7 +72,7 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
             mainListener.enabled = false;
 
             // - ui
-            _textSub.gameObject.SetActive(true);
+            _textSub.SetActive(true);
             _Aim.gameObject.SetActive(false);
             _info.SetActive(false);
 
@@ -101,7 +99,7 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
             fpListener.enabled = false;
 
             // - ui
-            _textSub.gameObject.SetActive(false);
+            _textSub.SetActive(false);
             _Aim.gameObject.SetActive(true);
             //_info.SetActive(true);
 

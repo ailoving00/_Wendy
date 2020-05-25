@@ -53,6 +53,10 @@ public class ActionController_02_VER2 : MonoBehaviour
     // - 라이트
     LightOn_3stage _lightOn_script;
 
+    // - 외곽선
+    private DrawOutline_HJ OutlineController;
+    private int pre_ol_index = 0; //이전 아웃라인 인덱스
+
     void Start()
     {
         //배치퍼즐
@@ -70,6 +74,9 @@ public class ActionController_02_VER2 : MonoBehaviour
 
         //라이트
         _lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
+
+        //외곽선
+        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
     }
 
 
@@ -149,7 +156,9 @@ public class ActionController_02_VER2 : MonoBehaviour
             }
         }
         else
+        {
             InfoDisappear();
+        }
     }
 
 
@@ -157,13 +166,17 @@ public class ActionController_02_VER2 : MonoBehaviour
     private void ItemInfoAppear()
     {
         pickupActivated = true;
-        actionText.gameObject.SetActive(true);
-        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득" + " [Click]";
+
+        //info
+        //actionText.gameObject.SetActive(true);
+        //actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득" + " [Click]";
     }
     public void InfoDisappear()
     {
         pickupActivated = false;
-        actionText.gameObject.SetActive(false);
+
+        //info
+        //actionText.gameObject.SetActive(false);
     }
 
 

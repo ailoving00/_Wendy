@@ -21,9 +21,6 @@ TagManager:
   - Puzzle
   - Door
   - SubClock
-  - Note_EB
-  - Door_EB
-  - Action
   layers:
   - Default
   - TransparentFX
@@ -52,8 +49,8 @@ TagManager:
   - Basement
   - Flash
   - Snow
-  - Foot
-  - NotePage
+  - 
+  - 
   - 
   - 
   - 

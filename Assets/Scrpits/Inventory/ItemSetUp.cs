@@ -21,6 +21,7 @@ public class ItemSetUp : MonoBehaviour
     {
         if (SetItem.gameObject.activeSelf == true)
         {
+            Debug.Log("트루가 실행됨");
             gameObject.GetComponent<ItemSetUp>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }

@@ -10,9 +10,6 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [SerializeField]
-    private string moveSound;
-
     enum BlockType { H2, H3, V2, V3, Me };
     enum Axis { X, Y, Z };
     enum DirType { left, right, up, down, same };
@@ -74,11 +71,9 @@ public class Block : MonoBehaviour
         if (isMoving)
         {
             float step = speed * Time.deltaTime;
-           
 
             transform.position = Vector3.MoveTowards(transform.position, destination, step);
             //transform.Translate(direction * step);
-
 
             if (transform.position == destination)
             {
@@ -124,7 +119,6 @@ public class Block : MonoBehaviour
             Set_location();
 
             isMoving = true;
-            SoundManger.instance.PlaySound(moveSound);
         }
         else //(axis == Axis.Y)
         {
@@ -138,7 +132,6 @@ public class Block : MonoBehaviour
             Set_location();
 
             isMoving = true;
-            SoundManger.instance.PlaySound(moveSound);
         }
     }
 

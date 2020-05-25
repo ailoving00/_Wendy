@@ -11,7 +11,6 @@ public class OntriggerLamp : MonoBehaviour
 
     public GameObject Pathmodel;
 
-    public GameObject TinkerSound;
 
     public GameObject PlayerMove;
 
@@ -42,7 +41,8 @@ public class OntriggerLamp : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-
+        if(State == true)
+        {
             if (other.transform.CompareTag("Player"))
             {
                 //Debug.Log("충돌! 액자 퍼즐 깻는가 안 깻는가에 대해서!");
@@ -54,12 +54,13 @@ public class OntriggerLamp : MonoBehaviour
                 Fadein();
                 // 등불 퍼즐 애니메이션 실행. 램프 키고 끄기 -- 추가하기 
                 //  Tinkerbell_ani.Play();
- 
-             
+
+                State = false;
             }
 
-
-        
+            else
+                ColliderStay = false;
+        }
     }
 
     void SartDelay()
@@ -84,8 +85,6 @@ public class OntriggerLamp : MonoBehaviour
 
         PlayerMove.GetComponent<Player_HJ>().enabled = true;
         PlayerMove.GetComponent<Collider>().enabled = true;
-
-        this.gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 
     void Fadein()
@@ -123,7 +122,6 @@ public class OntriggerLamp : MonoBehaviour
 
         }
         Pathmodel.gameObject.SetActive(false);
-        TinkerSound.SetActive(false);
     }
 
 

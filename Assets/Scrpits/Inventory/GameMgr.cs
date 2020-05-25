@@ -17,9 +17,6 @@ public class GameMgr : MonoBehaviour
 
     Animator animator;
 
-    [SerializeField]
-    private string BGMSound;
-
     // - 선택슬롯
     public SelectSlot selectSlot_script;
 
@@ -34,9 +31,6 @@ public class GameMgr : MonoBehaviour
         //RectTransform Inventory_Panel = GetComponent<RectTransform>();
 
         animator = Inventory_Panel.GetComponent<Animator>();
-        SoundManger.instance.PlayBGMSound(BGMSound);
-
-
     }
 
     void Update()

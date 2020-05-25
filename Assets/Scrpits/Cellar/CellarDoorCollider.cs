@@ -17,8 +17,6 @@ public class CellarDoorCollider : MonoBehaviour
     private RaycastHit hitInfo;
 
     Camera _mainCam;
-    public Camera CellarCamera;
-    
 
     void Start()
     {
@@ -26,14 +24,14 @@ public class CellarDoorCollider : MonoBehaviour
         guideCaption.gameObject.SetActive(false);
 
         _mainCam = Camera.main;
-        CellarCamera = GetComponent<Camera>();
-
     }
 
     public void OnTriggerStay(Collider other)
     {
         if (other.transform.CompareTag("Player"))
         {
+            //Debug.Log("충돌! 페이드 인 아웃 실행가능 범위인가?");
+            //  Tinkerbell_ani.Play();
             if (textstate)
             {
                 if (LookAtDoor())
@@ -46,18 +44,11 @@ public class CellarDoorCollider : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-
-                 if (LookAtDoor())
-                 {
-                      ChangeCam_script.change_Camera(1);
-                      NotText();
-
-                      textstate = false;
-                  }
-
-
-                
-
+                if (LookAtDoor())
+                {
+                    ChangeCam_script.change_Camera(1);
+                    textstate = false;
+                }
             }
         }
     }
@@ -71,8 +62,6 @@ public class CellarDoorCollider : MonoBehaviour
         return false;
     }
 
-
-
     void GuidText()
     {
         guideCaption.gameObject.SetActive(true);
@@ -81,7 +70,7 @@ public class CellarDoorCollider : MonoBehaviour
 
     void NotText()
     {
-        guideCaption.gameObject.SetActive(false);
+        //guideCaption.gameObject.SetActive(false);
     }
 
     public void OnTriggerExit(Collider other)

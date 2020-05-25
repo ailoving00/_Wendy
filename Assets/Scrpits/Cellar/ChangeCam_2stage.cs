@@ -7,11 +7,10 @@ using UnityEngine.UI;
 public class ChangeCam_2stage : MonoBehaviour
 {
 
-    static public ChangeCam_2stage instance;
+
 
     private Camera mainCamera;
     private Camera CellarCamera;
-    public GameObject FlashPack;
     public GameObject Target_Player;
     public GameObject Mid_Canva;
     public GameObject OutLineScript;
@@ -32,9 +31,6 @@ public class ChangeCam_2stage : MonoBehaviour
     float movetime = 0f;
     float time = 0f;
 
-    private bool checkstage = false;
-    public bool CheckStage { get { return checkstage; } }
-
 
     public RectTransform Up_Panel;
     public RectTransform Down_Panel;
@@ -44,8 +40,8 @@ public class ChangeCam_2stage : MonoBehaviour
 
     private int count = 0;
 
-    //   private bool Fadstate = true;
-    //  private bool test = true;
+ //   private bool Fadstate = true;
+  //  private bool test = true;
 
 
     void Start()
@@ -62,12 +58,7 @@ public class ChangeCam_2stage : MonoBehaviour
 
         Fade_script = FindObjectOfType<FadeManager>();
         actionController = mainCamera.GetComponent<ActionController_02_VER2>();
-
-
-
-
     }
-
 
 
     public void change_Camera(int type)
@@ -86,7 +77,6 @@ public class ChangeCam_2stage : MonoBehaviour
 
                     }
                 }
-
                 else
                     StartCoroutine(CameraFadeOut(1.6f));
 
@@ -101,7 +91,7 @@ public class ChangeCam_2stage : MonoBehaviour
     {
 
 
-        mainCamera.WorldToScreenPoint(new Vector3(-1.428f, 1.218f, -15.728f));
+         mainCamera.WorldToScreenPoint(new Vector3(-1.428f, 1.218f,-15.728f));
 
 
         yield return null;
@@ -112,9 +102,7 @@ public class ChangeCam_2stage : MonoBehaviour
     IEnumerator MoveOutPanel(float duration)
     {
         time = 0f;
-
-
-
+        Debug.Log("실행됨!!!!!");
 
         WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
         // Vector2 EWallEndPos = Wall_E.transform.localPosition + new Vector3(2, 0, 0);
@@ -152,6 +140,7 @@ public class ChangeCam_2stage : MonoBehaviour
     IEnumerator MoveInPanel(float duration)
     {
         time = 0f;
+        Debug.Log("실행됨!!!!!");
 
         WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
         // Vector2 EWallEndPos = Wall_E.transform.localPosition + new Vector3(2, 0, 0);
@@ -203,8 +192,7 @@ public class ChangeCam_2stage : MonoBehaviour
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = false;
         mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
         OutLineScript.SetActive(false);
-
-
+        
         StartCoroutine(MoveOutPanel(4f));
         yield return new WaitForSeconds(0.5f);
         //카메라 확대, 이동이 들어감
@@ -219,7 +207,7 @@ public class ChangeCam_2stage : MonoBehaviour
         movetime = duration;
         WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
 
-        FlashPack.SetActive(false);
+
         Mid_Canva.SetActive(false);
 
         while (duration > 0.0f) // 선형보간이 진행됩니다. 선형보간의 이동이 끝날때까지! 
@@ -256,7 +244,6 @@ public class ChangeCam_2stage : MonoBehaviour
         //지하실 카메라 겸
         CellarCamera.enabled = true;
         CellarListener.enabled = true;
-
 
 
 
@@ -302,8 +289,6 @@ public class ChangeCam_2stage : MonoBehaviour
         // 플레이어 움직이는 스크립트 켬
         OutLineScript.SetActive(true);
         Mid_Canva.SetActive(true);
-        FlashPack.SetActive(true);
-
 
 
 

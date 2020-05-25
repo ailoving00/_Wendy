@@ -21,33 +21,21 @@ public class ColliderMgr : MonoBehaviour
     [SerializeField]
     private LayerMask layer;
 
-
     public Text actionText;
-
-    [SerializeField]
-    private string Lamp_Sound;
-
-    [SerializeField]
-    private string ResetLamp_Sound;
-
 
     private bool pickupActivated = false;//false;
     private RaycastHit puzzleInfo;
 
 
     private int CheckOnL = 0;
-
-    public GameObject ResetLeber;
     LampLight lamplight;
-    Animator animator;
-    private bool LaberOn = false;
 
     //public GameObject[] _Pointstate;
 
 
     void Start()
     {
-        animator = ResetLeber.GetComponent<Animator>();
+
         bell_Doll.SetActive(false);
 
         //   Animation Tinkerbell_ani = gameObject.GetComponent<Animation>();
@@ -88,13 +76,13 @@ public class ColliderMgr : MonoBehaviour
     {
         if (CheckOnL == 8)
         {
+            //Debug.Log("램프가 끝났지롱");
             bell_Doll.SetActive(true);
             InfoDisappear();
             this.gameObject.GetComponent<ColliderMgr>().enabled = false;
 
         }
     }
-
 
 
     private void CanLocation()
@@ -108,14 +96,8 @@ public class ColliderMgr : MonoBehaviour
 
                     int Lampnumber = puzzleInfo.transform.GetComponent<LampLight>().LampNum;
 
-
-
                     if (Lampnumber != 9)
                     {
-
-                        SoundManger.instance.PlaySound(Lamp_Sound);
-
-
                         if (Lampnumber - 1 < 0)
                         {
                             if (lamp[7].activeInHierarchy == true)
@@ -203,23 +185,10 @@ public class ColliderMgr : MonoBehaviour
 
                     else
                     {
-                        StartCoroutine(CheckAnimationState());
-
-                        if (LaberOn == false)
-                        {
-                            SoundManger.instance.PlaySound(ResetLamp_Sound);
-                            animator.SetTrigger("On");
-                        }
-                        else
-                            Debug.Log("현재 실행가능한 상태가 아닙니다.");
-
-                        for(int i = 0; i < 8; i++)
+                        for (int i = 0; i < 8; i++)
                         {
                             lamp[i].SetActive(false);
                         }
-
-
-                        
 
                         lamp[0].SetActive(true);
                         lamp[7].SetActive(true);
@@ -227,7 +196,80 @@ public class ColliderMgr : MonoBehaviour
                         CheckOnL = 3;
 
                     }
+
+
+
+
+                    /*
+                    if (puzzleInfo.transform.name == "LampColider0")
+                    {
+                        Debug.Log("램프가 충돌되었습니다");
+
+                        lamplight.SetLight(1);
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider1")
+                    {
+                        // lamplight.SetLight(1);
+                        lamplight.SetLight(1);
+
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider2")
+                    {
+                        lamplight.SetLight(1);
+
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider3")
+                    {
+                        lamplight.SetLight(1);
+
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider4")
+                    {
+                        lamplight.SetLight(1);
+
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider5")
+                    {
+                        lamplight.SetLight(1);
+
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider6")
+                    {
+                        lamplight.SetLight(1);
+
+                    }
+
+                    if (puzzleInfo.transform.name == "LampColider7")
+                    {
+                        lamplight.SetLight(1);
+
+                    }
+
+    */
+
+                    // 흠.... 어느 특정 콜라이더가 
+
+
                 }
+                //if(Light1.activeSelf == true)
+                //{
+                //    Light1.SetActive(false);
+                //    Light2.SetActive(true);
+                //    Light3.SetActive(true);
+                //}
+                //else
+                //{
+                //    Light1.SetActive(true);
+                //    Light2.SetActive(false);
+                //    Light3.SetActive(false);
+                //}
+
             }
 
         }
@@ -236,30 +278,6 @@ public class ColliderMgr : MonoBehaviour
 
 
 
-
-    IEnumerator CheckAnimationState()
-    {
-
-        while (!animator.GetCurrentAnimatorStateInfo(0)
-        .IsName("New State"))
-        {
-            //전환 중일 때 실행되는 부분
-            LaberOn = true;
-            yield return null;
-        }
-
-        while (animator.GetCurrentAnimatorStateInfo(0)
-                .IsName("New State"))
-        {
-            //전환 중일 때 실행되는 부분
-            LaberOn = false;
-            yield return null;
-        }
-
-
-        //애니메이션 완료 후 실행되는 부분
-
-    }
 
 
 

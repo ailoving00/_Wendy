@@ -274,7 +274,3 @@ C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.UI.xml
 C:\Users\User01\Desktop\_Wendy\obj\Debug\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
 C:\Users\User01\Desktop\_Wendy\obj\Debug\Assembly-CSharp-firstpass.dll
 C:\Users\User01\Desktop\_Wendy\obj\Debug\Assembly-CSharp-firstpass.pdb
-C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Recorder.dll
-C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Recorder.Editor.dll
-C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Recorder.Editor.pdb
-C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Recorder.pdb

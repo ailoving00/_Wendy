@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
+    [SerializeField]
+    private string arriveSound;
+
     private int[] blockArray = new int[36];
     public int[] originArray = new int[36];
 
@@ -59,8 +62,10 @@ public class BlockManager : MonoBehaviour
             {
                 int index = start - 1;
 
-                if (index == 11 && bt == 4) //도착지점!!
-                    return false;
+                if (index == 11 && bt == 4) //도착지점!! --이 부분에는 다른 사운드를 출력해주는것으로? 
+                {
+                    SoundManger.instance.PlaySound(arriveSound);
+                    return false; }
 
                 if ((start % 6) != 0)
                 {

@@ -113,7 +113,7 @@ public class ActionController_02_VER2 : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
-                if (hitInfo.transform.tag == "Item") //compare @
+                if (hitInfo.transform.CompareTag("Item")) //compare @
                 {
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
@@ -191,7 +191,7 @@ public class ActionController_02_VER2 : MonoBehaviour
     {
         if (hitInfo2.transform != null)
         {
-            if (hitInfo2.transform.tag == "Location") //compare @
+            if (hitInfo2.transform.CompareTag("Location")) //compare @
             {
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
@@ -284,7 +284,7 @@ public class ActionController_02_VER2 : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo2, range, layerMask_dlsplay))
         {
-            if (hitInfo2.transform.tag == "Location")
+            if (hitInfo2.transform.CompareTag("Location"))
             {
 
             }

@@ -11,6 +11,13 @@ public class ActionController_01 : MonoBehaviour
     public Inventory theInventory;
 
     [SerializeField]
+    private string itemgainsound;
+
+    [SerializeField]
+    private string itemusesound;
+
+
+    [SerializeField]
     private float range = 10f; // 충돌 체크 구의 반경
     [SerializeField]
     private float length = 10f; // 충돌 체크의 최대 거리 
@@ -137,6 +144,10 @@ public class ActionController_01 : MonoBehaviour
                         //Debug.Log(hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + "획득했습니다");
                         Item hit_item = hitInfo.transform.GetComponent<ItemPickUp>().item;
 
+                        //퍼즐조각 입수 사운드 
+                        SoundManger.instance.PlaySound(itemgainsound); 
+
+
                         // - 퍼즐조각 수집 개수 증가
                         BlockCount++;
                         if (BlockCount == 1)
@@ -165,6 +176,9 @@ public class ActionController_01 : MonoBehaviour
                     // - 사용
                     else if (hit_itemCode == 111) //조각 배치
                     {
+
+
+
                         if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
                         {
                             //// - 텍스트 출력
@@ -183,6 +197,10 @@ public class ActionController_01 : MonoBehaviour
                         // - 퍼즐 배치
                         if (select_itemCode == 110)
                         {
+
+                            //퍼즐조각 배치 사운드
+                            SoundManger.instance.PlaySound(itemusesound);
+
                             //// - 텍스트 출력
                             //puzzleText.text = "퍼즐조각을 배치했다";
                             ////페이드아웃

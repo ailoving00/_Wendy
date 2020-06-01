@@ -46,7 +46,7 @@ public class Block : MonoBehaviour
 
     void Start()
     {
-        speed = 10f;
+        speed = 10.0f;
 
         isMoving = false;
         direction = Vector3.zero;

@@ -79,6 +79,11 @@ public class ActionController_01 : MonoBehaviour
 
     BoxOpen boxOpen_script;
 
+
+    ViewNote viewNote_script;
+    bool popupNote = false;
+    bool opening = false;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -97,6 +102,8 @@ public class ActionController_01 : MonoBehaviour
         CarPuzzle_script = GameObject.FindObjectOfType<MouseController_CarPuzzle>();
 
         boxOpen_script = GameObject.FindObjectOfType<BoxOpen>();
+
+        viewNote_script = GameObject.FindObjectOfType<ViewNote>();
     }
 
     void Update()
@@ -104,7 +111,10 @@ public class ActionController_01 : MonoBehaviour
         //if (ChangeCam_script.get_PuzzlPlay())
         //    return;
 
-        CheckItem();
+        if (!popupNote)
+        {
+            CheckItem();
+        }
         TryAction();
     }
 
@@ -123,8 +133,29 @@ public class ActionController_01 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //CheckItem();
-            CanPickUp();
+            if (!popupNote)
+            {
+                //CheckItem();
+                CanPickUp();
+            }
+            else
+            {
+                if (!opening)
+                {
+                    //쪽지 열기 애니메이션 (이동은 CanPickUp에서)
+                    if (viewNote_script.OpenAni_Note())
+                        opening = true;
+                }
+                else
+                {
+                    //접기 + 원위치로 이동
+                    if (viewNote_script.EndAni_Note())
+                    {
+                        opening = false;
+                        popupNote = false; //->위 호출이 다끝나면 변하게해야함
+                    }
+                }
+            }
         }
     }
 
@@ -145,15 +176,15 @@ public class ActionController_01 : MonoBehaviour
                         Item hit_item = hitInfo.transform.GetComponent<ItemPickUp>().item;
 
                         //퍼즐조각 입수 사운드 
-                        SoundManger.instance.PlaySound(itemgainsound); 
+                        SoundManger.instance.PlaySound(itemgainsound);
 
 
                         // - 퍼즐조각 수집 개수 증가
                         BlockCount++;
                         if (BlockCount == 1)
                         {
-                            guideController_script.change_sprite(1);
-                            guide_script.InStartFadeAnim();
+                            //guideController_script.change_sprite(1);
+                            //guide_script.InStartFadeAnim();
                         }
                         else
                         {
@@ -176,9 +207,6 @@ public class ActionController_01 : MonoBehaviour
                     // - 사용
                     else if (hit_itemCode == 111) //조각 배치
                     {
-
-
-
                         if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
                         {
                             //// - 텍스트 출력
@@ -197,7 +225,6 @@ public class ActionController_01 : MonoBehaviour
                         // - 퍼즐 배치
                         if (select_itemCode == 110)
                         {
-
                             //퍼즐조각 배치 사운드
                             SoundManger.instance.PlaySound(itemusesound);
 
@@ -205,6 +232,9 @@ public class ActionController_01 : MonoBehaviour
                             //puzzleText.text = "퍼즐조각을 배치했다";
                             ////페이드아웃
                             //text_script.InStartFadeAnim();
+
+                            guideController_script.change_sprite(4);
+                            guide_script.InStartFadeAnim();
 
                             UseCount++;
 
@@ -252,22 +282,31 @@ public class ActionController_01 : MonoBehaviour
                         //text_script.stop_coroutine();
                         guide_script.stop_coroutine();
                     }
-                    if (hit_itemCode == 113) //상자 일때
-                    {
-                        // - 콜라이더 비활성화
-                        hitInfo.collider.enabled = false;
+                    //if (hit_itemCode == 113) //상자 일때
+                    //{
+                    //    // - 콜라이더 비활성화
+                    //    hitInfo.collider.enabled = false;
 
-                        // - 외곽선 없애기
-                        //hitInfo.transform.gameObject.SetActive(false);
-                        OutlineController.set_enabled(pre_ol_index, false);
+                    //    // - 외곽선 없애기
+                    //    //hitInfo.transform.gameObject.SetActive(false);
+                    //    OutlineController.set_enabled(pre_ol_index, false);
 
-                        // - info 없애기
-                        InfoDisappear();
+                    //    // - info 없애기
+                    //    InfoDisappear();
 
-                        // - 상자 애니메이션
-                        boxOpen_script.set_aniBool();
-                    }
+                    //    // - 상자 애니메이션
+                    //    boxOpen_script.set_aniBool();
+                    //}
                 }
+            }
+
+            if (hitInfo.transform.CompareTag("Note_EB"))
+            {
+                viewNote_script.StartAni_Note();
+
+                popupNote = true;
+
+                InfoDisappear();
             }
         }
     }
@@ -278,27 +317,41 @@ public class ActionController_01 : MonoBehaviour
         {
             //                 레이저 발사 위치            , 구의 반경, 발사 방향,      충돌 결과,     최대거리, 레이어마스크
 
-            // = 외곽선 =
-            ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
-
-            if (CheckAllSectorform(hitInfo)) //hitInfo가 범위 안에 있으면 true
+            if (hitInfo.transform.CompareTag("Note_EB") == false)
             {
-                // - info 띄우기
-                ItemInfoAppear(pieceItem_script.item);
+                // = 외곽선 =
+                ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
 
-                // - 외곽선
-                OutlineController.set_enabled(pieceItem_script.outlineIndex, true);
-                pre_ol_index = pieceItem_script.outlineIndex;
+                if (CheckAllSectorform(hitInfo)) //hitInfo가 범위 안에 있으면 true
+                {
+                    // - info 띄우기
+                    ItemInfoAppear(pieceItem_script.item);
+
+                    // - 외곽선
+                    OutlineController.set_enabled(pieceItem_script.outlineIndex, true);
+                    pre_ol_index = pieceItem_script.outlineIndex;
+                }
+                else
+                {
+                    // - info 사라지게
+                    InfoDisappear();
+
+                    // - 외곽선 사라짐
+                    OutlineController.set_enabled(pre_ol_index, false);
+
+                    isCollision = false;
+                }
             }
             else
             {
-                // - info 사라지게
-                InfoDisappear();
+                if (CheckAllSectorform(hitInfo)) //hitInfo가 범위 안에 있으면 true
+                {
+                    // - info 띄우기
+                    //ItemInfoAppear(pieceItem_script.item);
 
-                // - 외곽선 사라짐
-                OutlineController.set_enabled(pre_ol_index, false);
-
-                isCollision = false;
+                    pickupActivated = true;
+                    actionImage.gameObject.SetActive(true);
+                }
             }
         }
         else

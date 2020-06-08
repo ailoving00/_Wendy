@@ -249,7 +249,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 displayManager_script2.Create_sameOne();
 
                                 //라이트
-                                //_lightOn_script.LightOn();
+                                _lightOn_script.LightOn();
 
                                 //지하실, 2층계단 오픈
                                 tempDoor.SetActive(false);

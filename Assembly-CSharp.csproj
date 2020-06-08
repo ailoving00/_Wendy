@@ -70,6 +70,7 @@
      <Compile Include="Assets\_INGINGING\Hee-ji\1\ekza_reward\Drawer_FP.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\sight_1\PlayerRange_1stage.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\sight_1\Sight_1stage.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\1_view_Test\CheckRange.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_1stage\paper\ViewNote.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\OnTrigger_Flash.cs" />
@@ -252,6 +253,7 @@
      <None Include="Assets\Materials\Custom\Custom Cutout.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\GlobalSnowForReflections.shader" />
      <None Include="Assets\MotionBlur\Resources\Common.cginc" />
+     <None Include="Assets\_INGINGING\Hee-ji\lighting\2-3stage\frame\Custom Cutout_shadow.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DecalDraw.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFOBasic.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SnowedSpeedTreeBillboard.cginc" />
@@ -295,6 +297,7 @@
      <None Include="Assets\MotionBlur\Resources\Prefilter.cginc" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SpeedTreeNoLeaves.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\MovingObjects\GlobalSnowMovingObject.cginc" />
+     <None Include="Assets\_INGINGING\Hee-ji\lighting\2-3stage\frame\TransparentShadowReceiver.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\Compose.cginc" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGDesktop.shader" />
      <None Include="Assets\MotionBlur\Resources\FrameBlending.shader" />

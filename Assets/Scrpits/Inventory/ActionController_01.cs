@@ -84,6 +84,9 @@ public class ActionController_01 : MonoBehaviour
     bool popupNote = false;
     bool opening = false;
 
+
+    CheckRange checkRange_Script;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -104,6 +107,8 @@ public class ActionController_01 : MonoBehaviour
         boxOpen_script = GameObject.FindObjectOfType<BoxOpen>();
 
         viewNote_script = GameObject.FindObjectOfType<ViewNote>();
+
+        checkRange_Script = GameObject.FindObjectOfType<CheckRange>();
     }
 
     void Update()
@@ -314,8 +319,10 @@ public class ActionController_01 : MonoBehaviour
     private void CheckItem()
     {
         if (Physics.SphereCast(P_target.transform.position, range, Vector3.up, out hitInfo, length, layerMask))
+        //                 레이저 발사 위치            , 구의 반경, 발사 방향,      충돌 결과,     최대거리, 레이어마스크
+        //if(checkRange_Script.checkItem())
         {
-            //                 레이저 발사 위치            , 구의 반경, 발사 방향,      충돌 결과,     최대거리, 레이어마스크
+            //hitInfo = checkRange_Script.Get_hitInfo();
 
             if (hitInfo.transform.CompareTag("Note_EB") == false)
             {

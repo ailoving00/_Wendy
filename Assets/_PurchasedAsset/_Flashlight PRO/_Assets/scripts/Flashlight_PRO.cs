@@ -24,7 +24,8 @@ public class Flashlight_PRO : MonoBehaviour
 
     [SerializeField]
     private Text actionText;
-
+    [SerializeField]
+    private Image actionImg;
 
     float FlickerT = 0f;
     bool delay = false;
@@ -53,9 +54,7 @@ public class Flashlight_PRO : MonoBehaviour
     void FlashRandom()
     {
         StartCoroutine(Randomlight());
-
     }
-
 
     void Update()
     {
@@ -158,11 +157,13 @@ public class Flashlight_PRO : MonoBehaviour
 
     private void FlashLightAppear()
     {
-        actionText.gameObject.SetActive(true);
-        actionText.text = "Q를 눌러 손전등 켜기";
+        //actionText.gameObject.SetActive(true);
+        //actionText.text = "Q를 눌러 손전등 켜기";
+        actionImg.gameObject.SetActive(true);
     }
     private void FlashLightDisappear()
     {
-        actionText.gameObject.SetActive(false);
+        //actionText.gameObject.SetActive(false);
+        actionImg.gameObject.SetActive(false);
     }
 }

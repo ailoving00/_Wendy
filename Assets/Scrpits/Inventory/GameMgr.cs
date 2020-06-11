@@ -23,6 +23,12 @@ public class GameMgr : MonoBehaviour
     // - 선택슬롯
     public SelectSlot selectSlot_script;
 
+    //- 자막 (인벤)
+    public Image puzzleImage;
+    FadeAni_guide guide_script;
+    GuideCaption_Controller guideController_script;
+    private bool onceCaption = false;
+
     void Start()
     {
         check = false;
@@ -36,18 +42,33 @@ public class GameMgr : MonoBehaviour
         animator = Inventory_Panel.GetComponent<Animator>();
         SoundManger.instance.PlayBGMSound(BGMSound);
 
-
+        // - 인벤토리 
+        if (puzzleImage != null)
+        {
+            guide_script = puzzleImage.gameObject.GetComponent<FadeAni_guide>();
+            guideController_script = puzzleImage.gameObject.GetComponent<GuideCaption_Controller>();
+        }
+        else
+        {
+            onceCaption = true;
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    Application.Quit();
+        //}
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            if (!onceCaption)
+            {
+                onceCaption = true;
+                guide_script.InStartFadeAnim();
+            }
+
             if (check)
             {
                 check = false;

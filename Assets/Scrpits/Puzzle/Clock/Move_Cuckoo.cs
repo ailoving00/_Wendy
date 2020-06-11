@@ -64,6 +64,9 @@ public class Move_Cuckoo : MonoBehaviour
 
     bool once = false;
 
+    private float journeyLength;
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -93,6 +96,8 @@ public class Move_Cuckoo : MonoBehaviour
         cpManager_script = GameObject.FindObjectOfType<ClockPuzzle_Manager>();
 
         //AniNameHash = animator.StringToHash(EventEndAnimationName);
+
+        journeyLength = Vector3.Distance(startTransform.position, endTransform.position);
     }
 
     void Update()
@@ -164,9 +169,12 @@ public class Move_Cuckoo : MonoBehaviour
                 center -= magicVec; // new Vector3(0, 1, 0); //매직벡터사용
                 Vector3 startRelCenter = transform.position - center;
                 Vector3 setRelCenter = endTransform.position - center;
-                //float fracComplete = (Time.time - startTime) / journeyTime;
-                float fracComplete = moveSpeed * Time.deltaTime;
-                transform.position = Vector3.Slerp(startRelCenter, setRelCenter, fracComplete);
+
+                //Slerp을 지정시간 이동조절 쓰는법
+                float distCovered = (Time.time - startTime) * moveSpeed;
+                float fracJourney = distCovered / journeyLength;
+
+                transform.position = Vector3.Slerp(startRelCenter, setRelCenter, fracJourney);
                 transform.position += center;
 
                 // - 회전
@@ -195,9 +203,11 @@ public class Move_Cuckoo : MonoBehaviour
                 center -= magicVec; // new Vector3(0, 1, 0);
                 Vector3 startRelCenter = transform.position - center;
                 Vector3 setRelCenter = startTransform.position - center;
-                //float fracComplete = (Time.time - startTime) / journeyTime;
-                float fracComplete = moveSpeed * Time.deltaTime;
-                transform.position = Vector3.Slerp(startRelCenter, setRelCenter, fracComplete);
+
+                float distCovered = (Time.time - startTime) * moveSpeed;
+                float fracJourney = distCovered / journeyLength;
+
+                transform.position = Vector3.Slerp(startRelCenter, setRelCenter, fracJourney); //2
                 transform.position += center;
 
                 // - 회전

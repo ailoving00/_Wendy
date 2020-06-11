@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class ClockPuzzle_Manager : MonoBehaviour
 {
-
-    [SerializeField]
-    private string crowSound;
-
-    [SerializeField]
-    private string trySound;
-
     // - 시계퍼즐 풀 수 있는지 상태 확인하기 (범위에 들어왔는가)
     public bool active = false;
     private bool end = false;
@@ -113,16 +106,6 @@ public class ClockPuzzle_Manager : MonoBehaviour
         }
     }
 
-
-    IEnumerator DelaySound()
-    {
-        yield return new WaitForSeconds(2f);
-
-        SoundManger.instance.PlaySound(crowSound);
-
-    }
-
-
     private void check_collider()
     {
         //if (Physics.Raycast(mCT.position, mCT.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
@@ -137,9 +120,7 @@ public class ClockPuzzle_Manager : MonoBehaviour
             {
                 if (!enterBtn_script.get_result())
                 {
-                    StartCoroutine(DelaySound());
                     cuckoo_script.start_cuckooAni();
-
                 }
                 else
                 {

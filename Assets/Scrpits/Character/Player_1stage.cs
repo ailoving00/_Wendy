@@ -271,4 +271,9 @@ public class Player_1stage : MonoBehaviour
 
         cr_check = false;
     }
+
+    public void SetunActive()
+    {
+        _animator.SetBool("IsWalking", false);
+    }
 }

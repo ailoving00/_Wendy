@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Cellar_Manager : MonoBehaviour
 {
+
+    [SerializeField]
+    private string MoveWallSound;
+
+    [SerializeField]
+    private string MoveRockSound;
+
     public GameObject Wall_E;
     public GameObject Wall_S;
 
@@ -13,11 +20,7 @@ public class Cellar_Manager : MonoBehaviour
     public float moveStreet = 1f;
     public float addStreet = 1f;
 
-    void Pos()
-    {
 
-
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -42,23 +45,37 @@ public class Cellar_Manager : MonoBehaviour
 
     }
 
+    private void PlaySound()
+    {
+        SoundManger.instance.PlaySound(MoveWallSound);
+        SoundManger.instance.PlaySound(MoveRockSound);
+    }
+
     IEnumerator deley()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         Vector3 EWallstartPos = Wall_E.transform.localPosition;
         Vector3 SWallstartPos = Wall_S.transform.position;
 
+        PlaySound();
+
         StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet, 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
         StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet), 3f));   // 시작부터 카운트 다운이 진행된다. 
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
+
+        PlaySound();
+
 
         StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet+ addStreet, 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
         StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet+ addStreet), 3f));   // 시작부터 카운트 다운이 진행된다. 
 
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
+
+        PlaySound();
+
 
         StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet + (addStreet*2), 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
         StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, (addStreet * 2)), 3f));   // 시작부터 카운트 다운이 진행된다. 

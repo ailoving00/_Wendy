@@ -16,6 +16,12 @@ public class ActionController_02_VER2 : MonoBehaviour
     public Inventory theInventory;
 
     [SerializeField]
+    private string itemgainsound;
+
+    [SerializeField]
+    private string itemusesound;
+
+    [SerializeField]
     private float range;
 
     [SerializeField]
@@ -117,6 +123,9 @@ public class ActionController_02_VER2 : MonoBehaviour
                 {
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
+                        SoundManger.instance.PlaySound(itemgainsound);
+
+
                         // - 아이템 습득
                         Destroy(hitInfo.transform.gameObject); //아이템 삭제
 
@@ -199,6 +208,8 @@ public class ActionController_02_VER2 : MonoBehaviour
                 if (PickUp_state)
                 {
                     // 장식장 인형 가질수있으면 가져가기
+                    SoundManger.instance.PlaySound(itemgainsound);
+
                     location_script.take_Doll();
                     PickUp_state = false;
 
@@ -215,6 +226,8 @@ public class ActionController_02_VER2 : MonoBehaviour
                     {
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
+
+                            SoundManger.instance.PlaySound(itemusesound);
 
                             // - 아이템 생성  O
                             location_script.setup_Doll(theInventory.get_Item(use_index));

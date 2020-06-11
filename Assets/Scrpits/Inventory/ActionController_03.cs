@@ -126,13 +126,13 @@ public class ActionController_03 : MonoBehaviour
     private void ItemInfoAppear()
     {
         pickupActivated = true;
-        //actionText.gameObject.SetActive(true);
-        //actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득" + " [Click]";
+        actionText.gameObject.SetActive(true);
+        actionText.text = hitInfo.transform.GetComponent<ItemPickUp>().item.itemName + " 획득" + " [Click]";
     }
     public void InfoDisappear()
     {
         pickupActivated = false;
-        //actionText.gameObject.SetActive(false);
+        actionText.gameObject.SetActive(false);
     }
 
     //

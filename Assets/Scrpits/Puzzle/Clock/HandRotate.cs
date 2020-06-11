@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HandRotate : MonoBehaviour
 {
+
+
+
     public int dirType = 0; //인스펙터창에 입력, -1은 반시계방향, 1은 시계방향, 이 값은 ClockNum인덱스가 줄어드는건지도 판별한다
     private float rotateValue;
 

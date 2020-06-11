@@ -175,7 +175,7 @@ public class ActionController_GetKey : MonoBehaviour
                             InfoDisappear(); //info 삭제
 
                             // - 현관 라이트 켜기
-                            //_lightOn_script.LightOnFront();
+                            _lightOn_script.LightOnFront();
 
                             // - 엔딩 활성화
                             endingCtrller_script.enabled = true;

@@ -21,15 +21,6 @@ public class FadeAni_guide : MonoBehaviour
     void Awake()
     {
         fadeImg = GetComponent<Image>();
-        init();
-    }
-
-     void init()
-    {
-        //인벤토리자막
-        Color fadecolor = fadeImg.color;
-        fadecolor.a = 1f;
-        fadeImg.color = fadecolor;
     }
 
     //페이드아웃

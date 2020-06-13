@@ -26,7 +26,7 @@ public class ActionController_01 : MonoBehaviour
     private LayerMask layerMask;
 
     [SerializeField]
-    private GameObject target;
+    private GameObject target; // center
 
     [SerializeField]
     private GameObject P_target;//타겟 발 오브젝트와 연결된 pivot
@@ -80,7 +80,7 @@ public class ActionController_01 : MonoBehaviour
     BoxOpen boxOpen_script;
 
 
-    ViewNote viewNote_script;
+    ViewNote_01 viewNote_script;
     bool popupNote = false;
     bool opening = false;
 
@@ -106,7 +106,7 @@ public class ActionController_01 : MonoBehaviour
 
         boxOpen_script = GameObject.FindObjectOfType<BoxOpen>();
 
-        viewNote_script = GameObject.FindObjectOfType<ViewNote>();
+        viewNote_script = GameObject.FindObjectOfType<ViewNote_01>();
 
         checkRange_Script = GameObject.FindObjectOfType<CheckRange>();
     }
@@ -123,42 +123,57 @@ public class ActionController_01 : MonoBehaviour
         TryAction();
     }
 
-    private void OnDrawGizmos()  //OnDrawGizmosSelected()
-    {
-        Handles.color = isCollision ? _red : _blue;
-        Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, angleRange / 2, distance);
-        //                     타겟에의 위치에서, 타겟의 위치 앞전방으로,위아래 판별, 각도는 몇만큼, 방향은 몇만큼
-        Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, -angleRange / 2, distance);
-        //                     타겟에의 위치에서, 타겟의 위치 앞전방으로 ,위아래 판별, 각도는 몇만큼의 -, 방향은 몇만큼. 
+    //private void OnDrawGizmos()  //OnDrawGizmosSelected()
+    //{
+    //    Handles.color = isCollision ? _red : _blue;
+    //    Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, angleRange / 2, distance);
+    //    //                     타겟에의 위치에서, 타겟의 위치 앞전방으로,위아래 판별, 각도는 몇만큼, 방향은 몇만큼
+    //    Handles.DrawSolidArc(target.transform.position, Vector3.up, target.transform.forward, -angleRange / 2, distance);
+    //    //                     타겟에의 위치에서, 타겟의 위치 앞전방으로 ,위아래 판별, 각도는 몇만큼의 -, 방향은 몇만큼. 
 
-        Gizmos.DrawSphere(P_target.transform.position, range);
-    }
+    //    Gizmos.DrawSphere(P_target.transform.position, range);
+    //}
 
     private void TryAction()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            // - 애니메이션쪽지 (2스테이지로 옮기기)
+            //if (!popupNote)
+            //{
+            //    //CheckItem();
+            //    CanPickUp();
+            //}
+            //else
+            //{
+            //    if (!opening)
+            //    {
+            //        //쪽지 열기 애니메이션 (이동은 CanPickUp에서)
+            //        if (viewNote_script.OpenAni_Note())
+            //            opening = true;
+            //    }
+            //    else
+            //    {
+            //        //접기 + 원위치로 이동
+            //        if (viewNote_script.EndAni_Note())
+            //        {
+            //            opening = false;
+            //            popupNote = false; //->위 호출이 다끝나면 변하게해야함
+            //        }
+            //    }
+            //}
+
+
             if (!popupNote)
             {
-                //CheckItem();
                 CanPickUp();
             }
             else
             {
-                if (!opening)
+                if (viewNote_script.EndAni_Note()) //코루틴이 실행되는 동안에는 X
                 {
-                    //쪽지 열기 애니메이션 (이동은 CanPickUp에서)
-                    if (viewNote_script.OpenAni_Note())
-                        opening = true;
-                }
-                else
-                {
-                    //접기 + 원위치로 이동
-                    if (viewNote_script.EndAni_Note())
-                    {
-                        opening = false;
-                        popupNote = false; //->위 호출이 다끝나면 변하게해야함
-                    }
+                    opening = false;
+                    popupNote = false; //->위 호출이 다끝나면 변하게해야함
                 }
             }
         }
@@ -257,7 +272,7 @@ public class ActionController_01 : MonoBehaviour
 
                                 // - info
 
-                                // - 외곽선 , 빈퍼즐블럭 없애기
+                                // - 외곽선 , 빈퍼즐블럭 비활성화
                                 hitInfo.transform.gameObject.SetActive(false);
                                 OutlineController.set_enabled(pre_ol_index, false);
                                 puzzleKey.gameObject.SetActive(true);
@@ -302,16 +317,32 @@ public class ActionController_01 : MonoBehaviour
                     //    // - 상자 애니메이션
                     //    boxOpen_script.set_aniBool();
                     //}
+
+                    return;
                 }
             }
 
-            if (hitInfo.transform.CompareTag("Note_EB"))
+            if (hitInfo.transform.CompareTag("Note_BP"))
             {
-                viewNote_script.StartAni_Note();
-
                 popupNote = true;
 
+                viewNote_script.StartAni_Note();
+
                 InfoDisappear();
+                OutlineController.set_enabled(pre_ol_index, false);
+
+                return;
+            }
+
+            if (hitInfo.transform.CompareTag("ObjAni"))
+            {
+                //애니메이션 출력 전 이동
+                InteractionMoving interactMoving_script = hitInfo.transform.GetComponent<InteractionMoving>();
+                interactMoving_script.StartToMove();
+
+                InfoDisappear();
+
+                return;
             }
         }
     }
@@ -324,7 +355,7 @@ public class ActionController_01 : MonoBehaviour
         {
             //hitInfo = checkRange_Script.Get_hitInfo();
 
-            if (hitInfo.transform.CompareTag("Note_EB") == false)
+            if (hitInfo.transform.CompareTag("ObjAni") == false)
             {
                 // = 외곽선 =
                 ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
@@ -335,8 +366,14 @@ public class ActionController_01 : MonoBehaviour
                     ItemInfoAppear(pieceItem_script.item);
 
                     // - 외곽선
+                    int temp_index = pieceItem_script.outlineIndex;
                     OutlineController.set_enabled(pieceItem_script.outlineIndex, true);
-                    pre_ol_index = pieceItem_script.outlineIndex;
+
+                    if (temp_index != pre_ol_index)
+                    {
+                        OutlineController.set_enabled(pre_ol_index, false);
+                        pre_ol_index = pieceItem_script.outlineIndex;
+                    }
                 }
                 else
                 {
@@ -372,7 +409,8 @@ public class ActionController_01 : MonoBehaviour
     private bool CheckAllSectorform(RaycastHit tempHit) //범위안에 드는지 검사
     {
         dotValue = Mathf.Cos(Mathf.Deg2Rad * (angleRange / 2));
-        direction = tempHit.transform.position - target.transform.position;
+        //direction = tempHit.transform.position - target.transform.position;
+        direction = tempHit.point - target.transform.position;
         if (direction.magnitude < distance)
         {
             if (Vector3.Dot(direction.normalized, target.transform.forward) > dotValue)

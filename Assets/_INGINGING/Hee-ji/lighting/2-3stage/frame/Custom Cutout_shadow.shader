@@ -10,14 +10,16 @@
 	}
 
 		SubShader{
+		//뒷면
 		Tags{ "Queue" = "AlphaTest" "Ignore Projector" = "True" "RenderType" = "Transparent" }
 		LOD 200
+
+		cull Back
 
 		CGPROGRAM
 
 #pragma surface surf Standard alphatest:_Cutoff fullforwardshadows
-#pragma surface surf Lambert
-
+		//#pragma surface surf Lambert addshadow alphatest:_Cutoff vertex:winganim
 #pragma target 3.0
 
 		sampler2D _MainTex;
@@ -48,9 +50,58 @@
 
 		o.Alpha = main.a * mask.a;
 	}
-
 	ENDCG
+
+
+		//뒷면
+		Tags{ "Queue" = "AlphaTest" "Ignore Projector" = "True" "RenderType" = "Transparent" }
+		LOD 200
+
+		cull Front
+
+		CGPROGRAM
+
+#pragma surface surf Standard alphatest:_Cutoff fullforwardshadows
+#pragma vertex vert
+
+#pragma target 3.0
+
+		sampler2D _MainTex;
+	sampler2D _MaskTex;
+
+	struct Input {
+		float2 uv_MainTex;
+		float2 uv2_MaskTex;
+	};
+
+	half _Glossiness;
+	half _Metallic;
+	fixed4 _Color;
+
+	void vert(inout appdata_full v, out Input o) {
+		UNITY_INITIALIZE_OUTPUT(Input, o);
+		v.normal = -v.normal;
 	}
-		//FallBack "Diffuse"
-		Fallback "Transparent/Cutout/Diffuse"
+
+	void surf(Input IN, inout SurfaceOutputStandard o) {
+
+		fixed4 main = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+		fixed4 mask = tex2D(_MaskTex, IN.uv2_MaskTex);
+
+		//Multiplied by the mask.rgb in this case, because if you use a white texture as your mask,
+		//you can color it black to add burn marks around the damage.
+		o.Albedo = main.rgb * mask.rgb;
+
+		//For most cases, you'd probably just want:
+		//surface.Albedo = main.rgb;
+		o.Metallic = _Metallic;
+		o.Smoothness = _Glossiness;
+
+		o.Alpha = main.a * mask.a;
+	}
+	ENDCG
+
+
+	}
+		FallBack "Diffuse"
 }

@@ -26,6 +26,7 @@ TagManager:
   - Action
   - Wendy
   - Snow
+  - Note_BP
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - CameraObstacle
   - Light
   - Item
-  - Item_HJ
+  - ObjAni
   - Doll
   - Display
   - Floor

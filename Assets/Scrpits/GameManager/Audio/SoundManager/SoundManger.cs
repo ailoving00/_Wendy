@@ -64,10 +64,10 @@ public class SoundManger : MonoBehaviour
                         return;
                     }
                 }
-                Debug.Log("모든 가용 AudioSource가 사용중입니다 ");
+                //Debug.Log("모든 가용 AudioSource가 사용중입니다 ");
                 return;
             }
-            Debug.Log(_name+"사운드가 존재하지않습니다. ");
+            //Debug.Log(_name+"사운드가 존재하지않습니다. ");
         }
         
     }
@@ -86,10 +86,10 @@ public class SoundManger : MonoBehaviour
                 return;
 
             }
-            Debug.Log("모든 가용 AudioSource가 사용중입니다 ");
+            //Debug.Log("모든 가용 AudioSource가 사용중입니다 ");
             return;
         }
-        Debug.Log(_name + "사운드가 존재하지않습니다. ");
+        //Debug.Log(_name + "사운드가 존재하지않습니다. ");
     }
 
 
@@ -125,7 +125,7 @@ public class SoundManger : MonoBehaviour
                 return;
             }
         }
-        Debug.Log("재생중인" + _name + "사운드가 없습니다.");
+        //Debug.Log("재생중인" + _name + "사운드가 없습니다.");
     }
 
 

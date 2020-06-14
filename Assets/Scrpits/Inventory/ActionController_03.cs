@@ -161,7 +161,7 @@ public class ActionController_03 : MonoBehaviour
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
                             // - 아이템 생성  O
-                            location_script.setup_Doll(theInventory.get_Item(use_index));
+                            //location_script.setup_Doll(theInventory.get_Item(use_index));
 
 
                             // - 장식장 비교를 위한 변수

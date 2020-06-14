@@ -227,6 +227,7 @@ public class Move_Cuckoo : MonoBehaviour
             }
 
             //active = false; //# -> doorAni_script 스크립트로 옮김
+            cpManager_script.set_popup_anmu(false);
         }
 
         moveAniState = false;

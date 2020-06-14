@@ -21,6 +21,12 @@ public class FramePuzzle_Enter : MonoBehaviour
     // - 외곽선
     private DrawOutline_HJ OutlineController;
     public int pre_ol_index = -1; //이전 아웃라인 인덱스
+    private bool outline_active = false;
+
+    // - 클릭버튼
+    public GameObject actionCaption;
+
+    ActionController_02_VER2 actionCtrler2_script;
 
     void Start()
     {
@@ -33,10 +39,18 @@ public class FramePuzzle_Enter : MonoBehaviour
 
         //외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
+
+        actionCtrler2_script = GameObject.FindObjectOfType<ActionController_02_VER2>();
     }
 
     void Update()
     {
+        if (puzzleEnd)
+        {
+            this.enabled = false;
+            return;
+        }
+
         LookAtFrame();
         TryAction();
 
@@ -49,14 +63,22 @@ public class FramePuzzle_Enter : MonoBehaviour
         Mouse_ray = camera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(Mouse_ray, out hitInfo, range, CamObstacle_layerMask))
         {
+            if (OutlineController.get_outline_okay())
+                return;
+
             if (hitInfo.transform.CompareTag("Frame"))
             {
-                //외곽선 그리기
+                // - 클릭버튼 활성화
+                actionCaption.SetActive(true);
+
+                // - 외곽선 그리기
                 if (pre_ol_index == -1)
                 {
                     SetOutline setoutlin_script = hitInfo.transform.GetComponent<SetOutline>();
+                    OutlineController.set_check(true);
                     OutlineController.set_enabled(setoutlin_script._index, true);
                     pre_ol_index = setoutlin_script._index;
+                    outline_active = true;
                 }
             }
         }
@@ -64,9 +86,14 @@ public class FramePuzzle_Enter : MonoBehaviour
         {
             if (pre_ol_index != -1)
             {
-                //외곽선 해제
+                // - 외곽선 해제
                 OutlineController.set_enabled(pre_ol_index, false);
                 pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
             }
         }
     }
@@ -76,6 +103,9 @@ public class FramePuzzle_Enter : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (puzzleEnd)
+                return;
+
+            if (!outline_active)
                 return;
 
             //test = true;
@@ -96,6 +126,18 @@ public class FramePuzzle_Enter : MonoBehaviour
             {
                 //카메라 변경
                 fpCameraController.change_Camera(true);
+
+                if (pre_ol_index != -1)
+                {
+                    // - 외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+
+                    // - 클릭버튼 해제
+                    actionCaption.SetActive(false);
+                }
             }
         }
     }
@@ -103,5 +145,10 @@ public class FramePuzzle_Enter : MonoBehaviour
     public void set_puzzleEnd()
     {
         puzzleEnd = true;
+        OutlineController.set_enabled(0, false);
+        OutlineController.set_check(false);
+        actionCtrler2_script.enabled = true;
+
+        //this.enabled = false; //-> 업데이트함수에 있음
     }
 }

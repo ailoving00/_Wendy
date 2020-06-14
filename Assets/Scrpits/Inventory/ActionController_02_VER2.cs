@@ -21,9 +21,11 @@ public class ActionController_02_VER2 : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
-
+    //[SerializeField]
+    //private Text actionText;
+    // - 클릭버튼
     [SerializeField]
-    private Text actionText;
+    private GameObject actionCaption;
 
     /// acquire true - false 
     private bool pickupActivated = false;//false;
@@ -55,10 +57,14 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     // - 외곽선
     private DrawOutline_HJ OutlineController;
-    private int pre_ol_index = 0; //이전 아웃라인 인덱스
+    private int pre_ol_index = -1; //이전 아웃라인 인덱스
+    private bool outline_active = false;
 
     // - Wendy AI
     WendyAI wendyAI_Script;
+
+    // - 3스테이지 배치퍼즐
+    DollAniManager dollAniManager_script;
 
     void Start()
     {
@@ -85,7 +91,6 @@ public class ActionController_02_VER2 : MonoBehaviour
         wendyAI_Script = GameObject.FindObjectOfType<WendyAI>();
     }
 
-
     void Update()
     {
         CheckItem();
@@ -93,7 +98,6 @@ public class ActionController_02_VER2 : MonoBehaviour
 
         TryAction();
     }
-
 
     private void TryAction()
     {
@@ -109,6 +113,9 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     private void CanPickUp()
     {
+        if (!outline_active) // 습득과 관련된 아이템은 외곽선과 상관 있다
+            return;
+
         if (pickupActivated)
         {
             if (hitInfo.transform != null)
@@ -118,27 +125,36 @@ public class ActionController_02_VER2 : MonoBehaviour
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
                         // - 아이템 습득
-                        Destroy(hitInfo.transform.gameObject); //아이템 삭제
+                        //Destroy(hitInfo.transform.gameObject); //아이템 삭제
+                        hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
+                        OutlineController.set_enabled(pre_ol_index, false);
 
                         InfoDisappear(); //info 삭제
 
                         PickUp_state = true; // 습득한 상태로 변경 -> 이후 Check_use_Item에서 location_script의 상태 업데이트하기 위해서
 
-                        // - 장식장 클릭
+                        // - 장식장 클릭 (인형이 놓여져있음)
                         if (hitInfo2.transform != null) //null @
                         {
-                            DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
-                            int display_index = location_script.location_Num;
+                            if (hitInfo2.transform.tag == "Location")
+                            {
+                                DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
+                                int display_index = location_script.location_Num;
 
-                            // #
-                            displayManager_script.reset_DisplayArry(display_index);
+                                // #
+                                displayManager_script.reset_DisplayArry(display_index);
+                            }
                         }
                     }
-
-                    if (hitInfo.transform.GetComponent<ItemPickUp>().item.itemName == "FlashlightItem")
+                    else if (hitInfo.transform.GetComponent<ItemPickUp>().item.itemName == "FlashlightItem")
                     {
-                        Destroy(hitInfo.transform.gameObject); //아이템 삭제, 나중엔 코루틴으로 #
+                        //Destroy(hitInfo.transform.gameObject); //아이템 삭제, 나중엔 코루틴으로 #
 
+                        // - 손전등(아이템) 비활성화
+                        hitInfo.transform.gameObject.SetActive(false);
+                        OutlineController.set_enabled(pre_ol_index, false);
+
+                        // - 손전등 기능 on
                         FlashlightItem.SetActive(true);
                         flash_script.enabled = true;
                     }
@@ -156,14 +172,64 @@ public class ActionController_02_VER2 : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
         {
+            if (OutlineController.get_outline_okay())
+                return;
+
             if (hitInfo.transform.tag == "Item") //compare @
             {
+                // - 인포
                 ItemInfoAppear();
+
+                // - 클릭버튼 활성화
+                actionCaption.SetActive(true);
+
+                // - 외곽선
+                ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
+                int cur_ol_index = pieceItem_script.outlineIndex;
+
+                // 1
+                //if (pre_ol_index != cur_ol_index)
+                //{
+                //    OutlineController.set_enabled(pieceItem_script.outlineIndex, true);
+                //    if (pre_ol_index != -1)
+                //        OutlineController.set_enabled(pre_ol_index, false);
+                //    pre_ol_index = pieceItem_script.outlineIndex;
+                //}
+                // 2
+                //if (cur_ol_index >= 14 && cur_ol_index != 0) 
+                {
+                    OutlineController.set_check(true);
+                    outline_active = true;
+
+                    if (pre_ol_index == -1)
+                    {
+                        OutlineController.set_enabled(cur_ol_index, true);
+                        pre_ol_index = cur_ol_index;
+                    }
+                    else
+                    {
+                        OutlineController.set_enabled(pre_ol_index, false);
+                        OutlineController.set_enabled(cur_ol_index, true);
+                        pre_ol_index = cur_ol_index;
+                    }
+                }
             }
         }
         else
         {
             InfoDisappear();
+
+            if (pre_ol_index != -1)
+            {
+                //외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
         }
     }
 
@@ -215,15 +281,20 @@ public class ActionController_02_VER2 : MonoBehaviour
                     {
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
-
-                            // - 아이템 생성  O
-                            location_script.setup_Doll(theInventory.get_Item(use_index));
-
-
-                            // - 장식장 비교를 위한 변수
+                            // - 아이템 활성화
 
                             // 아이템 코드
                             int doll_itemCode = theInventory.get_ItemCode(use_index);
+                            // 장식장 놓을때, 이동
+                            int doll_displayIndex = displayManager_script.compareItemCode(doll_itemCode); //인형매니저(2배치퍼즐)에서 아이템 인덱스 얻기
+                            displayManager_script.MoveSelectedInputArry(
+                                doll_displayIndex,
+                                location_script.get_DisplayPosition(),
+                                location_script.get_DisplayRotation());
+                            location_script.lay_Doll();
+
+                            // - 장식장 비교를 위한 변수
+ 
                             // 장식장 위치 넘버
                             int display_index = location_script.location_Num;
 

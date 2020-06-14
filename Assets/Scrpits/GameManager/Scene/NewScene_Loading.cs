@@ -82,7 +82,7 @@ public class NewScene_Loading : MonoBehaviour
         fadeImg.color = fadecolor;
 
         //고정해제
-        actionCtrler_script.enabled = true;
+        //actionCtrler_script.enabled = true;
         fpCam_script.enabled = true;
         playerCtrler_script.enabled = true;
         fpChangeCam_script.enabled = true;

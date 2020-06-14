@@ -8,7 +8,10 @@ public class TitleButton : MonoBehaviour
 {
     public void StartButton()
     {
-        SceneManager.LoadScene("02_3_Stage copy");
+        // - 로딩씬
+
+        SceneManager.LoadScene("01_Stage"); //임시
+
     }
 
     public void ExitButton()
@@ -18,6 +21,7 @@ public class TitleButton : MonoBehaviour
 
     void Start()
     {
+        // 변경 필요함
         Screen.SetResolution(1920, 1080, false);
     }
 

@@ -683,9 +683,17 @@
       <Project>{1629A4BA-F7A3-CC94-6A0F-6D3A345BD2B5}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="sc.posteffects.editor.csproj">
+      <Project>{3A05155C-8538-76C5-1D5C-6C238A6ED317}</Project>
+      <Name>sc.posteffects.editor</Name>
+    </ProjectReference>
     <ProjectReference Include="PathCreator.csproj">
       <Project>{2F913B9D-A330-488B-7E28-BA55AC9C1FF2}</Project>
       <Name>PathCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="sc.posteffects.runtime.csproj">
+      <Project>{8B036805-3468-3739-F28E-533A243B3031}</Project>
+      <Name>sc.posteffects.runtime</Name>
     </ProjectReference>
     <ProjectReference Include="PathCreatorEditor.csproj">
       <Project>{8631BDAF-5176-81CA-8783-B94C0762BFF4}</Project>

@@ -6,7 +6,7 @@ public class ClockPuzzle_Manager : MonoBehaviour
 {
     // - 시계퍼즐 풀 수 있는지 상태 확인하기 (범위에 들어왔는가)
     public bool active = false;
-    private bool end = false;
+    private bool end = false; //클리어상태
 
     // - 클릭
     // 카메라
@@ -28,7 +28,11 @@ public class ClockPuzzle_Manager : MonoBehaviour
     // - 외곽선
     private DrawOutline_HJ OutlineController;
     public int pre_ol_index = -1; //이전 아웃라인 인덱스
+    bool popup_anmu = false;
+    private bool outline_active = false;
 
+    // - 클릭버튼
+    public GameObject actionCaption;
 
     void Start()
     {
@@ -53,6 +57,9 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
     private void LookAtClock()
     {
+        if (popup_anmu)
+            return;
+
         if (Physics.Raycast(mCT.position, mCT.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
         {
             if (hitInfo.transform.CompareTag("InputButton_CP"))
@@ -71,24 +78,39 @@ public class ClockPuzzle_Manager : MonoBehaviour
                 //외곽선 해제
                 OutlineController.set_enabled(pre_ol_index, false);
                 pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
             }
         }
     }
 
     private void DrawOutline()
     {
-        //외곽선 그리기
+        // - 클릭버튼 활성화
+        actionCaption.SetActive(true);
+
+        // - 외곽선 그리기
         SetOutline setoutlin_script = hitInfo.transform.GetComponent<SetOutline>();
-        if (pre_ol_index == -1)
+
+        if (setoutlin_script._index <= 5 && setoutlin_script._index != 0) //시계퍼즐은 조건(범위에들어와야함)이 있기때문에 우선권을 가진다
         {
-            OutlineController.set_enabled(setoutlin_script._index, true);
-            pre_ol_index = setoutlin_script._index;
-        }
-        else
-        {
-            OutlineController.set_enabled(pre_ol_index, false);
-            OutlineController.set_enabled(setoutlin_script._index, true);
-            pre_ol_index = setoutlin_script._index;
+            OutlineController.set_check(true);
+            outline_active = true;
+
+            if (pre_ol_index == -1)
+            {
+                OutlineController.set_enabled(setoutlin_script._index, true);
+                pre_ol_index = setoutlin_script._index;
+            }
+            else
+            {
+                OutlineController.set_enabled(pre_ol_index, false);
+                OutlineController.set_enabled(setoutlin_script._index, true);
+                pre_ol_index = setoutlin_script._index;
+            }
         }
     }
 
@@ -102,6 +124,9 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (!outline_active)
+                return;
+
             check_collider();
         }
     }
@@ -118,14 +143,22 @@ public class ClockPuzzle_Manager : MonoBehaviour
             }
             else if (hitInfo.transform.tag == "EnterButton_CP")
             {
-                if (!enterBtn_script.get_result())
+                if (!enterBtn_script.get_result()) // 오답
                 {
+                    popup_anmu = true;
+                    if (pre_ol_index != -1)
+                    {
+                        //외곽선 해제
+                        OutlineController.set_enabled(pre_ol_index, false);
+                        pre_ol_index = -1;
+                        OutlineController.set_check(false);
+                    }
+
                     cuckoo_script.start_cuckooAni();
                 }
-                else
+                else //정답
                 {
-                    // - 코루틴으로 몇초뒤 스크립트가 enable = false 되는것은 @
-                    end = true;
+                    // - 시계움직임 멈추기
                     fan_script.cp_is_over();
 
                     // - 시계판 열리는 애니메이션
@@ -133,6 +166,18 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
                     // - 피터팬인형 활성화
                     reward.SetActive(true);
+
+                    // - 외곽선 해제
+                    if (pre_ol_index != -1)
+                    {
+                        OutlineController.set_enabled(pre_ol_index, false);
+                        pre_ol_index = -1;
+                        OutlineController.set_check(false);
+                    }
+
+                    // - 해제, 코루틴으로 몇초뒤 스크립트가 enable = false 되는것은 @ -> ?
+                    end = true;
+                    this.enabled = false;
                 }
             }
         }
@@ -156,5 +201,10 @@ public class ClockPuzzle_Manager : MonoBehaviour
     public Vector3 get_hitinfo_pos()
     {
         return hitInfo.point;
+    }
+
+    public void set_popup_anmu(bool b)
+    {
+        popup_anmu = b;
     }
 }

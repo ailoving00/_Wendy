@@ -7,12 +7,15 @@ public class Drawer_FP : MonoBehaviour
     //public Transform _start_trans;
     public Transform _end_trans;
 
+    public GameObject real_drawer;
+    public GameObject fake_drawer;
+
     private bool _reward_on = false;
     public float speed = 200f;
 
     void Start()
     {
-
+        real_drawer.SetActive(false);
     }
 
     void Update()
@@ -26,6 +29,9 @@ public class Drawer_FP : MonoBehaviour
             return;
 
         _reward_on = true;
+
+        fake_drawer.SetActive(false);
+        real_drawer.SetActive(true);
 
         StartCoroutine(DraweMove());
     }

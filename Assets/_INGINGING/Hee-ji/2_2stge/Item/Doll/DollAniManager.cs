@@ -82,7 +82,7 @@ public class DollAniManager : MonoBehaviour
 
         for (int i = 0; i < doll_states.Length; i++)
         {
-            if (doll_states[i] == true)
+            if (doll_states[i] == true || !doll_anims[i].gameObject.activeInHierarchy)
             {
                 return;
             }

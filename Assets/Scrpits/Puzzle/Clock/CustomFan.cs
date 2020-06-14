@@ -207,7 +207,7 @@ public class CustomFan : MonoBehaviour
 
     public void cp_is_over()
     {
-        StopCoroutine(ChangeGauge());
+        StopCoroutine(coroutine);
 
         // - 시계사운드도 멈추기
     }

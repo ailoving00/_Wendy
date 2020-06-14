@@ -14,8 +14,9 @@ public class ActionController_GetKey : MonoBehaviour
     private LayerMask layerMask;
     //public LayerMask layerMask_Ending;
 
-    [SerializeField]
-    private Text actionText;
+    //[SerializeField]
+    //private Text actionText;
+    public GameObject actionCaption;
 
     /// acquire true - false 
     private bool pickupActivated = false;//false;
@@ -51,7 +52,12 @@ public class ActionController_GetKey : MonoBehaviour
     private ActionController_Ending endingCtrller_script;
 
     // - 현관 라이트
-    public LightOn_3stage _lightOn_script;
+    //public LightOn_3stage _lightOn_script; // 열쇠를 얻으면 현관쪽이 밝아짐 : 기획에 없는 기능
+
+    // - 외곽선
+    private DrawOutline_HJ OutlineController;
+    private int pre_ol_index = -1; //이전 아웃라인 인덱스
+    private bool outline_active = false;
 
     void Start()
     {
@@ -66,11 +72,14 @@ public class ActionController_GetKey : MonoBehaviour
         endingCtrller_script = GameObject.FindObjectOfType<ActionController_Ending>();
 
         //라이트
-        _lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
+        //_lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
 
         //string[] res = UnityStats.screenRes.Split('x');
         //Debug.Log(int.Parse(res[0]) + " " + int.Parse(res[1]));
         //Vector3 halfScreen;
+
+        // 외곽선
+        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
     }
 
     void Update()
@@ -84,7 +93,10 @@ public class ActionController_GetKey : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // - 책 팝업, 넘기기
+            if (!outline_active)
+                return;
+
+            // - 책 팝업 상태에서 페이지 넘기기
             PopUpBook();
 
             // - 책 / 열쇠 아이템 습득 
@@ -98,13 +110,52 @@ public class ActionController_GetKey : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
             {
+                if (OutlineController.get_outline_okay())
+                    return;
+
                 if (hitInfo.transform.tag == "Book_EB") //compare @
                 {
                     InfoAppear();
+
+                    // - 클릭버튼 활성화
+                    actionCaption.SetActive(true);
+
+                    // - 외곽선
+                    ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
+                    int cur_ol_index = pieceItem_script.outlineIndex;
+
+                    OutlineController.set_check(true);
+                    outline_active = true;
+
+                    if (pre_ol_index == -1)
+                    {
+                        OutlineController.set_enabled(cur_ol_index, true);
+                        pre_ol_index = cur_ol_index;
+                    }
+                    else
+                    {
+                        OutlineController.set_enabled(pre_ol_index, false);
+                        OutlineController.set_enabled(cur_ol_index, true);
+                        pre_ol_index = cur_ol_index;
+                    }
                 }
             }
             else
+            {
                 InfoDisappear();
+
+                if (pre_ol_index != -1)
+                {
+                    //외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+
+                    // - 클릭버튼 해제
+                    actionCaption.SetActive(false);
+                }
+            }
         }
         else
         {
@@ -125,14 +176,58 @@ public class ActionController_GetKey : MonoBehaviour
             {
                 if (isLastPage)
                 {
+                    if (OutlineController.get_outline_okay())
+                        return;
+
                     if (hitInfo.transform.tag == "Key_EB") //compare @
                     {
                         getKey = true;
                         InfoAppear();
+
+                        // - 클릭버튼 활성화
+                        actionCaption.SetActive(true);
+
+                        // - 외곽선
+                        ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
+                        int cur_ol_index = pieceItem_script.outlineIndex;
+
+                        OutlineController.set_check(true);
+                        outline_active = true;
+
+                        if (pre_ol_index == -1)
+                        {
+                            OutlineController.set_enabled(cur_ol_index, true);
+                            pre_ol_index = cur_ol_index;
+                        }
+                        else
+                        {
+                            OutlineController.set_enabled(pre_ol_index, false);
+                            OutlineController.set_enabled(cur_ol_index, true);
+                            pre_ol_index = cur_ol_index;
+                        }
                     }
                 }
                 else
+                {
                     getKey = false;
+
+                }
+            }
+            else
+            {
+                InfoDisappear();
+
+                if (pre_ol_index != -1)
+                {
+                    //외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+
+                    // - 클릭버튼 해제
+                    actionCaption.SetActive(false);
+                }
             }
         }
     }
@@ -145,6 +240,15 @@ public class ActionController_GetKey : MonoBehaviour
             {
                 if (hitInfo.transform.tag == "Book_EB") //compare @
                 {
+                    // - 외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+
+                    // - 클릭버튼 비활성화
+                    actionCaption.SetActive(false);
+
                     // - 책 팝업
                     endingBook_script.move_BookAni();
 
@@ -168,7 +272,16 @@ public class ActionController_GetKey : MonoBehaviour
                         if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                         {
                             // - 아이템 습득
-                            Destroy(hitInfo.transform.gameObject); //아이템 삭제
+                            hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
+
+                            // - 외곽선 해제
+                            OutlineController.set_enabled(pre_ol_index, false);
+                            pre_ol_index = -1;
+                            OutlineController.set_check(false);
+                            outline_active = false;
+
+                            // - 클릭버튼 비활성화
+                            actionCaption.SetActive(false);
 
                             //
                             getKey = false;

@@ -67,6 +67,7 @@
      <Compile Include="Assets\_INGINGING\Hee-ji\1\Clock_sub\ChangeCam_SubClock.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\Clock_sub\MakeClockSee.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\Clock_sub\SeeingSubClock.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\1\Clock_sub\SubClockInfo.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\ekza_reward\Drawer_FP.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\sight_1\PlayerRange_1stage.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\1\sight_1\Sight_1stage.cs" />
@@ -79,6 +80,7 @@
      <Compile Include="Assets\_INGINGING\Hee-ji\2_2stge\Item\Doll\MockingDollAni.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_2stge\paper_Ani\ViewNote_Ani_02.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_2stge\VolumeTrigger.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\2_3stage\DoorOpen_Basement.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\TestRay.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\view_Test (+)\CheckRange.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />

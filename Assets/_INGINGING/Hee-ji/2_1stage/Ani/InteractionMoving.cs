@@ -47,6 +47,9 @@ public class InteractionMoving : MonoBehaviour
     public int _answer_index = -1;
     InteracttAniManager interAniManager_script;
 
+    public HideTree_ver2 hideTree_script;
+    public Collider hideColl;
+
     void Start()
     {
         agent = GameObject.FindWithTag("Player").GetComponent<NavMeshAgent>();
@@ -71,6 +74,9 @@ public class InteractionMoving : MonoBehaviour
         {
             return;
         }
+
+        hideTree_script.enabled = false;
+        hideColl.enabled = false;
 
         coroutine = StartCoroutine(MoveAgent());
     }

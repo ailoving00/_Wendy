@@ -34,6 +34,8 @@ public class ClockPuzzle_Manager : MonoBehaviour
     // - 클릭버튼
     public GameObject actionCaption;
 
+    private MakeClockSee SeeClock_script;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -47,6 +49,8 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
         //외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
+
+        SeeClock_script = GameObject.FindObjectOfType<MakeClockSee>();
     }
 
     void Update()
@@ -69,6 +73,20 @@ public class ClockPuzzle_Manager : MonoBehaviour
             else if (hitInfo.transform.tag == "EnterButton_CP")
             {
                 DrawOutline();
+            }
+            else
+            {
+                if (pre_ol_index != -1)
+                {
+                    //외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+
+                    // - 클릭버튼 해제
+                    actionCaption.SetActive(false);
+                }
             }
         }
         else
@@ -178,6 +196,7 @@ public class ClockPuzzle_Manager : MonoBehaviour
                     // - 해제, 코루틴으로 몇초뒤 스크립트가 enable = false 되는것은 @ -> ?
                     end = true;
                     this.enabled = false;
+                    SeeClock_script.enabled = false;
                 }
             }
         }

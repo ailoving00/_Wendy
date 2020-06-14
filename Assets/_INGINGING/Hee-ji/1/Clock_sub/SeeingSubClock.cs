@@ -11,7 +11,7 @@ public class SeeingSubClock : MonoBehaviour
         ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_SubClock>();
     }
 
-        void Update()
+    void Update()
     {
         TryAction();
     }

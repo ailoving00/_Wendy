@@ -28,6 +28,9 @@ public class InteractionAnimation : MonoBehaviour
     InteracttAniManager interAniManager_script;
     private int _answer_index = -1;
 
+    public HideTree_ver2 hideTree_script;
+    public Collider hideColl;
+
     void Start()
     {
         palyer_script = GameObject.FindObjectOfType<Player_1stage>();
@@ -91,7 +94,7 @@ public class InteractionAnimation : MonoBehaviour
         }
 
         // - 퍼즐조각 애니메이션
-        if (!_isBox)
+        if (!_isBox && _answer_index != -1) //정답인 나무일때
         {
             interAniManager_script.Active_Piece(_answer_index);
         }
@@ -103,6 +106,9 @@ public class InteractionAnimation : MonoBehaviour
         palyer_script.enabled = true;
         palyer_script.set_Angle(transAngle);
         actionCtrler.enabled = true;
+
+        hideTree_script.enabled = true; //나무투명화 스크립트
+        hideColl.enabled = true;
     }
 
     public void set_angle(float a)

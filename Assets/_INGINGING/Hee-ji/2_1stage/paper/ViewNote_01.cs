@@ -42,6 +42,9 @@ public class ViewNote_01 : MonoBehaviour
             return;
         }
 
+        // - 쪽지 습득 -> 한번만 습득?
+        //~
+
         playerCtrler_script.SetunActive();
         playerCtrler_script.enabled = false;
 

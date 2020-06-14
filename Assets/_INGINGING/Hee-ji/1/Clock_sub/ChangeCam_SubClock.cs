@@ -22,7 +22,7 @@ public class ChangeCam_SubClock : MonoBehaviour
     public GameObject _info;
 
     private MakeClockSee MakeClockSee_script;
-    private SeeingSubClock SeeingClock_script;
+    public SeeingSubClock SeeingClock_script;
 
     void Start()
     {

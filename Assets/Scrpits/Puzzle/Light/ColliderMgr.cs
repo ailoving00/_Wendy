@@ -46,7 +46,6 @@ public class ColliderMgr : MonoBehaviour
     private bool outline_active = false;
 
     // - 클릭버튼
-    [SerializeField]
     public GameObject actionCaption;
 
     void Start()
@@ -197,8 +196,7 @@ public class ColliderMgr : MonoBehaviour
                             }
                         }
                     }
-
-                    else
+                    else // 두꺼비집
                     {
                         StartCoroutine(CheckAnimationState());
 
@@ -269,10 +267,21 @@ public class ColliderMgr : MonoBehaviour
                 if (pre_ol_index == -1)
                 {
                     SetOutline setoutlin_script = puzzleInfo.transform.GetComponent<SetOutline>();
-                    OutlineController.set_check(true);
-                    OutlineController.set_enabled(setoutlin_script._index, true);
-                    pre_ol_index = setoutlin_script._index;
-                    outline_active = true;
+
+                    if (setoutlin_script != null) // 두꺼비집이 아닐 경우
+                    {
+                        Debug.Log("dd");
+                        OutlineController.set_check(true);
+                        OutlineController.set_enabled(setoutlin_script._index, true);
+                        pre_ol_index = setoutlin_script._index;
+                        outline_active = true;
+                    }
+                    else
+                    {
+                        pre_ol_index = -2;
+                        OutlineController.set_check(true);
+                        outline_active = true;
+                    }
                 }
             }
         }
@@ -282,11 +291,20 @@ public class ColliderMgr : MonoBehaviour
 
             if (pre_ol_index != -1)
             {
-                // - 외곽선 해제
-                OutlineController.set_enabled(pre_ol_index, false);
-                pre_ol_index = -1;
-                OutlineController.set_check(false);
-                outline_active = false;
+                if (pre_ol_index != -2)
+                {
+                    // - 외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+                }
+                else
+                {
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+                }
 
                 // - 클릭버튼 해제
                 actionCaption.SetActive(false);

@@ -14,8 +14,9 @@ public class ActionController_Ending : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
-    [SerializeField]
-    private Text actionText;
+    //[SerializeField]
+    //private Text actionText;
+    public GameObject actionCaption;
 
     private bool openActivated = false;
     private RaycastHit hitInfo;
@@ -24,12 +25,18 @@ public class ActionController_Ending : MonoBehaviour
 
     private EndingVideo_Loading loadEnding_script;
 
+    // - 외곽선
+    private DrawOutline_HJ OutlineController;
+    private int pre_ol_index = -1; //이전 아웃라인 인덱스
+    private bool outline_active = false;
 
     void Start()
     {
         selectSlot_script = GameObject.FindObjectOfType<SelectSlot>();
 
         loadEnding_script = GameObject.FindObjectOfType<EndingVideo_Loading>();
+
+        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
     }
 
     void Update()
@@ -51,10 +58,16 @@ public class ActionController_Ending : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
         {
+            if (OutlineController.get_outline_okay())
+                return;
+
             if (hitInfo.transform.tag == "Door") //compare @
             {
                 InfoAppear();
             }
+        }
+        else
+        {
         }
     }
 

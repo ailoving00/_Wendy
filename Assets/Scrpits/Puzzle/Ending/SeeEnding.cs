@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SeeEnding : MonoBehaviour
 {
     //public GameObject _Inventory;
     public Camera _uiCam;
     private Camera _mainCam;
-
-
     private Camera _endingCam;
 
     private VideoPlayer _video;
+    public RawImage _rawImage;
 
     void Start()
     {
@@ -53,6 +53,8 @@ public class SeeEnding : MonoBehaviour
             yield return waitTime;
         }
 
+        _rawImage.gameObject.SetActive(true);
+        _rawImage.texture = _video.texture;
         _video.Play();
 
         while (_video.isPlaying)

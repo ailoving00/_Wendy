@@ -41,7 +41,7 @@ public class MockingDollAni : MonoBehaviour
 
     public void play_Animation()
     {
-        if (isPlaying)
+        if (isPlaying || !gameObject.activeInHierarchy)
             return;// false;  //StopCoroutine(coroutine);
 
 
@@ -77,6 +77,8 @@ public class MockingDollAni : MonoBehaviour
         dollAniManger_script.set_dollAcitveState(dollNum, false);
 
         dollAniManger_script.CheckDollAnim(dollNum);
+
+        Debug.Log("end check");
     }
 
     public bool get_playState()

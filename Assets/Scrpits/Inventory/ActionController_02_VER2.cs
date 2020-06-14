@@ -120,12 +120,11 @@ public class ActionController_02_VER2 : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
-                if (hitInfo.transform.CompareTag("Item")) //compare @
+                if (hitInfo.transform.CompareTag("Item"))
                 {
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
                         // - 아이템 습득
-                        //Destroy(hitInfo.transform.gameObject); //아이템 삭제
                         hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
                         OutlineController.set_enabled(pre_ol_index, false);
 
@@ -294,7 +293,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                             location_script.lay_Doll();
 
                             // - 장식장 비교를 위한 변수
- 
+
                             // 장식장 위치 넘버
                             int display_index = location_script.location_Num;
 
@@ -337,6 +336,19 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();
                                 wendyAI_Script.colliderChange();
+
+                                // 외곽선 해제                   
+                                if (pre_ol_index != -1)
+                                {
+                                    //외곽선 해제
+                                    OutlineController.set_enabled(pre_ol_index, false);
+                                    pre_ol_index = -1;
+                                    OutlineController.set_check(false);
+                                    outline_active = false;
+
+                                    // - 클릭버튼 해제
+                                    actionCaption.SetActive(false);
+                                }
                             }
                         }
                     }
@@ -357,7 +369,7 @@ public class ActionController_02_VER2 : MonoBehaviour
         {
             if (hitInfo2.transform.CompareTag("Location"))
             {
-
+                //hitInfo2는 장식장 위치
             }
         }
     }

@@ -56,7 +56,7 @@ public class MockingDollAni : MonoBehaviour
         aniModeling.SetActive(true);
         realModeling.SetActive(false);
         isPlaying = true;
-        dollAniManger_script.set_dollAcitveState(dollNum, true);
+        dollAniManger_script.set_dollAniState(dollNum, true);
 
         animator.SetBool("IsMocking", true);
 
@@ -74,7 +74,7 @@ public class MockingDollAni : MonoBehaviour
         aniModeling.SetActive(false);
         realModeling.SetActive(true);
         isPlaying = false;
-        dollAniManger_script.set_dollAcitveState(dollNum, false);
+        dollAniManger_script.set_dollAniState(dollNum, false);
 
         dollAniManger_script.CheckDollAnim(dollNum);
 

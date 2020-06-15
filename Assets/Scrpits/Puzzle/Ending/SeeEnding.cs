@@ -31,9 +31,12 @@ public class SeeEnding : MonoBehaviour
     public void playVideo()
     {
         // - 해제하기 (인벤토리,카메라,게임사운드매니저)     // *엔딩로딩스크립트에도 일부 스크립트 해제가 있다   
-        _uiCam.enabled = false; //_Inventory.SetActive(false);
+        //_uiCam.enabled = false; //_Inventory.SetActive(false);
         _mainCam.enabled = false;
-        _endingCam.enabled = true;
+        //_endingCam.enabled = true;
+
+        // - 다른 스크립트 해제
+        //~
 
         //사운드 @
 
@@ -64,6 +67,6 @@ public class SeeEnding : MonoBehaviour
         }
 
         // - 영상이 끝났을때, 타이틀로 돌아가기
-        SceneManager.LoadScene("01_Stage");
+        SceneManager.LoadScene("00_Title");
     }
 }

@@ -64,10 +64,45 @@ public class ActionController_Ending : MonoBehaviour
             if (hitInfo.transform.tag == "Door") //compare @
             {
                 InfoAppear();
+
+                // - 클릭버튼 활성화
+                actionCaption.SetActive(true);
+
+                // - 외곽선
+                SetOutline setoutlin_script = hitInfo.transform.GetComponent<SetOutline>();
+                int cur_ol_index = setoutlin_script._index;
+
+                OutlineController.set_check(true);
+                outline_active = true;
+
+                if (pre_ol_index == -1)
+                {
+                    OutlineController.set_enabled(cur_ol_index, true);
+                    pre_ol_index = cur_ol_index;
+                }
+                else
+                {
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    OutlineController.set_enabled(cur_ol_index, true);
+                    pre_ol_index = cur_ol_index;
+                }
             }
         }
         else
         {
+            InfoDisappear();
+
+            if (pre_ol_index != -1)
+            {
+                //외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
         }
     }
 

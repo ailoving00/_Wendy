@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CellarDoorCollider : MonoBehaviour
 {
-    public Text guideCaption;
+    public Text guideCaption; //안씀
     ChangeCam_2stage ChangeCam_script;
     bool textstate = true;
 
@@ -23,11 +23,10 @@ public class CellarDoorCollider : MonoBehaviour
     void Start()
     {
         ChangeCam_script = FindObjectOfType<ChangeCam_2stage>();
-        guideCaption.gameObject.SetActive(false);
+        //guideCaption.gameObject.SetActive(false);
 
         _mainCam = Camera.main;
         CellarCamera = GetComponent<Camera>();
-
     }
 
     public void OnTriggerStay(Collider other)
@@ -38,15 +37,23 @@ public class CellarDoorCollider : MonoBehaviour
             {
                 if (LookAtDoor())
                 {
-                    GuidText();
+                    //GuidText();
+                    
+                //외곽선
+                //클릭버튼
                 }
             }
             else
-                NotText();
+            {
+                //NotText();
+
+                //외곽선 해제
+                //클릭버튼 해제
+
+            }
 
             if (Input.GetMouseButtonDown(0))
             {
-
                  if (LookAtDoor())
                  {
                       ChangeCam_script.change_Camera(1);
@@ -54,10 +61,6 @@ public class CellarDoorCollider : MonoBehaviour
 
                       textstate = false;
                   }
-
-
-                
-
             }
         }
     }
@@ -75,21 +78,21 @@ public class CellarDoorCollider : MonoBehaviour
 
     void GuidText()
     {
-        guideCaption.gameObject.SetActive(true);
-        guideCaption.text = "지하실 살펴보기";
+        //guideCaption.gameObject.SetActive(true);
+        //guideCaption.text = "지하실 살펴보기";
     }
 
     void NotText()
     {
-        guideCaption.gameObject.SetActive(false);
+        //guideCaption.gameObject.SetActive(false);
     }
 
     public void OnTriggerExit(Collider other)
     {
         if (other.transform.CompareTag("Player"))
         {
-            guideCaption.gameObject.SetActive(false);
-            textstate = true;
+            //guideCaption.gameObject.SetActive(false);
+            //textstate = true;
         }
     }
 }

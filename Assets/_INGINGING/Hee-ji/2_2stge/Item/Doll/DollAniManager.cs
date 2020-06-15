@@ -8,9 +8,9 @@ public class DollAniManager : MonoBehaviour
 {
     DisplayManager_3stage displayManager_script;
 
-    MockingDollAni[] doll_anims = new MockingDollAni[8];
-    bool[] doll_states = new bool[8]; //애니메이션 상태
-    bool[] doll_acitve_state = new bool[8]; //활성화 상태
+    public MockingDollAni[] doll_anims = new MockingDollAni[8];
+    public bool[] doll_states = new bool[8]; //애니메이션 상태, 인덱스는 doll_anims와 같고 아이템코드 순서순
+    public bool[] doll_acitve_state = new bool[8]; //오브젝트의 활성화 상태, 인덱스는 장식장배치
 
     private bool clickable = true; //종 클릭이 가능한지 (애니메이션이 다 끝난상태면 가능함)
 
@@ -27,7 +27,7 @@ public class DollAniManager : MonoBehaviour
 
         for (int i = 0; i < doll_states.Length; i++)
         {
-            doll_states[i] = true;
+            doll_states[i] = false; // true;
         }
 
         for (int i = 0; i < doll_acitve_state.Length; i++)
@@ -54,11 +54,15 @@ public class DollAniManager : MonoBehaviour
         if (clickable == false) //애니메이션이 실행할 수 있는 상태인지 검사
             return false;
 
-        clickable = false;
+        //clickable = false;
 
         return true;
     }
-
+    public void set_clickable(bool b)
+    {
+        clickable = b;
+    }
+        
     public void MisplaceDolls()
     {
         //이함수에 반환형을 bool 로 해준다면 함수의 실행성공실패를 알수있다
@@ -82,12 +86,13 @@ public class DollAniManager : MonoBehaviour
 
         for (int i = 0; i < doll_states.Length; i++)
         {
-            if (doll_states[i] == true || !doll_anims[i].gameObject.activeInHierarchy)
+            if (doll_states[i] == true) // || !doll_anims[i].gameObject.activeInHierarchy)
             {
                 return;
             }
         }
 
+        // 모두 애니메이션이 완료된 상태여야 클릭할수있다
         clickable = true; //클릭할수있는 상태로 전환
     }
 
@@ -95,5 +100,11 @@ public class DollAniManager : MonoBehaviour
     public void set_dollAcitveState(int index, bool state)
     {
         doll_acitve_state[index] = state;
+    }
+
+    // - 애니메이션 상태
+    public void set_dollAniState(int index, bool state)
+    {
+        doll_states[index] = state;
     }
 }

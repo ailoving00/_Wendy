@@ -127,6 +127,8 @@ public class ActionController_02_VER2 : MonoBehaviour
                         // - 아이템 습득
                         hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
                         OutlineController.set_enabled(pre_ol_index, false);
+                        OutlineController.set_check(false);
+                        outline_active = false;
 
                         InfoDisappear(); //info 삭제
 
@@ -322,8 +324,10 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 _lightOn_script.LightOn();
 
                                 //지하실, 2층계단 오픈
-                                tempDoor.SetActive(false);
-                                tempStairs.SetActive(false);
+                                tempDoor.SetActive(false); //콜라이더 비활성화
+                                //tempStairs.SetActive(false);
+                                DoorOpen_Basement doorAni = tempStairs.GetComponent<DoorOpen_Basement>();
+                                doorAni.StartDoorAni();
 
                                 enter_3stage = true;
 

@@ -37,6 +37,7 @@ public class ActionController_GetKey : MonoBehaviour
     private bool getKey = false;
 
     private bool possibleBookFlip = false;
+    bool flipOver = false;
 
     //
     FirstPersonCamera fpCam_Script;
@@ -93,8 +94,8 @@ public class ActionController_GetKey : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!outline_active)
-                return;
+            //if (!outline_active) //-> 이 코드 없어야함, FramePuzzle_Enter와 마찬가지로 외곽선부분이 곂치는게 없음
+            //    return;
 
             // - 책 팝업 상태에서 페이지 넘기기
             PopUpBook();
@@ -121,8 +122,8 @@ public class ActionController_GetKey : MonoBehaviour
                     actionCaption.SetActive(true);
 
                     // - 외곽선
-                    ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
-                    int cur_ol_index = pieceItem_script.outlineIndex;
+                    SetOutline setoutlin_script = hitInfo.transform.GetComponent<SetOutline>();
+                    int cur_ol_index = setoutlin_script._index;
 
                     OutlineController.set_check(true);
                     outline_active = true;
@@ -174,7 +175,7 @@ public class ActionController_GetKey : MonoBehaviour
 
             if (Physics.Raycast(ray.origin, ray.direction, out hitInfo, range, layerMask))
             {
-                if (isLastPage)
+                if (isLastPage && !flipOver)
                 {
                     if (OutlineController.get_outline_okay())
                         return;
@@ -206,11 +207,14 @@ public class ActionController_GetKey : MonoBehaviour
                             pre_ol_index = cur_ol_index;
                         }
                     }
+                    else
+                    {
+                        getKey = false;
+                    }
                 }
                 else
                 {
                     getKey = false;
-
                 }
             }
             else
@@ -298,7 +302,6 @@ public class ActionController_GetKey : MonoBehaviour
             }
         }
     }
-    bool flipOver = false;
 
     private void PopUpBook()
     {

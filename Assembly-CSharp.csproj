@@ -227,6 +227,7 @@
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFOOrthogonal.shader" />
      <None Include="Assets\_INGINGING\Hee-ji\1\_grass_heeji\Grass Assets\Materials\Additive Summation.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMUnlit.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_StandartMaskedDetails.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DepthBlur.shader" />
      <None Include="Assets\_INGINGING\Hee-ji\final_background\fix\gagu\Test_cutOut_Surf.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\Pipeline\Pipeline.hlsl" />
@@ -244,12 +245,14 @@
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\License.txt" />
      <None Include="Assets\Scrpits\ObjectOutline\EasyOutline.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\D3D9.hlsl" />
+     <None Include="Assets\_PurchasedAsset\_Interior\Nauthilus Games\01-Assets\04-Shader\PlantShader.shader" />
      <None Include="Assets\MotionBlur\Resources\Reconstruction.cginc" />
      <None Include="Assets\Resources\SSAO Pro\SSAOPro_v2.shader" />
      <None Include="Assets\_INGINGING\Hee-ji\final_background\fix\gagu\Custom Cutout_shadow_opaque.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMSurfaceShaderCommon.cginc" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\Tree\Tree_Opaque.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DepthCopyMask.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_Standart.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\SnowParticleSurfaceShader.shader" />
      <None Include="Assets\Sprites\Texture\2Stage\mainclock\Custom Cutout.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\OpenGL.hlsl" />
@@ -263,6 +266,7 @@
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Extras\WaterReflections\README.txt" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\Compose.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMLambertSolidColor.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_StandartTransparentAdditive.shader" />
      <None Include="Assets\_INGINGING\Hee-ji\lighting\2-3stage\frame\Custom Cutout_shadow.shader" />
      <None Include="Assets\Scrpits\Puzzle\Light\Custom Cutout.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\Tree\TreeLibrary.cginc" />
@@ -276,6 +280,7 @@
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFOBasic.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SnowedSpeedTreeBillboard.cginc" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\Colors.hlsl" />
+     <None Include="Assets\_PurchasedAsset\_Interior\Nauthilus Games\03-Documentation\PlantShader.txt" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGSimple.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\GlobalSnow.cginc" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\Switch.hlsl" />
@@ -310,6 +315,7 @@
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\XboxOne.hlsl" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SnowedSpeedTreeWind.cginc" />
      <None Include="Assets\Scrpits\ObjectOutline\RenderDepth.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_Standart2Sided.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SnowedSpeedTreeBillboardCommon.cginc" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\Sampling.hlsl" />
      <None Include="Assets\_INGINGING\Hee-ji\1\_grass_heeji\WindGrass.shader" />
@@ -317,8 +323,10 @@
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\DepthNormals.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFODesktopPlus.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGWithSky.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\Nauthilus Games\03-Documentation\PostProcess.txt" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMStandardShaderNormalOcclusion.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMStandardShaderNormal.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\Nauthilus Games\03-Documentation\Read me.txt" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\ACES.hlsl" />
      <None Include="Assets\MotionBlur\Resources\Prefilter.cginc" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SpeedTreeNoLeaves.shader" />
@@ -329,13 +337,16 @@
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGDesktop.shader" />
      <None Include="Assets\MotionBlur\Resources\FrameBlending.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\xRLib.hlsl" />
+     <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_StandartTransparent.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DepthCopy.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\StdLib.hlsl" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMStandardShaderNormalOcclusionIntegrated.shader" />
+     <None Include="Assets\_PurchasedAsset\_Interior\Antique Optical Instruments\README.txt" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\MovingObjects\MovingObjectOpaque.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMVertexFragmentShaderCommon.cginc" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGDesktopPlus.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\Pipeline\URP.hlsl" />
+     <None Include="Assets\_PurchasedAsset\_Interior\Playground_collection\readme.txt" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\EraseGeometry.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFOSimple.shader" />
      <None Include="Assets\_PurchasedAsset\X\Grimoire\ReadMe.txt" />

@@ -19,6 +19,7 @@ public class ActionController_03 : MonoBehaviour
 
     /// acquire true - false 
     private bool pickupActivated = false;//false;
+    private bool layActivated = false;
     private RaycastHit hitInfo;
 
     // - 아이템 사용하기
@@ -66,7 +67,6 @@ public class ActionController_03 : MonoBehaviour
     void Update()
     {
         CheckItem();
-
         //if (end)
         Check_Location();
 
@@ -111,7 +111,7 @@ public class ActionController_03 : MonoBehaviour
 
                         PickUp_state = true; // 습득한 상태로 변경 -> 이후 Check_use_Item에서 location_script의 상태 업데이트하기 위해서
 
-                        // - 장식장 클릭
+                        // - 장식장 클릭 (장식장에서 인형을 뺐을때)
                         if (hitInfo2.transform != null) //null @
                         {
                             if (hitInfo2.transform.tag == "Location")
@@ -120,6 +120,9 @@ public class ActionController_03 : MonoBehaviour
                                 int display_index = location_script.location_Num;
 
                                 displayManager_script2.reset_DisplayArry(display_index);
+
+                                // - 활성화 상태 / 놓여진 상태임을 animation 매니저에 저장
+                                dollAniManager_script.set_dollAcitveState(display_index, false);
                             }
                         }
                     }
@@ -134,6 +137,9 @@ public class ActionController_03 : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
         {
             if (OutlineController.get_outline_okay())
+                return;
+
+            if (!dollAniManager_script.ClickButton())
                 return;
 
             if (hitInfo.transform.tag == "Item") //compare @
@@ -216,6 +222,8 @@ public class ActionController_03 : MonoBehaviour
         //if (dollAniManager_script.ClickButton())
         //    return;
 
+        if (!layActivated) return;
+
         if (hitInfo2.transform != null)
         {
             if (hitInfo2.transform.tag == "Location") //compare @
@@ -229,9 +237,8 @@ public class ActionController_03 : MonoBehaviour
                     location_script.take_Doll();
                     PickUp_state = false;
                 }
-                else
+                else // - 장식장에 인형 놓기
                 {
-
                     // - 선택슬롯의 인덱스 얻기
                     int use_index = selectSlot_script.get_index();
 
@@ -243,24 +250,32 @@ public class ActionController_03 : MonoBehaviour
 
                             // 아이템 코드
                             int doll_itemCode = theInventory.get_ItemCode(use_index);
-                            // 장식장 놓을때, 이동
+                            // 장식장 놓을때, 배치퍼즐의 아이템(인형)의 인덱스를 구한다
                             int doll_displayIndex = displayManager_script2.compareItemCode(doll_itemCode); //인형매니저(2배치퍼즐)에서 아이템 인덱스 얻기
-                            displayManager_script2.MoveSelectedInputArry(
-                                doll_displayIndex,
-                                location_script.get_DisplayPosition(),
-                                location_script.get_DisplayRotation());
-                            location_script.lay_Doll();
 
-                            // - 장식장 비교를 위한 변수
+                            if (doll_displayIndex != -1)
+                            {
+                                // - 위에서 구한 인덱스(doll_displayIndex)에 접근, 이동
+                                displayManager_script2.MoveSelectedInputArry(
+                                    doll_displayIndex,
+                                    location_script.get_DisplayPosition(),
+                                    location_script.get_DisplayRotation());
+                                location_script.lay_Doll();
 
-                            // 장식장 위치 넘버
-                            int display_index = location_script.location_Num;
+                                // - 장식장 비교를 위한 변수
 
-                            // - 아이템 코드 저장 #
-                            displayManager_script2.set_DisplayArry(display_index, doll_itemCode);
+                                // 장식장 위치 넘버
+                                int display_index = location_script.location_Num;
 
-                            // - 아이템사용 후, 슬롯 클리어  O
-                            theInventory.clear_Slot(use_index);
+                                // - 아이템 코드 저장 #
+                                displayManager_script2.set_DisplayArry(display_index, doll_itemCode);
+
+                                // - 아이템사용 후, 슬롯 클리어  O
+                                theInventory.clear_Slot(use_index);
+
+                                // - 활성화 상태 / 놓여진 상태임을 animation 매니저에 저장
+                                dollAniManager_script.set_dollAcitveState(display_index, true);
+                            }
                         }
                     }
                 }
@@ -274,6 +289,8 @@ public class ActionController_03 : MonoBehaviour
                     if (pre_ol_index == -1)
                         return;
 
+                    dollAniManager_script.set_clickable(false); //클릭했으니 상태를 클릭못하는 상태로변환
+
                     // - 외곽선 해제
                     OutlineController.set_enabled(pre_ol_index, false);
                     pre_ol_index = -1;
@@ -285,7 +302,7 @@ public class ActionController_03 : MonoBehaviour
 
                     if (displayManager_script2.compare_Answer()) // 맞았을때,
                     {
-                        doorAnimation.play_doorAni();
+                        doorAnimation.play_doorAni(); //문열리기 
                         this.enabled = false;
 
                         getKey_script.enabled = true;
@@ -317,6 +334,11 @@ public class ActionController_03 : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo2, range, layerMask_dlsplay))
         {
+            if (!dollAniManager_script.ClickButton())
+                return;
+
+            layActivated = true;
+
             if (hitInfo2.transform.CompareTag("Location"))
             {
                 //hitInfo2는 장식장 위치
@@ -326,7 +348,7 @@ public class ActionController_03 : MonoBehaviour
                 if (OutlineController.get_outline_okay())
                     return;
 
-                InfoDisappear();
+                ItemInfoAppear();
 
                 // - 클릭버튼 활성화
                 actionCaption.SetActive(true);
@@ -350,6 +372,10 @@ public class ActionController_03 : MonoBehaviour
                     pre_ol_index = cur_index;
                 }
             }
+        }
+        else
+        {
+            layActivated = false;
         }
     }
 

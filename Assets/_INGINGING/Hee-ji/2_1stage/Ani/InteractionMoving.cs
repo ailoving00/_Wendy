@@ -75,8 +75,11 @@ public class InteractionMoving : MonoBehaviour
             return;
         }
 
-        hideTree_script.enabled = false;
-        hideColl.enabled = false;
+        if (hideTree_script != null)
+        {
+            hideTree_script.enabled = false;
+            hideColl.enabled = false;
+        }
 
         coroutine = StartCoroutine(MoveAgent());
     }

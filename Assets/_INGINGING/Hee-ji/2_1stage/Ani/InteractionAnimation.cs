@@ -111,8 +111,11 @@ public class InteractionAnimation : MonoBehaviour
         palyer_script.set_Angle(transAngle);
         actionCtrler.enabled = true;
 
-        hideTree_script.enabled = true; //나무투명화 스크립트
-        hideColl.enabled = true;
+        if (hideTree_script != null)
+        {
+            hideTree_script.enabled = true; //나무투명화 스크립트
+            hideColl.enabled = true;
+        }
     }
 
     public void set_angle(float a)
@@ -123,5 +126,5 @@ public class InteractionAnimation : MonoBehaviour
     public void set_aIndex(int index)
     {
         _answer_index = index;
-    }  
+    }
 }

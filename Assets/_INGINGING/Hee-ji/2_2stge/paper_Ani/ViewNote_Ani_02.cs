@@ -8,13 +8,15 @@ public class ViewNote_Ani_02 : MonoBehaviour
     public Transform startTrans;
 
     public bool popup = false; //완벽히 띄어져있는가
-    public bool stateC = false; //코루틴이 한번만 실행되도록
     private bool play = false; //애니메이션 플레이 상태
+
+    private Coroutine coroutine;
+    private Coroutine cAni;
+    public bool stateC = false; //코루틴이 한번만 실행되도록
 
     // - 애니메이션
     public Animator animator;
     private static string EventOpenAnimationName = "Base Layer.paper_unfold";
-
     private static string AniName_unfold = "paper_unfold";
 
     public float moveSpeed;
@@ -25,15 +27,19 @@ public class ViewNote_Ani_02 : MonoBehaviour
     public float customFactor;
 
     // - 해제해야할 스크립트
-    ActionController_01 actionCtrler_script; //해제하면 X
-    Player_1stage playerCtrler_script; //해제해야함
+    public FirstPersonCamera CamMove_Script;
+    public Player_HJ Player_script;
+
+    public FlodNote clockNote_script;
 
     void Start()
     {
         animator = GetComponent<Animator>();
 
-        actionCtrler_script = GameObject.FindObjectOfType<ActionController_01>();
-        playerCtrler_script = GameObject.FindObjectOfType<Player_1stage>();
+        CamMove_Script = Camera.main.GetComponent<FirstPersonCamera>();
+        Player_script = GameObject.FindObjectOfType<Player_HJ>();
+
+        clockNote_script = GameObject.FindObjectOfType<FlodNote>();
     }
 
     // Update is called once per frame
@@ -42,58 +48,39 @@ public class ViewNote_Ani_02 : MonoBehaviour
 
     }
 
-    public void StartAni_Note()
+    public void StartAni_Note() //이동
     {
         if (stateC)
         {
             return;
         }
 
-        ////transform.position = endTrans.position;
-        ////transform.rotation = endTrans.rotation;
+        // - 스크립트 해제
+        Player_script.SetDeActiveAni();
+        Player_script.enabled = false;
+        CamMove_Script.enabled = false;
 
-        ////animator.Play(AniName_unfold, 0, 0.0f);
-        //animator.SetFloat("speed", 1f);
-        //animator.SetBool("IsUnfolding", true);
-
-        playerCtrler_script.SetunActive();
-        playerCtrler_script.enabled = false;
-
-        StartCoroutine(MoveNote_Start());
+        coroutine = StartCoroutine(MoveNote_Start());
     }
-    public bool OpenAni_Note()
+    public bool OpenAni_Note() //애니메이션
     {
         if (stateC)
         {
             return false;
         }
 
-        StartCoroutine(OpenNote_Start());
+        coroutine = StartCoroutine(OpenNote_Start());
 
         return true;
     }
-    public bool EndAni_Note()
+    public bool EndAni_Note() //이동
     {
         if (stateC)
         {
             return false;
         }
 
-        //transform.position = startTrans.position;
-        //transform.rotation = startTrans.rotation;
-
-        //animator.SetFloat("speed", -1f);
-        //animator.Play(AniName_unfold, 0, 0.85f);
-
-        //animator.SetBool("IsUnfolding", false);
-
-        animator.SetFloat("speed", -2f);
-        animator.Play(AniName_unfold, 0, 0.4f);
-        //animator.SetBool("IsUnfolding", false);
-
-        playerCtrler_script.enabled = true;
-
-        StartCoroutine(MoveNote_End());
+        coroutine = StartCoroutine(MoveNote_End());
 
         return true;
     }
@@ -139,7 +126,7 @@ public class ViewNote_Ani_02 : MonoBehaviour
 
             }
 
-            popup = true;     
+            popup = true;
         }
 
         stateC = false;
@@ -149,8 +136,8 @@ public class ViewNote_Ani_02 : MonoBehaviour
     {
         stateC = true;
 
-        animator.SetFloat("speed", 1f);
         //animator.SetBool("IsUnfolding", true);
+        animator.SetFloat("speed", 1f);
         animator.Play(AniName_unfold, 0, 0.1f);
 
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName(EventOpenAnimationName))
@@ -163,13 +150,22 @@ public class ViewNote_Ani_02 : MonoBehaviour
             // - 애니메이션 재생 중
             yield return null;
         }
-        
+
         stateC = false;
     }
 
     IEnumerator MoveNote_End()
     {
         stateC = true;
+
+        //animator.SetBool("IsUnfolding", false);
+        animator.SetFloat("speed", -2f);
+        animator.Play(AniName_unfold, 0, 0.4f);
+        cAni = StartCoroutine(UnfoldAni_End());
+
+        // - 스크립트 회복
+        Player_script.enabled = true;
+        CamMove_Script.enabled = true;
 
         if (popup) // start 지점으로 갈떄
         {
@@ -198,5 +194,22 @@ public class ViewNote_Ani_02 : MonoBehaviour
         }
 
         stateC = false;
+    }
+
+    IEnumerator UnfoldAni_End()
+    {
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(EventOpenAnimationName))
+        {
+            yield return null;
+        }
+
+        while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.001f)
+        {
+            // - 애니메이션 재생 중
+            yield return null;
+        }
+
+        clockNote_script.SetActive_Ani(false);
+        clockNote_script.SetActive_Outline(true);
     }
 }

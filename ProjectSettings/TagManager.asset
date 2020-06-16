@@ -27,6 +27,8 @@ TagManager:
   - Wendy
   - Snow
   - Note_BP
+  - ObjAni
+  - Note_CP
   layers:
   - Default
   - TransparentFX

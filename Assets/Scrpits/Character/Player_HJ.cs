@@ -136,4 +136,9 @@ public class Player_HJ : MonoBehaviour
     {
         cp_start = b;
     }
+
+    public void SetDeActiveAni()
+    {
+        _animator.SetBool("IsWalking", false);
+    }
 }

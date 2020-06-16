@@ -46,6 +46,18 @@ public class SoundManger : MonoBehaviour
         playSoundName = new string[audioEffects.Length];
     }
 
+    public void BGMSetMusicVolum(float vloume)
+    {
+        audioBgm.volume = vloume;
+    }
+
+    public void EffectSetMusicVolum(float vloume)
+    {
+        for (int j = 0; j < audioEffects.Length; j++) //재생되어있지 않은 오디오를 찾기 
+        {
+            audioEffects[j].volume = vloume;
+        }
+    }
 
     //이름이 입력되면 -> Sound배열안에 맞는 이름이 있는지 찾고 -> 있다면 AudioSource에 넣어서 재생
     public void PlaySound(string _name)

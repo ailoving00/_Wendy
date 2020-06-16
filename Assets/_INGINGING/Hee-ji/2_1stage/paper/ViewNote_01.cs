@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ViewNote_01 : MonoBehaviour
 {
+    [SerializeField]
+    private string NoteSound;
+
     public Transform endTrans;
     public Transform startTrans;
 
@@ -48,6 +51,7 @@ public class ViewNote_01 : MonoBehaviour
         playerCtrler_script.SetunActive();
         playerCtrler_script.enabled = false;
 
+        SoundManger.instance.PlaySound(NoteSound);
         StartCoroutine(MoveNote_Start());
     }
     public bool EndAni_Note()

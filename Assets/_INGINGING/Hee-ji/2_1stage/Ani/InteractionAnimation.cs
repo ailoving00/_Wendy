@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class InteractionAnimation : MonoBehaviour
 {
+    [SerializeField]
+    private string ShackTreeSound;
+
     public int _type = 0; //1: 박스, 2: 인삼, 3: 일반나무
 
     public Animator _player_animator;
@@ -78,6 +81,7 @@ public class InteractionAnimation : MonoBehaviour
 
         _player_animator.SetTrigger(EventTriggerName);
         _obj_animator.SetBool("IsPlaying", true);
+        SoundManger.instance.PlaySound(ShackTreeSound);
 
         while (!_player_animator.GetCurrentAnimatorStateInfo(0)
                 .IsName(EventEndAnimationName))

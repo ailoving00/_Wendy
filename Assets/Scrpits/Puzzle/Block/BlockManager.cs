@@ -64,7 +64,8 @@ public class BlockManager : MonoBehaviour
 
                 if (index == 11 && bt == 4) //도착지점!! --이 부분에는 다른 사운드를 출력해주는것으로? 
                 {
-                    SoundManger.instance.PlaySound(arriveSound);
+                    SoundManger.instance.PlaySound(arriveSound); // 사운드가 안남. 왜? -해결
+
                     return false; }
 
                 if ((start % 6) != 0)

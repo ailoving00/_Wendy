@@ -11,10 +11,7 @@ public class FootSound_1S : MonoBehaviour
     [SerializeField]
     private string[] floorfootSound;
 
-    void Start()
-    {
 
-    }
 
     void OnTriggerEnter(Collider _col)
     {

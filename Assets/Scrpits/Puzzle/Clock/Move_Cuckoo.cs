@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Move_Cuckoo : MonoBehaviour
 {
+    [SerializeField]
+    private string CrowSound = "CP_crow";
+
     // - 이동
     private bool movestate = false;
     public Transform startTransform;
@@ -100,10 +103,10 @@ public class Move_Cuckoo : MonoBehaviour
         journeyLength = Vector3.Distance(startTransform.position, endTransform.position);
     }
 
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
+    //}
 
     public void start_cuckooAni()
     {
@@ -233,6 +236,17 @@ public class Move_Cuckoo : MonoBehaviour
         moveAniState = false;
     }
 
+    IEnumerator crowSoundStart()
+    {
+        // - 앵무새 애니메이션 시작
+        yield return new WaitForSeconds(2.6f);
+
+        SoundManger.instance.PlaySound(CrowSound); // 이건 약간 3초 뒤에 하거나 해야하는 걸로 안다. 
+
+
+    }
+
+
     IEnumerator check_aniState()
     {
         // - 앵무새 애니메이션 시작
@@ -242,6 +256,7 @@ public class Move_Cuckoo : MonoBehaviour
         // - 카메라 흔들기 (최초1회 실행)
         if (!once)
         {
+            StartCoroutine(crowSoundStart());
 
             animator.Play(AniName_start, 0, 0f);
 

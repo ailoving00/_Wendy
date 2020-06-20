@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class ClockPuzzle_Manager : MonoBehaviour
 {
+    [SerializeField]
+    private string TurnDial = "CP_trunDial";
+
+    [SerializeField]
+    private string TryButton = "CP_tryButton";
+
+    [SerializeField]
+    private string OpenClock = "CP_openClock";
+
+
+
     // - 시계퍼즐 풀 수 있는지 상태 확인하기 (범위에 들어왔는가)
     public bool active = false;
     private bool end = false; //클리어상태
@@ -157,10 +168,14 @@ public class ClockPuzzle_Manager : MonoBehaviour
             if (hitInfo.transform.tag == "InputButton_CP")
             {
                 InputClockAnswer input_script = hitInfo.transform.GetComponent<InputClockAnswer>();
+
+                SoundManger.instance.PlaySound(TurnDial);
                 input_script.click_button();
             }
             else if (hitInfo.transform.tag == "EnterButton_CP")
             {
+                SoundManger.instance.PlaySound(TryButton);
+
                 if (!enterBtn_script.get_result()) // 오답
                 {
                     popup_anmu = true;
@@ -171,7 +186,7 @@ public class ClockPuzzle_Manager : MonoBehaviour
                         pre_ol_index = -1;
                         OutlineController.set_check(false);
                     }
-
+                    // 앵무새 애니메이션
                     cuckoo_script.start_cuckooAni();
                 }
                 else //정답
@@ -180,7 +195,9 @@ public class ClockPuzzle_Manager : MonoBehaviour
                     fan_script.cp_is_over();
 
                     // - 시계판 열리는 애니메이션
+                    SoundManger.instance.PlaySound(OpenClock);
                     reward_script.set_Ani_param();
+
 
                     // - 피터팬인형 활성화
                     reward.SetActive(true);

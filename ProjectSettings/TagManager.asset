@@ -21,14 +21,16 @@ TagManager:
   - Puzzle
   - Door
   - SubClock
-  - Note_EB
   - Door_EB
   - Action
   - Wendy
   - Snow
-  - Note_BP
   - ObjAni
   - Note_CP
+  - Note
+  - Note_BP
+  - Note_EB
+  - Carpet
   layers:
   - Default
   - TransparentFX

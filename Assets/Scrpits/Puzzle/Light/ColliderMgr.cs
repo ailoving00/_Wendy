@@ -127,9 +127,13 @@ public class ColliderMgr : MonoBehaviour
                 {
                     int Lampnumber = puzzleInfo.transform.GetComponent<LampLight>().LampNum;
 
+                    puzzleInfo.transform.GetComponent<AudioSource>().Play();
+
                     if (Lampnumber != 9)
                     {
                         SoundManger.instance.PlaySound(Lamp_Sound);
+
+
 
                         if (Lampnumber - 1 < 0)
                         {

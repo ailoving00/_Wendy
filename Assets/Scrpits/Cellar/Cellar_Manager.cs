@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class Cellar_Manager : MonoBehaviour
 {
+    [SerializeField]
+    private string MoveWallSound = "Cellar_moveWall";
+
+    [SerializeField]
+    private string RockDown = "Cellar_rockDown";
+
+    [SerializeField]
+    private string BreakonSound = "Cellar_breakon";
+
     public GameObject Wall_E;
     public GameObject Wall_S;
 
@@ -13,11 +22,6 @@ public class Cellar_Manager : MonoBehaviour
     public float moveStreet = 1f;
     public float addStreet = 1f;
 
-    void Pos()
-    {
-
-
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -33,35 +37,60 @@ public class Cellar_Manager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        // t += Time.deltaTime / 2.0f;
+    //void Update()
+    //{
+    //    // t += Time.deltaTime / 2.0f;
 
-        //  Wall_E.transform.position = new Vector3(Mathf.Lerp(0f, 2f, t), Wall_E.transform.position.y , Wall_E.transform.position.z);
+    //    //  Wall_E.transform.position = new Vector3(Mathf.Lerp(0f, 2f, t), Wall_E.transform.position.y , Wall_E.transform.position.z);
 
 
-    }
+    //}
 
     IEnumerator deley()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(50);
+
 
         Vector3 EWallstartPos = Wall_E.transform.localPosition;
         Vector3 SWallstartPos = Wall_S.transform.position;
 
+        SoundManger.instance.PlaySound(RockDown);
+        SoundManger.instance.PlaySound(MoveWallSound);
         StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet, 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
         StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet), 3f));   // 시작부터 카운트 다운이 진행된다. 
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(50);
 
-        StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet+ addStreet, 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
-        StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet+ addStreet), 3f));   // 시작부터 카운트 다운이 진행된다. 
+        SoundManger.instance.PlaySound(BreakonSound);
+        SoundManger.instance.PlaySound(MoveWallSound);
+        StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet + (addStreet), 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
+        StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet+(addStreet)), 3f));   // 시작부터 카운트 다운이 진행된다. 
 
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(50);
+        SoundManger.instance.PlaySound(MoveWallSound);
+        SoundManger.instance.PlaySound(BreakonSound);
+        StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3((moveStreet + (addStreet * 2)), 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
 
-        StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(moveStreet + (addStreet*2), 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
-        StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, (addStreet * 2)), 3f));   // 시작부터 카운트 다운이 진행된다. 
+        StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet + (addStreet *2)), 3f));   // 시작부터 카운트 다운이 진행된다. 
+
+
+        yield return new WaitForSeconds(50);
+        SoundManger.instance.PlaySound(MoveWallSound);
+        SoundManger.instance.PlaySound(BreakonSound);
+        StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3((moveStreet + (addStreet * 3)), 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
+        StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet + (addStreet*3)), 3f));   // 시작부터 카운트 다운이 진행된다. 
+
+
+        yield return new WaitForSeconds(50);
+        SoundManger.instance.PlaySound(MoveWallSound);
+        SoundManger.instance.PlaySound(BreakonSound);
+        StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3((moveStreet + (addStreet * 5)), 0, 0), 3f));   // 시작부터 카운트 다운이 진행된다. 
+        StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, moveStreet + (addStreet * 5)), 3f));   // 시작부터 카운트 다운이 진행된다. 
+
+
+
+
     }
 
     IEnumerator EWall_CountDown(Vector3 endPos, float duration)

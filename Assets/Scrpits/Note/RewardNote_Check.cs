@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RewardNote_Check : MonoBehaviour
 {
+    [SerializeField]
+    private string NoteCheckSound = "CheckNote";
+
     // - 상태
     bool popup = false; //애니메이션 팝업 
     bool state = false; //애니메이션 플레이 상태
@@ -22,8 +25,7 @@ public class RewardNote_Check : MonoBehaviour
     private float speedFactor = 0.0f; //보정값
     public float customFactor;
 
-    [SerializeField]
-    private string NoteSound;
+
 
     // - 애니메이션 -- 필요없어요.
     //private Animator animator;
@@ -73,10 +75,13 @@ public class RewardNote_Check : MonoBehaviour
     {
         SetNewSpeedFactor();
 
+      
+
         if (!popup) // 즉, pop 상태가 아닐때는 
         {
             Cursor.lockState = CursorLockMode.None; //커서 고정 해제
                                                     // book_colider.enabled = false;
+            SoundManger.instance.PlaySound(NoteCheckSound);
 
 
             while (true)
@@ -85,7 +90,7 @@ public class RewardNote_Check : MonoBehaviour
 
                 yield return new WaitForSeconds(0.01f);
 
-                SoundManger.instance.PlaySound(NoteSound);
+
 
                 // - 이동
                 float step_m = moveSpeed * speedFactor * Time.deltaTime;
@@ -127,7 +132,6 @@ public class RewardNote_Check : MonoBehaviour
 
                 yield return new WaitForSeconds(0.01f);
 
-                SoundManger.instance.PlaySound(NoteSound);
                 // - 이동
                 float step_m = moveSpeed_return * speedFactor * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, startTarget.position, step_m);

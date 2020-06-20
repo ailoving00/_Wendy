@@ -16,6 +16,8 @@ public class OntriggerLamp : MonoBehaviour
     public GameObject PlayerMove; //게임 오브젝트- 플레이어. 여기서 수정 
     public GameObject playerModeling;
 
+    public ParticleSystem enter_TinkerBell;
+
     Animator _animator = null;
 
     Renderer[] renderer;
@@ -152,6 +154,8 @@ IEnumerator FadeInTinkerBell(float FadeSet)
 
         }
         Pathmodel.gameObject.SetActive(false);
+        enter_TinkerBell.gameObject.SetActive(true);
+        enter_TinkerBell.Play();
         TinkerSound.SetActive(false);
     }
 

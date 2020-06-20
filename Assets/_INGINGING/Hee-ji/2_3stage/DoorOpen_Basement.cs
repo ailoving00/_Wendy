@@ -7,6 +7,9 @@ public class DoorOpen_Basement : MonoBehaviour
     //public Transform _startPos;
     //public Transform _endPos;
 
+    [SerializeField]
+    private string OpenCellarSound = "Cellar_openDoor";
+
     Animator _animator;
 
 
@@ -22,6 +25,7 @@ public class DoorOpen_Basement : MonoBehaviour
 
     public void StartDoorAni()
     {
+        SoundManger.instance.PlaySound(OpenCellarSound);
         _animator.SetBool("IsOpening", true);
     }
 }

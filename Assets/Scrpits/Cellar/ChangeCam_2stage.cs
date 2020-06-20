@@ -9,6 +9,9 @@ public class ChangeCam_2stage : MonoBehaviour
 
     static public ChangeCam_2stage instance;
 
+    [SerializeField]
+    private string WendyLaughSound = "Cellar_laughWendy";
+
     private Camera mainCamera;
     private Camera CellarCamera;
     public GameObject FlashPack;
@@ -51,6 +54,11 @@ public class ChangeCam_2stage : MonoBehaviour
     //public Camera uiCamera;
 
 
+    public GameObject playerModeling;
+    Animator _animator = null;
+
+    bool LaughState = false;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -66,6 +74,7 @@ public class ChangeCam_2stage : MonoBehaviour
         Fade_script = FindObjectOfType<FadeManager>();
         actionController = mainCamera.GetComponent<ActionController_02_VER2>();
 
+        _animator = playerModeling.GetComponent<Animator>();
 
 
 
@@ -189,8 +198,6 @@ public class ChangeCam_2stage : MonoBehaviour
 
 
 
-    // 카메라 확대 / 줌 - 인 --- 이 기능은 나중에 질문하고 묻는걸로.
-
 
     // 카메라 변경 기능
 
@@ -200,6 +207,7 @@ public class ChangeCam_2stage : MonoBehaviour
         time = 0f;
 
         //플레이어 이동 스크립트 끄기
+        _animator.SetBool("IsWalking", false);
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = false;
         mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
         OutLineScript.SetActive(false);
@@ -254,6 +262,11 @@ public class ChangeCam_2stage : MonoBehaviour
         Fade_script.FadeIn();
         yield return new WaitForSeconds(1f);
 
+        LaughState = true;
+        DelayWendyLaugh();
+       // SoundManger.instance.PlayLoopSound(WendyLaughSound);
+
+
         mainCamera.transform.position = SavePoint;
         mainCamera.transform.eulerAngles = SaveRotationPoint;
         mainCamera.fieldOfView = FieldSave;
@@ -263,6 +276,32 @@ public class ChangeCam_2stage : MonoBehaviour
         FadeIng = false;
     }
 
+    void DelayWendyLaugh()
+    {
+
+        StartCoroutine(WendySound());
+    }
+
+
+    IEnumerator WendySound()
+    {
+        if (LaughState)
+        {
+            while (true)
+            {
+                SoundManger.instance.PlaySound(WendyLaughSound);
+                yield return new WaitForSeconds(5f);
+
+                if(LaughState == false)
+                {
+                    break;
+                }
+            }
+        }
+
+
+    }        
+
     IEnumerator CameraFadeIn()
     {
         FadeIng = true;
@@ -270,6 +309,10 @@ public class ChangeCam_2stage : MonoBehaviour
         // 페이드 아웃 실행
         Fade_script.FadeOut();
         yield return new WaitForSeconds(2f);
+
+        LaughState = false; 
+       // SoundManger.instance.StopEffectSound(WendyLaughSound);
+
 
         // 메인 카메라키고 지하실 카메라 끔 , 메인 카메라 켬
         mainCamera.enabled = true;

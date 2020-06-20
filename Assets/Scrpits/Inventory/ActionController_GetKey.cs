@@ -275,6 +275,9 @@ public class ActionController_GetKey : MonoBehaviour
                     {
                         if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                         {
+
+                            hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);
+
                             // - 아이템 습득
                             hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
 

@@ -83,6 +83,9 @@ public class ActionController_TestNote : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Note_CP")) // 1번
                 {
+                    hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);
+
+
                     popupNote = true;
 
                     clockNote_script.SetActive_Ani(true);

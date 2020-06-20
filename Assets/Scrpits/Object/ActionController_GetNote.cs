@@ -15,9 +15,19 @@ public class ActionController_GetNote : MonoBehaviour
 
     private RaycastHit hitaction;
 
+    [SerializeField]
+    private Image actionImage;
+
     Chestaction cheataction;
+    FlodNote clockNote_script;
+
     NoteManger notemager;
     //RewardNote_Check noteCheck_script;
+
+    private Camera mainCam;
+    private DrawOutline_HJ OutlineController;
+    private int pre_ol_index = 0; //이전 아웃라인 인덱스
+
 
     private bool pickupActivated;
 
@@ -31,6 +41,7 @@ public class ActionController_GetNote : MonoBehaviour
     private bool isFirstPage = true;
     private bool isLastPage = false;
     private bool getKey = false;
+    bool popupNote = false;
 
     FirstPersonCamera fpCam_Script;
     Player_HJ player_script;
@@ -46,7 +57,10 @@ public class ActionController_GetNote : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCam = GetComponent<Camera>();
+        OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
+        clockNote_script = GameObject.FindObjectOfType<FlodNote>();
         //noteCheck_script = GameObject.FindObjectOfType<RewardNote_Check>();
         fpCam_Script = Camera.main.GetComponent<FirstPersonCamera>();
         player_script = GameObject.FindObjectOfType<Player_HJ>();
@@ -59,7 +73,12 @@ public class ActionController_GetNote : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Checkaction();
+        if (!popupNote)
+        {
+            Checkaction();
+        }
+
+       // Checkaction();
         TryAction();
     }
 
@@ -86,7 +105,7 @@ public class ActionController_GetNote : MonoBehaviour
                 moveChest[Chestnumber].transform.parent.GetComponent<Chestaction>().Start_action(1);
             }
             
-            if (hitaction.transform.tag == "Note_EB") //compare @
+            if (hitaction.transform.tag == "Note") //compare @
             {
                 hitaction.transform.GetComponent<PageNote>().CheckAddcount(1);
 
@@ -105,7 +124,10 @@ public class ActionController_GetNote : MonoBehaviour
 
 
             }
-            if (hitaction.transform.tag == "Door_EB") //compare @
+
+
+
+            if (hitaction.transform.CompareTag("Door")) //compare @
             {
                 notemager.OpenCondition();
             }
@@ -165,7 +187,7 @@ public class ActionController_GetNote : MonoBehaviour
                 ActionAppear();
             }
 
-            if (hitaction.transform.CompareTag("Note_EB")) //compare @
+            if (hitaction.transform.CompareTag("Note")) //compare @
             {
                 NoteAppear();
             }
@@ -174,6 +196,8 @@ public class ActionController_GetNote : MonoBehaviour
             {
                 DoorAppear();
             }
+
+
         }
         else
             ActionDisappear();

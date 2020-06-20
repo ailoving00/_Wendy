@@ -5,7 +5,13 @@ using UnityEngine;
 public class InteractionAnimation : MonoBehaviour
 {
     [SerializeField]
-    private string ShackTreeSound;
+    private string OpenBoxSound = "openBox";
+
+    [SerializeField]
+    private string ShakeBoxSound = "ShakeBox";
+
+    [SerializeField]
+    private string ShackTreeSound = "ShakeTree";
 
     public int _type = 0; //1: 박스, 2: 인삼, 3: 일반나무
 
@@ -44,14 +50,19 @@ public class InteractionAnimation : MonoBehaviour
             case 1:
                 EventEndAnimationName = EventEndAnimationName1;
                 EventTriggerName = EventTriggerName1;
+                //SoundManger.instance.PlaySound(OpenBoxSound);
+
                 break;
             case 2:
                 EventEndAnimationName = EventEndAnimationName2;
                 EventTriggerName = EventTriggerName2;
+               // SoundManger.instance.PlaySound(ShackTreeSound);
+
                 break;
             case 3:
                 EventEndAnimationName = EventEndAnimationName3;
                 EventTriggerName = EventTriggerName3;
+              //  SoundManger.instance.PlaySound(ShackTreeSound);
                 break;
             default:
                 break;
@@ -75,14 +86,38 @@ public class InteractionAnimation : MonoBehaviour
         coroutine = StartCoroutine(check_AniState());
     }
 
+    IEnumerator BoxsoundDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SoundManger.instance.PlaySound(OpenBoxSound);
+        yield return new WaitForSeconds(4f);
+        SoundManger.instance.PlaySound(ShakeBoxSound);
+
+    }
     IEnumerator check_AniState()
     {
         isPlaying = true;
 
         _player_animator.SetTrigger(EventTriggerName);
         _obj_animator.SetBool("IsPlaying", true);
-        SoundManger.instance.PlaySound(ShackTreeSound);
 
+        switch (_type)
+        {
+            case 1:
+                StartCoroutine(BoxsoundDelay());
+
+                break;
+            case 2:
+                 SoundManger.instance.PlaySound(ShackTreeSound);
+
+                break;
+            case 3:
+                  SoundManger.instance.PlaySound(ShackTreeSound);
+                break;
+            default:
+                break;
+        }
+      //  SoundManger.instance.PlaySound(ShackTreeSound);
         while (!_player_animator.GetCurrentAnimatorStateInfo(0)
                 .IsName(EventEndAnimationName))
         {

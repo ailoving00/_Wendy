@@ -4,28 +4,38 @@ using UnityEngine;
 
 public class Chestaction : MonoBehaviour
 {
-
-
-    private Quaternion Right = Quaternion.identity;
-
-
+    //private Quaternion Right = Quaternion.identity;
 
     public int Chest_number;
-    public GameObject MoveChest;
-    public float angle;
+    //public GameObject MoveChest;
 
+    // - 서랍 타입
+    public int type = 0;
+
+    //여닫이문
+    public float angle;
     Quaternion targetSet;
     Quaternion bRotation;
+    //미닫이문
+    Vector3 start_t;
+    public Transform end_t;
+    public GameObject target;
 
-
+    // - 상태
     bool CheckState = false;
     bool moveOnState = false;
     bool moveOffState = false;
 
     float time = 0f;
-    float F_time =1f;
+    float F_time = 0.5f;
     float SetTimeState = 0f;
     float checkangle;
+
+    // 해제해야하는것
+    Collider _collider;
+
+    // - 코루틴
+    private Coroutine coroutine;
 
     void Start()
     {
@@ -33,41 +43,43 @@ public class Chestaction : MonoBehaviour
         bRotation = Quaternion.Euler(new Vector3(0, angle, 0));
         SetTimeState = time;
 
-
-
+        _collider = GetComponentInChildren<Collider>();
     }
+
     void Update()
     {
+        //if (moveOnState)
+        //{
+        //    time += Time.deltaTime / F_time;
+        //    this.transform.rotation = Quaternion.Slerp(targetSet, bRotation, time);
+        //    checkangle = Quaternion.Angle(targetSet, MoveChest.transform.rotation);
 
-        if (moveOnState)
-        {
-            time += Time.deltaTime / F_time;
-            this.transform.rotation = Quaternion.Slerp(targetSet, bRotation, time);
-            checkangle = Quaternion.Angle(targetSet, MoveChest.transform.rotation);
+        //    if (checkangle >= Mathf.Abs(angle))
+        //    {
+        //        //moveOnState = false;
+        //        //time = 0f;
 
-            if (checkangle >= Mathf.Abs(angle))
-            {
-                CheckState = true;
-                moveOnState = false;
-                time = 0f;
-                return;
-            }
-        }
+        //        // - 해제
+        //        _collider.enabled = false;
+        //        this.enabled = false;
 
-        if(moveOffState)
-        {
-            time += Time.deltaTime / F_time;
-            this.transform.rotation = Quaternion.Slerp(bRotation, targetSet, time);
-            checkangle = Quaternion.Angle(targetSet, MoveChest.transform.rotation);
+        //        return;
+        //    }
+        //}
+        //if(moveOffState)
+        //{
+        //    time += Time.deltaTime / F_time;
+        //    this.transform.rotation = Quaternion.Slerp(bRotation, targetSet, time);
+        //    checkangle = Quaternion.Angle(targetSet, MoveChest.transform.rotation);
 
-            if (checkangle <= 0)
-            {
-                CheckState = false;
-                moveOffState = false;
-                time = 0f;
-                return;
-            }
-        }
+        //    if (checkangle <= 0)
+        //    {
+        //        CheckState = false;
+        //        moveOffState = false;
+        //        time = 0f;
+        //        return;
+        //    }
+        //}
 
 
         /*
@@ -85,22 +97,83 @@ public class Chestaction : MonoBehaviour
     {
         if (type == 1)
         {
-
-            if (!CheckState)
+            if (!moveOnState)
             {
-                moveOnState = true;
+                //회전
+                coroutine = StartCoroutine(RotateDrawer());
+
                 return;
             }
-
             else
             {
-                moveOffState = true;
                 return;
+            }
+        }
+        else if (type == 2)
+        {
+            if (!moveOnState)
+            {
+                //이동
+                start_t = target.transform.position;
+                coroutine = StartCoroutine(MoveDrawer());
 
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
+
+    IEnumerator MoveDrawer()
+    {
+        moveOnState = true;
+
+        while (true)
+        {
+            // - 이동
+            time += Time.deltaTime / (F_time*2);
+            //float step_m = moveSpeed * speedFactor * Time.deltaTime;
+            target.transform.position = Vector3.MoveTowards(start_t, end_t.position, time);
+
+            //if (checkangle >= Mathf.Abs(angle))
+            if (Vector3.Distance(target.transform.position, end_t.position) < 0.001f)
+            {
+                // - 해제
+                _collider.enabled = false;
+                this.enabled = false;
+
+                break;
             }
 
+            yield return new WaitForSeconds(0.01f);
         }
+        //moveOnState = false;
+    }
 
+    IEnumerator RotateDrawer()
+    {
+        moveOnState = true;
+
+        while (true)
+        {
+            time += Time.deltaTime / F_time;
+            this.transform.rotation = Quaternion.Slerp(targetSet, bRotation, time);
+            checkangle = Quaternion.Angle(targetSet, transform.rotation);
+
+            if (checkangle >= Mathf.Abs(angle))
+            {
+                // - 해제
+                _collider.enabled = false;
+                this.enabled = false;
+
+                break;
+            }
+
+            yield return new WaitForSeconds(0.01f);
+        }
+        //moveOnState = false;
     }
 
 

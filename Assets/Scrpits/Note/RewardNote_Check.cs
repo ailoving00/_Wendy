@@ -75,22 +75,17 @@ public class RewardNote_Check : MonoBehaviour
     {
         SetNewSpeedFactor();
 
-      
-
         if (!popup) // 즉, pop 상태가 아닐때는 
         {
             Cursor.lockState = CursorLockMode.None; //커서 고정 해제
                                                     // book_colider.enabled = false;
             SoundManger.instance.PlaySound(NoteCheckSound);
 
-
             while (true)
             {
                // _pointlight.SetActive(true);
 
                 yield return new WaitForSeconds(0.01f);
-
-
 
                 // - 이동
                 float step_m = moveSpeed * speedFactor * Time.deltaTime;
@@ -103,7 +98,7 @@ public class RewardNote_Check : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, endTarget.rotation, step_r);
 
 
-                if (Vector3.Distance(transform.position, endTarget.position) < 0.1f)
+                if (Vector3.Distance(transform.position, endTarget.position) < 0.01f)
                 {
                     float angle = Quaternion.Angle(transform.rotation, endTarget.rotation);
                     if (angle >= 179f)
@@ -124,12 +119,8 @@ public class RewardNote_Check : MonoBehaviour
 
         else // start 지점으로 갈떄
         {
-
-
             while (true)
             {
-
-
                 yield return new WaitForSeconds(0.01f);
 
                 // - 이동
@@ -140,7 +131,7 @@ public class RewardNote_Check : MonoBehaviour
                 float step_r = rotSpeed_return * Time.deltaTime;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startTarget.rotation, step_r);
 
-                if (Vector3.Distance(transform.position, startTarget.position) < 0.1f)
+                if (Vector3.Distance(transform.position, startTarget.position) < 0.01f)
                 {
                     if (Vector3.Angle(transform.forward, startTarget.forward) < 1f)
                     {

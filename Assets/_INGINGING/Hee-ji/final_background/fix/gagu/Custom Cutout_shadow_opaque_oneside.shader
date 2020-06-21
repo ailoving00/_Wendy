@@ -10,7 +10,7 @@
 
 		SubShader{
 		//뒷면
-		Tags{ "Queue" = "AlphaTest" "Ignore Projector" = "True" "RenderType" = "TransparentCutout"} //"LightMode" = "ForwardBase"
+		Tags{ "Queue" = "AlphaTest" "Ignore Projector" = "True" "RenderType" = "Transparent" } //Cutout"} //"LightMode" = "ForwardBase"
 		LOD 200
 
 		cull Back

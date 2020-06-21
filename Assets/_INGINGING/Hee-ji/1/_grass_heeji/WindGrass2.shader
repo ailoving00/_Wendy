@@ -17,7 +17,8 @@
 	}
 		SubShader
 	{
-		Tags{ "RenderType" = "Opaque" }
+		//Tags{ "RenderType" = "Opaque" }
+		Tags{ "Queue" = "AlphaTest" "IgnoreProjector" = "True" "RenderType" = "TransparentCutout"}
 		LOD 100
 		cull off
 		Lighting OFF
@@ -118,5 +119,7 @@
 	}
 		ENDCG
 	}
+			//FallBack "Diffuse"
+
 	}
 }

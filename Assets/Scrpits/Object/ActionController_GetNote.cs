@@ -99,11 +99,11 @@ public class ActionController_GetNote : MonoBehaviour
         if (hitaction.transform != null)
         {
             //추후에 따로 분리할 예정입니다.
-            if (hitaction.transform.tag == "Action") //compare @
-            {
-                int Chestnumber = hitaction.transform.parent.GetComponent<Chestaction>().Chest_number;
-                moveChest[Chestnumber].transform.parent.GetComponent<Chestaction>().Start_action(1);
-            }
+            //if (hitaction.transform.tag == "Action") //compare @
+            //{
+            //    int Chestnumber = hitaction.transform.parent.GetComponent<Chestaction>().Chest_number;
+            //    moveChest[Chestnumber].transform.parent.GetComponent<Chestaction>().Start_action(1);
+            //}
             
             if (hitaction.transform.tag == "Note") //compare @
             {
@@ -205,8 +205,8 @@ public class ActionController_GetNote : MonoBehaviour
     private void DoorAppear()
     {
         pickupActivated = true;
-        actiontext.gameObject.SetActive(true);
-        actiontext.text = " 밖으로 나간다";
+        //actiontext.gameObject.SetActive(true);
+        //actiontext.text = " 밖으로 나간다";
     }
 
     private void NoteAppear()
@@ -221,13 +221,13 @@ public class ActionController_GetNote : MonoBehaviour
     private void ActionAppear()
     {
         pickupActivated = true;
-        actiontext.gameObject.SetActive(true);
-        actiontext.text =  "서랍 여닫기 [Click]";
+        //actiontext.gameObject.SetActive(true);
+        //actiontext.text =  "서랍 여닫기 [Click]";
     }
     public void ActionDisappear()
     {
         pickupActivated = false;
-       actiontext.gameObject.SetActive(false);
+       //actiontext.gameObject.SetActive(false);
     }
 
     //private void OnTriggerEnter(Collider other)

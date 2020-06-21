@@ -28,6 +28,11 @@ public class FramePuzzle_Enter : MonoBehaviour
 
     ActionController_02_VER2 actionCtrler2_script;
 
+    // - 장애물, 벽
+    ObstacleReader obstacleReader_script;
+    bool coverCheck = false;
+
+
     void Start()
     {
         camera = GetComponent<Camera>(); //메인카메라
@@ -41,6 +46,9 @@ public class FramePuzzle_Enter : MonoBehaviour
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
         actionCtrler2_script = GameObject.FindObjectOfType<ActionController_02_VER2>();
+
+        //장애물,벽
+        obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
     }
 
     void Update()
@@ -48,6 +56,12 @@ public class FramePuzzle_Enter : MonoBehaviour
         if (puzzleEnd)
         {
             this.enabled = false;
+            return;
+        }
+
+        if (coverCheck)
+        {
+            coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
             return;
         }
 
@@ -61,13 +75,18 @@ public class FramePuzzle_Enter : MonoBehaviour
     private void LookAtFrame()
     {
         Mouse_ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(Mouse_ray, out hitInfo, range, CamObstacle_layerMask))
+        if (Physics.Raycast(Mouse_ray, out hitInfo, range, FramelayerMask))
         {
             if (OutlineController.get_outline_okay())
                 return;
 
             if (hitInfo.transform.CompareTag("Frame"))
             {
+                // - 장애물 검사하기
+                coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
+                if (coverCheck)
+                    return;
+
                 // - 클릭버튼 활성화
                 actionCaption.SetActive(true);
 
@@ -79,6 +98,20 @@ public class FramePuzzle_Enter : MonoBehaviour
                     OutlineController.set_enabled(setoutlin_script._index, true);
                     pre_ol_index = setoutlin_script._index;
                     outline_active = true;
+                }
+            }
+            else
+            {
+                if (pre_ol_index != -1)
+                {
+                    // - 외곽선 해제
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    pre_ol_index = -1;
+                    OutlineController.set_check(false);
+                    outline_active = false;
+
+                    // - 클릭버튼 해제
+                    actionCaption.SetActive(false);
                 }
             }
         }
@@ -94,6 +127,9 @@ public class FramePuzzle_Enter : MonoBehaviour
 
                 // - 클릭버튼 해제
                 actionCaption.SetActive(false);
+
+                // - 장애물 검사하기
+                coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
             }
         }
     }

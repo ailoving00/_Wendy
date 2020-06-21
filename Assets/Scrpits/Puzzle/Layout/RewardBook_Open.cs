@@ -136,7 +136,7 @@ public class RewardBook_Open : MonoBehaviour
                 float step_r = rotSpeed * Time.deltaTime;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, endTarget.rotation, step_r);
 
-                if (Vector3.Distance(transform.position, endTarget.position) < 0.1f)
+                if (Vector3.Distance(transform.position, endTarget.position) < 0.01f)
                 {
                     //float angle = Quaternion.Angle(transform.rotation, endTarget.rotation);
                     //if (angle >= 179f)
@@ -168,7 +168,7 @@ public class RewardBook_Open : MonoBehaviour
                 float step_r = rotSpeed_return * Time.deltaTime;
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startTarget.rotation, step_r);
 
-                if (Vector3.Distance(transform.position, startTarget.position) < 0.1f)
+                if (Vector3.Distance(transform.position, startTarget.position) < 0.01f)
                 {
                     if (Vector3.Angle(transform.forward, startTarget.forward) < 1f)
                     {

@@ -31,6 +31,8 @@ TagManager:
   - Note_BP
   - Note_EB
   - Carpet
+  - Obstacle
+  - Drawer
   layers:
   - Default
   - TransparentFX
@@ -61,8 +63,8 @@ TagManager:
   - Snow
   - Foot
   - NotePage
-  - 
-  - 
+  - Toy
+  - Drawer
   - 
   m_SortingLayers:
   - name: Default

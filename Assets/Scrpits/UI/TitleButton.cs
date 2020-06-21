@@ -23,6 +23,10 @@ public class TitleButton : MonoBehaviour
     {
         // 변경 필요함
         Screen.SetResolution(1920, 1080, false);
+
+        // 
+        Cursor.lockState = CursorLockMode.None; //마우스 해제
+        //Cursor.lockState = CursorLockMode.Locked; //중앙 고정
     }
 
     void Update()

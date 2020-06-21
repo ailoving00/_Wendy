@@ -10,10 +10,10 @@
 
 		SubShader{
 		//뒷면
-		Tags{ "Queue" = "AlphaTest" "Ignore Projector" = "True" "RenderType" = "TransparentCutout"} //"LightMode" = "ForwardBase"
+		Tags{ "Queue" = "AlphaTest" "Ignore Projector" = "True" "RenderType" = "TransparentCutout" } //"Transparent"//Opaque"} //TransparentCutout"} //"LightMode" = "ForwardBase"
 		LOD 200
 
-		cull Back
+		cull Back //off
 
 		CGPROGRAM
 
@@ -103,5 +103,5 @@
 
 
 	}
-		FallBack "Diffuse"
+		FallBack "Diffuse" //??이거 맞나
 }

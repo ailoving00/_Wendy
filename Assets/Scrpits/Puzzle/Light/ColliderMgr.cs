@@ -48,6 +48,11 @@ public class ColliderMgr : MonoBehaviour
     // - 클릭버튼
     public GameObject actionCaption;
 
+    // - 장애물, 벽
+    ObstacleReader obstacleReader_script;
+    bool coverCheck = false; //막고잇으면 TRUE
+    int obstacle_layer;
+
     void Start()
     {
         animator = ResetLeber.GetComponent<Animator>();
@@ -72,11 +77,18 @@ public class ColliderMgr : MonoBehaviour
 
         //외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
+
+        //장애물,벽
+        obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
+        obstacle_layer = (1 << LayerMask.NameToLayer("Light")) + (1 << LayerMask.NameToLayer("Obstacle"));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (CheckObstacle())
+            return;
+
         CheckLamp();
         TryAction();
         End_LampP();
@@ -274,7 +286,6 @@ public class ColliderMgr : MonoBehaviour
 
                     if (setoutlin_script != null) // 두꺼비집이 아닐 경우
                     {
-                        Debug.Log("dd");
                         OutlineController.set_check(true);
                         OutlineController.set_enabled(setoutlin_script._index, true);
                         pre_ol_index = setoutlin_script._index;
@@ -332,5 +343,31 @@ public class ColliderMgr : MonoBehaviour
 
         //info
         //actionText.gameObject.SetActive(false);
+    }
+
+    private bool CheckObstacle()
+    {
+        // - 장애물 검사하기
+        coverCheck = obstacleReader_script.LookAtFrame(obstacle_layer);
+        if (coverCheck)
+        {
+            pickupActivated = false;
+
+            if (pre_ol_index != -1)
+            {
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -6,7 +6,7 @@ public class RewardBook_Open : MonoBehaviour
 {
     // - 상태
     bool popup = false;
-    bool state = false; //애니메이션 플레이 상태
+    bool state = false; //애니메이션 플레이(코루틴 실행) 상태
     int step = 0;
 
     bool isOpen = false;
@@ -37,6 +37,13 @@ public class RewardBook_Open : MonoBehaviour
 
     private ActionController_GetKey getKey_script;
 
+    public GameObject _outlineObj;
+    public GameObject _aniFbx;
+
+    private Coroutine _coroutine;
+    bool cor_state = false; //이동 코루틴 실행상태일떄
+
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -55,7 +62,10 @@ public class RewardBook_Open : MonoBehaviour
         //if (popup)
         //    return;
 
-        StartCoroutine(MoveBook());
+        if (cor_state)
+            return;
+
+        _coroutine = StartCoroutine(MoveBook());
     }
 
     public bool play_BookAni(int s)
@@ -117,10 +127,15 @@ public class RewardBook_Open : MonoBehaviour
 
     IEnumerator MoveBook()
     {
+        cor_state = true;
+
         SetNewSpeedFactor();
 
         if (!popup) // end 지점으로 갈때
         {
+            _outlineObj.SetActive(false);
+            _aniFbx.SetActive(true);
+
             Cursor.lockState = CursorLockMode.None; //커서 고정 해제
             book_colider.enabled = false;
 
@@ -177,6 +192,9 @@ public class RewardBook_Open : MonoBehaviour
                 }
             }
 
+            _outlineObj.SetActive(true);
+            _aniFbx.SetActive(false);
+
             book_colider.enabled = true;
 
             popup = false;
@@ -185,6 +203,8 @@ public class RewardBook_Open : MonoBehaviour
 
             getKey_script.reset_BookState();
         }
+
+        cor_state = false;
     }
 
     IEnumerator bookOpenAni()

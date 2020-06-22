@@ -59,11 +59,8 @@ public class FramePuzzle_Enter : MonoBehaviour
             return;
         }
 
-        if (coverCheck)
-        {
-            coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
+        if (CheckObstacle())
             return;
-        }
 
         LookAtFrame();
         TryAction();
@@ -82,10 +79,10 @@ public class FramePuzzle_Enter : MonoBehaviour
 
             if (hitInfo.transform.CompareTag("Frame"))
             {
-                // - 장애물 검사하기
-                coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
-                if (coverCheck)
-                    return;
+                //// - 장애물 검사하기
+                //coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
+                //if (coverCheck)
+                //    return;
 
                 // - 클릭버튼 활성화
                 actionCaption.SetActive(true);
@@ -129,7 +126,7 @@ public class FramePuzzle_Enter : MonoBehaviour
                 actionCaption.SetActive(false);
 
                 // - 장애물 검사하기
-                coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
+                //coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
             }
         }
     }
@@ -186,5 +183,35 @@ public class FramePuzzle_Enter : MonoBehaviour
         actionCtrler2_script.enabled = true;
 
         //this.enabled = false; //-> 업데이트함수에 있음
+    }
+
+    private bool CheckObstacle()
+    {
+        //if (coverCheck)
+        //{
+        //    coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
+        //    return true;
+        //}
+
+        // - 장애물 검사하기
+        coverCheck = obstacleReader_script.LookAtFrame(CamObstacle_layerMask);
+        if (coverCheck)
+        {           
+            if (pre_ol_index != -1)
+            {
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);                
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

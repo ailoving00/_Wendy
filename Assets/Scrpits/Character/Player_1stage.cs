@@ -133,14 +133,14 @@ public class Player_1stage : MonoBehaviour
             //ver1
             dir = h * Vector3.left + v * Vector3.back; // 회전방향
 
-            //if (v != 0 & h != 0)
-            //{
-            //    movementSpeed = 1.25f;
-            //}
-            //else
-            //{
-            //    movementSpeed = 2.5f;
-            //}
+            if (v != 0 & h != 0)
+            {
+                movementSpeed = 0.75f;
+            }
+            else
+            {
+                movementSpeed = 1.5f;
+            }
 
             transform.position = transform.position + dir * movementSpeed * Time.deltaTime;
 

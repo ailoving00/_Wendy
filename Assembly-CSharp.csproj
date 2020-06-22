@@ -86,6 +86,7 @@
      <Compile Include="Assets\_INGINGING\Hee-ji\2_2stge\VolumeTrigger.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_3stage\DoorOpen_Basement.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_title\GameManager.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\2_title\OptionManager.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\NavMesh_runtime\LocalNavMeshBuilder.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\NavMesh_runtime\NavMeshSourceTag.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\TestRay.cs" />

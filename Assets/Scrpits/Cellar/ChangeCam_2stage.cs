@@ -59,6 +59,9 @@ public class ChangeCam_2stage : MonoBehaviour
 
     bool LaughState = false;
 
+    // - 지하실 문 외곽선
+    CellarDoorCollider cellar_script;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -76,7 +79,8 @@ public class ChangeCam_2stage : MonoBehaviour
 
         _animator = playerModeling.GetComponent<Animator>();
 
-
+        // - 지하실문 스크립트, 문 외곽선을 위해
+        cellar_script = GameObject.FindObjectOfType<CellarDoorCollider>();
 
     }
 
@@ -325,6 +329,7 @@ public class ChangeCam_2stage : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+
         // 플레이어 움직이는 스크립트 켬
         OutLineScript.SetActive(true);
         Mid_Canva.SetActive(true);
@@ -335,6 +340,9 @@ public class ChangeCam_2stage : MonoBehaviour
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = true;
         mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = true;
         See_Wendy = false;
+
+        // - 문외곽선 다시 생성 시키기
+        cellar_script.set_state(true);
 
         FadeIng = false;
 

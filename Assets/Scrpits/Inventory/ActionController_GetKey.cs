@@ -60,6 +60,11 @@ public class ActionController_GetKey : MonoBehaviour
     private int pre_ol_index = -1; //이전 아웃라인 인덱스
     private bool outline_active = false;
 
+    // - 장애물, 벽
+    ObstacleReader obstacleReader_script;
+    bool coverCheck = false; //막고잇으면 TRUE
+    int _obstacle_layer;
+
     void Start()
     {
         endingBook_script = GameObject.FindObjectOfType<RewardBook_Open>();
@@ -81,6 +86,10 @@ public class ActionController_GetKey : MonoBehaviour
 
         // 외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
+
+        //장애물,벽
+        obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
+        _obstacle_layer = (1 << LayerMask.NameToLayer("Item")) + (1 << LayerMask.NameToLayer("Obstacle"));
     }
 
     void Update()
@@ -396,4 +405,27 @@ public class ActionController_GetKey : MonoBehaviour
         //actionText.gameObject.SetActive(false);
     }
 
+    private bool CheckObstacle()
+    {
+        // - 장애물 검사하기
+        coverCheck = obstacleReader_script.LookAtFrame(_obstacle_layer);
+        if (coverCheck)
+        {
+            if (pre_ol_index != -1)
+            {
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }

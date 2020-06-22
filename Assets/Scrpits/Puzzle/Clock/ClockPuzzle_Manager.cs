@@ -13,8 +13,6 @@ public class ClockPuzzle_Manager : MonoBehaviour
     [SerializeField]
     private string OpenClock = "CP_openClock";
 
-
-
     // - 시계퍼즐 풀 수 있는지 상태 확인하기 (범위에 들어왔는가)
     public bool active = false;
     private bool end = false; //클리어상태
@@ -185,6 +183,10 @@ public class ClockPuzzle_Manager : MonoBehaviour
                         OutlineController.set_enabled(pre_ol_index, false);
                         pre_ol_index = -1;
                         OutlineController.set_check(false);
+                        outline_active = false;
+
+                        // - 클릭버튼 해제
+                        actionCaption.SetActive(false);
                     }
                     // 앵무새 애니메이션
                     cuckoo_script.start_cuckooAni();
@@ -208,6 +210,10 @@ public class ClockPuzzle_Manager : MonoBehaviour
                         OutlineController.set_enabled(pre_ol_index, false);
                         pre_ol_index = -1;
                         OutlineController.set_check(false);
+                        outline_active = false;
+
+                        // - 클릭버튼 해제
+                        actionCaption.SetActive(false);
                     }
 
                     // - 해제, 코루틴으로 몇초뒤 스크립트가 enable = false 되는것은 @ -> ?
@@ -242,5 +248,20 @@ public class ClockPuzzle_Manager : MonoBehaviour
     public void set_popup_anmu(bool b)
     {
         popup_anmu = b;
+    }
+
+    public void release_collider()
+    {
+        //시계퍼즐 영역을 벗어나면, 
+        if (pre_ol_index != -1)
+        {
+            OutlineController.set_enabled(pre_ol_index, false);
+            pre_ol_index = -1;
+            OutlineController.set_check(false);
+            outline_active = false;
+
+            // - 클릭버튼 해제
+            actionCaption.SetActive(false);
+        }
     }
 }

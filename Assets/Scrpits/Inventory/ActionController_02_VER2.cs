@@ -34,6 +34,7 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     // - 아이템 사용하기
     public LayerMask layerMask_dlsplay;
+    int location_layerMask;
     public SelectSlot selectSlot_script;
     private bool PickUp_state = false;
 
@@ -69,13 +70,15 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     // - 장애물, 벽
     ObstacleReader obstacleReader_script;
-    bool coverCheck = false; //막고잇으면 TRUE
+    bool coverCheck = false; //막고잇으면 TRUE, 아이템
+    bool coverCheck2 = false; //막고잇으면 TRUE, 배치퍼즐 장식장 location 확인
 
     void Start()
     {
         item_layerMask = (1 << LayerMask.NameToLayer("Item")) + (1 << LayerMask.NameToLayer("Doll"));
 
         //배치퍼즐
+        location_layerMask = (1 << LayerMask.NameToLayer("Display"));
         displayManager_script = GameObject.FindObjectOfType<DisplayManager_2stage>();
         displayManager_script2 = GameObject.FindObjectOfType<DisplayManager_3stage>();
 
@@ -103,11 +106,8 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     void Update()
     {
-        if (coverCheck)
-        {
-            coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+        if (CheckObstacle())
             return;
-        }
 
         CheckItem();
         Check_Location();
@@ -194,13 +194,29 @@ public class ActionController_02_VER2 : MonoBehaviour
 
             if (hitInfo.transform.tag == "Item") //compare @
             {
-                // - 장애물 검사하기
-                coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
-                if (coverCheck)
-                {
-                    pickupActivated = false;
-                    return;
-                }
+                //// - 장애물 검사하기
+                //coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+                //if (coverCheck)
+                //{
+                //    pickupActivated = false;
+
+                //    if (pre_ol_index != -1)
+                //    {
+                //        // - 외곽선 해제
+                //        OutlineController.set_enabled(pre_ol_index, false);
+                //        pre_ol_index = -1;
+                //        OutlineController.set_check(false);
+                //        outline_active = false;
+
+                //        // - 클릭버튼 해제
+                //        actionCaption.SetActive(false);
+
+                //        // - 장애물 검사하기
+                //        coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+                //    }
+
+                //    return;
+                //}
 
                 // - 인포
                 ItemInfoAppear();
@@ -252,8 +268,8 @@ public class ActionController_02_VER2 : MonoBehaviour
                     // - 클릭버튼 해제
                     actionCaption.SetActive(false);
 
-                    // - 장애물 검사하기
-                    coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+                    //// - 장애물 검사하기
+                    //coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
                 }
             }
         }
@@ -272,8 +288,8 @@ public class ActionController_02_VER2 : MonoBehaviour
                 // - 클릭버튼 해제
                 actionCaption.SetActive(false);
 
-                // - 장애물 검사하기
-                coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+                //// - 장애물 검사하기
+                //coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
             }
         }
     }
@@ -379,7 +395,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 actionController_3stage_script.enabled = true;
 
                                 //손전등 없어지기
-                                FlashlightItem.SetActive(false);
+                                //FlashlightItem.SetActive(false);
 
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();
@@ -413,12 +429,38 @@ public class ActionController_02_VER2 : MonoBehaviour
     // - 장식장 인형 위치의 콜라이더 확인
     private void Check_Location()
     {
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo2, range, layerMask_dlsplay))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo2, range, location_layerMask)) //layerMask_dlsplay
         {
             if (hitInfo2.transform.CompareTag("Location"))
             {
                 //hitInfo2는 장식장 위치
             }
         }
+    }
+
+    private bool CheckObstacle()
+    {
+        // - 장애물 검사하기
+        coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+        if (coverCheck)
+        {
+            pickupActivated = false;
+
+            if (pre_ol_index != -1)
+            {
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);                
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

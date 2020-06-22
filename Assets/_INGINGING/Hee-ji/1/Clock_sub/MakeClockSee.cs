@@ -31,6 +31,11 @@ public class MakeClockSee : MonoBehaviour
 
     public Transform puzzleCam_trans;
 
+    // - 장애물, 벽
+    ObstacleReader obstacleReader_script;
+    bool coverCheck = false; //막고잇으면 TRUE
+    int obstacle_layer;
+
     void Start()
     {
         camera = GetComponent<Camera>(); //메인카메라
@@ -45,10 +50,17 @@ public class MakeClockSee : MonoBehaviour
         ChangeCam_script = GameObject.FindObjectOfType<ChangeCam_SubClock>();
 
         //SeeClock_script = GameObject.FindObjectOfType<SeeingSubClock>();
+
+        //장애물,벽
+        obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
+        obstacle_layer = (1 << LayerMask.NameToLayer("ClockPuzzle")) + (1 << LayerMask.NameToLayer("Obstacle"));
     }
 
     void Update()
     {
+        if (CheckObstacle())
+            return;
+
         LookAtClock();
         TryAction();
     }
@@ -171,4 +183,45 @@ public class MakeClockSee : MonoBehaviour
         }
     }
 
+    public void set_active(bool b)
+    {
+        if(b == false) //비활성화하기직전 
+        {
+            if (pre_ol_index != -1)
+            {
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+
+                //외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+            }
+        }
+    }
+
+    private bool CheckObstacle()
+    {
+        // - 장애물 검사하기
+        coverCheck = obstacleReader_script.LookAtFrame(obstacle_layer);
+        if (coverCheck)
+        {
+            if (pre_ol_index != -1)
+            {
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }

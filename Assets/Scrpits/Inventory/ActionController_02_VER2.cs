@@ -73,6 +73,10 @@ public class ActionController_02_VER2 : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE, 아이템
     bool coverCheck2 = false; //막고잇으면 TRUE, 배치퍼즐 장식장 location 확인
 
+    // - 쪽지 매니저
+    NoteManger notemager;
+
+
     void Start()
     {
         item_layerMask = (1 << LayerMask.NameToLayer("Item")) + (1 << LayerMask.NameToLayer("Doll"));
@@ -102,11 +106,17 @@ public class ActionController_02_VER2 : MonoBehaviour
 
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>();
     }
 
     void Update()
     {
-        if (CheckObstacle())
+        if (CheckObstacle()) //장애물 체크
+            return;
+
+        if (notemager._popup == true) //쪽지 팝업 체크
             return;
 
         CheckItem();

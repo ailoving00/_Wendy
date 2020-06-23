@@ -43,7 +43,9 @@ public class ClockPuzzle_Manager : MonoBehaviour
     // - 클릭버튼
     public GameObject actionCaption;
 
+    // - 서브시계 스크립트
     private MakeClockSee SeeClock_script;
+ 
 
     void Start()
     {

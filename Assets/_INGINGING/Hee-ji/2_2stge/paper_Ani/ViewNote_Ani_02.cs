@@ -30,7 +30,8 @@ public class ViewNote_Ani_02 : MonoBehaviour
     public FirstPersonCamera CamMove_Script;
     public Player_HJ Player_script;
 
-    public FlodNote clockNote_script;
+    private FlodNote clockNote_script; // 외곽선 떄문에, 모델링 교체를 위해서
+    private ActionController_TestNote clockNoteCtrler_script;
 
     void Start()
     {
@@ -40,6 +41,8 @@ public class ViewNote_Ani_02 : MonoBehaviour
         Player_script = GameObject.FindObjectOfType<Player_HJ>();
 
         clockNote_script = GameObject.FindObjectOfType<FlodNote>();
+
+        clockNoteCtrler_script = GameObject.FindObjectOfType<ActionController_TestNote>();
     }
 
     // Update is called once per frame
@@ -99,9 +102,12 @@ public class ViewNote_Ani_02 : MonoBehaviour
 
         if (!popup) // 즉, pop 상태가 아닐때는 
         {
+            Cursor.lockState = CursorLockMode.None; //커서 고정 해제
+
             while (true)
             {
                 yield return new WaitForSeconds(0.01f);
+
 
                 // - 이동
                 float step_m = moveSpeed * speedFactor * Time.deltaTime;
@@ -191,8 +197,11 @@ public class ViewNote_Ani_02 : MonoBehaviour
             }
 
             popup = false;
+
+            Cursor.lockState = CursorLockMode.Locked; //커서 고정
         }
 
+        clockNoteCtrler_script.reset_NoteState();
         stateC = false;
     }
 

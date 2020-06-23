@@ -35,17 +35,24 @@ public class ActionController_Ending : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE
     int _obstacle_layer;
 
+    // - 쪽지 매니저
+    NoteManger notemager;
+
     void Start()
     {
         selectSlot_script = GameObject.FindObjectOfType<SelectSlot>();
 
         loadEnding_script = GameObject.FindObjectOfType<EndingVideo_Loading>();
 
+        // 외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         _obstacle_layer = (1 << LayerMask.NameToLayer("Ending")) + (1 << LayerMask.NameToLayer("Obstacle"));
+
+        //쪽지매니저
+        notemager = FindObjectOfType<NoteManger>();
     }
 
     void Update()
@@ -124,6 +131,9 @@ public class ActionController_Ending : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
+                // 쪽지매니저 호출
+                //notemager.OpenCondition(); 
+
                 // - 선택슬롯에 아무것도 없을때 (열쇠꽂기실패)
                 if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
                 {
@@ -141,7 +151,7 @@ public class ActionController_Ending : MonoBehaviour
                     // - 선택슬롯이 열쇠를 가리키면 (성공)
 
                     //영상틀기
-                    loadEnding_script.InStartFadeAnim();
+                    loadEnding_script.InStartFadeAnim(); //쪽지매니저와 합치기
 
                     //Aim.SetActive(false);
                 }

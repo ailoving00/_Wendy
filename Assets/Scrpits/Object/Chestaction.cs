@@ -130,18 +130,19 @@ public class Chestaction : MonoBehaviour
     {
         moveOnState = true;
 
+        // - 해제
+        _collider.enabled = false;
+
         while (true)
         {
             // - 이동
-            time += Time.deltaTime / (F_time*2);
+            time += Time.deltaTime / (F_time * 2);
             //float step_m = moveSpeed * speedFactor * Time.deltaTime;
             target.transform.position = Vector3.MoveTowards(start_t, end_t.position, time);
 
             //if (checkangle >= Mathf.Abs(angle))
             if (Vector3.Distance(target.transform.position, end_t.position) < 0.001f)
             {
-                // - 해제
-                _collider.enabled = false;
                 this.enabled = false;
 
                 break;
@@ -156,6 +157,9 @@ public class Chestaction : MonoBehaviour
     {
         moveOnState = true;
 
+        // - 해제
+        _collider.enabled = false;
+
         while (true)
         {
             time += Time.deltaTime / F_time;
@@ -164,8 +168,6 @@ public class Chestaction : MonoBehaviour
 
             if (checkangle >= Mathf.Abs(angle))
             {
-                // - 해제
-                _collider.enabled = false;
                 this.enabled = false;
 
                 break;

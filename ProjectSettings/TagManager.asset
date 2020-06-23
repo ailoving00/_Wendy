@@ -33,6 +33,7 @@ TagManager:
   - Carpet
   - Obstacle
   - Drawer
+  - TitleBtn
   layers:
   - Default
   - TransparentFX

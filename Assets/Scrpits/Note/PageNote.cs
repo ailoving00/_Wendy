@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PageNote : MonoBehaviour
 {
-
     NoteManger notemager;
     private bool check = false;
 

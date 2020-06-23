@@ -85,10 +85,11 @@
      <Compile Include="Assets\_INGINGING\Hee-ji\2_2stge\paper_Ani\ViewNote_Ani_02.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_2stge\VolumeTrigger.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_3stage\DoorOpen_Basement.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\2_title\BrightnessController.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\2_title\GameManager.cs" />
-     <Compile Include="Assets\_INGINGING\Hee-ji\2_title\OptionManager.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\NavMesh_runtime\LocalNavMeshBuilder.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\NavMesh_runtime\NavMeshSourceTag.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\SceneLoad.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\TestRay.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\view_Test (+)\CheckRange.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />
@@ -99,6 +100,9 @@
      <Compile Include="Assets\_PurchasedAsset\BadDog\VolumetricLighting\Scripts\BGPostProcessingBehavior.cs" />
      <Compile Include="Assets\_PurchasedAsset\BadDog\VolumetricLighting\Scripts\BGShaderIDs.cs" />
      <Compile Include="Assets\_PurchasedAsset\BadDog\VolumetricLighting\Scripts\BGVolumetricLighting.cs" />
+     <Compile Include="Assets\_PurchasedAsset\Falling_Dust\Scripts\BurningMatch.cs" />
+     <Compile Include="Assets\_PurchasedAsset\Falling_Dust\Scripts\Camera_Shake.cs" />
+     <Compile Include="Assets\_PurchasedAsset\Falling_Dust\Scripts\Mortar_Hit.cs" />
      <Compile Include="Assets\_PurchasedAsset\Fog\Scripts\DynamicFog.cs" />
      <Compile Include="Assets\_PurchasedAsset\Fog\Scripts\DynamicFogBase.cs" />
      <Compile Include="Assets\_PurchasedAsset\Fog\Scripts\DynamicFogExclusive.cs" />
@@ -231,6 +235,7 @@
      <Compile Include="Assets\Scrpits\Puzzle\Light\Light_test.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Light\OntriggerLamp.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Light\ResetButton.cs" />
+     <Compile Include="Assets\Scrpits\UI\TitleBtn_Indexer.cs" />
      <Compile Include="Assets\Scrpits\UI\TitleButton.cs" />
      <Compile Include="Assets\Scrpits\WendyAnimation\Animation\Camera_Babysee.cs" />
      <Compile Include="Assets\Scrpits\WendyAnimation\eyesight_baby.cs" />
@@ -285,6 +290,7 @@
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGOnlyFog.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\PSP2.hlsl" />
      <None Include="Assets\Materials\Custom\Custom Cutout.shader" />
+     <None Include="Assets\_PurchasedAsset\Falling_Dust\Falling Dust - Documentation.txt" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\GlobalSnowForReflections.shader" />
      <None Include="Assets\MotionBlur\Resources\Common.cginc" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\D3D12.hlsl" />
@@ -330,6 +336,7 @@
      <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_Standart2Sided.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SnowedSpeedTreeBillboardCommon.cginc" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\Sampling.hlsl" />
+     <None Include="Assets\_PurchasedAsset\Falling_Dust\ClickLeftMouseButtonToFireMortar.txt" />
      <None Include="Assets\_INGINGING\Hee-ji\1\_grass_heeji\WindGrass.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\Grass &amp; Billboards\README_ONLY_FOR_DEFERRED.txt" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\DepthNormals.shader" />

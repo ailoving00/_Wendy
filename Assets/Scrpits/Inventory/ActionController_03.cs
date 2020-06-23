@@ -65,9 +65,10 @@ public class ActionController_03 : MonoBehaviour
 
         dollAniManager_script = GameObject.FindObjectOfType<DollAniManager>();
 
+        // 외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
-        //장애물,벽
+        // 장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         _puzzle_layer = (1 << LayerMask.NameToLayer("Item")) + (1 << LayerMask.NameToLayer("Doll"));
     }
@@ -150,7 +151,7 @@ public class ActionController_03 : MonoBehaviour
             if (OutlineController.get_outline_okay())
                 return;
 
-            if (!dollAniManager_script.ClickButton())
+            if (!dollAniManager_script.ClickButton()) // 애니메이션이 끝나고 입력종을 클릭할 수 있는 상태가 되어야함
                 return;
 
             if (hitInfo.transform.tag == "Item") //compare @

@@ -65,6 +65,11 @@ public class ActionController_GetKey : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE
     int _obstacle_layer;
 
+    public PageNote pageNote_script; // 엔딩책의 PageNote
+
+    // - 쪽지 매니저
+    NoteManger notemager;
+
     void Start()
     {
         endingBook_script = GameObject.FindObjectOfType<RewardBook_Open>();
@@ -90,6 +95,9 @@ public class ActionController_GetKey : MonoBehaviour
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         _obstacle_layer = (1 << LayerMask.NameToLayer("Item")) + (1 << LayerMask.NameToLayer("Obstacle"));
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>(); //-> 해당 스크립트는 쪽지 매니저 검사 안해도 댐
     }
 
     void Update()
@@ -253,6 +261,11 @@ public class ActionController_GetKey : MonoBehaviour
             {
                 if (hitInfo.transform.tag == "Book_EB") //compare @
                 {
+                    // - 쪽지상태, 카운트 늘리기
+                    pageNote_script.CheckAddcount(1);
+                    // - 쪽지 매니저
+                    notemager._popup = true;
+
                     // - 외곽선 해제
                     OutlineController.set_enabled(pre_ol_index, false);
                     pre_ol_index = -1;
@@ -267,6 +280,7 @@ public class ActionController_GetKey : MonoBehaviour
 
                     //카메라, 플레이어 이동 불가 
                     fpCam_Script.enabled = false;
+                    player_script.SetDeActiveAni();
                     player_script.enabled = false;
 
                     //책 팝업상태로 바꾸기
@@ -284,8 +298,7 @@ public class ActionController_GetKey : MonoBehaviour
                     {
                         if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                         {
-
-                            hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);
+                            //hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1); 
 
                             // - 아이템 습득
                             hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
@@ -358,6 +371,9 @@ public class ActionController_GetKey : MonoBehaviour
                             if (endingBook_script.play_BookAni(2))
                             {
                                 flipOver = true;
+
+                                // - 쪽지 매니저
+                                notemager._popup = false; 
                             }
 
                             //에임 나타나기

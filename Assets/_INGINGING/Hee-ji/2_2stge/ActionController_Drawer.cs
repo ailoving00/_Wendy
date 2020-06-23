@@ -13,39 +13,40 @@ public class ActionController_Drawer : MonoBehaviour
     private Camera mainCam;
 
     private bool pickupActivated;
-    [SerializeField]
-    private Image actionImage;
+    //[SerializeField]
+    //private Image actionImage;
+    public GameObject actionCaption;
 
-    // - 외곽선
-    private DrawOutline_HJ OutlineController;
-    private int pre_ol_index = 0; //이전 아웃라인 인덱스
-   
     // - 서랍
     public GameObject[] moveChest;
 
+    // - 외곽선
+    private DrawOutline_HJ OutlineController;
+    private int pre_ol_index = -1; //이전 아웃라인 인덱스
+    private bool outline_active = false;
+
     // - 장애물, 벽
     ObstacleReader obstacleReader_script;
-    bool coverCheck = false;
+    bool coverCheck = false; //막고잇으면 TRUE
+    int _obstacle_layer;
 
     void Start()
     {
         mainCam = GetComponent<Camera>();
 
-        //외곽선
+        // 외곽선
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
-        //장애물,벽
+        // 장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
+        _obstacle_layer = (1 << LayerMask.NameToLayer("Drawer")) + (1 << LayerMask.NameToLayer("Obstacle"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (coverCheck)
-        {
-            coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+        if (CheckObstacle())
             return;
-        }
 
         LookAtDrawer();
         TryAction();
@@ -57,20 +58,49 @@ public class ActionController_Drawer : MonoBehaviour
         {
             if (hitaction.transform.CompareTag("Drawer")) //compare @
             {
-                // - 장애물 검사하기
-                coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
-                if (coverCheck)
+                if (OutlineController.get_outline_okay())
                     return;
 
                 ActionAppear();
+
+                // - 클릭버튼 활성화
+                actionCaption.SetActive(true);
+
+                // - 외곽선
+                SetOutline setoutlin_script = hitaction.transform.GetComponent<SetOutline>();
+                int cur_ol_index = setoutlin_script._index;
+
+                OutlineController.set_check(true);
+                outline_active = true;
+
+                if (pre_ol_index == -1)
+                {
+                    OutlineController.set_enabled(cur_ol_index, true);
+                    pre_ol_index = cur_ol_index;
+                }
+                else
+                {
+                    OutlineController.set_enabled(pre_ol_index, false);
+                    OutlineController.set_enabled(cur_ol_index, true);
+                    pre_ol_index = cur_ol_index;
+                }
             }
         }
         else
         {
             ActionDisappear();
 
-            // - 장애물 검사하기
-            coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+            if (pre_ol_index != -1)
+            {
+                //외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
         }
     }
 
@@ -93,13 +123,19 @@ public class ActionController_Drawer : MonoBehaviour
                 int Chestnumber = hitaction.transform.parent.GetComponent<Chestaction>().Chest_number;
                 int drawerType = hitaction.transform.parent.GetComponent<Chestaction>().type;
                 moveChest[Chestnumber].transform.parent.GetComponent<Chestaction>().Start_action(drawerType);
+
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+
+                // - 사운드
             }
         }
-    }
-
-    private void Checkaction()
-    {
-
     }
 
     // Need to modify
@@ -113,5 +149,31 @@ public class ActionController_Drawer : MonoBehaviour
     {
         pickupActivated = false;
         //actiontext.gameObject.SetActive(false);
+    }
+
+    private bool CheckObstacle()
+    {
+        // - 장애물 검사하기
+        coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+        if (coverCheck)
+        {
+            pickupActivated = false;
+
+            if (pre_ol_index != -1)
+            {
+                // - 외곽선 해제
+                OutlineController.set_enabled(pre_ol_index, false);
+                pre_ol_index = -1;
+                OutlineController.set_check(false);
+                outline_active = false;
+
+                // - 클릭버튼 해제
+                actionCaption.SetActive(false);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

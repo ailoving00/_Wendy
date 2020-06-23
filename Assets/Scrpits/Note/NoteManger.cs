@@ -8,7 +8,6 @@ public class NoteManger : MonoBehaviour
 {
     static public NoteManger instance;
 
-
     public GameObject NoteImage;
 
     public Sprite Note_1;
@@ -26,8 +25,8 @@ public class NoteManger : MonoBehaviour
     public GameObject ConditionPanel;
     public GameObject Aim;
 
-
-
+    public bool _popup = false;
+    
     // Start is called before the first frame update
     void Start()
     {

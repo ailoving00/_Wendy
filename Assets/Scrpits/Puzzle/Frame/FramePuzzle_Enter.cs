@@ -32,6 +32,9 @@ public class FramePuzzle_Enter : MonoBehaviour
     ObstacleReader obstacleReader_script;
     bool coverCheck = false;
 
+    // - 쪽지 매니저
+    NoteManger notemager;
+
 
     void Start()
     {
@@ -49,6 +52,9 @@ public class FramePuzzle_Enter : MonoBehaviour
 
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>();
     }
 
     void Update()
@@ -59,7 +65,10 @@ public class FramePuzzle_Enter : MonoBehaviour
             return;
         }
 
-        if (CheckObstacle())
+        if (CheckObstacle()) //장애물 체크
+            return;
+
+        if (notemager._popup == true) //쪽지 팝업 체크 : 팝업되지 않은 상태여야 가능하도록
             return;
 
         LookAtFrame();

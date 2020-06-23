@@ -25,14 +25,10 @@ public class RewardNote_Check : MonoBehaviour
     private float speedFactor = 0.0f; //보정값
     public float customFactor;
 
-
-
     // - 애니메이션 -- 필요없어요.
     //private Animator animator;
     //private static string EventOpenAnimationName = "Base Layer.book_open";
     //private static string EventFilpAnimationName = "Base Layer.book_flip";
-
-
     //private static string AniName_idle = "book_idle";
     //private static string AniName_open = "book_open";
     //private static string AniName_filp = "book_flip";
@@ -41,26 +37,34 @@ public class RewardNote_Check : MonoBehaviour
     public Transform endTarget;
 
     //public Collider flip_colider; // 페이지 넘길때의 콜라이더 -> 화면 반을 잘라서 오른쪽을 클릭하는것으로 변경
-    private Collider book_colider; // 책 팝업시 콜라이더
+    //private Collider book_colider; // 책 팝업시 콜라이더
 
     ActionController_GetNote getNote_script;
 
-   // public GameObject FlashLight_Pro;
+    // public GameObject FlashLight_Pro;
+
+    // 코루틴 한번만 호출 보장
+    private bool _cor_active = false;
+
+    // - 콜라이더 활성화, 비활성화 하기
+    Collider _note_collider;
 
     void Start()
     {
         //animator = GetComponent<Animator>();
-        book_colider = GetComponent<BoxCollider>();
+        //book_colider = GetComponent<BoxCollider>();
 
         getNote_script = Camera.main.GetComponent<ActionController_GetNote>();
         //_pointlight.SetActive(false);
+
+        _note_collider = GetComponent<BoxCollider>();
     }
 
 
     public void move_NoteAni()
     {
-        //if (popup)
-        //    return;
+        if (_cor_active)
+            return;
 
         StartCoroutine(MoveNote());
     }
@@ -73,12 +77,19 @@ public class RewardNote_Check : MonoBehaviour
 
     IEnumerator MoveNote()
     {
+        _cor_active = true;
+
         SetNewSpeedFactor();
 
         if (!popup) // 즉, pop 상태가 아닐때는 
         {
-            Cursor.lockState = CursorLockMode.None; //커서 고정 해제
-                                                    // book_colider.enabled = false;
+            // 커서 고정 해제
+            Cursor.lockState = CursorLockMode.None; 
+
+            // 콜라이더
+            _note_collider.enabled = false;
+
+            // 사운드
             SoundManger.instance.PlaySound(NoteCheckSound);
 
             while (true)
@@ -140,18 +151,30 @@ public class RewardNote_Check : MonoBehaviour
                 }
             }
 
-            book_colider.enabled = true;
+            // 콜라이더
+            //book_colider.enabled = true;
+            _note_collider.enabled = true;
 
             yield return new WaitForSeconds(0.05f);
+
             popup = false;
-           // _pointlight.SetActive(false);
+            // _pointlight.SetActive(false);
 
-           // FlashLight_Pro.SetActive(true);
+            // FlashLight_Pro.SetActive(true);
 
-            Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            //커서 고정
+            Cursor.lockState = CursorLockMode.Locked; 
+
 
             getNote_script.reset_NoteState();
         }
+
+        _cor_active = false;
     }
     
+    public bool get_corPossible()
+    {
+        return !_cor_active;
+    }
+
 }

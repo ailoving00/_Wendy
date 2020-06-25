@@ -10,6 +10,11 @@ public class ColliderMgr : MonoBehaviour
 
     public GameObject[] lamp;
 
+    public GameObject[] PointLampModl;
+    //Material[] PointLamp_Material;
+    Renderer[] PointLamp_Renderer;
+    Color alphaColor;
+
     public GameObject bell_Doll;
 
     public GameObject MCamera;
@@ -56,10 +61,68 @@ public class ColliderMgr : MonoBehaviour
     void Start()
     {
         animator = ResetLeber.GetComponent<Animator>();
-        bell_Doll.SetActive(false);
+        //  renderer = PointLampModl.GetComponent<Renderer>();
+
+        PointLamp_Renderer = new Renderer[PointLampModl.Length];
+
+        //PointLamp_Material = new Material[PointLampModl.Length];
+
+      //  alphaColor = new Color[PointLampModl.Length];
+
+        for (int i = 0; i< PointLampModl.Length; i++)
+        {
+            PointLamp_Renderer[i] = PointLampModl[i].GetComponent<Renderer>(); //메탈릭
+            //PointLamp_Material[i] = PointLampModl[i].GetComponent<Renderer>().material;
+           // alphaColor[i] = PointLamp_Material[i].GetColor("MainColor");
+        }
+       // PointLamp_Material[5].SetColor("_Color", Color.red);
+        //     alphaColor[5].a = 0.2f;
+        //      PointLamp_Renderer[5].material.color = alphaColor[5];
+
+
+        //alphaColor[5].a = 0.3f;
+        //PointLamp_Renderer[5].material.color = alphaColor[5];
+
+        //PointLamp_Renderer[0] = PointLampModl[0].GetComponent<Renderer>();
+
+        //alphaColor[5] = PointLampModl[5].GetComponent<Renderer>().material.color;
+        //alphaColor[5].a = 0.3f;
+        // PointLampModl[5].GetComponent<Renderer>().material.color = Color.red;
+        //PointLamp_Material[0] = PointLampModl[0].GetComponent<Renderer>().material; //메탈릭
+        //PointLamp_Renderer[0] = PointLampModl[0].GetComponent<Renderer>();
+
+        //PointLamp_Material[5] = PointLampModl.GetComponents<Renderer>().material; //메탈릭
+        //PointLamp_Renderer[5] = PointLampModl.GetComponents<Renderer>();
+
+        //PointLamp_Renderer[5].material.color = alphaColor[5];
+        //alphaColor[5].a = 0.3f;
+        //PointLamp_Renderer[5].material.color = alphaColor[5];
+        //for (int count = 0; count < 9; count++)
+        //{
+        //    //8PointLamp_Material[count] = PointLampModl[count].GetComponent<Renderer>().material; //메탈릭
+
+        //}
+
+        //pointlamp_material[7].color = 0.6f;
+
+
+        //for (int value = 0; value < 9; value++)
+        //{
+        //    PointLamp_Renderer[value].material.color = alphaColor[value];
+        //}
+
+
 
         //   Animation Tinkerbell_ani = gameObject.GetComponent<Animation>();
         lamplight = FindObjectOfType<LampLight>();
+
+        bell_Doll.SetActive(false);
+
+
+
+        //foreach (Renderer rend in PointLamp_Renderer)
+        //    alphaColor = rend.material.color;
+
         lamp[0].SetActive(true);
         lamp[7].SetActive(true);
         lamp[1].SetActive(true);
@@ -88,6 +151,10 @@ public class ColliderMgr : MonoBehaviour
     {
         if (CheckObstacle())
             return;
+
+
+
+
 
         CheckLamp();
         TryAction();
@@ -153,11 +220,18 @@ public class ColliderMgr : MonoBehaviour
                             {
                                 lamp[7].gameObject.SetActive(false);
                                 CheckOnL--;
+
+
+                                alphaColor.a = 0.2f;
+                                PointLamp_Renderer[7].material.color = alphaColor;
                             }
                             else
                             {
                                 lamp[7].gameObject.SetActive(true);
                                 CheckOnL++;
+
+                                alphaColor.a = 0.6f;
+                                PointLamp_Renderer[7].material.color = alphaColor;
                             }
                         }
                         else
@@ -166,11 +240,17 @@ public class ColliderMgr : MonoBehaviour
                             {
                                 lamp[Lampnumber - 1].gameObject.SetActive(false);
                                 CheckOnL--;
+
+                                alphaColor.a = 0.6f;
+                                PointLamp_Renderer[Lampnumber - 1].material.color = alphaColor;
                             }
                             else
                             {
                                 lamp[Lampnumber - 1].gameObject.SetActive(true);
                                 CheckOnL++;
+
+                                alphaColor.a = 0.2f;
+                                PointLamp_Renderer[Lampnumber - 1].material.color = alphaColor;
                             }
                         }
 
@@ -178,11 +258,20 @@ public class ColliderMgr : MonoBehaviour
                         {
                             lamp[Lampnumber].gameObject.SetActive(false);
                             CheckOnL--;
+
+                            alphaColor.a = 0.2f;
+
+                            //  foreach (Renderer rend in PointLamp_Renderer)
+                            PointLamp_Renderer[Lampnumber].material.color = alphaColor;
+
                         }
                         else
                         {
                             lamp[Lampnumber].gameObject.SetActive(true);
                             CheckOnL++;
+
+                            alphaColor.a = 0.6f;
+                                PointLamp_Renderer[Lampnumber].material.color = alphaColor;
                         }
 
                         if (Lampnumber + 1 > 7)
@@ -191,11 +280,19 @@ public class ColliderMgr : MonoBehaviour
                             {
                                 lamp[0].gameObject.SetActive(false);
                                 CheckOnL--;
+                                
+                                alphaColor.a = 0.2f;
+                                PointLamp_Renderer[0].material.color = alphaColor;
+
+
                             }
                             else
                             {
                                 lamp[0].gameObject.SetActive(true);
                                 CheckOnL++;
+
+                                alphaColor.a = 0.6f;
+                                PointLamp_Renderer[0].material.color = alphaColor;
                             }
                         }
                         else
@@ -204,11 +301,17 @@ public class ColliderMgr : MonoBehaviour
                             {
                                 lamp[Lampnumber + 1].gameObject.SetActive(false);
                                 CheckOnL--;
+
+                                alphaColor.a = 0.2f;
+                                PointLamp_Renderer[Lampnumber + 1].material.color = alphaColor;
                             }
                             else
                             {
                                 lamp[Lampnumber + 1].gameObject.SetActive(true);
                                 CheckOnL++;
+
+                                alphaColor.a = 0.6f;
+                                PointLamp_Renderer[Lampnumber + 1].material.color = alphaColor;
                             }
                         }
                     }

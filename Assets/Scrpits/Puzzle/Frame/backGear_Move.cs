@@ -5,7 +5,7 @@ using UnityEngine;
 public class backGear_Move : MonoBehaviour
 {
     [SerializeField]
-    private string gearSound;
+    private string gearBackSound = "PP_gear2";
 
     private bool gearOn = false;
     private bool inRotation = false;
@@ -61,7 +61,7 @@ public class backGear_Move : MonoBehaviour
 
         if (gearOn)
         {
-            SoundManger.instance.PlaySound(gearSound);
+            SoundManger.instance.PlaySound(gearBackSound);
 
             //RotTarget.rotation = Quaternion.Euler(new Vector3(180f, 0, 0));
 
@@ -93,7 +93,7 @@ public class backGear_Move : MonoBehaviour
         }
         else
         {
-            SoundManger.instance.PlaySound(gearSound);
+            SoundManger.instance.PlaySound(gearBackSound);
 
             //RotTarget.rotation = Quaternion.Euler(new Vector3(0f, 0, 0));
 

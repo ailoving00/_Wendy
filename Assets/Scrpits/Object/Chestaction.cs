@@ -6,6 +6,20 @@ public class Chestaction : MonoBehaviour
 {
     //private Quaternion Right = Quaternion.identity;
 
+
+    [SerializeField]
+    private string openSound = "OpenDesk";
+
+    [SerializeField]
+    private string closeSound = "CloseDesk";
+
+    [SerializeField]
+    private string openSlideSound = "OpenSlideDesk";
+
+    [SerializeField]
+    private string closeSlideSound = "CloseSlideDesk";
+
+
     public int Chest_number;
     //public GameObject MoveChest;
 
@@ -133,6 +147,8 @@ public class Chestaction : MonoBehaviour
         // - 해제
         _collider.enabled = false;
 
+        SoundManger.instance.PlaySound(openSlideSound);
+
         while (true)
         {
             // - 이동
@@ -159,6 +175,8 @@ public class Chestaction : MonoBehaviour
 
         // - 해제
         _collider.enabled = false;
+
+        SoundManger.instance.PlaySound(openSound);
 
         while (true)
         {

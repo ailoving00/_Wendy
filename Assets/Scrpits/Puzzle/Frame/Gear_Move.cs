@@ -5,10 +5,10 @@ using UnityEngine;
 public class Gear_Move : MonoBehaviour
 {
     [SerializeField]
-    private string gearSound;
+    private string GearmoveSound = "FP_gear1";
 
     [SerializeField]
-    private string pictureFrame;
+    private string PictureFrameSound = "FP_ImageGear";
 
     private bool gearOn = false;
     private bool inRotation = false;
@@ -117,12 +117,15 @@ public class Gear_Move : MonoBehaviour
         {
             //이미지 내리기 *************
             drawingMove_script.Play(true, firstTime); //안됨?
-            SoundManger.instance.PlaySound(pictureFrame);
+            SoundManger.instance.PlaySound(PictureFrameSound);
+
+            //기어 사운드
+            SoundManger.instance.PlaySound(GearmoveSound);
         }
         else if (matchType == 2) //사운드
         {
             //기어 사운드
-            SoundManger.instance.PlaySound(gearSound);
+            SoundManger.instance.PlaySound(GearmoveSound);
 
             //sound On
             //switch (matchNumber)
@@ -156,13 +159,17 @@ public class Gear_Move : MonoBehaviour
             drawingMove_script.Play(false, firstTime);
 
             //기어사운드
-            SoundManger.instance.PlaySound(pictureFrame);
+
+            //기어 사운드
+            SoundManger.instance.PlaySound(GearmoveSound);
+
+            SoundManger.instance.PlaySound(PictureFrameSound);
 
         }
         else if (matchType == 2) //사운드
         {
             //기어사운드
-            SoundManger.instance.StopEffectSound(gearSound);
+            SoundManger.instance.StopEffectSound(GearmoveSound);
 
             //sound Off
             //switch (matchNumber)

@@ -5,6 +5,23 @@ using UnityEngine;
 public class FramePuzzle_Controller : MonoBehaviour
 {
 
+    [SerializeField]
+    private string oneImageSound = "FP_oneImage";
+
+    [SerializeField]
+    private string twoImage1Sound = "FP_twoImage1";
+
+    [SerializeField]
+    private string twoImage2Sound = "FP_twoImage1";
+
+    [SerializeField]
+    private string threeImageSound = "FP_threeImage";
+
+    [SerializeField]
+    private string fourImageSound = "FP_fourImage";
+
+
+
     private Vector3 MousePoint;
     Ray Mouse_ray;
 
@@ -180,7 +197,31 @@ public class FramePuzzle_Controller : MonoBehaviour
                         if (curGear_mN == preGear_mN)
                         {
                             // - 맞다
-                            sequence++;
+                            sequence++; //이러면 추가다.
+                            
+                            
+                            if(sequence == 2)
+                            {
+                                SoundManger.instance.PlaySound(oneImageSound);
+                            }
+
+                            if (sequence == 3)
+                            {
+                                SoundManger.instance.PlaySound(twoImage2Sound);
+                                SoundManger.instance.PlaySound(twoImage1Sound);
+                            }
+
+                            if (sequence == 4)
+                            {
+                                SoundManger.instance.PlaySound(threeImageSound);
+
+                            }
+
+                            if (sequence == 5)
+                            {
+                                SoundManger.instance.PlaySound(fourImageSound);
+
+                            }
 
                             //자막바꾸기 **************
                             //subtitle_script.change_text(sequence);

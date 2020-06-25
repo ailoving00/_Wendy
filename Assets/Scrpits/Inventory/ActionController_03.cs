@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class ActionController_03 : MonoBehaviour
 {
+    [SerializeField]
+    private string bellSound = "AP_bell";
+    [SerializeField]
+    private string deskSound = "AP_openDesk";
+
+
     public Inventory theInventory;
 
     [SerializeField]
@@ -301,6 +307,8 @@ public class ActionController_03 : MonoBehaviour
                     if (pre_ol_index == -1)
                         return;
 
+                    SoundManger.instance.PlaySound(bellSound);
+
                     dollAniManager_script.set_clickable(false); //클릭했으니 상태를 클릭못하는 상태로변환
 
                     // - 외곽선 해제
@@ -317,7 +325,9 @@ public class ActionController_03 : MonoBehaviour
 
                     if (displayManager_script2.compare_Answer()) // 맞았을때,
                     {
+
                         doorAnimation.play_doorAni(); //문열리기 
+                        SoundManger.instance.PlaySound(deskSound);
                         this.enabled = false;
 
                         getKey_script.enabled = true;

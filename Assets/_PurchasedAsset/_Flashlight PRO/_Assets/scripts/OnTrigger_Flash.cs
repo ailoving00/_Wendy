@@ -4,6 +4,8 @@ using UnityEngine;
 // 수정 중! 활성화 노노! 
 public class OnTrigger_Flash : MonoBehaviour
 {
+    [SerializeField]
+    private string brokenSound = "bombHandLamp";
 
     // 도달했을 시 손전등이 꺼지는 연출 -- 원래는 불이 켜지면 해야하는데 지금은 트리거로 하기; 
     public GameObject mainCamera;
@@ -36,37 +38,44 @@ public class OnTrigger_Flash : MonoBehaviour
     // Start is called before the first frame update
 
 
-    public void OnTriggerEnter(Collider other)
+
+     public void FlashLightEnd(int i)
     {
-        if (other.transform.CompareTag("Player"))
-        {
-            //정지
-
-            if (FlashState == true)
-            {
-                StartCoroutine(MoveFlash());
-
-
-            }
-
-            else
-            {
-
-            }
-            // 파티클 실행
-
-            // 손전등 내림 
-
-
-            //Debug.Log("충돌! 닿았습니까? 그렇다면 손전등을 내놓고 가세요! ");
-            // 한번 실행하면 그것으로 끝! 이 콜라이더도 비활성화! 
-
-
-
-        }
-
-
+        StartCoroutine(MoveFlash());
     }
+
+
+    //public void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.transform.CompareTag("Player"))
+    //    {
+    //        //정지
+
+    //        if (FlashState == true)
+    //        {
+
+
+
+    //        }
+
+    //        else
+    //        {
+
+    //        }
+    //        // 파티클 실행
+
+    //        // 손전등 내림 
+
+
+    //        //Debug.Log("충돌! 닿았습니까? 그렇다면 손전등을 내놓고 가세요! ");
+    //        // 한번 실행하면 그것으로 끝! 이 콜라이더도 비활성화! 
+
+
+
+    //    }
+
+
+    //}
     // 로테이션 이동- 어우 개  빡 치 네! 가 생각나네!
     IEnumerator MoveFlash()
     {
@@ -83,6 +92,9 @@ public class OnTrigger_Flash : MonoBehaviour
         Quaternion StartRotation = FlashLamp_Transform.transform.rotation;
         Quaternion SetRotation = FlahLamp_EndTrans.transform.rotation;
 
+
+        SoundManger.instance.PlaySound(brokenSound);
+        //고장 파티클 추가
 
         while (true)
         {

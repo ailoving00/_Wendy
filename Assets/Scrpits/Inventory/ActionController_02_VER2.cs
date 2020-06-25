@@ -15,6 +15,12 @@ public class ActionController_02_VER2 : MonoBehaviour
 {
     public Inventory theInventory;
 
+
+    [SerializeField]
+    private string bellSound = "AP_bell";
+    [SerializeField]
+    private string deskSound = "AP_openDesk";
+
     [SerializeField]
     private float range;
 
@@ -53,6 +59,7 @@ public class ActionController_02_VER2 : MonoBehaviour
     // - 손전등
     public GameObject FlashlightItem;
     Flashlight_PRO flash_script;
+    OnTrigger_Flash flash_end;
 
     // - 라이트
     LightOn_3stage _lightOn_script;
@@ -94,6 +101,7 @@ public class ActionController_02_VER2 : MonoBehaviour
         FlashlightItem.SetActive(false);
         flash_script = FlashlightItem.GetComponent<Flashlight_PRO>();
         flash_script.enabled = false;
+        flash_end = FindObjectOfType<OnTrigger_Flash>();
 
         //라이트
         _lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
@@ -404,8 +412,9 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //3스테이지 카메라 스크립트 on
                                 actionController_3stage_script.enabled = true;
 
-                                //손전등 없어지기
+                                //손전등 없어지기 - 손전등 관련 스크립트 가져오기 
                                 //FlashlightItem.SetActive(false);
+                                flash_end.FlashLightEnd(1);
 
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();

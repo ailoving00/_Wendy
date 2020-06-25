@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ActionController_Drawer : MonoBehaviour
 {
+
+
     [SerializeField]
     private float range;
     [SerializeField]
@@ -123,6 +125,9 @@ public class ActionController_Drawer : MonoBehaviour
                 int Chestnumber = hitaction.transform.parent.GetComponent<Chestaction>().Chest_number;
                 int drawerType = hitaction.transform.parent.GetComponent<Chestaction>().type;
                 moveChest[Chestnumber].transform.parent.GetComponent<Chestaction>().Start_action(drawerType);
+
+
+
 
                 // - 외곽선 해제
                 OutlineController.set_enabled(pre_ol_index, false);

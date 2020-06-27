@@ -56,6 +56,10 @@ public class ActionController_02_VER2 : MonoBehaviour
     public GameObject tempDoor;
     public GameObject tempStairs;
 
+    //- 지하실과 2층 길목에 있을 가이드 링
+    public GameObject Ring_Particle;
+    ParticleSystem event_ringParticle;
+
     // - 손전등
     public GameObject FlashlightItem;
     Flashlight_PRO flash_script;
@@ -102,6 +106,9 @@ public class ActionController_02_VER2 : MonoBehaviour
         flash_script = FlashlightItem.GetComponent<Flashlight_PRO>();
         flash_script.enabled = false;
         flash_end = FindObjectOfType<OnTrigger_Flash>();
+
+        //파티클
+        event_ringParticle = Ring_Particle.GetComponentInChildren<ParticleSystem>();
 
         //라이트
         _lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
@@ -404,8 +411,12 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //지하실, 2층계단 오픈
                                 tempDoor.SetActive(false); //콜라이더 비활성화
                                 //tempStairs.SetActive(false);
+
+
                                 DoorOpen_Basement doorAni = tempStairs.GetComponent<DoorOpen_Basement>();
                                 doorAni.StartDoorAni();
+
+
 
                                 enter_3stage = true;
 
@@ -419,6 +430,11 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();
                                 wendyAI_Script.colliderChange();
+
+                                //지하실 파티클 오픈
+                                Ring_Particle.SetActive(true);
+                                event_ringParticle.Play();
+
 
                                 // 외곽선 해제                   
                                 if (pre_ol_index != -1)

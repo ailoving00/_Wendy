@@ -11,16 +11,34 @@ public class FootSound_1S : MonoBehaviour
     [SerializeField]
     private string[] floorfootSound;
 
+    [SerializeField]
+    ParticleSystem LFootParticle;
+
+    [SerializeField]
+    ParticleSystem RFootParticle;
+
     bool snowfloorState = true;
     bool woodfloorState = false;
 
 
-    void FootSound()
+    void FootSound(int a)
     {
+
         if (snowfloorState == true)
         {
             int i = Random.Range(0, 4);
             SoundManger.instance.PlaySound(snowfootSound[i]);
+
+            if (a == 1)
+            {
+                //Debug.Log("오른쪽");
+                LFootParticle.Play();
+            }
+            if (a == 2)
+            {
+                // Debug.Log("왼쪽");
+                RFootParticle.Play();
+            }
 
         }
         //사운드 출력.

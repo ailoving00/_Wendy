@@ -109,11 +109,6 @@ PrefabInstance:
       propertyPath: m_RenderAlignment
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5516655770218298400, guid: b30dc4490e1486e4d97c8c2f5f708169,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b30dc4490e1486e4d97c8c2f5f708169, type: 3}
 --- !u!4 &8013990767194179846 stripped
@@ -188,11 +183,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6565437882009924575, guid: 6188d66fea8cbe04e9a2719ea2805886,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6188d66fea8cbe04e9a2719ea2805886, type: 3}

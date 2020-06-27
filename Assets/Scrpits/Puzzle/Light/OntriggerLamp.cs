@@ -16,7 +16,8 @@ public class OntriggerLamp : MonoBehaviour
     public GameObject PlayerMove; //게임 오브젝트- 플레이어. 여기서 수정 
     public GameObject playerModeling;
 
-    public ParticleSystem enter_TinkerBell;
+    public GameObject Enter_TinkerBell;
+    ParticleSystem event_TinkerBellEnter;
 
     Animator _animator = null;
 
@@ -45,7 +46,9 @@ public class OntriggerLamp : MonoBehaviour
     {
         _animator = playerModeling.GetComponent<Animator>();
         renderer = Pathmodel.GetComponentsInChildren<Renderer>();
+        event_TinkerBellEnter = Enter_TinkerBell.GetComponentInChildren<ParticleSystem>();
 
+        Enter_TinkerBell.gameObject.SetActive(false);
         // renderer.material.color = new Color(0, 0, 0, 0);
     }
 
@@ -154,10 +157,33 @@ IEnumerator FadeInTinkerBell(float FadeSet)
 
         }
         Pathmodel.gameObject.SetActive(false);
-        enter_TinkerBell.gameObject.SetActive(true);
-        enter_TinkerBell.Play();
+
+
+
+
+        StartCoroutine(TinkerBellEnter());
+      //  Enter_TinkerBell.GetComponent<ParticleSystem>().Play();
+
+
+      //  Enter_TinkerBell.SetActive(false);
         TinkerSound.SetActive(false);
+
     }
+    IEnumerator TinkerBellEnter()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Enter_TinkerBell.SetActive(true);
+
+        if(!event_TinkerBellEnter.isPlaying)
+        {
+            Enter_TinkerBell.SetActive(false);
+        }
+     //   yield return new WaitForSeconds(5f);
+
+
+    }
+
+
 
 
 }

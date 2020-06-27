@@ -29,14 +29,19 @@ public class WendyAI : MonoBehaviour
 
     private Collider boxcoll; //게임오버를 위한 콜라이더
     private Cellar_Wendy gameOver_script;
+    private Cellar_Manager gameOver_script2;
     private Collider spherecoll; //플레이어를 쫓아가기 위한 콜라이더
 
+
+    //- 지하실과 2층 길목에 있을 가이드 링
+    public GameObject Ring_Particle;
+   // ParticleSystem event_ringParticle;
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = _modeling.GetComponent<Animator>();
-
+      //  event_ringParticle = Ring_Particle.GetComponentInChildren<ParticleSystem>();
         // - 상태 초기화 : 지하실에서 놀고 있는 애니메이션
         SetState(new Wendy_PlayState());
         _agent.updateRotation = false;
@@ -125,6 +130,9 @@ public class WendyAI : MonoBehaviour
             //코루틴
             if (_current_state.GetStateNum() == 1)
                 ChangeState();
+
+
+
         }
     }
     void OnTriggerExit(Collider other)
@@ -389,6 +397,7 @@ public class WendyAI : MonoBehaviour
     {
         boxcoll.enabled = false;
         gameOver_script.enabled = false;
+        gameOver_script2.enabled = false;
         spherecoll.enabled = true;
     }
 

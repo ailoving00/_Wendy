@@ -29,6 +29,10 @@ public class GameMgr : MonoBehaviour
     GuideCaption_Controller guideController_script;
     private bool onceCaption = false;
 
+    // - 옵션창
+    public GameObject optionPanel;
+    private bool pop = false;
+
     void Start()
     {
         check = false;
@@ -56,10 +60,21 @@ public class GameMgr : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    Application.Quit();
-        //}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            //Application.Quit();
+
+            if (!pop)
+            {
+                optionPanel.SetActive(true);
+                pop = true;
+            }
+            else
+            {
+                optionPanel.SetActive(false);
+                pop = false;
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {

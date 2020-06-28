@@ -58,19 +58,24 @@ public class ActionController_Drawer : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitaction, range, layerMask))
         {
+
             if (hitaction.transform.CompareTag("Drawer")) //compare @
             {
-                if (OutlineController.get_outline_okay())
-                    return;
+                // - 외곽선
+                SetOutline setoutlin_script = hitaction.transform.GetComponent<SetOutline>();
+                int cur_ol_index = setoutlin_script._index;
+
+                if (pre_ol_index == cur_ol_index) // 서랍-서랍 사이의 외곽선 보정
+                {
+                    if (OutlineController.get_outline_okay())
+                        return;
+                }
 
                 ActionAppear();
 
                 // - 클릭버튼 활성화
                 actionCaption.SetActive(true);
 
-                // - 외곽선
-                SetOutline setoutlin_script = hitaction.transform.GetComponent<SetOutline>();
-                int cur_ol_index = setoutlin_script._index;
 
                 OutlineController.set_check(true);
                 outline_active = true;

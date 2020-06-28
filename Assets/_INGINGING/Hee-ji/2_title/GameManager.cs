@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
+    public static GameManager _instance = null;
 
-    public int brightness;
+    public float brightness = 1f;
+    public float fx = 0.5f;
+    public float music = 0.5f;
 
     void Awake()
     {
-        _instance = this;
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
         // TitleButton 클래스에 임시로 있음
+
     }
 
     void Update()

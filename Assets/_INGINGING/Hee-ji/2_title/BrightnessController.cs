@@ -8,13 +8,21 @@ public class BrightnessController : MonoBehaviour
     private Slider _slider;
 
     // - 밝기 조절
-    float intensityValue = 1f;  //게임매니저로 옮기기
+    float intensityValue;  //게임매니저로 옮기기
     private float _sliderSize;
     public RectTransform _fillRect;
+
+    // - 다른 씬에도 적용하기 
+    //public static GameManager _instance;
 
     void Awake()
     {
         _slider = GetComponent<Slider>();
+    }
+
+    void Start()
+    {
+        //_instance = null;
     }
 
     public void BrightnessSlider()
@@ -27,8 +35,8 @@ public class BrightnessController : MonoBehaviour
         if (_sliderSize == 0)
         {
             //_sliderSize = GetComponent<RectTransform>().rect.width;
-            _sliderSize = 260; // _fillRect.rect.width;
-            _sliderSize = _sliderSize / (_slider.maxValue - _slider.minValue);
+            //_sliderSize = 1; // _fillRect.rect.width; //260 _sliderSize는 초기 슬라이더 사이즈 크기
+            //_sliderSize = _sliderSize / (_slider.maxValue - _slider.minValue);
         }
 
         // - 1

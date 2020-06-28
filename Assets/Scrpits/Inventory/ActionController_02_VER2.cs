@@ -53,8 +53,10 @@ public class ActionController_02_VER2 : MonoBehaviour
     private ActionController_03 actionController_3stage_script;
 
     // - 지하실과 2층으로 가는 길목 @ -> 이후에 네비메시 실시간 베이킹으로 바꾸기 
-    public GameObject tempDoor;
-    public GameObject tempStairs;
+    public GameObject tempDoor; //지하실 + 2층
+    public GameObject tempStairs; //지하실 문
+    public GameObject temp_basement; //지하실
+    public GameObject temp_stair; //2층
 
     //- 지하실과 2층 길목에 있을 가이드 링
     public GameObject Ring_Particle;
@@ -409,9 +411,9 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 _lightOn_script.LightOn();
 
                                 //지하실, 2층계단 오픈
-                                tempDoor.SetActive(false); //콜라이더 비활성화
+                                //tempDoor.SetActive(false); //콜라이더 비활성화
                                 //tempStairs.SetActive(false);
-
+                                temp_basement.SetActive(false);
 
                                 DoorOpen_Basement doorAni = tempStairs.GetComponent<DoorOpen_Basement>();
                                 doorAni.StartDoorAni();

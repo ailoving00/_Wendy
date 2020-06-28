@@ -133,16 +133,16 @@ public class Player_1stage : MonoBehaviour
             //ver1
             dir = h * Vector3.left + v * Vector3.back; // 회전방향
 
-            if (v != 0 & h != 0)
-            {
-                movementSpeed = 0.75f;
-            }
-            else
-            {
-                movementSpeed = 1.5f;
-            }
+            //if (v != 0 & h != 0)
+            //{
+            //    movementSpeed = 0.75f;
+            //}
+            //else
+            //{
+            //    movementSpeed = 1.5f;
+            //}
 
-            transform.position = transform.position + dir * movementSpeed * Time.deltaTime;
+            transform.position = transform.position + dir.normalized * movementSpeed * Time.deltaTime;
 
             //캐릭터의 원회전
             {

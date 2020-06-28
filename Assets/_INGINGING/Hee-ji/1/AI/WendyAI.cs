@@ -283,6 +283,11 @@ public class WendyAI : MonoBehaviour
         //도착지
         _agent.SetDestination(newPos);
 
+        // - 끼임 오류 수정
+        float trappedTime = 0.0f;
+        Vector3 prePos = Vector3.zero;
+        prePos = transform.position;
+
         while (!WithinRange(newPos, Range))
         {
             //회전
@@ -319,6 +324,22 @@ public class WendyAI : MonoBehaviour
                 _agent.speed = originalSpeed; // / GetNavMeshCost();
                 unpausedSpeed = _agent.velocity;
             }
+
+            // - 끼임 오류 수정
+            if (transform.position == prePos)
+            {
+                trappedTime += Time.deltaTime;
+                if (trappedTime > 1f)
+                {
+                    break;
+                }
+            }
+            else
+            {
+                trappedTime = 0f;
+            }
+            prePos = transform.position;
+
             yield return null;
         }
 

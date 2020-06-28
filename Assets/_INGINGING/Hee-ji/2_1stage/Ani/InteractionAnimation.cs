@@ -126,9 +126,9 @@ public class InteractionAnimation : MonoBehaviour
         }
 
         while (_player_animator.GetCurrentAnimatorStateInfo(0)
-                .normalizedTime < 0.99f)
+        .normalizedTime < 0.7f)
         {
-            // - 애니메이션 재생 중
+            // - 애니메이션 재생 중, 퍼즐조각 애니메이션 중간에 떨어짐
             yield return null;
         }
 
@@ -137,6 +137,14 @@ public class InteractionAnimation : MonoBehaviour
         {
             interAniManager_script.Active_Piece(_answer_index);
         }
+
+        while (_player_animator.GetCurrentAnimatorStateInfo(0)
+                .normalizedTime < 0.99f)
+        {
+            // - 애니메이션 재생 중
+            yield return null;
+        }
+
 
         // - 재생 완료, 스크립트 삭제
         _player_animator.SetBool("IsPlaying", false);

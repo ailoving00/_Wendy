@@ -201,7 +201,17 @@ public class ViewNote_Ani_02 : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked; //커서 고정
         }
 
-        clockNoteCtrler_script.reset_NoteState();
+        // - 
+        {
+            clockNoteCtrler_script = GameObject.FindObjectOfType<ActionController_TestNote>();
+
+            if (clockNoteCtrler_script != null)
+            //if (clockNoteCtrler_script.activeSelf == true) //활성화 상태이면
+            {
+                clockNoteCtrler_script.reset_NoteState();
+            }
+        }
+
         stateC = false;
     }
 

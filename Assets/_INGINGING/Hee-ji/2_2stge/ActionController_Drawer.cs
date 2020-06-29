@@ -164,7 +164,7 @@ public class ActionController_Drawer : MonoBehaviour
     private bool CheckObstacle()
     {
         // - 장애물 검사하기
-        coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
+        coverCheck = obstacleReader_script.LookAtFrame((int)_obstacle_layer);
         if (coverCheck)
         {
             pickupActivated = false;

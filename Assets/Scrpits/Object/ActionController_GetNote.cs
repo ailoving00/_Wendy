@@ -60,8 +60,10 @@ public class ActionController_GetNote : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE
     int _obstacle_layer;
 
-    // - 쪽지 상태 스크립트
     RewardNote_Check _pre_note_script = null;
+
+    // - 쪽지 상태 스크립트
+    SawNoteNumber note_num_script;
 
     void Start()
     {
@@ -81,6 +83,9 @@ public class ActionController_GetNote : MonoBehaviour
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         _obstacle_layer = (1 << LayerMask.NameToLayer("NotePage")) + (1 << LayerMask.NameToLayer("Obstacle"));
+
+        // 쪽지 상태 (싱글톤)
+        note_num_script = FindObjectOfType<SawNoteNumber>();
     }
 
     void Update()
@@ -92,7 +97,7 @@ public class ActionController_GetNote : MonoBehaviour
 
             Checkaction();
         }
-        
+
         TryAction();
     }
 
@@ -157,12 +162,14 @@ public class ActionController_GetNote : MonoBehaviour
                     _pre_note_script = noteScript;
                     // - 쪽지 매니저
                     notemager._popup = true;
+                    // - 쪽지 상태, UI
+                    hitaction.transform.GetComponent<PageNote>().CheckAddcount(1);
+                    if (note_num_script != null)
+                        note_num_script.SetNoteCount();
 
                     popupNote = true; //팝업 상태
 
                     ActionDisappear(); //info 삭제 - 분명 삭제했는데 왜 자꾸 뜬담? 
-
-                    hitaction.transform.GetComponent<PageNote>().CheckAddcount(1);
 
                     fpCam_Script.enabled = false;
                     player_script.SetDeActiveAni();

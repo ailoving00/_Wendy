@@ -34,7 +34,7 @@ public class ActionController_GetKey : MonoBehaviour
     private bool isPopup = false;
     private bool isFirstPage = true;
     private bool isLastPage = false;
-    private bool getKey = false;
+    public bool getKey = false;
 
     private bool possibleBookFlip = false;
     bool flipOver = false;
@@ -224,7 +224,7 @@ public class ActionController_GetKey : MonoBehaviour
                             pre_ol_index = cur_ol_index;
                         }
                     }
-                    else
+                    else // 여기 안거침
                     {
                         getKey = false;
                     }
@@ -236,6 +236,8 @@ public class ActionController_GetKey : MonoBehaviour
             }
             else
             {
+                getKey = false;
+
                 InfoDisappear();
 
                 if (pre_ol_index != -1)

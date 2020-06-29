@@ -28,6 +28,8 @@ public class GameMgr : MonoBehaviour
     FadeAni_guide guide_script;
     GuideCaption_Controller guideController_script;
     private bool onceCaption = false;
+    // - 1스테이지 인벤토리 가이드 확인
+    public bool invenguide_on = true;
 
     // - 옵션창
     public GameObject optionPanel;
@@ -60,6 +62,17 @@ public class GameMgr : MonoBehaviour
 
     void Update()
     {
+        // - 커서 락모드 테스트 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        // - 옵션창
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //Application.Quit();
@@ -81,6 +94,7 @@ public class GameMgr : MonoBehaviour
             if (!onceCaption)
             {
                 onceCaption = true;
+                invenguide_on = false;
                 guide_script.InStartFadeAnim();
             }
 

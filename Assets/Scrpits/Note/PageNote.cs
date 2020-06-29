@@ -26,7 +26,6 @@ public class PageNote : MonoBehaviour
             notemager.AddCount(1);
             check = true;
         }
-
         else
             return;
     }

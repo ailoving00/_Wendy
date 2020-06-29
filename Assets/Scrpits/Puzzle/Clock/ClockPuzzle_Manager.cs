@@ -220,8 +220,8 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
                     // - 해제, 코루틴으로 몇초뒤 스크립트가 enable = false 되는것은 @ -> ?
                     end = true;
-                    this.enabled = false;
                     SeeClock_script.enabled = false;
+                    this.enabled = false;
                 }
             }
         }

@@ -43,6 +43,9 @@ public class ActionController_TestNote : MonoBehaviour
     // - 쪽지 매니저
     NoteManger notemager;
 
+    // - 쪽지 상태 스크립트
+    SawNoteNumber note_num_script;
+
     void Start()
     {
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
@@ -61,6 +64,9 @@ public class ActionController_TestNote : MonoBehaviour
 
         // 쪽지 매니저
         notemager = FindObjectOfType<NoteManger>();
+
+        // 쪽지 상태 (싱글톤)
+        note_num_script = FindObjectOfType<SawNoteNumber>();
     }
 
     void Update()
@@ -117,8 +123,10 @@ public class ActionController_TestNote : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Note_CP")) // 1번 : 시계쪽지 순서
                 {
-                    // - 쪽지 상태
+                    // - 쪽지 상태, UI
                     hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);
+                    if (note_num_script != null)
+                        note_num_script.SetNoteCount();
                     // - 쪽지 매니저
                     notemager._popup = true;
 
@@ -252,5 +260,5 @@ public class ActionController_TestNote : MonoBehaviour
         }
 
         return false;
-    }    
+    }
 }

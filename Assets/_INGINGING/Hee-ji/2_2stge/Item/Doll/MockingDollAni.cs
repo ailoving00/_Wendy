@@ -78,7 +78,7 @@ public class MockingDollAni : MonoBehaviour
 
         dollAniManger_script.CheckDollAnim(dollNum);
 
-        Debug.Log("end check");
+        //Debug.Log("end check");
     }
 
     public bool get_playState()

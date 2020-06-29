@@ -246,6 +246,10 @@ public class ActionController_03 : MonoBehaviour
         {
             if (hitInfo2.transform.tag == "Location") //compare @
             {
+                // - 인형들 애니메이션 검사
+                //if (!dollAniManager_script.ClickButton()) //클릭이 가능한지
+                //    return;
+
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
 
@@ -307,9 +311,8 @@ public class ActionController_03 : MonoBehaviour
                     if (pre_ol_index == -1)
                         return;
 
+                    // - 종소리 사운드
                     SoundManger.instance.PlaySound(bellSound);
-
-                    dollAniManager_script.set_clickable(false); //클릭했으니 상태를 클릭못하는 상태로변환
 
                     // - 외곽선 해제
                     OutlineController.set_enabled(pre_ol_index, false);
@@ -320,8 +323,11 @@ public class ActionController_03 : MonoBehaviour
                     // - 클릭버튼 해제
                     actionCaption.SetActive(false);
 
-                    // - 종소리 사운드
-                    //~
+                    // - 배치퍼즐 장식장에 한개라도 있으면 상태가 false로
+                    if (displayManager_script2.get_inputState())
+                        dollAniManager_script.set_clickable(false); //클릭했으니 상태를 클릭못하는 상태로변환
+                    else //장식장에 아무것도 안 놓여짐,비워져있음
+                        return;
 
                     if (displayManager_script2.compare_Answer()) // 맞았을때,
                     {
@@ -359,8 +365,11 @@ public class ActionController_03 : MonoBehaviour
     {
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hitInfo2, range, layerMask_dlsplay))
         {
-            if (!dollAniManager_script.ClickButton())
+            if (!dollAniManager_script.ClickButton()) // 애니메이션이 끝나고 인형배치할 수 있는 상태가 되어야함
+            {
+                layActivated = false;
                 return;
+            }
 
             layActivated = true;
 

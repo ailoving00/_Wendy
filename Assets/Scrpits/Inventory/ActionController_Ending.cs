@@ -131,9 +131,6 @@ public class ActionController_Ending : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
-                // 쪽지매니저 호출
-                //notemager.OpenCondition(); 
-
                 // - 선택슬롯에 아무것도 없을때 (열쇠꽂기실패)
                 if (theInventory.IsVoid_Slot(selectSlot_script.get_index()))
                 {
@@ -146,12 +143,14 @@ public class ActionController_Ending : MonoBehaviour
                 int select_itemCode = theInventory.get_ItemCode(selectSlot_script.get_index());
                 Debug.Log(select_itemCode.ToString());
 
+                // - 선택슬롯으로 열쇠를 가리키면 (성공)
                 if (select_itemCode == 40)
                 {
-                    // - 선택슬롯이 열쇠를 가리키면 (성공)
+                    // - 쪽지매니저 호출
+                    notemager.OpenCondition();
 
-                    //영상틀기
-                    loadEnding_script.InStartFadeAnim(); //쪽지매니저와 합치기
+                    // - 영상틀기 (O)
+                    //loadEnding_script.InStartFadeAnim(); //쪽지매니저와 합치기
 
                     //Aim.SetActive(false);
                 }

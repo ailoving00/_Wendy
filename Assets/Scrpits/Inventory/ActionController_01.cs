@@ -84,8 +84,13 @@ public class ActionController_01 : MonoBehaviour
     bool popupNote = false;
     bool opening = false;
 
-
     CheckRange checkRange_Script;
+
+    // - 쪽지 매니저
+    NoteManger notemager;
+
+    // - 쪽지 상태 스크립트
+    SawNoteNumber note_num_script; // 파괴 X 싱글톤, 노트모은개수 확인
 
     void Start()
     {
@@ -109,6 +114,12 @@ public class ActionController_01 : MonoBehaviour
         viewNote_script = GameObject.FindObjectOfType<ViewNote_01>();
 
         checkRange_Script = GameObject.FindObjectOfType<CheckRange>();
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>();
+
+        // 쪽지 상태 (싱글톤)
+        note_num_script = FindObjectOfType<SawNoteNumber>();
     }
 
     void Update()
@@ -324,6 +335,11 @@ public class ActionController_01 : MonoBehaviour
 
             if (hitInfo.transform.CompareTag("Note_BP"))
             {
+                // - 쪽지 상태
+                hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);
+                note_num_script.SetNoteCount();
+
+                // - 팝업 상태
                 popupNote = true;
 
                 viewNote_script.StartAni_Note();

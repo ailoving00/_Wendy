@@ -116,4 +116,22 @@ public class DisplayManager_3stage : MonoBehaviour
 
         return -1;
     }
+
+    // 배치퍼즐에 아무것도 놓아진게 있는지 확인 -> 장식장이 비워져있으면 false
+    public bool get_inputState()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            if (input_Arry[i] == 0)
+            {
+                continue;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

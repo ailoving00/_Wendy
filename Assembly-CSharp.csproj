@@ -198,6 +198,7 @@
      <Compile Include="Assets\Scrpits\ObjectOutline\SortComparerForOutline_HJ.cs" />
      <Compile Include="Assets\Scrpits\ObjectOutline\TestDO_HJ.cs" />
      <Compile Include="Assets\Scrpits\ObjectOutline\TestItem_HJ.cs" />
+     <Compile Include="Assets\Scrpits\paricle\colliderRing.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\Block.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\BlockManager.cs" />
      <Compile Include="Assets\Scrpits\Puzzle\Block\BlockUnit.cs" />
@@ -254,6 +255,7 @@
      <None Include="Assets\_INGINGING\Hee-ji\1\_grass_heeji\Grass Assets\Materials\Additive Summation.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFMUnlit.shader" />
      <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_StandartMaskedDetails.shader" />
+     <None Include="Assets\Alloy\LICENSE.txt" />
      <None Include="Assets\_INGINGING\Hee-ji\final_tex\1stage\grass\Grass2.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DepthBlur.shader" />
      <None Include="Assets\_INGINGING\Hee-ji\final_background\fix\gagu\Test_cutOut_Surf.shader" />
@@ -281,6 +283,7 @@
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\Tree\Tree_Opaque.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\DepthCopyMask.shader" />
      <None Include="Assets\_PurchasedAsset\_Interior\_IvyPack\__CubemapsShaders\ASE_Standart.shader" />
+     <None Include="Assets\Alloy\REQUIRED ACTIONS.txt" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Common\Shaders\SnowParticleSurfaceShader.shader" />
      <None Include="Assets\Sprites\Texture\2Stage\mainclock\Custom Cutout.shader" />
      <None Include="Assets\_PurchasedAsset\SC Post Effects\Shaders\API\OpenGL.hlsl" />

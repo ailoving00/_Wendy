@@ -15,6 +15,11 @@ public class ActionController_02_VER2 : MonoBehaviour
 {
     public Inventory theInventory;
 
+    [SerializeField]
+    private string itemgainsound = "GainItem";
+
+    [SerializeField]
+    private string itemusesound = "SetItem" ;
 
     [SerializeField]
     private string bellSound = "AP_bell";
@@ -165,8 +170,18 @@ public class ActionController_02_VER2 : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Item"))
                 {
+
+                    //아이템 입수 사운드 
+                    SoundManger.instance.PlaySound(itemgainsound);
+
+
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
+
+
+
+
+
                         // - 아이템 습득
                         hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
                         OutlineController.set_enabled(pre_ol_index, false);
@@ -182,6 +197,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                         {
                             if (hitInfo2.transform.tag == "Location")
                             {
+
                                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
                                 int display_index = location_script.location_Num;
 
@@ -347,11 +363,18 @@ public class ActionController_02_VER2 : MonoBehaviour
         {
             if (hitInfo2.transform.CompareTag("Location")) //compare @
             {
+
+                //인형 배치 사운드
+                SoundManger.instance.PlaySound(itemusesound);
+
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
 
                 if (PickUp_state)
                 {
+
+
+
                     // 장식장 인형 가질수있으면 가져가기
                     location_script.take_Doll();
                     PickUp_state = false;

@@ -6,6 +6,11 @@ using UnityEngine;
 public class ActionController_03 : MonoBehaviour
 {
     [SerializeField]
+    private string itemgainsound = "GainItem";
+
+    [SerializeField]
+    private string itemusesound = "SetItem";
+    [SerializeField]
     private string bellSound = "AP_bell";
     [SerializeField]
     private string deskSound = "AP_openDesk";
@@ -114,6 +119,11 @@ public class ActionController_03 : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Item"))
                 {
+
+                    //아이템 입수 사운드 
+                    SoundManger.instance.PlaySound(itemgainsound);
+
+
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
                         // - 아이템 습득
@@ -249,6 +259,11 @@ public class ActionController_03 : MonoBehaviour
                 // - 인형들 애니메이션 검사
                 //if (!dollAniManager_script.ClickButton()) //클릭이 가능한지
                 //    return;
+
+
+                //인형 배치 사운드
+                SoundManger.instance.PlaySound(itemusesound);
+
 
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();

@@ -13,6 +13,7 @@ public class Cellar_Wendy : MonoBehaviour
     GameOverManger gameoverStart;
     Cellar_Manager cellar_;
 
+
     public Image timeover;
 
     private Color aplha;
@@ -33,13 +34,13 @@ public class Cellar_Wendy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Wall")
+        if (other.transform.CompareTag("Wall"))
         {
             timeover.gameObject.SetActive(true);
             StartCoroutine(Title());
 
 
-            cellar_.enabled = false;
+            cellar_.MoveStop();
 
         }
     }

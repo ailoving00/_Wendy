@@ -36,10 +36,10 @@ public class DollAniManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
+    //}
 
     public void Active_AnimScript() //이거 각자의 MockingDollAni에서 활성화관련 코드에 잇는걸로 바꿈
     {

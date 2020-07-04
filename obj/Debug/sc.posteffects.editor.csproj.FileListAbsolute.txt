@@ -543,3 +543,4 @@ C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\sc.posteffects.editor.csprojResol
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\sc.posteffects.editor.dll
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\sc.posteffects.editor.pdb
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Boo.Lang.dll

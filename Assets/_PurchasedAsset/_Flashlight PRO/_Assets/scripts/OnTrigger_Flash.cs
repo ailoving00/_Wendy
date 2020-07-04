@@ -15,9 +15,12 @@ public class OnTrigger_Flash : MonoBehaviour
     public float speedFactor = 0.0f; //보정값 222
     Animator _animator = null;
 
+    public GameObject Particle_bomb;
+    ParticleSystem particleBomb;
 
     public GameObject FlashLamp_Transform;
     public GameObject FlahLamp_EndTrans;
+    Flashlight_PRO flashstate;
 
     public GameObject FlashCamera;
     public GameObject FlashPack;
@@ -32,7 +35,8 @@ public class OnTrigger_Flash : MonoBehaviour
     void Start()
     {
         _animator = playerModeling.GetComponent<Animator>();
-
+        ParticleSystem particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
+        flashstate = FindObjectOfType<Flashlight_PRO>();
     }
 
     // Start is called before the first frame update
@@ -82,9 +86,14 @@ public class OnTrigger_Flash : MonoBehaviour
         FlashState = true;
 
 
+        yield return new WaitForSeconds(1.5f);
+
         _animator.SetBool("IsWalking", false);
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = false;
         //mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
+
+        yield return new WaitForSeconds(1f);
+
 
         Vector3 StartPoint = FlashLamp_Transform.transform.position;
         Vector3 SetPoint = FlahLamp_EndTrans.transform.position;
@@ -93,7 +102,21 @@ public class OnTrigger_Flash : MonoBehaviour
         Quaternion SetRotation = FlahLamp_EndTrans.transform.rotation;
 
 
-        SoundManger.instance.PlaySound(brokenSound);
+
+
+
+        /// 오류발생 수정중
+        //particlebomb.gameobject.setactive(true);
+        //particlebomb.play();
+
+
+        //flashstate.switch(false);
+        //soundmanger.instance.playsound(brokensound);
+
+
+        yield return new WaitForSeconds(5f);
+
+
         //고장 파티클 추가
 
         while (true)

@@ -279,7 +279,6 @@ C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Recorder.Editor.pdb
 C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Unity.Recorder.pdb
 C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\sc.posteffects.editor.pdb
 C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\sc.posteffects.runtime.pdb
-C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Boo.Lang.dll
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\Microsoft.Win32.Primitives.dll
@@ -562,3 +561,4 @@ C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\UnityEditor.UI.xml
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\Assembly-CSharp-firstpass.csprojResolveAssemblyReference.cache
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\Assembly-CSharp-firstpass.dll
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Boo.Lang.dll

@@ -167,6 +167,7 @@
      <Compile Include="Assets\Scrpits\Character\ThreePersonCamera_1stage.cs" />
      <Compile Include="Assets\Scrpits\Character\Wendy_FootSound.cs" />
      <Compile Include="Assets\Scrpits\Decorating\Box_1stage\BoxOpen.cs" />
+     <Compile Include="Assets\Scrpits\GameManager\Audio\AddSoundManager.cs" />
      <Compile Include="Assets\Scrpits\GameManager\Audio\RandomSound.cs" />
      <Compile Include="Assets\Scrpits\GameManager\Audio\SoundManager\SoundManger.cs" />
      <Compile Include="Assets\Scrpits\GameManager\GameOver\GameOverManger.cs" />
@@ -263,6 +264,7 @@
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\SnowOverlay.cginc" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\GlobalSnowForwardOptions.cginc" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\SnowOverlay.shader" />
+     <None Include="Assets\_INGINGING\Hovl Studio\Procedural fire\Shaders\FireSphere.shader" />
      <None Include="Assets\_PurchasedAsset\SSAO Pro\Readme.txt" />
      <None Include="Assets\_INGINGING\Hee-ji\final_tex\1stage\grass\Grass.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\FogOfWar.shader" />
@@ -341,6 +343,7 @@
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\Tree\GlobalSnowMats.cginc" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SnowedSpeedTreeCommon.cginc" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFGBasic.shader" />
+     <None Include="Assets\_INGINGING\Hovl Studio\Procedural fire\Demo scene\Readme.txt" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Forward\Shaders\SpeedTree\SpeedTreeBillboardAdapted.shader" />
      <None Include="Assets\_PurchasedAsset\Fog\Resources\Shaders\DFODesktopPlusOrthogonal.shader" />
      <None Include="Assets\_PurchasedAsset\Snow\Resources\Workflow_Deferred\Shaders\GlobalSnowDeferredOptions.cginc" />

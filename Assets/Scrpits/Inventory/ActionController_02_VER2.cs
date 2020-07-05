@@ -65,12 +65,15 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     //- 지하실과 2층 길목에 있을 가이드 링
     public GameObject Ring_Particle;
-    ParticleSystem event_ringParticle;
+    ParticleSystem particleRing;
 
     // - 손전등
     public GameObject FlashlightItem;
     Flashlight_PRO flash_script;
     OnTrigger_Flash flash_end;
+
+    // - 모닥불
+    AddSoundManager Fire_script;
 
     // - 라이트
     LightOn_3stage _lightOn_script;
@@ -97,6 +100,9 @@ public class ActionController_02_VER2 : MonoBehaviour
 
     void Start()
     {
+
+        particleRing = Ring_Particle.GetComponentInChildren<ParticleSystem>();
+
         item_layerMask = (1 << LayerMask.NameToLayer("Item")) + (1 << LayerMask.NameToLayer("Doll"));
 
         //배치퍼즐
@@ -114,8 +120,8 @@ public class ActionController_02_VER2 : MonoBehaviour
         flash_script.enabled = false;
         flash_end = FindObjectOfType<OnTrigger_Flash>();
 
-        //파티클
-        event_ringParticle = Ring_Particle.GetComponentInChildren<ParticleSystem>();
+        //모닥불
+        Fire_script = GameObject.FindObjectOfType<AddSoundManager>();
 
         //라이트
         _lightOn_script = GameObject.FindObjectOfType<LightOn_3stage>();
@@ -452,13 +458,25 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //FlashlightItem.SetActive(false);
                                 flash_end.FlashLightEnd(1);
 
+                                //지하실 파티클 오픈
+                                Ring_Particle.SetActive(true);
+
+                                //모닥불 
+                                Fire_script.FireWallStartSound();
+
+
+                                if (particleRing.isPlaying)
+                                {
+                                    particleRing.Play();
+                                }
+
+
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();
                                 wendyAI_Script.colliderChange();
 
-                                //지하실 파티클 오픈
-                                Ring_Particle.SetActive(true);
-                                event_ringParticle.Play();
+                                
+                               
 
 
                                 // 외곽선 해제                   

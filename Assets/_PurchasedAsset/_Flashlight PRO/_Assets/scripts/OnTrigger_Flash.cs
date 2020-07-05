@@ -35,8 +35,10 @@ public class OnTrigger_Flash : MonoBehaviour
     void Start()
     {
         _animator = playerModeling.GetComponent<Animator>();
-        ParticleSystem particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
+       // ParticleSystem particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
         flashstate = FindObjectOfType<Flashlight_PRO>();
+        particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
+        Particle_bomb.SetActive(false);
     }
 
     // Start is called before the first frame update
@@ -114,10 +116,19 @@ public class OnTrigger_Flash : MonoBehaviour
         //soundmanger.instance.playsound(brokensound);
 
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
 
 
         //고장 파티클 추가
+        Particle_bomb.SetActive(true);
+
+        if (!particleBomb.isPlaying)
+        {
+            Particle_bomb.SetActive(false);
+        }
+        SoundManger.instance.PlaySound(brokenSound);
+
+        yield return new WaitForSeconds(3f);
 
         while (true)
         {
@@ -149,7 +160,7 @@ public class OnTrigger_Flash : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         Target_Player.gameObject.GetComponent<Player_HJ>().enabled = true; //이걸 줄일수 있는게 없을까?
                                                                            // mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = true;
-        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+       // this.gameObject.GetComponent<BoxCollider>().enabled = false;
         FlashCamera.SetActive(false);
         FlashPack.SetActive(false);
 
@@ -192,13 +203,6 @@ public class OnTrigger_Flash : MonoBehaviour
         //   }
 
         //   FlashState = false;
-
-
-
-        //Mathf.Lerp ( 시작점, 종료점, 거리비율을 받는데 )
-        // 시작점에는 오브젝트의 현재 위치를 받고 - 종료점에는 오브젝트 현재 위치 + 10.
-        // 다시 시작점에는 오브젝트의 종료 위치를 받고 - 종료점에는 그 시작점의 + 10.
-
 
     }
 

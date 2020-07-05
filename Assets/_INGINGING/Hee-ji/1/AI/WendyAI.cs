@@ -34,7 +34,7 @@ public class WendyAI : MonoBehaviour
 
 
     //- 지하실과 2층 길목에 있을 가이드 링
-    public GameObject Ring_Particle;
+   // public GameObject Ring_Particle;
    // ParticleSystem event_ringParticle;
 
     private void Awake()

@@ -45,7 +45,12 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
     // - 서브시계 스크립트
     private MakeClockSee SeeClock_script;
- 
+
+    // - 쪽지 매니저
+    NoteManger notemager;
+
+    // - 시계퍼즐 활성화 스크립트
+    ActivePuzzle_CP activePuzzle_script;
 
     void Start()
     {
@@ -62,10 +67,27 @@ public class ClockPuzzle_Manager : MonoBehaviour
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
 
         SeeClock_script = GameObject.FindObjectOfType<MakeClockSee>();
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>();
+
+        //시계퍼즐 활성화
+        activePuzzle_script = GameObject.FindObjectOfType<ActivePuzzle_CP>();
     }
 
     void Update()
     {
+        //장애물검사 : 장애물은 없을것같아서 검사안함
+        //~
+
+        //쪽지 팝업 체크 : 팝업되지 않은 상태여야 가능하도록
+        if (notemager._popup == true) 
+            return;
+
+        //퍼즐 끝
+        if (end)
+            return;
+
         LookAtClock();
         check_click();
     }
@@ -145,8 +167,8 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
     private void check_click()
     {
-        if (end)
-            return;
+        //if (end)
+        //    return;
 
         if (!active)
             return;
@@ -201,8 +223,7 @@ public class ClockPuzzle_Manager : MonoBehaviour
                     // - 시계판 열리는 애니메이션
                     SoundManger.instance.PlaySound(OpenClock);
                     reward_script.set_Ani_param();
-
-
+                    
                     // - 피터팬인형 활성화
                     reward.SetActive(true);
 
@@ -220,6 +241,9 @@ public class ClockPuzzle_Manager : MonoBehaviour
 
                     // - 해제, 코루틴으로 몇초뒤 스크립트가 enable = false 되는것은 @ -> ?
                     end = true;
+                    activePuzzle_script.set_puzzleEnd(); //시계퍼즐 활성화스크립트 해제
+
+                    // - 서브시계 보기 기능 끝
                     SeeClock_script.enabled = false;
                     this.enabled = false;
                 }
@@ -265,5 +289,10 @@ public class ClockPuzzle_Manager : MonoBehaviour
             // - 클릭버튼 해제
             actionCaption.SetActive(false);
         }
+    }
+    
+    public bool GetPuzzleEnd()
+    {
+        return end;
     }
 }

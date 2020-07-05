@@ -152,6 +152,8 @@ public class InteractionAnimation : MonoBehaviour
 
         palyer_script.enabled = true;
         palyer_script.set_Angle(transAngle);
+        palyer_script.SetAniState(true);
+
         actionCtrler.enabled = true;
 
         if (hideTree_script != null)

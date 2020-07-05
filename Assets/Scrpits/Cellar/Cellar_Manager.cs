@@ -25,18 +25,25 @@ public class Cellar_Manager : MonoBehaviour
 
     bool Stop = false;
 
+    Coroutine _coroutine;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        // 특정 상황 반복 시 코루틴 실행. 현재는 플레이어가 집에 들어오자마자 시작되는 것으로.
-        // Vector3 E_WallStart = Wall_E.transform.position; // E_Wall 의 시작 위치
+        //// 특정 상황 반복 시 코루틴 실행. 현재는 플레이어가 집에 들어오자마자 시작되는 것으로.
+        //// Vector3 E_WallStart = Wall_E.transform.position; // E_Wall 의 시작 위치
 
+        //Vector3 S_WallStop = Wall_S.transform.position + new Vector3(0, 0, 2); // E_Wall의 움직이고 난 끝위치
+
+        //StartCoroutine(deley());
+    }
+
+    public void MoveStart()
+    {
         Vector3 S_WallStop = Wall_S.transform.position + new Vector3(0, 0, 2); // E_Wall의 움직이고 난 끝위치
 
-
         StartCoroutine(deley());
-
-
     }
 
     public void MoveStop()
@@ -44,27 +51,17 @@ public class Cellar_Manager : MonoBehaviour
         Stop = true;
     }
 
-
     IEnumerator deley()
     {
-
-
         yield return new WaitForSeconds(5);
-
 
         Vector3 EWallstartPos = Wall_E.transform.localPosition;
         Vector3 SWallstartPos = Wall_S.transform.position;
-
 
         SoundManger.instance.PlaySound(RockDown);
         SoundManger.instance.PlaySound(MoveWallSound);
         StartCoroutine(EWall_CountDown(EWallstartPos + new Vector3(10, 0, 0), SetTimeLimet));   // 시작부터 카운트 다운이 진행된다. 
         StartCoroutine(SWall_CountDown(SWallstartPos + new Vector3(0, 0, 10), SetTimeLimet));   // 시작부터 카운트 다운이 진행된다. 
-
-
-
-
-
     }
 
     IEnumerator EWall_CountDown(Vector3 endPos, float duration)
@@ -84,16 +81,13 @@ public class Cellar_Manager : MonoBehaviour
             time += Time.deltaTime;
             Wall_E.transform.localPosition = Vector3.Lerp(EWallstartPos, endPos,  time / movetime);
 
-
             if (Stop)
                 break;
 
             yield return waitForEndOfFrame;
         }
 
-
-        yield return new WaitForSeconds(2);
-
+        yield return new WaitForSeconds(2f);
     }
 
     IEnumerator SWall_CountDown(Vector3 endPos, float duration)
@@ -113,20 +107,16 @@ public class Cellar_Manager : MonoBehaviour
             time += Time.deltaTime;
             Wall_S.transform.localPosition = Vector3.Lerp(SWallstartPos, endPos, time / movetime);
             //   Wall_E.transform.position = Vector3.Lerp(Wall_E.transform.position, E_WallStop, t);
-
-
-
+            
             if (Stop)
                 break;
 
             yield return waitForEndOfFrame;
         }
 
-
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2f);
 
         Vector3 E_WallStop = Wall_E.transform.position + new Vector3(2, 0, 0); // E_Wall의 움직이고 난 끝위치
-
     }
 
 

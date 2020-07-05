@@ -59,6 +59,8 @@ public class Player_1stage : MonoBehaviour
     //CharacterController controller;
     //private Vector3 moveDirection = Vector3.zero;
 
+    private bool agentMove = true;
+
     void Start()
     {
         //_animator = GameObject.Find("wendy_umuni_rigging").GetComponent<Animator>(); 
@@ -66,6 +68,8 @@ public class Player_1stage : MonoBehaviour
         //_animator = GetComponent<Animator>();
 
         check = false;
+
+        angle = 180f;
 
         atanAngle = 0.0f;
         anglecheck = 0;
@@ -97,10 +101,11 @@ public class Player_1stage : MonoBehaviour
 
         if (v == 0 & h == 0)
         {
-            if (!check)
+            if (!check || agentMove)
             {
                 _animator.SetBool("IsWalking", false);
                 check = true;
+                agentMove = false;
 
                 dir = Vector3.zero;
 
@@ -123,10 +128,11 @@ public class Player_1stage : MonoBehaviour
             // - 이전 방향키나 방향이 같으면? => 동일한 값일경우 , 쓸데없는 연산을 줄여야함 @ 수정필요
 
             //애니메이션
-            if (check)
+            if (check || agentMove)
             {
                 _animator.SetBool("IsWalking", true);
                 check = false;
+                agentMove = false;
             }
 
             //이동
@@ -300,5 +306,10 @@ public class Player_1stage : MonoBehaviour
 
         rotAni = false;
         //yield break;
+    }
+
+    public void SetAniState(bool b)
+    {
+        agentMove = b;
     }
 }

@@ -28,6 +28,12 @@ public class GameManager : MonoBehaviour
     {
         // TitleButton 클래스에 임시로 있음
 
+        // - 화면 비율
+        //Screen.SetResolution(1920, 1080, false);
+        Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true);
+
+        // - 커서
+        Cursor.lockState = CursorLockMode.None; //마우스 해제
     }
 
     void Update()

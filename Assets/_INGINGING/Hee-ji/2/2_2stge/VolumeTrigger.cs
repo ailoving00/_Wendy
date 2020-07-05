@@ -35,7 +35,8 @@ namespace SCPE
 
         private void OnTriggerEnter(Collider other)
         {
-            Trigger();
+            if (other.tag == "Player")
+                Trigger();
         }
 
         /// <summary>

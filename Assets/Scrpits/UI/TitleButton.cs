@@ -23,11 +23,13 @@ public class TitleButton : MonoBehaviour
 
     void Start()
     {
-        // - 추후 보완, 변경 필요함
-        Screen.SetResolution(1920, 1080, false);
+        // GameManager로 이동
+        //// - 추후 보완, 변경 필요함
+        //Screen.SetResolution(1920, 1080, false);
 
-        // - 커서
-        Cursor.lockState = CursorLockMode.None; //마우스 해제
+        //// - 커서
+        //Cursor.lockState = CursorLockMode.None; //마우스 해제
+
         // - 옵션창
         _option_window.SetActive(false);
 

@@ -66,8 +66,8 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
-    - _MoveAmount: 0.2
-    - _MoveSpeed: 2
+    - _MoveAmount: 0.1
+    - _MoveSpeed: 1
     - _MoveTilling: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02

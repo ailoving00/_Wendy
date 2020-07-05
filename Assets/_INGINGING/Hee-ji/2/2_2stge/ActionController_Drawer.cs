@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ActionController_Drawer : MonoBehaviour
 {
-
-
     [SerializeField]
     private float range;
     [SerializeField]

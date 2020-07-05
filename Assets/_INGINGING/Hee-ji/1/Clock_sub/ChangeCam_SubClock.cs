@@ -16,13 +16,14 @@ public class ChangeCam_SubClock : MonoBehaviour
     private ActionController_02_VER2 actionController;
     private FirstPersonCamera mainCamMove_script;
 
-    private FramePuzzle_Controller fpController;
     //temp
     public GameObject _Aim;
     public GameObject _info;
 
     private MakeClockSee MakeClockSee_script;
     public SeeingSubClock SeeingClock_script;
+
+    private int stage = 2;
 
     void Start()
     {
@@ -67,6 +68,7 @@ public class ChangeCam_SubClock : MonoBehaviour
             _info.SetActive(false);
 
             // - 메인카메라,플레이어 스크립트 off
+            //if (stage == 2) //서브시계가 2스테이지에만 볼수있게 만들었음
             actionController.enabled = false;
             mainCamMove_script.enabled = false;
 
@@ -105,10 +107,13 @@ public class ChangeCam_SubClock : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
 
+        //if (stage == 2)
         actionController.enabled = true;
-        mainCamMove_script.enabled = true;
         playerController.enabled = true;
 
-        MakeClockSee_script.enabled = true;
+        {
+            mainCamMove_script.enabled = true;
+            MakeClockSee_script.enabled = true;
+        }
     }
 }

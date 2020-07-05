@@ -97,6 +97,11 @@ public class ActionController_02_VER2 : MonoBehaviour
     // - 쪽지 매니저
     NoteManger notemager;
 
+    // - 지하실 : 클리어하면 멈추게
+    Cellar_Manager _cellarManager;
+
+    // - 지하실 보기
+    CellarDoorCollider _cellarDoor_script;
 
     void Start()
     {
@@ -137,6 +142,12 @@ public class ActionController_02_VER2 : MonoBehaviour
 
         // 쪽지 매니저
         notemager = FindObjectOfType<NoteManger>();
+
+        //지하실
+        _cellarManager = GameObject.FindObjectOfType<Cellar_Manager>();
+
+        //지하실 보기
+        _cellarDoor_script = GameObject.FindObjectOfType<CellarDoorCollider>();
     }
 
     void Update()
@@ -176,18 +187,11 @@ public class ActionController_02_VER2 : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Item"))
                 {
-
                     //아이템 입수 사운드 
                     SoundManger.instance.PlaySound(itemgainsound);
 
-
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
-
-
-
-
-
                         // - 아이템 습득
                         hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
                         OutlineController.set_enabled(pre_ol_index, false);
@@ -378,9 +382,6 @@ public class ActionController_02_VER2 : MonoBehaviour
 
                 if (PickUp_state)
                 {
-
-
-
                     // 장식장 인형 가질수있으면 가져가기
                     location_script.take_Doll();
                     PickUp_state = false;
@@ -424,7 +425,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                             // - count 증가 #
                             displayManager_script.count++;
 
-                            // - 2스테이지 장식장 배치가 3스테이지로 옮겨짐. 한번만 실행 #
+                            // - 2스테이지 장식장 배치가 3스테이지로 옮겨짐. 한번만 실행 # (2스테이지 클리어)
                             if (displayManager_script.count == 8)
                             {
                                 //2스테이지 배치퍼즐 off
@@ -444,11 +445,10 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //tempStairs.SetActive(false);
                                 temp_basement.SetActive(false);
 
+                                // 지하실 열리기(임시)
                                 DoorOpen_Basement doorAni = tempStairs.GetComponent<DoorOpen_Basement>();
                                 doorAni.StartDoorAni();
-
-
-
+                                
                                 enter_3stage = true;
 
                                 //3스테이지 카메라 스크립트 on
@@ -461,23 +461,24 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //지하실 파티클 오픈
                                 Ring_Particle.SetActive(true);
 
+                                //지하실 움직임 끝
+                                _cellarManager.MoveStop();
+
+                                //지하실 보기 기능 끝
+                                //_cellarDoor_script.enabled = false; //트리거로 검사해서 소용 없다
+                                _cellarDoor_script.Set2StageEnd();
+
                                 //모닥불 
                                 Fire_script.FireWallStartSound();
-
-
+                                
                                 if (particleRing.isPlaying)
                                 {
                                     particleRing.Play();
-                                }
-
-
+                                }                                
+                                
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();
                                 wendyAI_Script.colliderChange();
-
-                                
-                               
-
 
                                 // 외곽선 해제                   
                                 if (pre_ol_index != -1)

@@ -21,11 +21,15 @@ public class NextStage_01 : MonoBehaviour
     //private Coroutine coroutine;
     GameMgr invenCtrler_script;
 
+    Option_inGame option_ingame_script;
+
     void Awake()
     {
         fadeImg = GetComponent<Image>();
 
         invenCtrler_script = GameObject.FindObjectOfType<GameMgr>();
+
+        option_ingame_script = GameObject.FindObjectOfType<Option_inGame>();
     }
 
     //페이드아웃
@@ -40,6 +44,9 @@ public class NextStage_01 : MonoBehaviour
         end = 1f;
 
         invenCtrler_script.enabled = false;
+
+        // - 매니저에 값 복사
+        option_ingame_script.DelegateSliderValue();
 
         StartCoroutine(fadeIntanim());
     }

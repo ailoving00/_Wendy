@@ -34,7 +34,17 @@ public class CellarDoorCollider : MonoBehaviour
     bool coverCheck = false;
     int checklayer;
 
+    // - 서브시계 보기
     MakeClockSee subClock_script; // 우선순위를 위해서
+
+    // - 시계퍼즐 활성화 상태를 얻기위함
+    ClockPuzzle_Manager cp_manager_script;
+
+    // - 쪽지 매니저
+    NoteManger notemager;
+
+    // - 2스테이지 클리어 변수
+    private bool _2stage_clear = false;
 
     void Start()
     {
@@ -53,15 +63,31 @@ public class CellarDoorCollider : MonoBehaviour
 
         // 서브시계 보는 스크립트
         subClock_script = GameObject.FindObjectOfType<MakeClockSee>();
+
+        //시계퍼즐 매니저 스크립트
+        cp_manager_script = GameObject.FindObjectOfType<ClockPuzzle_Manager>();
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Player"))
         {
-            // - 지하실 볼수있는 범위에 들어오면 서브시계 볼수없음, 지하실보는것이 우선순위
-            subClock_script.set_active(false);
-            subClock_script.enabled = false;
+            if (_2stage_clear)
+                return;
+
+            if (notemager._popup == true) //쪽지 팝업 체크
+                return;
+
+            // 시계퍼즐이 클리어 됬는지 (서브시계
+            if (!cp_manager_script.GetPuzzleEnd())
+            {
+                // - 지하실 볼수있는 범위에 들어오면 서브시계 볼수없음, 지하실보는것이 우선순위
+                subClock_script.set_active(false);
+                subClock_script.enabled = false;
+            }
         }
     }
 
@@ -69,6 +95,12 @@ public class CellarDoorCollider : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
+            if (_2stage_clear)
+                return;
+
+            if (notemager._popup == true) //쪽지 팝업 체크
+                return;
+
             if (textstate)
             {
                 if (LookAtDoor())
@@ -124,7 +156,6 @@ public class CellarDoorCollider : MonoBehaviour
             {
                 if (LookAtDoor())
                 {
-
                     ChangeCam_script.change_Camera(1);
 
                     //NotText();
@@ -161,6 +192,12 @@ public class CellarDoorCollider : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
+            if (_2stage_clear)
+                return;
+
+            if (notemager._popup == true) //쪽지 팝업 체크
+                return;
+
             //guideCaption.gameObject.SetActive(false);
             textstate = true;
 
@@ -176,8 +213,12 @@ public class CellarDoorCollider : MonoBehaviour
                 actionCaption.SetActive(false);
             }
 
-            // - 서브시계 볼수있음
-            subClock_script.enabled = true;
+            // 시계퍼즐이 클리어 됬는지
+            if (!cp_manager_script.GetPuzzleEnd())
+            {
+                // - 서브시계 볼수있음
+                subClock_script.enabled = true;
+            }
         }
     }
 
@@ -208,5 +249,10 @@ public class CellarDoorCollider : MonoBehaviour
     public void set_state(bool b) //지하실 changeCam 스크립트에서 호출됨
     {
         textstate = b;
+    }
+
+    public void Set2StageEnd()
+    {
+        _2stage_clear = true;
     }
 }

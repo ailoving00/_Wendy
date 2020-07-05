@@ -36,6 +36,12 @@ public class MakeClockSee : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE
     int obstacle_layer;
 
+    // - 쪽지 매니저
+    NoteManger notemager;
+
+    // - 시계퍼즐 활성화 상태를 얻기위함
+    ClockPuzzle_Manager cp_manager_script;
+
     void Start()
     {
         camera = GetComponent<Camera>(); //메인카메라
@@ -54,11 +60,23 @@ public class MakeClockSee : MonoBehaviour
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         obstacle_layer = (1 << LayerMask.NameToLayer("ClockPuzzle")) + (1 << LayerMask.NameToLayer("Obstacle"));
+
+        // 쪽지 매니저
+        notemager = FindObjectOfType<NoteManger>();
+
+        //시계퍼즐 매니저 스크립트
+        cp_manager_script = GameObject.FindObjectOfType<ClockPuzzle_Manager>();
     }
 
     void Update()
     {
+        if (cp_manager_script.GetPuzzleEnd())
+            return;
+
         if (CheckObstacle())
+            return;
+
+        if (notemager._popup == true) //쪽지 팝업 체크 : 팝업되지 않은 상태여야 가능하도록
             return;
 
         LookAtClock();
@@ -185,7 +203,7 @@ public class MakeClockSee : MonoBehaviour
 
     public void set_active(bool b)
     {
-        if(b == false) //비활성화하기직전 
+        if (b == false) //비활성화하기직전 
         {
             if (pre_ol_index != -1)
             {

@@ -34,6 +34,15 @@ public class GameMgr : MonoBehaviour
     // - 옵션창
     public GameObject optionPanel;
     private bool pop = false;
+    private bool once_pop = false;
+    private Option_inGame option_ingame_script;
+
+    // - stage
+    public int stage; //1 : 1스테이지, 2 : 2~3스테이지
+
+    // - 카메라 움직임
+    FirstPersonCamera fpCam_script;
+
 
     void Start()
     {
@@ -58,19 +67,24 @@ public class GameMgr : MonoBehaviour
         {
             onceCaption = true;
         }
+
+        if (stage == 2)
+            fpCam_script = GameObject.FindObjectOfType<FirstPersonCamera>();
+
+        option_ingame_script = GameObject.FindObjectOfType<Option_inGame>();
     }
 
     void Update()
     {
-        // - 커서 락모드 테스트 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        //// - 커서 락모드 테스트 
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        ////    Cursor.lockState = CursorLockMode.Locked;
+        //}
 
         // - 옵션창
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -79,13 +93,44 @@ public class GameMgr : MonoBehaviour
 
             if (!pop)
             {
+                Time.timeScale = 0f;
                 optionPanel.SetActive(true);
                 pop = true;
+             
+                if(!once_pop)
+                {
+                    once_pop = true;
+                    //Option_inGame.InitSliderValue(); //초기화는 언제하는지.
+                }
+
+                Cursor.lockState = CursorLockMode.None;
+
+                if (stage == 1)
+                {
+
+                }
+                else if (stage == 2)
+                {
+                    fpCam_script.enabled = false;
+                }
             }
             else
             {
+                Time.timeScale = 1f;
+
                 optionPanel.SetActive(false);
                 pop = false;
+
+                if (stage == 1)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+                else if (stage == 2 || stage == 3)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    fpCam_script.enabled = true;
+                }
+
             }
         }
 

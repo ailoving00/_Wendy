@@ -48,10 +48,11 @@ public class WendyAI : MonoBehaviour
 
         _rot_dir = Vector3.zero;
 
-        boxcoll = GetComponent<BoxCollider>();
+        boxcoll = GetComponent<Collider>();
         spherecoll = GetComponent<SphereCollider>();
 
         gameOver_script = GameObject.FindObjectOfType<Cellar_Wendy>();
+        gameOver_script2 = GameObject.FindObjectOfType<Cellar_Manager>();
     }
 
     private void Update()

@@ -58,6 +58,9 @@ public class ColliderMgr : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE
     int obstacle_layer;
 
+    // - 지하실 , 이 스크립트가 활성화되면 지하실 움직임
+    Cellar_Manager _cellarManager;
+
     void Start()
     {
         animator = ResetLeber.GetComponent<Animator>();
@@ -144,6 +147,10 @@ public class ColliderMgr : MonoBehaviour
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         obstacle_layer = (1 << LayerMask.NameToLayer("Light")) + (1 << LayerMask.NameToLayer("Obstacle"));
+
+        //지하실
+        _cellarManager = GameObject.FindObjectOfType<Cellar_Manager>();
+        _cellarManager.MoveStart();
     }
 
     // Update is called once per frame
@@ -151,11 +158,7 @@ public class ColliderMgr : MonoBehaviour
     {
         if (CheckObstacle())
             return;
-
-
-
-
-
+       
         CheckLamp();
         TryAction();
         End_LampP();

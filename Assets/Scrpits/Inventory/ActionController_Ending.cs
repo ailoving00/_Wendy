@@ -38,6 +38,9 @@ public class ActionController_Ending : MonoBehaviour
     // - 쪽지 매니저
     NoteManger notemager;
 
+    // - 옵션창, 게임매니저
+    GameMgr gameMgr_script;
+
     void Start()
     {
         selectSlot_script = GameObject.FindObjectOfType<SelectSlot>();
@@ -53,10 +56,16 @@ public class ActionController_Ending : MonoBehaviour
 
         //쪽지매니저
         notemager = FindObjectOfType<NoteManger>();
+
+        //게임매니저
+        gameMgr_script = GameObject.FindObjectOfType<GameMgr>();
     }
 
     void Update()
     {
+        if (notemager.guidePopup == true || gameMgr_script.pop == true)
+            return;
+
         if (CheckObstacle())
             return;
 
@@ -141,7 +150,7 @@ public class ActionController_Ending : MonoBehaviour
 
                 // - 선택슬롯에 무언가 있을때
                 int select_itemCode = theInventory.get_ItemCode(selectSlot_script.get_index());
-                Debug.Log(select_itemCode.ToString());
+                //Debug.Log(select_itemCode.ToString());
 
                 // - 선택슬롯으로 열쇠를 가리키면 (성공)
                 if (select_itemCode == 40)

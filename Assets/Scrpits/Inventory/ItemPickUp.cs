@@ -11,4 +11,10 @@ public class ItemPickUp : MonoBehaviour
     {
         return item.itemCode;
     }
+
+    public int get_layoutIndex()
+    {
+        return item.layoutIndex;
+    }
+
 }

@@ -31,13 +31,13 @@ public class ActionController_GetKey : MonoBehaviour
 
     public Collider eB_colider; // 놓여진 책
 
-    private bool isPopup = false;
+    public bool isPopup = false;
     private bool isFirstPage = true;
-    private bool isLastPage = false;
-    public bool getKey = false;
+    public bool isLastPage = false;
+    private bool getKey = false;
 
     private bool possibleBookFlip = false;
-    bool flipOver = false;
+    private bool flipOver = false;
 
     //
     FirstPersonCamera fpCam_Script;
@@ -102,6 +102,9 @@ public class ActionController_GetKey : MonoBehaviour
 
     void Update()
     {
+        if (notemager.guidePopup)
+            return;
+
         CheckHit();
 
         TryAction();

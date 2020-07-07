@@ -31,6 +31,9 @@ public class NoteManger : MonoBehaviour
     private EndingVideo_Loading loadEnding_script;
     private ActionController_Ending endingContrler_script;
 
+    //옵션창과 곂칠때?
+    public bool guidePopup = false;
+
     void Start()
     {
         fpCam_Script = Camera.main.GetComponent<FirstPersonCamera>();
@@ -57,6 +60,9 @@ public class NoteManger : MonoBehaviour
 
     public void OpenCondition()
     {
+        guidePopup = true;
+        Time.timeScale = 0f;
+
         if (checkcount != 5)
         {
             // 조건 불만족시 경고창
@@ -64,9 +70,10 @@ public class NoteManger : MonoBehaviour
             ConditionPanel.SetActive(true);
 
             // 해제해야할 스크립트
+
             fpCam_Script.enabled = false;
-            player_script.enabled = false;
-            endingContrler_script.enabled = false;
+            //player_script.enabled = false;
+            //endingContrler_script.enabled = false;
 
             // 십자선 제거
             Aim.SetActive(false);
@@ -81,14 +88,18 @@ public class NoteManger : MonoBehaviour
 
     public void YesClickEvent()
     {
+        guidePopup = true;
+
         //Debug.Log("집 밖으로 나갔습니다");
         ConditionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked; //커서 고정 --오아아앙!
 
         // - 아래 loadEnding_script 스크립트의 InStartFadeAnim 함수 내용과 곂칠지도
+        Time.timeScale = 0f;
+
         fpCam_Script.enabled = true;
-        player_script.enabled = true;
-        endingContrler_script.enabled = true;
+        //player_script.enabled = true;
+        //endingContrler_script.enabled = true;
         Aim.SetActive(true);
 
         // - 영상 나오게
@@ -97,12 +108,24 @@ public class NoteManger : MonoBehaviour
 
     public void NoClickEvent()
     {
+        guidePopup = false;
+
         ConditionPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked; //커서 고정 --오아아앙!
 
+        Time.timeScale = 1f;
+
         fpCam_Script.enabled = true;
-        player_script.enabled = true;
-        endingContrler_script.enabled = true;
+        //player_script.enabled = true;
+        //endingContrler_script.enabled = true;
+        Aim.SetActive(true);
+    }
+    public void NoClickEvent_fromGameMgr()
+    {
+        ConditionPanel.SetActive(false);
+        //Cursor.lockState = CursorLockMode.Locked; //커서 고정 --오아아앙!
+
+        //fpCam_Script.enabled = true;
         Aim.SetActive(true);
     }
 

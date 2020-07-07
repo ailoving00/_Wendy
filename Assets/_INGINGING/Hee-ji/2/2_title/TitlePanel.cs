@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TitlePanel : MonoBehaviour
 {
@@ -14,14 +15,25 @@ public class TitlePanel : MonoBehaviour
 
     float time = 0f;
 
+
+    //void Awake()
+    //void OnLevelWasLoaded()
     void Start()
     {
+        //SceneManager.sceneLoaded += InStartFadeAnim;
+
+
         fadeImg = GetComponent<Image>();
 
         InStartFadeAnim();
+
+        Debug.Log("ddd");
     }
 
-
+    void OnDisabled()
+    {
+        //SceneManager.sceneLoaded -= InStartFadeAnim;
+    }
 
     //페이드아웃
     public void InStartFadeAnim()

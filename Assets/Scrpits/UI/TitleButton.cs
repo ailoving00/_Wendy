@@ -48,6 +48,7 @@ public class TitleButton : MonoBehaviour
     {
         // - 로딩씬
         SceneManager.LoadScene("01_Loading");
+        //LoadSceneAsync
     }
 
     public void OptionButton()
@@ -111,7 +112,7 @@ public class TitleButton : MonoBehaviour
                 {
                     if (result.gameObject.CompareTag("TitleBtn"))
                     {
-                        Debug.Log("Hit " + result.gameObject.name);
+                        //Debug.Log("Hit " + result.gameObject.name);
                         int index = result.gameObject.GetComponent<TitleBtn_Indexer>().GetPos_Leaf();
 
                         if (_cur_index != index)

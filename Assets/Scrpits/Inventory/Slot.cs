@@ -62,5 +62,11 @@ public class Slot : MonoBehaviour
     {
         return voidState;
     }
+
+    // +
+    public void set_layoutIndex(int index)
+    {
+        item.layoutIndex = index;
+    }
 }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Option_inGame : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class Option_inGame : MonoBehaviour
     // - 옵션 슬라이더
     BrightnessController _brightness_ctrler_script;
 
+    //// - 사운드
+    //SoundManger songManager_script;
+
+    // - 버튼 컨트롤
+    GameMgr gameMgr_script;
+
     void Start()
     {
         option_manager_script = FindObjectOfType<OptionManager>();
@@ -23,9 +30,12 @@ public class Option_inGame : MonoBehaviour
         _brightness_ctrler_script = _bright_slider.gameObject.GetComponent<BrightnessController>();
 
         //InitSliderValue(); //GameMgr 스크립트로 옮김
+
+        //songManager_script = FindObjectOfType<SoundManger>();
+
+        gameMgr_script = GameObject.FindObjectOfType<GameMgr>();
+
     }
-
-
 
     public void InitSliderValue()
     {
@@ -48,6 +58,12 @@ public class Option_inGame : MonoBehaviour
         //option_manager_script.SetBrightnessVolume(_brightness_ctrler_script.GetSliderValue());
     }
 
+    // = = = =
+    //- 슬라이더 연결되어있음
+
+    // = = = =
+    // - 버튼
+
     public void ClickContinueButtorn()
     {
         //if (stage == 1)
@@ -61,8 +77,39 @@ public class Option_inGame : MonoBehaviour
 
         //}
 
-        Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 1f;
-        _option_window.SetActive(false);
+
+        gameMgr_script.OptionDisappear();
+        //Cursor.lockState = CursorLockMode.None;
+        //Time.timeScale = 1f;
+        //_option_window.SetActive(false);
+
+    }
+
+    //public void ClickContinueButtorn_2stage()
+    //{
+    //    //if (stage == 1)
+    //    //{
+    //    //    //player_script.enabled = true;
+    //    //    //if (actionCtrler_script.enabled == false)
+    //    //    //    actionCtrler_script.enabled = true;
+    //    //}
+    //    //else if (stage == 2)
+    //    //{
+
+    //    //}
+
+    //    gameMgr_script.OptionDisappear();
+    //    //Cursor.lockState = CursorLockMode.Locked;
+    //    //Time.timeScale = 1f;
+    //    //_option_window.SetActive(false);
+
+
+    //    // 이동 수정
+    //}
+
+    public void ReturnTitleButton()
+    {
+        // - 메인화면으로 돌아가기
+        SceneManager.LoadScene("00_Title");
     }
 }

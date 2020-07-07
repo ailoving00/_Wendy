@@ -23,7 +23,7 @@ public class GameOverManger : MonoBehaviour
     Vector2 LPanelPos;
     Vector2 RPanelPos;
 
-    bool SetClick = false;
+    public bool SetClick = false;
 
     //-플레이어 이동 값
     Animator _animator = null;

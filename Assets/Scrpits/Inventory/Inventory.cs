@@ -82,6 +82,12 @@ public class Inventory : MonoBehaviour
         return slots[index].item.itemCode;
     }
 
+    // + 
+    public void set_Item_layoutIndex(int index, int layout) // 아이템 장식장 위치 설정하기
+    {
+        slots[index].set_layoutIndex(layout);
+    }
+
     public void clear_Slot(int index) 
     {
         slots[index].ClearSlot();
@@ -91,6 +97,7 @@ public class Inventory : MonoBehaviour
     {
         return slots[index].IsVoid();
     }
+
 }
 
 

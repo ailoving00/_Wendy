@@ -34,14 +34,18 @@ public class WendyAI : MonoBehaviour
 
 
     //- 지하실과 2층 길목에 있을 가이드 링
-   // public GameObject Ring_Particle;
-   // ParticleSystem event_ringParticle;
+    // public GameObject Ring_Particle;
+    // ParticleSystem event_ringParticle;
+    public GameObject basement_door_ring;
+    public GameObject stair_ring;
+    public GameObject temp_stair; //2층
+    private bool once_ring = true; // 최초 접촉 검사
 
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = _modeling.GetComponent<Animator>();
-      //  event_ringParticle = Ring_Particle.GetComponentInChildren<ParticleSystem>();
+        //  event_ringParticle = Ring_Particle.GetComponentInChildren<ParticleSystem>();
         // - 상태 초기화 : 지하실에서 놀고 있는 애니메이션
         SetState(new Wendy_PlayState());
         _agent.updateRotation = false;
@@ -57,7 +61,8 @@ public class WendyAI : MonoBehaviour
 
     private void Update()
     {
-        _current_state.Update();
+        if (!once_ring)
+            _current_state.Update();
     }
 
     public void SetState(IState nextState)
@@ -124,15 +129,26 @@ public class WendyAI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SetContactWithPlayer(true);
+            if (once_ring)
+            {
+                once_ring = false;
 
-            //_current_state.SetContact();
+                // 원형 이펙트
+                basement_door_ring.SetActive(false);
+                stair_ring.SetActive(true);
 
-            //코루틴
-            if (_current_state.GetStateNum() == 1)
-                ChangeState();
+                // 2층가는 길목 콜라이더 없애기
+                temp_stair.SetActive(false);
+            }
+            else
+            {
+                SetContactWithPlayer(true);
 
-
+                //_current_state.SetContact();
+                //코루틴
+                if (_current_state.GetStateNum() == 1)
+                    ChangeState();
+            }
 
         }
     }
@@ -140,7 +156,8 @@ public class WendyAI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SetContactWithPlayer(false);
+            if (!once_ring)
+                SetContactWithPlayer(false);
 
             //if (_current_state.GetStateNum() == 2)
             //    ChangeState();

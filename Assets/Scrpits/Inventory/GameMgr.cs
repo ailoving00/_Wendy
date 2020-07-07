@@ -33,7 +33,7 @@ public class GameMgr : MonoBehaviour
 
     // - 옵션창
     public GameObject optionPanel;
-    private bool pop = false;
+    public bool pop = false;
     private bool once_pop = false;
     private Option_inGame option_ingame_script;
 
@@ -42,6 +42,14 @@ public class GameMgr : MonoBehaviour
 
     // - 카메라 움직임
     FirstPersonCamera fpCam_script;
+
+    // - 쪽지 매니저
+    NoteManger notemager;
+
+    public GameObject Aim;
+
+    // - 게임오버
+    GameOverManger gameOver_script;
 
 
     void Start()
@@ -72,10 +80,23 @@ public class GameMgr : MonoBehaviour
             fpCam_script = GameObject.FindObjectOfType<FirstPersonCamera>();
 
         option_ingame_script = GameObject.FindObjectOfType<Option_inGame>();
+
+        //쪽지매니저
+        notemager = FindObjectOfType<NoteManger>();
+        //if (notemager.guidePopup == true)
+
+        //게임오버
+        gameOver_script = GameObject.FindObjectOfType<GameOverManger>();
     }
 
     void Update()
     {
+        if (stage == 2)
+        {
+            if (gameOver_script.SetClick == true)
+                return;
+        }
+
         //// - 커서 락모드 테스트 
         //if (Input.GetKeyDown(KeyCode.T))
         //{
@@ -93,44 +114,13 @@ public class GameMgr : MonoBehaviour
 
             if (!pop)
             {
-                Time.timeScale = 0f;
-                optionPanel.SetActive(true);
-                pop = true;
-             
-                if(!once_pop)
-                {
-                    once_pop = true;
-                    //Option_inGame.InitSliderValue(); //초기화는 언제하는지.
-                }
-
-                Cursor.lockState = CursorLockMode.None;
-
-                if (stage == 1)
-                {
-
-                }
-                else if (stage == 2)
-                {
-                    fpCam_script.enabled = false;
-                }
+                OptionPopUp();
+                if (notemager.guidePopup == true)
+                    notemager.NoClickEvent_fromGameMgr();
             }
             else
             {
-                Time.timeScale = 1f;
-
-                optionPanel.SetActive(false);
-                pop = false;
-
-                if (stage == 1)
-                {
-                    Cursor.lockState = CursorLockMode.None;
-                }
-                else if (stage == 2 || stage == 3)
-                {
-                    Cursor.lockState = CursorLockMode.Locked;
-                    fpCam_script.enabled = true;
-                }
-
+                OptionDisappear();
             }
         }
 
@@ -212,4 +202,48 @@ public class GameMgr : MonoBehaviour
         // - 닫았을때
         scrollRectView.anchoredPosition = new Vector2(0.0f, -144.6f); //인벤토리 애니메이션이 끝날때 호출
     }
+
+    public void OptionPopUp()
+    {
+        Time.timeScale = 0f;
+        optionPanel.SetActive(true);
+        pop = true;
+
+        if (!once_pop)
+        {
+            once_pop = true;
+            //Option_inGame.InitSliderValue(); //초기화는 언제하는지.
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+
+        if (stage == 1)
+        {
+
+        }
+        else if (stage == 2)
+        {
+            fpCam_script.enabled = false;
+        }
+    }
+    public void OptionDisappear()
+    {
+        Time.timeScale = 1f;
+
+        optionPanel.SetActive(false);
+        pop = false;
+
+        if (stage == 1)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (stage == 2 || stage == 3)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            fpCam_script.enabled = true;
+        }
+
+        notemager.guidePopup = false;
+    }
+
 }

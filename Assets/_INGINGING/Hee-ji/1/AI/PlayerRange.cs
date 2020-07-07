@@ -25,12 +25,12 @@ public class PlayerRange : MonoBehaviour
             {
                 once = false;
 
-                // 원형 이펙트
-                basement_door_ring.SetActive(false);
-                stair_ring.SetActive(true);
+                //// 원형 이펙트
+                //basement_door_ring.SetActive(false);
+                //stair_ring.SetActive(true);
 
-                // 2층가는 길목 콜라이더 없애기
-                temp_stair.SetActive(false);
+                //// 2층가는 길목 콜라이더 없애기
+                //temp_stair.SetActive(false);
             }
         }
     }

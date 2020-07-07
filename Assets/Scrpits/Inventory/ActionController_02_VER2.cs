@@ -19,7 +19,7 @@ public class ActionController_02_VER2 : MonoBehaviour
     private string itemgainsound = "GainItem";
 
     [SerializeField]
-    private string itemusesound = "SetItem" ;
+    private string itemusesound = "SetItem";
 
     [SerializeField]
     private string bellSound = "AP_bell";
@@ -195,9 +195,23 @@ public class ActionController_02_VER2 : MonoBehaviour
                 {
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
+                        // 오류고치기
+                        //// +
+                        //DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
+                        //int display_index = location_script.location_Num;
+
+                        //// +
+                        //ItemPickUp pieceItem_script = hitInfo.transform.GetComponent<ItemPickUp>();
+                        //pieceItem_script.get_layoutIndex();
+
+                        //// +
+                        ////if (!location_script.tryToPut_doll())
+                        ////    return;
+                        ////클릭한 장식장 위치와 아이템의 놓여진 위치가 동일하면
+
+                        
                         //아이템 입수 사운드 
                         SoundManger.instance.PlaySound(itemgainsound);
-
 
                         // - 아이템 습득
                         hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
@@ -215,12 +229,13 @@ public class ActionController_02_VER2 : MonoBehaviour
                         {
                             if (hitInfo2.transform.CompareTag("Location"))
                             {
-
+                                // - 습득당시, 장식장 위치를 정확하게 검사하기 위에서 조금 앞에 코드 놔둠
                                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
                                 int display_index = location_script.location_Num;
 
                                 // #
                                 displayManager_script.reset_DisplayArry(display_index);
+
                             }
                         }
                     }
@@ -253,7 +268,7 @@ public class ActionController_02_VER2 : MonoBehaviour
             if (OutlineController.get_outline_okay())
                 return;
 
-            if (hitInfo.transform.CompareTag( "Item")) //compare @
+            if (hitInfo.transform.CompareTag("Item")) //compare @
             {
                 //// - 장애물 검사하기
                 //coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
@@ -380,13 +395,12 @@ public class ActionController_02_VER2 : MonoBehaviour
         if (hitInfo2.transform != null)
         {
             if (hitInfo2.transform.CompareTag("Location")) //compare @
-            {                
+            {
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
 
                 if (PickUp_state)
                 {
-
                     //인형 배치 사운드
                     SoundManger.instance.PlaySound(itemgainsound);
 
@@ -404,7 +418,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                     int use_index = selectSlot_script.get_index();
 
                     if (!theInventory.IsVoid_Slot(use_index)) //슬롯에 아이템이 있는가? 있으면 IsVoid_Slot반환값이 false
-                    {                        
+                    {
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
                             //인형 배치 사운드
@@ -482,12 +496,12 @@ public class ActionController_02_VER2 : MonoBehaviour
 
                                 //모닥불 
                                 Fire_script.FireWallStartSound();
-                                
+
                                 if (particleRing.isPlaying)
                                 {
                                     particleRing.Play();
-                                }                                
-                                
+                                }
+
                                 //웬디 AI on
                                 wendyAI_Script.ClearLayoutPuzzle();
                                 wendyAI_Script.colliderChange();
@@ -546,7 +560,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                 outline_active = false;
 
                 // - 클릭버튼 해제
-                actionCaption.SetActive(false);                
+                actionCaption.SetActive(false);
             }
 
             return true;

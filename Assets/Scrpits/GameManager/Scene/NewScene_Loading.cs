@@ -27,6 +27,10 @@ public class NewScene_Loading : MonoBehaviour
     // - 습득 쪽지 스크립트
     SawNoteNumber _note_num_script;
 
+    // - 지하실 , 이 스크립트가 활성화되면 지하실 움직임
+    Cellar_Manager _cellarManager;
+
+
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked; //커서 고정
@@ -56,6 +60,11 @@ public class NewScene_Loading : MonoBehaviour
 
         // - 페이드인
         InStartFadeAnim();
+
+        //지하실
+        //_cellarManager = GameObject.FindObjectOfType<Cellar_Manager>();
+        //if (_cellarManager != null)
+        //    _cellarManager.MoveStart();
     }
 
     //페이드아웃

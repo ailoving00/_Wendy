@@ -40,7 +40,6 @@ public class Cellar_Manager : MonoBehaviour
 
         StartCoroutine(deley());
 
-
         CellarSoundScript.StartCellarSound();
     }
 

@@ -49,9 +49,7 @@ public class ColliderMgr : MonoBehaviour
     private bool LaberOn = false;
 
     //public GameObject[] _Pointstate;
-
-
-
+    
     // - 외곽선
     private DrawOutline_HJ OutlineController;
     public int pre_ol_index = -1; //이전 아웃라인 인덱스
@@ -65,8 +63,6 @@ public class ColliderMgr : MonoBehaviour
     bool coverCheck = false; //막고잇으면 TRUE
     int obstacle_layer;
 
-    // - 지하실 , 이 스크립트가 활성화되면 지하실 움직임
-    Cellar_Manager _cellarManager;
     ColliderMgr this_script;
 
     //-플레이어 이동 값
@@ -124,10 +120,6 @@ public class ColliderMgr : MonoBehaviour
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         obstacle_layer = (1 << LayerMask.NameToLayer("Light")) + (1 << LayerMask.NameToLayer("Obstacle"));
-
-        //지하실
-        _cellarManager = GameObject.FindObjectOfType<Cellar_Manager>();
-        _cellarManager.MoveStart();
     }
 
     // Update is called once per frame

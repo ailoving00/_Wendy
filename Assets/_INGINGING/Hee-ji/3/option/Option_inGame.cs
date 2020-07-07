@@ -37,14 +37,15 @@ public class Option_inGame : MonoBehaviour
         _brightness_ctrler_script.Initialization(temp_bright);
     }
 
+    //- 오류남 @@@@
     public void DelegateSliderValue()
     {
-        option_manager_script.SetMusicVolume(_music_slider.value);
+        //option_manager_script.SetMusicVolume(_music_slider.value);
 
-        option_manager_script.SetFXVolume(_fx_slider.value);
+        //option_manager_script.SetFXVolume(_fx_slider.value);
 
-        //option_manager_script.SetBrightnessVolume(_bright_slider.value);
-        option_manager_script.SetBrightnessVolume(_brightness_ctrler_script.GetSliderValue());
+        ////option_manager_script.SetBrightnessVolume(_bright_slider.value);
+        //option_manager_script.SetBrightnessVolume(_brightness_ctrler_script.GetSliderValue());
     }
 
     public void ClickContinueButtorn()

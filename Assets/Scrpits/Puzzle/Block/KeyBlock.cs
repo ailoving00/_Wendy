@@ -6,10 +6,7 @@ public class KeyBlock : MonoBehaviour
 {
     public NextStage_01 nextStage;
 
-    void start()
-    {
-        //nextStage = GameObject.FindObjectOfType<NextStage_01>();
-    }
+
 
     void OnTriggerEnter(Collider coll)
     {

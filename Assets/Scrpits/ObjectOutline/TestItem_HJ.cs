@@ -8,15 +8,7 @@ public class TestItem_HJ : MonoBehaviour
 {
     public int ItemType;
 
-    void Start()
-    {
-        
-    }
 
-    void Update()
-    {
-        
-    }
 
     //[SerializeField]
     //private ItemType objectType = ObjectType.None;

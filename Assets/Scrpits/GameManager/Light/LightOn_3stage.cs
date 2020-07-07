@@ -8,15 +8,6 @@ public class LightOn_3stage : MonoBehaviour
     public GameObject[] _lights2stage;
     public GameObject[] _lightsfront;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void LightOn()
     {

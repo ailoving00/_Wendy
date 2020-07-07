@@ -28,10 +28,7 @@ public class CheckRange : MonoBehaviour
         sectorRange = GetComponent<Collider>();
     }
 
-    void Update()
-    {
-
-    }
+ 
 
     public bool checkItem()
     {

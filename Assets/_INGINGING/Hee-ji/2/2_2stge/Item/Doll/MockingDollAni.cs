@@ -25,9 +25,6 @@ public class MockingDollAni : MonoBehaviour
         initialize();
     }
 
-    void Update()
-    {
-    }
 
     public void set_dollNum(int number)
     {

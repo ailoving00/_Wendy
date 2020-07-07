@@ -25,10 +25,7 @@ public class EndingPanel : MonoBehaviour
         playVideo();
     }
 
-    void Update()
-    {
 
-    }
 
     public void playVideo()
     {

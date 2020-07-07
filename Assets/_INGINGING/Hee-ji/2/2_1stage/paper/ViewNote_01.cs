@@ -32,11 +32,6 @@ public class ViewNote_01 : MonoBehaviour
         playerCtrler_script = GameObject.FindObjectOfType<Player_1stage>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void StartAni_Note()
     {

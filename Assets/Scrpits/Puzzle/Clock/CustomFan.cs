@@ -138,10 +138,7 @@ public class CustomFan : MonoBehaviour
         prevfill = fill;
     }
 
-    // Update is called once per frame  
-    void Update()
-    {
-    }
+
 
     public void Set_fill()
     {

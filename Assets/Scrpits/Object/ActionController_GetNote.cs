@@ -139,7 +139,7 @@ public class ActionController_GetNote : MonoBehaviour
             //    moveChest[Chestnumber].transform.parent.GetComponent<Chestaction>().Start_action(1);
             //}
 
-            if (hitaction.transform.tag == "Note") //compare @
+            if (hitaction.transform.CompareTag("Note")) //compare @
             {
                 //if (AniState == false)
                 //{

@@ -4,17 +4,24 @@ using UnityEngine.UI;
 
 public class Flashlight_PRO : MonoBehaviour
 {
-    [Space(10)]
-    [SerializeField()]
-    GameObject Lights; // all light effects and spotlight
+    //[Space(10)]
+
+    public GameObject Lights; // all light effects and spotlight
 
     [SerializeField]
     private string Swith_Sound;
 
+   // public GameObject lights;
+    //private Light spotlight;
+    //private Material ambient_light_material;
+    //private Color ambient_mat_color;
+    //private bool is_enabled = false;
 
-    private Light spotlight;
-    private Material ambient_light_material;
-    private Color ambient_mat_color;
+    public GameObject spotlightOBJ;
+    Light spotlight;
+    public GameObject ambient_light_OBJ;
+    Material ambient_light_material;
+    Color ambient_mat_color;
     private bool is_enabled = false;
 
     bool value;
@@ -33,15 +40,22 @@ public class Flashlight_PRO : MonoBehaviour
 
 
 
+
     // Use this for initialization
     void Start()
     {
         value = true;
         Switch(true);
         // cache components
-        spotlight = Lights.transform.Find("Spotlight").GetComponent<Light>();
-        ambient_light_material = Lights.transform.Find("ambient").GetComponent<Renderer>().material;
+        //spotlight = Lights.transform.Find("Spotlight").GetComponent<Light>();
+        //ambient_light_material = Lights.transform.Find("ambient").GetComponent<Renderer>().material;
+        //ambient_mat_color = ambient_light_material.GetColor("_TintColor");
+
+        spotlight = spotlightOBJ.transform.GetComponent<Light>();
+        ambient_light_material = ambient_light_OBJ.transform.GetComponent<Renderer>().material;
         ambient_mat_color = ambient_light_material.GetColor("_TintColor");
+
+
 
         spotlight.intensity = 2;
        
@@ -51,7 +65,7 @@ public class Flashlight_PRO : MonoBehaviour
         FlashLightAppear();
     }
 
-    void FlashRandom()
+    public void FlashRandom()
     {
         StartCoroutine(Randomlight());
     }
@@ -109,7 +123,7 @@ public class Flashlight_PRO : MonoBehaviour
                     float in_Light = Random.Range(0f, 1f);
 
                     spotlight.intensity = in_Light;
-                    ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, in_Light / 20));
+                    ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, in_Light / 30));
 
                     yield return new WaitForSeconds(w);
 
@@ -122,7 +136,7 @@ public class Flashlight_PRO : MonoBehaviour
             }
 
             spotlight.intensity = 2;
-            ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, 1f / 20));
+            ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, 1f / 30));
 
             yield return new WaitForSeconds(20);
 
@@ -130,6 +144,29 @@ public class Flashlight_PRO : MonoBehaviour
 
 
     }
+
+    //public void BombFlashLight()
+    //{
+    //    StopCoroutine("Randomlight");
+
+    //    Lights.SetActive(false);
+
+    //    this.enabled = false;
+    //    //왜인지 모를 오류 발생. 아예 꺼지는 것으로.
+    //    // StartCoroutine(bombflash());
+    //    //spotlight.intensity = 0f;
+    //    //ambient_light_material.gameobject.SatActive(false);
+    //}
+
+    //IEnumerator bombflash()
+    //{
+    //    spotlight.intensity = 0;
+    //    ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, 1f / 30));
+    //    //   Wall_E.transform.position = Vector3.Lerp(Wall_E.transform.position, E_WallStop, t);
+
+    //}
+
+
 
     /// <summary>
     /// changes the intensivity of lights from 0 to 100.
@@ -139,7 +176,7 @@ public class Flashlight_PRO : MonoBehaviour
     {
         percentage = Mathf.Clamp(percentage, 0, 100);
         spotlight.intensity = (8 * percentage) / 100;
-        ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, percentage / 2000));
+        ambient_light_material.SetColor("_TintColor", new Color(ambient_mat_color.r, ambient_mat_color.g, ambient_mat_color.b, percentage / 2500));
     }
 
     /// <summary>
@@ -167,3 +204,4 @@ public class Flashlight_PRO : MonoBehaviour
         actionImg.gameObject.SetActive(false);
     }
 }
+

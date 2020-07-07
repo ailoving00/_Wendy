@@ -24,10 +24,7 @@ public class InteracttAniManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
+
 
     public void Active_Piece(int index)
     {

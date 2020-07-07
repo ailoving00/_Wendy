@@ -26,9 +26,6 @@ public class SceneLoad : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-    }
 
     IEnumerator LoadScene()
     {

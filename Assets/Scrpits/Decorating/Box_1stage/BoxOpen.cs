@@ -16,10 +16,6 @@ public class BoxOpen : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
 
     public void set_aniBool()
     {

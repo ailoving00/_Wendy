@@ -10,14 +10,6 @@ public class DisplayLocation : MonoBehaviour
     GameObject clone;
     BoxCollider[] colliders;
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
 
     public void setup_Doll(GameObject obj, int select)
     {

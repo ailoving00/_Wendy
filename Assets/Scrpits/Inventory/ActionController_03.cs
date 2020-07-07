@@ -15,6 +15,9 @@ public class ActionController_03 : MonoBehaviour
     [SerializeField]
     private string deskSound = "AP_openDesk";
 
+    [SerializeField]
+    private string laugh = "AP_laugh";
+
 
     public Inventory theInventory;
 
@@ -120,12 +123,13 @@ public class ActionController_03 : MonoBehaviour
                 if (hitInfo.transform.CompareTag("Item"))
                 {
 
-                    //아이템 입수 사운드 
-                    SoundManger.instance.PlaySound(itemgainsound);
-
 
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
+                        //아이템 입수 사운드 
+                        SoundManger.instance.PlaySound(itemgainsound);
+
+
                         // - 아이템 습득
                         InfoDisappear(); //info 삭제
 
@@ -142,7 +146,7 @@ public class ActionController_03 : MonoBehaviour
                         // - 장식장 클릭 (장식장에서 인형을 뺐을때)
                         if (hitInfo2.transform != null) //null @
                         {
-                            if (hitInfo2.transform.tag == "Location")
+                            if (hitInfo2.transform.CompareTag( "Location"))
                             {
                                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
                                 int display_index = location_script.location_Num;
@@ -170,7 +174,7 @@ public class ActionController_03 : MonoBehaviour
             if (!dollAniManager_script.ClickButton()) // 애니메이션이 끝나고 입력종을 클릭할 수 있는 상태가 되어야함
                 return;
 
-            if (hitInfo.transform.tag == "Item") //compare @
+            if (hitInfo.transform.CompareTag("Item")) //compare @
             {
                 ItemInfoAppear();
 
@@ -254,15 +258,13 @@ public class ActionController_03 : MonoBehaviour
 
         if (hitInfo2.transform != null)
         {
-            if (hitInfo2.transform.tag == "Location") //compare @
+            if (hitInfo2.transform.CompareTag("Location")) //compare @
             {
                 // - 인형들 애니메이션 검사
                 //if (!dollAniManager_script.ClickButton()) //클릭이 가능한지
                 //    return;
 
 
-                //인형 배치 사운드
-                SoundManger.instance.PlaySound(itemusesound);
 
 
                 // - 클릭한 장식장 위치의 스크립트 얻기
@@ -270,6 +272,9 @@ public class ActionController_03 : MonoBehaviour
 
                 if (PickUp_state)
                 {
+                    //아이템 입수 사운드 
+                    SoundManger.instance.PlaySound(itemgainsound);
+
                     // 장식장 인형 가질수있으면 가져가기
                     location_script.take_Doll();
                     PickUp_state = false;
@@ -283,6 +288,11 @@ public class ActionController_03 : MonoBehaviour
                     {
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
+
+                            //아이템 입수 사운드 
+                            SoundManger.instance.PlaySound(itemgainsound);
+
+
                             // - 아이템 활성화
 
                             // 아이템 코드
@@ -318,7 +328,7 @@ public class ActionController_03 : MonoBehaviour
                 }
 
             }
-            else if (hitInfo2.transform.tag == "Enter") //compare @
+            else if (hitInfo2.transform.CompareTag("Enter")) //compare @
             {
                 // Enter 버튼을 누르고,
                 if (dollAniManager_script.ClickButton()) //클릭이 가능한지
@@ -356,6 +366,7 @@ public class ActionController_03 : MonoBehaviour
                     }
                     else // 틀렸을때
                     {
+                        SoundManger.instance.PlaySound(laugh);
                         // - 비웃기 애니메이션
                         dollAniManager_script.MisplaceDolls();
                         //Debug.Log("wrong answer - layout puzzle - 3stage");

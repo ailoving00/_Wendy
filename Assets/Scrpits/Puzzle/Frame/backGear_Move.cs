@@ -5,7 +5,7 @@ using UnityEngine;
 public class backGear_Move : MonoBehaviour
 {
     [SerializeField]
-    private string gearBackSound = "PP_gear2";
+    private string gearBackSound = "FP_gear2";
 
     private bool gearOn = false;
     private bool inRotation = false;
@@ -23,20 +23,14 @@ public class backGear_Move : MonoBehaviour
 
     private bool once = false;
 
-    void Start()
-    {
 
-    }
 
     public void set_gearNumber(int num)
     {
         backgearNumber = num;
     }
 
-    void Update()
-    {
 
-    }
 
     public void start_Rotation(bool state, bool first)
     {
@@ -117,5 +111,7 @@ public class backGear_Move : MonoBehaviour
         }
 
         inRotation = false;
+
+        SoundManger.instance.StopEffectSound(gearBackSound);
     }
 }

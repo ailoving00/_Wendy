@@ -23,10 +23,7 @@ public class Subtitle_Controller : MonoBehaviour
         change_text(1);
     }
 
-    void Update()
-    {
-        
-    }
+
 
     public void change_text(int number)
     {

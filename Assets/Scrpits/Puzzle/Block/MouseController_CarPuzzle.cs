@@ -96,7 +96,7 @@ public class MouseController_CarPuzzle : MonoBehaviour
                     return;
                 }
 
-                if (target.tag == "Block")
+                if (target.CompareTag("Block"))
                 {
                     //Debug.Log(target.GetComponent<Collider>().name);
 

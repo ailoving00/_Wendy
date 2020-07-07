@@ -21,10 +21,16 @@ public class OntriggerLamp : MonoBehaviour
 
     Animator _animator = null;
 
+    private BoxCollider This_colider;
+
+    //알파 값
     Renderer[] renderer;
-
     Color alphaColor;
+    //Renderer rend;
 
+    //스크립트
+    ColliderMgr coliderscript;
+    Player_HJ playerController;
 
     public AudioSource TinFlyAudio;
 
@@ -41,14 +47,38 @@ public class OntriggerLamp : MonoBehaviour
 
     float time = 0f;
 
+    PathFollower tinkerBellPath;
+
+   Collider player_collider;
 
     void Start()
     {
-        _animator = playerModeling.GetComponent<Animator>();
+
+        // 플레이어 충돌 콜라이더 값
+        player_collider = PlayerMove.GetComponent<Collider>();
+
+
+        //팅커벨 무브-알파값
+        tinkerBellPath = PathObject.GetComponent<PathFollower>();
         renderer = Pathmodel.GetComponentsInChildren<Renderer>();
+
+
+        //renderer = new Renderer[];
+        // PointLamp_Renderer = new Renderer[PointLampModl.Length];
+
+        //팅커벨 파티클
         event_TinkerBellEnter = Enter_TinkerBell.GetComponentInChildren<ParticleSystem>();
 
+        //플레이어 move
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
+        _animator = playerModeling.GetComponent<Animator>();
+
+        //등불 퍼즐 스크립트
+        coliderscript =  GameObject.FindObjectOfType<ColliderMgr>();
         Enter_TinkerBell.gameObject.SetActive(false);
+
+        This_colider= this.gameObject.GetComponentInChildren<BoxCollider>();
+
         // renderer.material.color = new Color(0, 0, 0, 0);
     }
 
@@ -61,11 +91,11 @@ public class OntriggerLamp : MonoBehaviour
                 //Debug.Log("충돌! 액자 퍼즐 깻는가 안 깻는가에 대해서!");
 
                 ColliderStay = true;
-                PathObject.GetComponent<PathFollower>().enabled = true;
+                tinkerBellPath.enabled = true;
 
                 SartDelay();
                 Fadein();
-            SoundPlay();
+                SoundPlay();
                 // 등불 퍼즐 애니메이션 실행. 램프 키고 끄기 -- 추가하기 
                 //  Tinkerbell_ani.Play();
 
@@ -86,24 +116,23 @@ public class OntriggerLamp : MonoBehaviour
     {
        // 
         _animator.SetBool("IsWalking", false);
-        PlayerMove.GetComponent<Player_HJ>().enabled = false;
-        PlayerMove.GetComponent<Collider>().enabled = false;
+        playerController.enabled = false;
+        player_collider.enabled = false;
 
         // StartCoroutine(FadeInTinkerBell());
 
 
         yield return new WaitForSeconds(Set);
-      //  PathObject.SetActive(false);
-        GameMgr.GetComponent<ColliderMgr>().enabled = true;
+        //  PathObject.SetActive(false);
+        coliderscript.enabled = true;
 
         yield return new WaitForSeconds(1f);
 
         // PlayerMove.GetComponent<Player_HJ>().enabled = true;
+        playerController.enabled = true;
+        player_collider.enabled = true;
 
-        PlayerMove.GetComponent<Player_HJ>().enabled = true;
-        PlayerMove.GetComponent<Collider>().enabled = true;
-
-        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        This_colider.enabled = false;
     }
 
     void SoundPlay()
@@ -131,8 +160,8 @@ public class OntriggerLamp : MonoBehaviour
 IEnumerator FadeInTinkerBell(float FadeSet)
     {
 
-        foreach (Renderer rend in renderer)
-            alphaColor = rend.material.color ;
+        //foreach (Renderer rend in renderer)
+        //    alphaColor = rend.material.color ;
         // yield return new WaitForSeconds(Set/2);
 
         // Color alpha = renderer.material.color;
@@ -149,12 +178,15 @@ IEnumerator FadeInTinkerBell(float FadeSet)
             alphaColor.a = Mathf.Lerp(1, 0, time);
             //Debug.Log("줄어드는중");
 
-            foreach (Renderer rend in renderer)
-               rend.material.color = alphaColor ;
-            //alpha = Fadetime;
-            // renderer.material.color = alpha;
-            yield return new WaitForSeconds(0.01f);
+            //foreach ( Renderer rend in renderer)
+            //   rend.material.color = alphaColor ;
 
+            for (int i = 0; i < renderer.Length; i++)
+            {
+                renderer[i].material.color = alphaColor;
+
+            }
+            yield return new WaitForSeconds(0.01f);
         }
         Pathmodel.gameObject.SetActive(false);
 
@@ -169,6 +201,7 @@ IEnumerator FadeInTinkerBell(float FadeSet)
         TinkerSound.SetActive(false);
 
     }
+
     IEnumerator TinkerBellEnter()
     {
         yield return new WaitForSeconds(0.5f);

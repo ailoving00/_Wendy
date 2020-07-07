@@ -12,19 +12,10 @@ public class PlayerRange : MonoBehaviour
 
     public GameObject temp_stair; //2층
 
-    void Start()
-    {
-        //_wendy_ai = GameObject.FindObjectOfType<WendyAI>;
-    }
-
-    void Update()
-    {
-
-    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wendy")
+        if (other.gameObject.CompareTag("Wendy") )
         {
             if (!once)
             {

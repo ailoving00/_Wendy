@@ -9,11 +9,6 @@ public class FootSound_2S : MonoBehaviour
     private string[] floorfootSound;
 
 
-    void Start()
-    {
-
-    }
-
     void OnTriggerEnter(Collider _col)
     {
         if (_col.gameObject.layer == LayerMask.NameToLayer("Floor"))

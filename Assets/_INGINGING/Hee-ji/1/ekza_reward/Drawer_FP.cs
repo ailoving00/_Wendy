@@ -18,10 +18,6 @@ public class Drawer_FP : MonoBehaviour
         real_drawer.SetActive(false);
     }
 
-    void Update()
-    {
-
-    }
 
     public void RewardActive()
     {

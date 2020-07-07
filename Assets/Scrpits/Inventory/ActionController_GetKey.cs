@@ -131,7 +131,7 @@ public class ActionController_GetKey : MonoBehaviour
                 if (OutlineController.get_outline_okay())
                     return;
 
-                if (hitInfo.transform.tag == "Book_EB") //compare @
+                if (hitInfo.transform.CompareTag("Book_EB")) //compare @
                 {
                     InfoAppear();
 
@@ -197,7 +197,7 @@ public class ActionController_GetKey : MonoBehaviour
                     if (OutlineController.get_outline_okay())
                         return;
 
-                    if (hitInfo.transform.tag == "Key_EB") //compare @
+                    if (hitInfo.transform.CompareTag("Key_EB")) //compare @
                     {
                         getKey = true;
                         InfoAppear();
@@ -261,7 +261,7 @@ public class ActionController_GetKey : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
-                if (hitInfo.transform.tag == "Book_EB") //compare @
+                if (hitInfo.transform.CompareTag("Book_EB")) //compare @
                 {
                     // - 쪽지상태, 카운트 늘리기
                     pageNote_script.CheckAddcount(1);
@@ -296,7 +296,7 @@ public class ActionController_GetKey : MonoBehaviour
 
                 if (isLastPage && !flipOver)
                 {
-                    if (hitInfo.transform.tag == "Key_EB") //compare @
+                    if (hitInfo.transform.CompareTag("Key_EB")) //compare @
                     {
                         if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                         {

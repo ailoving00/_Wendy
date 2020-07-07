@@ -16,6 +16,9 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
     public GameObject _Aim;
     public GameObject _info;
 
+    //캐릭터 모델링
+    Animator _animator = null;
+    public GameObject playerModeling;
 
     private Player_HJ playerController;
 
@@ -29,6 +32,8 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
     {
         mainCamera = Camera.main;
         fpCamera = GetComponent<Camera>();
+
+        _animator = playerModeling.GetComponent<Animator>();
 
         mainListener = mainCamera.GetComponent<AudioListener>();
         fpListener = GetComponent<AudioListener>();
@@ -46,10 +51,7 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
         //fpListener.enabled = false;
     }
 
-    void Update()
-    {
 
-    }
 
     //0.6
     public void change_Camera(bool b)
@@ -76,11 +78,11 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
             _Aim.gameObject.SetActive(false);
             _info.SetActive(false);
 
-            // - 메인카메라,플레이어 스크립트 off
+            // - 메인카메라,플레이어 스크립트 off --- 애니메이션 스크립트 OFF
             //actionController.enabled = false;
             mainCamMove_script.enabled = false;
             puzzleEnter_script.enabled = false;
-
+            _animator.SetBool("IsWalking", false);
             playerController.enabled = false;
 
             // - 퍼즐 스크립트 on

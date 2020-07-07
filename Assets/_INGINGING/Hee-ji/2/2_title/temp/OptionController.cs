@@ -34,10 +34,6 @@ public class OptionController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
 
     public void ContinueButton()
     {

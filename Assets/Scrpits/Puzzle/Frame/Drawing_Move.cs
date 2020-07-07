@@ -38,10 +38,7 @@ public class Drawing_Move : MonoBehaviour
         start3 = dtarget[4].gameObject.transform;
     }
 
-    //void Update()
-    //{
 
-    //}
 
     IEnumerator drawing_Move(bool state, bool first)
     {

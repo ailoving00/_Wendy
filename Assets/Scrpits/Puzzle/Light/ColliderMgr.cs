@@ -8,6 +8,9 @@ public class ColliderMgr : MonoBehaviour
     //  public Animation Tinkerbell_ani;
     // Start is called before the first frame update
 
+    [SerializeField]
+    private string tinkerBellSound= "FP_fourImage";
+
     public GameObject[] lamp;
 
     public GameObject[] PointLampModl;
@@ -15,7 +18,9 @@ public class ColliderMgr : MonoBehaviour
     Renderer[] PointLamp_Renderer;
     Color alphaColor;
 
+    //팅커벨
     public GameObject bell_Doll;
+    public Transform SetPosition;
 
     public GameObject MCamera;
 
@@ -45,6 +50,8 @@ public class ColliderMgr : MonoBehaviour
 
     //public GameObject[] _Pointstate;
 
+
+
     // - 외곽선
     private DrawOutline_HJ OutlineController;
     public int pre_ol_index = -1; //이전 아웃라인 인덱스
@@ -60,6 +67,13 @@ public class ColliderMgr : MonoBehaviour
 
     // - 지하실 , 이 스크립트가 활성화되면 지하실 움직임
     Cellar_Manager _cellarManager;
+    ColliderMgr this_script;
+
+    //-플레이어 이동 값
+    public GameObject playerModeling;
+    Animator _animator = null;
+    Player_HJ playerController;
+    FirstPersonCamera Side_Controller;
 
     void Start()
     {
@@ -78,53 +92,16 @@ public class ColliderMgr : MonoBehaviour
             //PointLamp_Material[i] = PointLampModl[i].GetComponent<Renderer>().material;
            // alphaColor[i] = PointLamp_Material[i].GetColor("MainColor");
         }
-       // PointLamp_Material[5].SetColor("_Color", Color.red);
-        //     alphaColor[5].a = 0.2f;
-        //      PointLamp_Renderer[5].material.color = alphaColor[5];
 
-
-        //alphaColor[5].a = 0.3f;
-        //PointLamp_Renderer[5].material.color = alphaColor[5];
-
-        //PointLamp_Renderer[0] = PointLampModl[0].GetComponent<Renderer>();
-
-        //alphaColor[5] = PointLampModl[5].GetComponent<Renderer>().material.color;
-        //alphaColor[5].a = 0.3f;
-        // PointLampModl[5].GetComponent<Renderer>().material.color = Color.red;
-        //PointLamp_Material[0] = PointLampModl[0].GetComponent<Renderer>().material; //메탈릭
-        //PointLamp_Renderer[0] = PointLampModl[0].GetComponent<Renderer>();
-
-        //PointLamp_Material[5] = PointLampModl.GetComponents<Renderer>().material; //메탈릭
-        //PointLamp_Renderer[5] = PointLampModl.GetComponents<Renderer>();
-
-        //PointLamp_Renderer[5].material.color = alphaColor[5];
-        //alphaColor[5].a = 0.3f;
-        //PointLamp_Renderer[5].material.color = alphaColor[5];
-        //for (int count = 0; count < 9; count++)
-        //{
-        //    //8PointLamp_Material[count] = PointLampModl[count].GetComponent<Renderer>().material; //메탈릭
-
-        //}
-
-        //pointlamp_material[7].color = 0.6f;
-
-
-        //for (int value = 0; value < 9; value++)
-        //{
-        //    PointLamp_Renderer[value].material.color = alphaColor[value];
-        //}
-
-
-
-        //   Animation Tinkerbell_ani = gameObject.GetComponent<Animation>();
         lamplight = FindObjectOfType<LampLight>();
 
         bell_Doll.SetActive(false);
 
+        //플레이어 move
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
+        Side_Controller = GameObject.FindObjectOfType<FirstPersonCamera>();
+        _animator = playerModeling.GetComponent<Animator>();
 
-
-        //foreach (Renderer rend in PointLamp_Renderer)
-        //    alphaColor = rend.material.color;
 
         lamp[0].SetActive(true);
         lamp[7].SetActive(true);
@@ -179,8 +156,15 @@ public class ColliderMgr : MonoBehaviour
     {
         if (CheckOnL == 8)
         {
+            // 수정. 끝났을때 플레이어의 앞에 툭 떨어지는 것으로 수정
+            SoundManger.instance.PlaySound(tinkerBellSound);
+
+            StartCoroutine(StopFallTinker());
+
             bell_Doll.SetActive(true);
 
+            bell_Doll.transform.position = SetPosition.position;
+            bell_Doll.transform.rotation = SetPosition.rotation;
             InfoDisappear();
 
             if (pre_ol_index != -1)
@@ -195,8 +179,21 @@ public class ColliderMgr : MonoBehaviour
                 actionCaption.SetActive(false);
             }
 
-            this.gameObject.GetComponent<ColliderMgr>().enabled = false; // this.enabled = false;
+            this.enabled = false;
+
         }
+    }
+
+    IEnumerator StopFallTinker()
+    {
+        _animator.SetBool("IsWalking", false);
+        playerController.enabled = false;
+        Side_Controller.enabled = false;
+
+        yield return new WaitForSeconds(0.4f);
+
+        playerController.enabled = true;
+        Side_Controller.enabled = true;
     }
 
     private void CanLocation()

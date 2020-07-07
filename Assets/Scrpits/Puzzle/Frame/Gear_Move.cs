@@ -5,6 +5,9 @@ using UnityEngine;
 public class Gear_Move : MonoBehaviour
 {
     [SerializeField]
+    private string[] GearHaveSound;
+
+    [SerializeField]
     private string GearmoveSound = "FP_gear1";
 
     [SerializeField]
@@ -46,10 +49,7 @@ public class Gear_Move : MonoBehaviour
         }
     }
 
-    void Update()
-    {
 
-    }
 
     public bool get_inRotation()
     {
@@ -103,6 +103,35 @@ public class Gear_Move : MonoBehaviour
         return delayOn;
     }
 
+
+    IEnumerator ImageSoundPlaylist()
+    {
+        yield return new WaitForSeconds(0.7f);
+
+        for (int i = 0; i < GearHaveSound.Length; i++)
+        {
+            SoundManger.instance.PlaySound(GearHaveSound[i]);
+
+            yield return new WaitForSeconds(0.7f);
+
+        }
+    }
+
+    //IEnumerator gearsoundDelay()
+    //{
+    //    yield return new WaitForSeconds(1f);
+
+    //    for (int i = 0; i < GearHaveSound.Length; i++)
+    //    {
+    //        SoundManger.instance.PlaySound(GearHaveSound[i]);
+
+    //        yield return new WaitForSeconds(1f);
+
+    //    }
+    //}
+
+
+
     public void gear_Active(bool first) //연결오브제 활성화
     {
         //1회인지
@@ -117,15 +146,19 @@ public class Gear_Move : MonoBehaviour
         {
             //이미지 내리기 *************
             drawingMove_script.Play(true, firstTime); //안됨?
-            SoundManger.instance.PlaySound(PictureFrameSound);
 
             //기어 사운드
             SoundManger.instance.PlaySound(GearmoveSound);
+            //이미지 사운드
+            SoundManger.instance.PlaySound(PictureFrameSound);
+
         }
         else if (matchType == 2) //사운드
         {
-            //기어 사운드
+
             SoundManger.instance.PlaySound(GearmoveSound);
+
+            StartCoroutine(ImageSoundPlaylist());
 
             //sound On
             //switch (matchNumber)
@@ -158,18 +191,21 @@ public class Gear_Move : MonoBehaviour
             //이미지 올리기
             drawingMove_script.Play(false, firstTime);
 
-            //기어사운드
-
             //기어 사운드
             SoundManger.instance.PlaySound(GearmoveSound);
 
+            //이미지 사운드
             SoundManger.instance.PlaySound(PictureFrameSound);
+
 
         }
         else if (matchType == 2) //사운드
         {
             //기어사운드
-            SoundManger.instance.StopEffectSound(GearmoveSound);
+            //SoundManger.instance.StopEffectSound(GearmoveSound);
+
+            //기어 사운드
+            SoundManger.instance.PlaySound(GearmoveSound);
 
             //sound Off
             //switch (matchNumber)
@@ -232,7 +268,11 @@ public class Gear_Move : MonoBehaviour
             //yield return new WaitForSecondsRealtime(0.000001f); //X
         }
 
+
+
+
         inRotation = false;
+        SoundManger.instance.StopEffectSound(GearmoveSound);
 
         if (delayOn)
         {

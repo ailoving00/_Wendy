@@ -23,10 +23,6 @@ public class SeeEnding : MonoBehaviour
         _video = GetComponent<VideoPlayer>();
     }
 
-    void Update()
-    {
-
-    }
 
     public void playVideo()
     {

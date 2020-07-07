@@ -122,7 +122,7 @@ public class WendyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             SetContactWithPlayer(true);
 
@@ -138,7 +138,7 @@ public class WendyAI : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             SetContactWithPlayer(false);
 

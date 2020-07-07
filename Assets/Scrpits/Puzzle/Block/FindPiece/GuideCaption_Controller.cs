@@ -20,10 +20,7 @@ public class GuideCaption_Controller : MonoBehaviour
         change_sprite(1);
     }
 
-    void Update()
-    {
 
-    }
 
     public void change_sprite(int number)
     {

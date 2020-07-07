@@ -13,11 +13,7 @@ public class PageNote : MonoBehaviour
         notemager = FindObjectOfType<NoteManger>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void CheckAddcount(int i)
     {

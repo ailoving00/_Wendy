@@ -64,9 +64,6 @@ public class InteractionMoving : MonoBehaviour
         interAniManager_script = GameObject.FindObjectOfType<InteracttAniManager>();
     }
 
-    void Update()
-    {
-    }
 
     public void StartToMove()
     {

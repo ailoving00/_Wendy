@@ -60,52 +60,7 @@ public class Chestaction : MonoBehaviour
         _collider = GetComponentInChildren<Collider>();
     }
 
-    void Update()
-    {
-        //if (moveOnState)
-        //{
-        //    time += Time.deltaTime / F_time;
-        //    this.transform.rotation = Quaternion.Slerp(targetSet, bRotation, time);
-        //    checkangle = Quaternion.Angle(targetSet, MoveChest.transform.rotation);
 
-        //    if (checkangle >= Mathf.Abs(angle))
-        //    {
-        //        //moveOnState = false;
-        //        //time = 0f;
-
-        //        // - 해제
-        //        _collider.enabled = false;
-        //        this.enabled = false;
-
-        //        return;
-        //    }
-        //}
-        //if(moveOffState)
-        //{
-        //    time += Time.deltaTime / F_time;
-        //    this.transform.rotation = Quaternion.Slerp(bRotation, targetSet, time);
-        //    checkangle = Quaternion.Angle(targetSet, MoveChest.transform.rotation);
-
-        //    if (checkangle <= 0)
-        //    {
-        //        CheckState = false;
-        //        moveOffState = false;
-        //        time = 0f;
-        //        return;
-        //    }
-        //}
-
-
-        /*
-        while (SetTimeState < 1f)
-        {
-            //Debug.Log("실행중");
-            time += Time.deltaTime / F_time;
-            this.transform.rotation = Quaternion.Slerp(targetSet, bRotation, time);
-            SetTimeState += Time.deltaTime / F_time;
-        }
-        */
-    }
 
     public void Start_action(int type)
     {

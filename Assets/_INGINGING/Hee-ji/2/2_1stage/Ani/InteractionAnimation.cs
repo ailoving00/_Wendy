@@ -71,10 +71,7 @@ public class InteractionAnimation : MonoBehaviour
         interAniManager_script = GameObject.FindObjectOfType<InteracttAniManager>();
     }
 
-    void Update()
-    {
 
-    }
 
     public void PlayAni()
     {

@@ -24,10 +24,7 @@ public class CameraShake : MonoBehaviour
 
     }
 
-    private void Update()
-    {
 
-    }
 
     public void set_CameraShake()
     {

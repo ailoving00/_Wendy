@@ -11,10 +11,6 @@ public class RewardDoor_Open : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
 
     public void play_doorAni()
     {

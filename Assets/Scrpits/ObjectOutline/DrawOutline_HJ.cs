@@ -23,9 +23,7 @@ public class DrawOutline_HJ : MonoBehaviour
 
     }
 
-    void Update()
-    {
-    }
+
 
     public void set_enabled(int index, bool enabled)
     {

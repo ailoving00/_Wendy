@@ -11,13 +11,7 @@ public class ReversalCamera : MonoBehaviour
         camera = GetComponent<Camera>();
     }
 
-    void Start()
-    {
-    }
 
-    void Update()
-    {
-    }
 
     public void OnPreCull()
     {

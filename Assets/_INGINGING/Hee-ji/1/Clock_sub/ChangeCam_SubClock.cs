@@ -43,10 +43,6 @@ public class ChangeCam_SubClock : MonoBehaviour
         SeeingClock_script = GameObject.FindObjectOfType<SeeingSubClock>();
     }
 
-    void Update()
-    {
-
-    }
 
     //0.6
     public void change_Camera(bool select)

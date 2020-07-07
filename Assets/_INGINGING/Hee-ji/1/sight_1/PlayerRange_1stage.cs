@@ -11,10 +11,6 @@ public class PlayerRange_1stage : MonoBehaviour
         _sight_script = GetComponent<Sight_1stage>();
     }
 
-    void Update()
-    {
-        
-    }
 
     void OnTriggerEnter(Collider other)
     {

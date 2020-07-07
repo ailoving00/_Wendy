@@ -28,10 +28,6 @@ public class SawNoteNumber : MonoBehaviour
         notemager = FindObjectOfType<NoteManger>();
     }
 
-    void Update()
-    {
-
-    }
 
     public void SetNoteCount()
     {

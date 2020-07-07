@@ -14,10 +14,6 @@ public class DoorAni_reward : MonoBehaviour
         aniController = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-
-    }
 
     public void set_Ani_param()
     {

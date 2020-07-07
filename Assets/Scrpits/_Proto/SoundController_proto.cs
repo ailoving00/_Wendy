@@ -7,15 +7,6 @@ public class SoundController_proto : MonoBehaviour
     public AudioSource[] _BGM;
     public AudioSource[] _SFX;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public void play_btnOn()
     {

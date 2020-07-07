@@ -22,10 +22,7 @@ public class InputClockAnswer : MonoBehaviour
         rotateValue -= 30f;
     }
 
-    void Update()
-    {
 
-    }
 
     void FixedUpdate()
     {

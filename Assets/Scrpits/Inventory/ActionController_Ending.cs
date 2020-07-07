@@ -80,7 +80,7 @@ public class ActionController_Ending : MonoBehaviour
             if (OutlineController.get_outline_okay())
                 return;
 
-            if (hitInfo.transform.tag == "Door") //compare @
+            if (hitInfo.transform.CompareTag("Door")) //compare @
             {
                 InfoAppear();
 

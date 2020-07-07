@@ -6,13 +6,5 @@ public class SetOutline : MonoBehaviour
 {
     public int _index;
 
-    void Start()
-    {
 
-    }
-
-    void Update()
-    {
-
-    }
 }

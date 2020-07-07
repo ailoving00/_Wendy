@@ -187,13 +187,16 @@ public class ActionController_02_VER2 : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Item"))
                 {
-                    //아이템 입수 사운드 
-                    SoundManger.instance.PlaySound(itemgainsound);
-
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
+
+                        //아이템 입수 사운드 
+                        SoundManger.instance.PlaySound(itemgainsound);
+
+
                         // - 아이템 습득
                         hitInfo.transform.gameObject.SetActive(false); //아이템 비활성화
+                        //아이템에 달려있는 리지드 바디 비활성화 
                         OutlineController.set_enabled(pre_ol_index, false);
                         OutlineController.set_check(false);
                         outline_active = false;
@@ -205,7 +208,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                         // - 장식장 클릭 (인형이 놓여져있음)
                         if (hitInfo2.transform != null) //null @
                         {
-                            if (hitInfo2.transform.tag == "Location")
+                            if (hitInfo2.transform.CompareTag("Location"))
                             {
 
                                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>(); // @
@@ -245,7 +248,7 @@ public class ActionController_02_VER2 : MonoBehaviour
             if (OutlineController.get_outline_okay())
                 return;
 
-            if (hitInfo.transform.tag == "Item") //compare @
+            if (hitInfo.transform.CompareTag( "Item")) //compare @
             {
                 //// - 장애물 검사하기
                 //coverCheck = obstacleReader_script.LookAtFrame((int)layerMask);
@@ -374,14 +377,17 @@ public class ActionController_02_VER2 : MonoBehaviour
             if (hitInfo2.transform.CompareTag("Location")) //compare @
             {
 
-                //인형 배치 사운드
-                SoundManger.instance.PlaySound(itemusesound);
+
 
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
 
                 if (PickUp_state)
                 {
+
+                    //인형 배치 사운드
+                    SoundManger.instance.PlaySound(itemgainsound);
+
                     // 장식장 인형 가질수있으면 가져가기
                     location_script.take_Doll();
                     PickUp_state = false;
@@ -397,8 +403,14 @@ public class ActionController_02_VER2 : MonoBehaviour
 
                     if (!theInventory.IsVoid_Slot(use_index)) //슬롯에 아이템이 있는가? 있으면 IsVoid_Slot반환값이 false
                     {
+                        
+
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
+
+                            //인형 배치 사운드
+                            SoundManger.instance.PlaySound(itemgainsound);
+
                             // - 아이템 활성화
 
                             // 아이템 코드

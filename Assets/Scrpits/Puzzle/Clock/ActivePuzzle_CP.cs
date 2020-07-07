@@ -13,10 +13,7 @@ public class ActivePuzzle_CP : MonoBehaviour
         CPmanager_script = GameObject.FindObjectOfType<ClockPuzzle_Manager>();
     }
 
-    void Update()
-    {
 
-    }
 
     void OnTriggerEnter(Collider other)
     {

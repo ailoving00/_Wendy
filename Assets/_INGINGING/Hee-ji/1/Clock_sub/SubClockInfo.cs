@@ -8,10 +8,6 @@ public class SubClockInfo : MonoBehaviour
     //public SeeingSubClock seeingSubClock_script;
     public Transform _camPos;
 
-    void Start()
-    {
-        //seeingSubClock_script = GetComponent<SeeingSubClock>();
-    }
 
     public int get_Index()
     {

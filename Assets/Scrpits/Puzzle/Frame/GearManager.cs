@@ -26,10 +26,7 @@ public class GearManager : MonoBehaviour
         }
     }
 
-    //void Update()
-    //{
-        
-    //}
+
     
     public void set_unActiveGear(int index)
     {

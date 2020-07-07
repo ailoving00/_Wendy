@@ -103,7 +103,7 @@ public class ClockPuzzle_Manager : MonoBehaviour
             {
                 DrawOutline();
             }
-            else if (hitInfo.transform.tag == "EnterButton_CP")
+            else if (hitInfo.transform.CompareTag("EnterButton_CP"))
             {
                 DrawOutline();
             }
@@ -187,14 +187,14 @@ public class ClockPuzzle_Manager : MonoBehaviour
         //if (Physics.Raycast(mCT.position, mCT.TransformDirection(Vector3.forward), out hitInfo, range, layerMask))
         if (hitInfo.transform != null)
         {
-            if (hitInfo.transform.tag == "InputButton_CP")
+            if (hitInfo.transform.CompareTag("InputButton_CP"))
             {
                 InputClockAnswer input_script = hitInfo.transform.GetComponent<InputClockAnswer>();
 
                 SoundManger.instance.PlaySound(TurnDial);
                 input_script.click_button();
             }
-            else if (hitInfo.transform.tag == "EnterButton_CP")
+            else if (hitInfo.transform.CompareTag("EnterButton_CP"))
             {
                 SoundManger.instance.PlaySound(TryButton);
 

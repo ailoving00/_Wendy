@@ -28,10 +28,6 @@ public class DisplayManager_2stage : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
 
     public void set_DisplayArry(int index, int code)
     {

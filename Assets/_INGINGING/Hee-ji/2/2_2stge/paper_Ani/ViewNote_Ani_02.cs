@@ -45,11 +45,7 @@ public class ViewNote_Ani_02 : MonoBehaviour
         clockNoteCtrler_script = GameObject.FindObjectOfType<ActionController_TestNote>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 
     public void StartAni_Note() //이동
     {

@@ -103,10 +103,7 @@ public class Move_Cuckoo : MonoBehaviour
         journeyLength = Vector3.Distance(startTransform.position, endTransform.position);
     }
 
-    //void Update()
-    //{
 
-    //}
 
     public void start_cuckooAni()
     {

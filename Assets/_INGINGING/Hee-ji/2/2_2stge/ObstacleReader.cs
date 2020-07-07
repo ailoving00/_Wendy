@@ -18,10 +18,7 @@ public class ObstacleReader : MonoBehaviour
         CamObstacle_layerMask = 1 << LayerMask.NameToLayer("Obstacle"); //-> X
     }
 
-    void Update()
-    {
-
-    }
+ 
 
     public bool LookAtFrame(int layer)
     {

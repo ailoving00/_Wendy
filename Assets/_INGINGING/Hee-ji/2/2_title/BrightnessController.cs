@@ -20,10 +20,6 @@ public class BrightnessController : MonoBehaviour
         _slider = GetComponent<Slider>();
     }
 
-    void Start()
-    {
-        //_instance = null;
-    }
 
     public void BrightnessSlider()
     {

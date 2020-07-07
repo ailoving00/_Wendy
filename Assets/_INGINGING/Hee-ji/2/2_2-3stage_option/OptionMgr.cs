@@ -17,10 +17,7 @@ public class OptionMgr : MonoBehaviour
         _mainCam = Camera.main;
     }
 
-    void Update()
-    {
-        
-    }
+
 
     // - 씬 초반 초기화
     public void Init()

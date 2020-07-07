@@ -14,15 +14,11 @@ public class CameraAndWallCollide_temp : MonoBehaviour
         check = false;
     }
 
-    void Update()
-    {
 
-
-    }
 
     void OnTriggerStay(Collider coll)
     {
-        if (coll.gameObject.tag == "Wall")
+        if (coll.gameObject.CompareTag("Wall"))
             check = true;
     }
 

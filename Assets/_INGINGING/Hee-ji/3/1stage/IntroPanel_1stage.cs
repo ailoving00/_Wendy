@@ -32,10 +32,6 @@ public class IntroPanel_1stage : MonoBehaviour
         InStartFadeAnim();
     }
 
-    void Update()
-    {
-
-    }
 
     //페이드아웃
     public void InStartFadeAnim()

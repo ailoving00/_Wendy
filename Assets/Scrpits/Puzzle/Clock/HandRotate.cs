@@ -37,9 +37,6 @@ public class HandRotate : MonoBehaviour
         enterBtn_script = GameObject.FindObjectOfType<EnterClockAnswer>();
     }
 
-    void Update()
-    {
-    }
 
     public void start_rotate()
     {

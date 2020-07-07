@@ -21,13 +21,11 @@ public class BlockUnit : MonoBehaviour
         unitNumber = int.Parse(name); //System.Convert.ToInt32(a);
     }
 
-    void Update()
-    {
-    }
+
 
     void OnTriggerEnter(Collider coll) //이동했다는것
     {
-        if (coll.gameObject.tag == "Block")
+        if (coll.gameObject.CompareTag("Block"))
         {
             script.isBlock(unitNumber);
 
@@ -37,7 +35,7 @@ public class BlockUnit : MonoBehaviour
 
     void OnTriggerExit(Collider coll)
     {
-        if (coll.gameObject.tag == "Block")
+        if (coll.gameObject.CompareTag("Block"))
         {
             script.isEmpty(unitNumber);
         }

@@ -53,9 +53,11 @@ public class ChangeCam_2stage : MonoBehaviour
     public Camera flashCamera;
     //public Camera uiCamera;
 
-
+    //-플레이어 이동 값
     public GameObject playerModeling;
     Animator _animator = null;
+    Player_HJ playerController;
+    FirstPersonCamera Side_Controller;
 
     bool LaughState = false;
 
@@ -76,7 +78,10 @@ public class ChangeCam_2stage : MonoBehaviour
 
         Fade_script = FindObjectOfType<FadeManager>();
         actionController = mainCamera.GetComponent<ActionController_02_VER2>();
-
+       
+        //플레이어 move
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
+        Side_Controller = GameObject.FindObjectOfType<FirstPersonCamera>();
         _animator = playerModeling.GetComponent<Animator>();
 
         // - 지하실문 스크립트, 문 외곽선을 위해
@@ -212,8 +217,8 @@ public class ChangeCam_2stage : MonoBehaviour
 
         //플레이어 이동 스크립트 끄기
         _animator.SetBool("IsWalking", false);
-        Target_Player.gameObject.GetComponent<Player_HJ>().enabled = false;
-        mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
+        playerController.enabled = false;
+        Side_Controller.enabled = false;
         OutLineScript.SetActive(false);
 
         StartCoroutine(MoveOutPanel(4f));
@@ -294,7 +299,7 @@ public class ChangeCam_2stage : MonoBehaviour
             while (true)
             {
                 SoundManger.instance.PlaySound(WendyLaughSound);
-                yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(7f);
 
                 if(LaughState == false)
                 {
@@ -337,8 +342,8 @@ public class ChangeCam_2stage : MonoBehaviour
         flashCamera.enabled = true;
 
         count = 0;
-        Target_Player.gameObject.GetComponent<Player_HJ>().enabled = true;
-        mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = true;
+        playerController.enabled = true;
+        Side_Controller.enabled = true;
         See_Wendy = false;
 
         // - 문외곽선 다시 생성 시키기

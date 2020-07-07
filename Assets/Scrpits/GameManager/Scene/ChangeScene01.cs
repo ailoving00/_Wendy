@@ -9,11 +9,6 @@ public class ChangeScene01 : MonoBehaviour
 
     private GameObject _Cleardoor;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     private GameObject GetClickedObject()
     {

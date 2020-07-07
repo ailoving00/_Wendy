@@ -25,10 +25,7 @@ public class Option_inGame : MonoBehaviour
         //InitSliderValue(); //GameMgr 스크립트로 옮김
     }
 
-    void Update()
-    {
 
-    }
 
     public void InitSliderValue()
     {

@@ -37,11 +37,7 @@ public class DisplayManager_3stage : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-
-    }
-
+ 
     public bool compare_Answer()
     {
         for (int i = 0; i < 8; i++)

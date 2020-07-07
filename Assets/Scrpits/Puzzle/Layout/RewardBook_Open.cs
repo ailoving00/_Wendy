@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class RewardBook_Open : MonoBehaviour
 {
+
+    [SerializeField]
+    private string FilpBook = "flipPage";
+
+    [SerializeField]
+    private string ShufflePage = "shufflePage";
+
+    [SerializeField]
+    private string BookClose = "bookclose";
+
     // - 상태
     bool popup = false;
     bool state = false; //애니메이션 플레이(코루틴 실행) 상태
@@ -52,10 +62,6 @@ public class RewardBook_Open : MonoBehaviour
         getKey_script = Camera.main.GetComponent<ActionController_GetKey>();
     }
 
-    void Update()
-    {
-
-    }
 
     public void move_BookAni()
     {
@@ -87,16 +93,18 @@ public class RewardBook_Open : MonoBehaviour
         {
             case 1: // 책 펼치기
                 isOpen = true;
+                SoundManger.instance.PlaySound(ShufflePage);
                 StartCoroutine(bookOpenAni());
                 break;
 
             case 2: // 책 덮기
-                //1
-                //isOpen = false;
-                //StartCoroutine(bookOpenAni());
-                //break;
+                    //1
+                    //isOpen = false;
+                    //StartCoroutine(bookOpenAni());
+                    //break;
 
                 //2
+                SoundManger.instance.PlaySound(BookClose);
                 isOpen = false;
                 isFlip = false;
                 //flip_colider.enabled = false;
@@ -106,6 +114,7 @@ public class RewardBook_Open : MonoBehaviour
 
             case 3: // 한장 넘기기 (책 펼쳐져있을때)
                 isFlip = true;
+                SoundManger.instance.PlaySound(FilpBook);
                 StartCoroutine(bookFlipAni());
                 break;
 

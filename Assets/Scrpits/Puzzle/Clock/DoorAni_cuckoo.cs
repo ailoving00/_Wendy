@@ -14,10 +14,6 @@ public class DoorAni_cuckoo : MonoBehaviour
         moveCuckoo_script = GameObject.FindObjectOfType<Move_Cuckoo>();
     }
 
-    void Update()
-    {
-
-    }
 
     public void set_Ani_param(bool param)
     {

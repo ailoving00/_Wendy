@@ -26,15 +26,7 @@ public class OptionManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
-    {
 
-    }
-
-    void Update()
-    {
-
-    }
 
     // - 값을 전달
     public float GetMusicVolume()

@@ -23,8 +23,14 @@ public class GameOverManger : MonoBehaviour
     Vector2 LPanelPos;
     Vector2 RPanelPos;
 
-    Animator _animator = null;
     bool SetClick = false;
+
+    //-플레이어 이동 값
+    Animator _animator = null;
+    Player_HJ playerController;
+    FirstPersonCamera Side_Controller;
+
+
     // Start is called before the first frame update
 
 
@@ -38,7 +44,10 @@ public class GameOverManger : MonoBehaviour
 
     void Start()
     {
+        //플레이어 move
         _animator = PlayerObj.GetComponent<Animator>();
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
+        Side_Controller = GameObject.FindObjectOfType<FirstPersonCamera>();
 
     }
     void Update()
@@ -64,9 +73,8 @@ public class GameOverManger : MonoBehaviour
     {
 
         _animator.SetBool("IsWalking", false);
-        scriptModle.GetComponent<Player_HJ>().enabled = false;
-        //     scriptModle.GetComponent<Collider>().enabled = false;
-        mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
+        playerController.enabled = false;
+        Side_Controller.enabled = false;
 
 
         yield return new WaitForSeconds(2.5f);

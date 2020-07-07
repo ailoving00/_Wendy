@@ -6,15 +6,6 @@ public class TitleBtn_Indexer : MonoBehaviour
 {
     public int _index;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 
     public int GetPos_Leaf()
     {

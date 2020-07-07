@@ -24,10 +24,6 @@ public class BlockManager : MonoBehaviour
         block_scripts = blockParent.GetComponentsInChildren<Block>();
     }
 
-    void Update()
-    {
-
-    }
 
     public void isBlock(int i)
     {

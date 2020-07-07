@@ -11,16 +11,16 @@ public class OnTrigger_Flash : MonoBehaviour
     public GameObject mainCamera;
     public GameObject Target_Player;
     public GameObject playerModeling;
+    public GameObject FlashLight;
 
     public float speedFactor = 0.0f; //보정값 222
-    Animator _animator = null;
 
     public GameObject Particle_bomb;
     ParticleSystem particleBomb;
 
     public GameObject FlashLamp_Transform;
     public GameObject FlahLamp_EndTrans;
-    Flashlight_PRO flashstate;
+    public Flashlight_PRO flashstate;
 
     public GameObject FlashCamera;
     public GameObject FlashPack;
@@ -32,13 +32,25 @@ public class OnTrigger_Flash : MonoBehaviour
     float step;
     float Setangle = 1f;
 
+    //-플레이어 이동 값
+    Animator _animator = null;
+    Player_HJ playerController;
+    FirstPersonCamera Side_Controller;
+
     void Start()
     {
+        //플레이어 move
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
+        Side_Controller = GameObject.FindObjectOfType<FirstPersonCamera>();
         _animator = playerModeling.GetComponent<Animator>();
-       // ParticleSystem particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
+
+
+        // ParticleSystem particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
         flashstate = FindObjectOfType<Flashlight_PRO>();
         particleBomb = Particle_bomb.GetComponentInChildren<ParticleSystem>();
         Particle_bomb.SetActive(false);
+
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
     }
 
     // Start is called before the first frame update
@@ -51,38 +63,6 @@ public class OnTrigger_Flash : MonoBehaviour
     }
 
 
-    //public void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.transform.CompareTag("Player"))
-    //    {
-    //        //정지
-
-    //        if (FlashState == true)
-    //        {
-
-
-
-    //        }
-
-    //        else
-    //        {
-
-    //        }
-    //        // 파티클 실행
-
-    //        // 손전등 내림 
-
-
-    //        //Debug.Log("충돌! 닿았습니까? 그렇다면 손전등을 내놓고 가세요! ");
-    //        // 한번 실행하면 그것으로 끝! 이 콜라이더도 비활성화! 
-
-
-
-    //    }
-
-
-    //}
-    // 로테이션 이동- 어우 개  빡 치 네! 가 생각나네!
     IEnumerator MoveFlash()
     {
         FlashState = true;
@@ -91,8 +71,9 @@ public class OnTrigger_Flash : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         _animator.SetBool("IsWalking", false);
-        Target_Player.gameObject.GetComponent<Player_HJ>().enabled = false;
-        //mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = false;
+        playerController.enabled = false;
+        Side_Controller.enabled = false;
+     
 
         yield return new WaitForSeconds(1f);
 
@@ -106,21 +87,18 @@ public class OnTrigger_Flash : MonoBehaviour
 
 
 
+        //고장 파티클 추가
+        Particle_bomb.SetActive(true);
 
-        /// 오류발생 수정중
-        //particlebomb.gameobject.setactive(true);
-        //particlebomb.play();
-
-
-        //flashstate.switch(false);
-        //soundmanger.instance.playsound(brokensound);
-
+        //등불 깜빡거림 
 
         yield return new WaitForSeconds(1f);
 
+       FlashLight.SetActive(false);
+        //flashstate.BombFlashLight();
 
-        //고장 파티클 추가
-        Particle_bomb.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
 
         if (!particleBomb.isPlaying)
         {
@@ -128,11 +106,11 @@ public class OnTrigger_Flash : MonoBehaviour
         }
         SoundManger.instance.PlaySound(brokenSound);
 
-        yield return new WaitForSeconds(3f);
+
 
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
+
 
 
             step += Time.deltaTime * moveSpeed;
@@ -150,59 +128,26 @@ public class OnTrigger_Flash : MonoBehaviour
                 break;
 
             }
-        
-     
-    
 
+
+
+            yield return new WaitForSeconds(0.01f);
 
         }
 
         yield return new WaitForSeconds(0.05f);
-        Target_Player.gameObject.GetComponent<Player_HJ>().enabled = true; //이걸 줄일수 있는게 없을까?
-                                                                           // mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = true;
-       // this.gameObject.GetComponent<BoxCollider>().enabled = false;
+
+
+
+        playerController.enabled = true;
+        Side_Controller.enabled = true;
+        // this.gameObject.GetComponent<BoxCollider>().enabled = false;
         FlashCamera.SetActive(false);
         FlashPack.SetActive(false);
 
         FlashState = false;
 
 
-        //   Quaternion targetSet = FlashLamp_Transform.transform.rotation;
-        ////   Quaternion bRotation = FlashLamp_Transform.transform.rotation + new Vector3(0,0,0);
-        //   Quaternion bRotation = Quaternion.Euler(targetSet.eulerAngles + new Vector3(0, 0, -20));
-
-        //   yield return new WaitForSeconds(3f);
-        //   Debug.Log("왜안돼");
-
-        //   //아래 수정 
-
-        //   while (true)
-        //   {
-        //       yield return new WaitForSeconds(0.01f);
-
-
-        //       step +=  Time.deltaTime / moveSpeed ;
-        //       //FlashLamp_Transform.transform.rotation = Quaternion.Slerp(targetSet, bRotation, step);
-
-        //       FlashLamp_Transform.transform.rotation = Quaternion.Euler(Setangle, 0, 0);
-
-        //       Setangle++;
-
-        //       checkangle = Quaternion.Angle(bRotation, FlashLamp_Transform.transform.rotation);
-
-
-        //       if (Setangle >= 10)
-        //       {
-        //           Target_Player.gameObject.GetComponent<Player_HJ>().enabled = true;
-        //          // mainCamera.gameObject.GetComponent<FirstPersonCamera>().enabled = true;
-        //           break;
-
-        //       }
-
-
-        //   }
-
-        //   FlashState = false;
 
     }
 

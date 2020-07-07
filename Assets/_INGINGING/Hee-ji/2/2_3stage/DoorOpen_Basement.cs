@@ -18,10 +18,6 @@ public class DoorOpen_Basement : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
 
     public void StartDoorAni()
     {

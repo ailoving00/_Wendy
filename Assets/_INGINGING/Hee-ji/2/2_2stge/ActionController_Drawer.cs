@@ -123,7 +123,7 @@ public class ActionController_Drawer : MonoBehaviour
     {
         if (hitaction.transform != null) //pickupActivated == true
         {
-            if (hitaction.transform.tag == "Drawer") //compare @
+            if (hitaction.transform.CompareTag("Drawer")) //compare @
             {
                 int Chestnumber = hitaction.transform.parent.GetComponent<Chestaction>().Chest_number;
                 int drawerType = hitaction.transform.parent.GetComponent<Chestaction>().type;

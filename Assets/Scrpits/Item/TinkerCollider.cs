@@ -17,6 +17,8 @@ public class TinkerCollider : MonoBehaviour
         CanPick.enabled = false;
 
     }
+
+ 
     void OnTriggerEnter(Collider other)
     {
         if (other.transform.CompareTag("Floor"))

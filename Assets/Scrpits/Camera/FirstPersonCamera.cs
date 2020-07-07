@@ -33,7 +33,7 @@ public class FirstPersonCamera : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; //커서 고정
+        //Cursor.lockState = CursorLockMode.Locked; //커서 고정 //->GameMgr로 이동
         Vector3 angles = transform.eulerAngles;
 
         x = angles.y;

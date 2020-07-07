@@ -77,7 +77,17 @@ public class GameMgr : MonoBehaviour
         }
 
         if (stage == 2)
+        {
             fpCam_script = GameObject.FindObjectOfType<FirstPersonCamera>();
+
+            //커서
+            LockCursor();
+        }
+        else
+        {
+            //커서
+            noneCursor();
+        }
 
         option_ingame_script = GameObject.FindObjectOfType<Option_inGame>();
 
@@ -112,15 +122,21 @@ public class GameMgr : MonoBehaviour
         {
             //Application.Quit();
 
-            if (!pop)
+            if (!pop) //옵션창이 튀어나왔을때, !pop -> kpop
             {
                 OptionPopUp();
                 if (notemager.guidePopup == true)
                     notemager.NoClickEvent_fromGameMgr();
+
+                //커서
+                noneCursor();
             }
             else
             {
                 OptionDisappear();
+
+                //커서
+                noneCursor();
             }
         }
 
@@ -246,4 +262,19 @@ public class GameMgr : MonoBehaviour
         notemager.guidePopup = false;
     }
 
+    // - 커서
+    public void LockCursor()
+    {
+        //screen.SetActive(false);
+        //deathComponents.SetActive(false);
+        Cursor.visible = (false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Screen.lockCursor = true;
+    }
+    public void noneCursor()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        Screen.lockCursor = false;
+    }
 }

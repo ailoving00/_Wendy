@@ -64,6 +64,10 @@ public class ChangeCam_2stage : MonoBehaviour
     // - 지하실 문 외곽선
     CellarDoorCollider cellar_script;
 
+    //게임매니저
+    private GameMgr gameMgr_script;
+
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -87,6 +91,8 @@ public class ChangeCam_2stage : MonoBehaviour
         // - 지하실문 스크립트, 문 외곽선을 위해
         cellar_script = GameObject.FindObjectOfType<CellarDoorCollider>();
 
+        //게임매니저
+        gameMgr_script = GameObject.FindObjectOfType<GameMgr>();
     }
 
 
@@ -102,6 +108,9 @@ public class ChangeCam_2stage : MonoBehaviour
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
+                        // - 커서
+                        gameMgr_script.noneCursor();
+
                         StartCoroutine(CameraFadeIn());
                         type = count;
 
@@ -109,7 +118,12 @@ public class ChangeCam_2stage : MonoBehaviour
                 }
 
                 else
+                {
+                    // - 커서
+                    gameMgr_script.LockCursor();
+
                     StartCoroutine(CameraFadeOut(1.6f));
+                }
 
             }
 

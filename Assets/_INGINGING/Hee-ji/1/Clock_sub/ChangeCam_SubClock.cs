@@ -27,6 +27,9 @@ public class ChangeCam_SubClock : MonoBehaviour
 
     public GameObject _clock_light;
 
+    //게임매니저
+    private GameMgr gameMgr_script;
+
     void Start()
     {
         _mainCamera = Camera.main;
@@ -43,6 +46,9 @@ public class ChangeCam_SubClock : MonoBehaviour
         //시계보기관련 스크립트
         MakeClockSee_script = GameObject.FindObjectOfType<MakeClockSee>();
         SeeingClock_script = GameObject.FindObjectOfType<SeeingSubClock>();
+
+        //게임매니저
+        gameMgr_script = GameObject.FindObjectOfType<GameMgr>();
     }
 
 
@@ -51,7 +57,9 @@ public class ChangeCam_SubClock : MonoBehaviour
     {
         if (select) //서브시계카메라 카메라 on
         {
-            Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
+            // - 커서
+            //Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
+            gameMgr_script.LockCursor();
 
             // - 카메라와 리스너
             _subclockCamera.enabled = true;
@@ -81,7 +89,9 @@ public class ChangeCam_SubClock : MonoBehaviour
         }
         else //if(type == 0) //다시 돌아가기
         {
-            Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            // - 커서
+            gameMgr_script.noneCursor();
+            //Cursor.lockState = CursorLockMode.Locked; //커서 고정
 
             // - 카메라와 리스너
             _mainCamera.enabled = true;

@@ -46,6 +46,10 @@ public class ActionController_TestNote : MonoBehaviour
     // - 쪽지 상태 스크립트
     SawNoteNumber note_num_script;
 
+    //게임매니저
+    private GameMgr gameMgr_script;
+
+
     void Start()
     {
         OutlineController = GameObject.FindObjectOfType<DrawOutline_HJ>();
@@ -67,6 +71,9 @@ public class ActionController_TestNote : MonoBehaviour
 
         // 쪽지 상태 (싱글톤)
         note_num_script = FindObjectOfType<SawNoteNumber>();
+
+        //게임매니저
+        gameMgr_script = GameObject.FindObjectOfType<GameMgr>();
     }
 
     void Update()
@@ -123,6 +130,9 @@ public class ActionController_TestNote : MonoBehaviour
             {
                 if (hitInfo.transform.CompareTag("Note_CP")) // 1번 : 시계쪽지 순서
                 {
+                    // - 커서
+                    gameMgr_script.noneCursor();
+
                     // - 쪽지 상태, UI
                     hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);
                     if (note_num_script != null)

@@ -28,6 +28,9 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
 
     private FramePuzzle_Controller fpController;
 
+    //게임매니저
+    private GameMgr gameMgr_script;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -44,13 +47,15 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
         puzzleEnter_script = Camera.main.GetComponent<FramePuzzle_Enter>();
         fpController = GameObject.FindObjectOfType<FramePuzzle_Controller>();
 
-        playerController = GameObject.FindObjectOfType<Player_HJ>();        
-        
+        playerController = GameObject.FindObjectOfType<Player_HJ>();
+
         //초기화
         //mainListener.enabled = true;
         //fpListener.enabled = false;
-    }
 
+        //게임매니저
+        gameMgr_script = GameObject.FindObjectOfType<GameMgr>();
+    }
 
 
     //0.6
@@ -64,7 +69,9 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
 
         if (b) //액자퍼즐 카메라 on
         {
-            Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
+            // - 커서
+            //Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
+            gameMgr_script.LockCursor();
 
             // - 카메라와 리스너
             fpCamera.enabled = true;
@@ -91,7 +98,9 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
         }
         else //if(type == 0) //다시 돌아가기
         {
-            Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            // - 커서
+            //Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            gameMgr_script.noneCursor();
 
             // - 카메라와 리스너
             mainCamera.enabled = true;

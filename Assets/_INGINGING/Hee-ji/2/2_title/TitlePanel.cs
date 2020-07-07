@@ -8,7 +8,7 @@ public class TitlePanel : MonoBehaviour
 {
     private float FadeTime = 3f; // Fade효과 재생시간
 
-    Image fadeImg;
+    public Image fadeImg;
 
     float start;
     float end;
@@ -16,28 +16,32 @@ public class TitlePanel : MonoBehaviour
     float time = 0f;
 
 
-    //void Awake()
     //void OnLevelWasLoaded()
-    void Start()
+    //void Start()
+    void Awake()
     {
-        //SceneManager.sceneLoaded += InStartFadeAnim;
-
-
         fadeImg = GetComponent<Image>();
 
         InStartFadeAnim();
 
-        Debug.Log("ddd");
     }
 
-    void OnDisabled()
-    {
-        //SceneManager.sceneLoaded -= InStartFadeAnim;
-    }
+    //void OnEnable()
+    //{
+    //    // 씬 매니저의 sceneLoaded에 체인을 건다.
+    //    SceneManager.sceneLoaded += InStartFadeAnim;
+    //}
+
+
+    //void OnDisabled()
+    //{
+    //    SceneManager.sceneLoaded -= InStartFadeAnim;
+    //}
 
     //페이드아웃
-    public void InStartFadeAnim()
+    public void InStartFadeAnim() //Scene scene, LoadSceneMode mode)
     {
+        //fadeImg = GetComponent<Image>();
         Color fadecolor = fadeImg.color;
         fadecolor.a = 1f;
         fadeImg.color = fadecolor;

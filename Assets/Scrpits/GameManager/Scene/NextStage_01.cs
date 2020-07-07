@@ -70,6 +70,8 @@ public class NextStage_01 : MonoBehaviour
         fadecolor.a = 1f;
         fadeImg.color = fadecolor;
 
+        //블럭퍼즐 끝나면
         SceneManager.LoadScene("02_Stage");
+        //아니면
     }
 }

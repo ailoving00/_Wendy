@@ -100,8 +100,11 @@ public class ActionController_02_VER2 : MonoBehaviour
     // - 지하실 : 클리어하면 멈추게
     Cellar_Manager _cellarManager;
 
-    // - 지하실 보기
+    // - 지하실 엿보기
     CellarDoorCollider _cellarDoor_script;
+
+    // - 지하실 쳐다봐야 열리기 (클리어이후)
+    LookingBasement lookingBasement_script;
 
     void Start()
     {
@@ -148,6 +151,9 @@ public class ActionController_02_VER2 : MonoBehaviour
 
         //지하실 보기
         _cellarDoor_script = GameObject.FindObjectOfType<CellarDoorCollider>();
+
+        //지하실쳐다봐야열리게
+        lookingBasement_script = GameObject.FindObjectOfType<LookingBasement>();
     }
 
     void Update()
@@ -189,7 +195,6 @@ public class ActionController_02_VER2 : MonoBehaviour
                 {
                     if (theInventory.AcquireItem(hitInfo.transform.GetComponent<ItemPickUp>().item))
                     {
-
                         //아이템 입수 사운드 
                         SoundManger.instance.PlaySound(itemgainsound);
 
@@ -375,10 +380,7 @@ public class ActionController_02_VER2 : MonoBehaviour
         if (hitInfo2.transform != null)
         {
             if (hitInfo2.transform.CompareTag("Location")) //compare @
-            {
-
-
-
+            {                
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
 
@@ -402,12 +404,9 @@ public class ActionController_02_VER2 : MonoBehaviour
                     int use_index = selectSlot_script.get_index();
 
                     if (!theInventory.IsVoid_Slot(use_index)) //슬롯에 아이템이 있는가? 있으면 IsVoid_Slot반환값이 false
-                    {
-                        
-
+                    {                        
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
-
                             //인형 배치 사운드
                             SoundManger.instance.PlaySound(itemgainsound);
 
@@ -452,23 +451,24 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //라이트
                                 _lightOn_script.LightOn();
 
+                                //3스테이지 카메라 스크립트 on
+                                actionController_3stage_script.enabled = true;
+
+                                enter_3stage = true;
+
+                                //손전등 없어지기 - 손전등 관련 스크립트 가져오기 
+                                //FlashlightItem.SetActive(false);
+                                flash_end.FlashLightEnd(1);
+
                                 //지하실, 2층계단 오픈
                                 //tempDoor.SetActive(false); //콜라이더 비활성화
                                 //tempStairs.SetActive(false);
                                 temp_basement.SetActive(false);
 
-                                // 지하실 열리기(임시)
-                                DoorOpen_Basement doorAni = tempStairs.GetComponent<DoorOpen_Basement>();
-                                doorAni.StartDoorAni();
-                                
-                                enter_3stage = true;
-
-                                //3스테이지 카메라 스크립트 on
-                                actionController_3stage_script.enabled = true;
-
-                                //손전등 없어지기 - 손전등 관련 스크립트 가져오기 
-                                //FlashlightItem.SetActive(false);
-                                flash_end.FlashLightEnd(1);
+                                // 지하실 열리기(임시) _________
+                                //DoorOpen_Basement doorAni = tempStairs.GetComponent<DoorOpen_Basement>();
+                                //doorAni.StartDoorAni();
+                                lookingBasement_script.enabled = true;
 
                                 //지하실 파티클 오픈
                                 Ring_Particle.SetActive(true);
@@ -476,7 +476,7 @@ public class ActionController_02_VER2 : MonoBehaviour
                                 //지하실 움직임 끝
                                 _cellarManager.MoveStop();
 
-                                //지하실 보기 기능 끝
+                                //지하실 엿보기 기능 끝
                                 //_cellarDoor_script.enabled = false; //트리거로 검사해서 소용 없다
                                 _cellarDoor_script.Set2StageEnd();
 

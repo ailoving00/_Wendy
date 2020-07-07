@@ -25,6 +25,8 @@ public class ChangeCam_SubClock : MonoBehaviour
 
     private int stage = 2;
 
+    public GameObject _clock_light;
+
     void Start()
     {
         _mainCamera = Camera.main;
@@ -73,6 +75,9 @@ public class ChangeCam_SubClock : MonoBehaviour
             // - 서브시계 보게만드는 스크리트 off, 보기 스크립트 on
             MakeClockSee_script.enabled = false;
             SeeingClock_script.enabled = true;
+
+            // - 서브시계를 밝히는 라이트 on
+            _clock_light.SetActive(true);
         }
         else //if(type == 0) //다시 돌아가기
         {
@@ -96,6 +101,9 @@ public class ChangeCam_SubClock : MonoBehaviour
             // - 메인카메라, 플레이어이동 스크립트 on
             //actionController.enabled = true;
             StartCoroutine(TimetoWaitFor());
+
+            // - 서브시계를 밝히는 라이트 off
+            _clock_light.SetActive(false);
         }
     }
 

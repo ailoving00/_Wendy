@@ -263,6 +263,7 @@ public class Player_1stage : MonoBehaviour
     {
         _animator.SetBool("IsWalking", false);
         check = false;
+        agentMove = true;
     }
 
     public void set_Angle(float a)

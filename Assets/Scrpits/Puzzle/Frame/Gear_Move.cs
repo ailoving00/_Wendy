@@ -106,7 +106,7 @@ public class Gear_Move : MonoBehaviour
 
     IEnumerator ImageSoundPlaylist()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.2f); // 이거 너무 길어요
 
         for (int i = 0; i < GearHaveSound.Length; i++)
         {

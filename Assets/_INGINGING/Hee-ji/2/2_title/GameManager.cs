@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
 
         // - 화면 비율
         //Screen.SetResolution(1920, 1080, false);
-        Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, true);
+        //if (Screen.fullScreen == true) Screen.fullScreen = !Screen.fullScreen 
+        Screen.SetResolution(Screen.width, (Screen.width * 16) / 9, Screen.fullScreen);
 
         // - 커서
         Cursor.lockState = CursorLockMode.None; //마우스 해제

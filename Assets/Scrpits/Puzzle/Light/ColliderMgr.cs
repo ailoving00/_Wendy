@@ -71,6 +71,12 @@ public class ColliderMgr : MonoBehaviour
     Player_HJ playerController;
     FirstPersonCamera Side_Controller;
 
+    // - 등불퍼즐 클리어 이후 리지드바디 문제
+    private ActionController_02_VER2 actionCtrler2_script;
+
+    // - 클리어 이후
+    private bool clear_puzzle = false;
+
     void Start()
     {
         animator = ResetLeber.GetComponent<Animator>();
@@ -120,11 +126,17 @@ public class ColliderMgr : MonoBehaviour
         //장애물,벽
         obstacleReader_script = GameObject.FindObjectOfType<ObstacleReader>();
         obstacle_layer = (1 << LayerMask.NameToLayer("Light")) + (1 << LayerMask.NameToLayer("Obstacle"));
+
+        //액션컨트롤러
+        actionCtrler2_script = GameObject.FindObjectOfType<ActionController_02_VER2>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (clear_puzzle)
+            return;
+
         if (CheckObstacle())
             return;
        
@@ -148,16 +160,18 @@ public class ColliderMgr : MonoBehaviour
     {
         if (CheckOnL == 8)
         {
+            // - 클릭 방지
+            actionCtrler2_script.enabled = false; //아이템스크립트에서
+            clear_puzzle = true; //본스크립트에서
+
             // 수정. 끝났을때 플레이어의 앞에 툭 떨어지는 것으로 수정
             SoundManger.instance.PlaySound(tinkerBellSound);
 
             StartCoroutine(StopFallTinker());
 
             bell_Doll.SetActive(true);
-
             bell_Doll.transform.position = SetPosition.position;
             bell_Doll.transform.rotation = SetPosition.rotation;
-            InfoDisappear();
 
             if (pre_ol_index != -1)
             {
@@ -170,9 +184,7 @@ public class ColliderMgr : MonoBehaviour
                 // - 클릭버튼 해제
                 actionCaption.SetActive(false);
             }
-
-            this.enabled = false;
-
+            InfoDisappear();
         }
     }
 
@@ -186,6 +198,8 @@ public class ColliderMgr : MonoBehaviour
 
         playerController.enabled = true;
         Side_Controller.enabled = true;
+
+        this.enabled = false;
     }
 
     private void CanLocation()

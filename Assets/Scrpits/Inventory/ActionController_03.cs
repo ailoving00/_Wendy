@@ -263,10 +263,7 @@ public class ActionController_03 : MonoBehaviour
                 // - 인형들 애니메이션 검사
                 //if (!dollAniManager_script.ClickButton()) //클릭이 가능한지
                 //    return;
-
-
-
-
+                
                 // - 클릭한 장식장 위치의 스크립트 얻기
                 DisplayLocation location_script = hitInfo2.transform.GetComponent<DisplayLocation>();
 
@@ -288,11 +285,9 @@ public class ActionController_03 : MonoBehaviour
                     {
                         if (location_script.tryToPut_doll()) //장식장 위치에 이미 인형이 있는가? 없으면 true
                         {
-
                             //아이템 입수 사운드 
                             SoundManger.instance.PlaySound(itemgainsound);
-
-
+                            
                             // - 아이템 활성화
 
                             // 아이템 코드

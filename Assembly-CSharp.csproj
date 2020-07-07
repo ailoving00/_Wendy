@@ -104,6 +104,7 @@
      <Compile Include="Assets\_INGINGING\Hee-ji\3\cursor\CursorClass.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\3\cursor\MouseCursor.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\3\option\Option_inGame.cs" />
+     <Compile Include="Assets\_INGINGING\Hee-ji\4\basement\LookingBasement.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\SceneLoad.cs" />
      <Compile Include="Assets\_INGINGING\Hee-ji\TestRay.cs" />
      <Compile Include="Assets\_PurchasedAsset\_Flashlight PRO\_Assets\scripts\Flashlight_PRO.cs" />

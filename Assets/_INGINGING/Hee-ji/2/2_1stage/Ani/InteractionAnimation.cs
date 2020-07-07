@@ -77,8 +77,11 @@ public class InteractionAnimation : MonoBehaviour
     {
         if (isPlaying == true) //중복재생방지
         {
+            Debug.Log("check1");
             return;
         }
+
+        Debug.Log("check1");
 
         coroutine = StartCoroutine(check_AniState());
     }

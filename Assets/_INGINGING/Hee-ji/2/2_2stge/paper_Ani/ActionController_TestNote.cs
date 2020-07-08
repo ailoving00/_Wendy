@@ -131,7 +131,7 @@ public class ActionController_TestNote : MonoBehaviour
                 if (hitInfo.transform.CompareTag("Note_CP")) // 1번 : 시계쪽지 순서
                 {
                     // - 커서
-                    gameMgr_script.noneCursor();
+                    //gameMgr_script.noneCursor();
 
                     // - 쪽지 상태, UI
                     hitInfo.transform.GetComponent<PageNote>().CheckAddcount(1);

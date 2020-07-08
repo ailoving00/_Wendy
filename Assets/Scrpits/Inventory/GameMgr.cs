@@ -81,12 +81,12 @@ public class GameMgr : MonoBehaviour
             fpCam_script = GameObject.FindObjectOfType<FirstPersonCamera>();
 
             //커서
-            LockCursor();
+            //LockCursor();
         }
         else
         {
             //커서
-            noneCursor();
+            //noneCursor();
         }
 
         option_ingame_script = GameObject.FindObjectOfType<Option_inGame>();
@@ -129,14 +129,16 @@ public class GameMgr : MonoBehaviour
                     notemager.NoClickEvent_fromGameMgr();
 
                 //커서
-                noneCursor();
+                //noneCursor();
+                Cursor.lockState = CursorLockMode.None;
             }
             else
             {
                 OptionDisappear();
 
                 //커서
-                noneCursor();
+                //noneCursor();
+                Cursor.lockState = CursorLockMode.Locked; //커서 고정
             }
         }
 

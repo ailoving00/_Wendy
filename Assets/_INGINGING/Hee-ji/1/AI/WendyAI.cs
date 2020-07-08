@@ -139,6 +139,12 @@ public class WendyAI : MonoBehaviour
 
                 // 2층가는 길목 콜라이더 없애기
                 temp_stair.SetActive(false);
+
+                // - 웬디이동
+                SetContactWithPlayer(true);
+                
+                if (_current_state.GetStateNum() == 1)
+                    ChangeState();
             }
             else
             {

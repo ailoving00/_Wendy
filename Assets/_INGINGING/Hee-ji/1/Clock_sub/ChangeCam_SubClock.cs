@@ -58,8 +58,8 @@ public class ChangeCam_SubClock : MonoBehaviour
         if (select) //서브시계카메라 카메라 on
         {
             // - 커서
-            //Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
-            gameMgr_script.LockCursor();
+            Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
+            //gameMgr_script.LockCursor();
 
             // - 카메라와 리스너
             _subclockCamera.enabled = true;
@@ -90,8 +90,8 @@ public class ChangeCam_SubClock : MonoBehaviour
         else //if(type == 0) //다시 돌아가기
         {
             // - 커서
-            gameMgr_script.noneCursor();
-            //Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            //gameMgr_script.noneCursor();
 
             // - 카메라와 리스너
             _mainCamera.enabled = true;

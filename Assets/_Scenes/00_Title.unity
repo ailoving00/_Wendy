@@ -4910,6 +4910,7 @@ MonoBehaviour:
   brightness: 0
   fx: 0.5
   music: 0.5
+  panelImg: {fileID: 1770845562306394818}
 --- !u!1 &1785898567
 GameObject:
   m_ObjectHideFlags: 0

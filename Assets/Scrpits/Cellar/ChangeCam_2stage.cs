@@ -109,7 +109,7 @@ public class ChangeCam_2stage : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         // - 커서
-                        gameMgr_script.noneCursor();
+                        //gameMgr_script.noneCursor();
 
                         StartCoroutine(CameraFadeIn());
                         type = count;
@@ -120,7 +120,7 @@ public class ChangeCam_2stage : MonoBehaviour
                 else
                 {
                     // - 커서
-                    gameMgr_script.LockCursor();
+                    //gameMgr_script.LockCursor();
 
                     StartCoroutine(CameraFadeOut(1.6f));
                 }

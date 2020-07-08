@@ -61,10 +61,10 @@ public class NoteManger : MonoBehaviour
     public void OpenCondition()
     {
         guidePopup = true;
-        Time.timeScale = 0f;
 
         if (checkcount != 5)
         {
+        Time.timeScale = 1f;
             // 조건 불만족시 경고창
             Cursor.lockState = CursorLockMode.None; //커서 고정 해제 -- 오옹 신기해요
             ConditionPanel.SetActive(true);
@@ -81,6 +81,7 @@ public class NoteManger : MonoBehaviour
         else
         {
             //Debug.Log("무사히 밖으로 나갔습니다");
+            Time.timeScale = 0f;
 
             loadEnding_script.InStartFadeAnim(); //쪽지매니저와 합치기
         }
@@ -95,7 +96,7 @@ public class NoteManger : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; //커서 고정 --오아아앙!
 
         // - 아래 loadEnding_script 스크립트의 InStartFadeAnim 함수 내용과 곂칠지도
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
 
         fpCam_Script.enabled = true;
         //player_script.enabled = true;

@@ -70,8 +70,8 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
         if (b) //액자퍼즐 카메라 on
         {
             // - 커서
-            //Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
-            gameMgr_script.LockCursor();
+            Cursor.lockState = CursorLockMode.None; //커서고정 해제 *Confined:화면안
+            //gameMgr_script.LockCursor();
 
             // - 카메라와 리스너
             fpCamera.enabled = true;
@@ -99,8 +99,8 @@ public class FramePuzzle_ChangeCam : MonoBehaviour
         else //if(type == 0) //다시 돌아가기
         {
             // - 커서
-            //Cursor.lockState = CursorLockMode.Locked; //커서 고정
-            gameMgr_script.noneCursor();
+            Cursor.lockState = CursorLockMode.Locked; //커서 고정
+            //gameMgr_script.noneCursor();
 
             // - 카메라와 리스너
             mainCamera.enabled = true;

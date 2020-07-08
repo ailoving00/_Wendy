@@ -21,14 +21,14 @@ public class Wendy_FootSound : MonoBehaviour
         if (woodfloorState == true)
         {
             int i = Random.Range(0, 4);
-            SoundManger.instance.PlaySoundVolum(floorfootSound[i], 0.3f);
+            SoundManger.instance.PlaySoundVolume(floorfootSound[i], 0.3f);
 
         }
         //사운드 출력.
         else if (carpetfloorState == true)
         {
             int i = Random.Range(0, 3);
-            SoundManger.instance.PlaySoundVolum(carpetfootSound[i],0.3f);
+            SoundManger.instance.PlaySoundVolume(carpetfootSound[i],0.3f);
             //Debug.Log("carpetSound");
 
         }

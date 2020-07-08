@@ -1462,3 +1462,4 @@ C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\UnityEngine.TestRunner.xml
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\nunit.framework.xml
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\UnityEditor.VR.xml
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.Android.Extensions.dll

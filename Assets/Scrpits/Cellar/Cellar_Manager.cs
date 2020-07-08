@@ -28,10 +28,13 @@ public class Cellar_Manager : MonoBehaviour
     Coroutine _coroutine;
 
     AddSoundManager CellarSoundScript;
+    Cellar_Wendy WendyScript;
 
     void Start()
     {
         CellarSoundScript = FindObjectOfType<AddSoundManager>();
+        WendyScript = FindObjectOfType<Cellar_Wendy>();
+        MoveStart();
     }
 
     public void MoveStart()
@@ -47,6 +50,7 @@ public class Cellar_Manager : MonoBehaviour
     {
         Stop = true;
         CellarSoundScript.CellarClear(1);
+        WendyScript.enabled = false;
     }
 
     IEnumerator deley()

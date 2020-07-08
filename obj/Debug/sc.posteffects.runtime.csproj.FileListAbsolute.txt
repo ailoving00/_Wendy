@@ -537,3 +537,5 @@ C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\sc.posteffects.runtime.csprojReso
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\sc.posteffects.runtime.dll
 C:\Users\User01\Desktop\Wendy\_Wendy\obj\Debug\sc.posteffects.runtime.pdb
 C:\Users\User01\Desktop\Wendy\_Wendy\Temp\bin\Debug\Boo.Lang.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\UnityEditor.Android.Extensions.dll
+C:\Users\User01\Desktop\_Wendy\Temp\bin\Debug\Boo.Lang.dll

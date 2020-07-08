@@ -55,7 +55,7 @@ public class backGear_Move : MonoBehaviour
 
         if (gearOn)
         {
-            SoundManger.instance.PlaySound(gearBackSound);
+            SoundManger.instance.PlaySoundVolume(gearBackSound, 0.3f);
 
             //RotTarget.rotation = Quaternion.Euler(new Vector3(180f, 0, 0));
 
@@ -87,7 +87,7 @@ public class backGear_Move : MonoBehaviour
         }
         else
         {
-            SoundManger.instance.PlaySound(gearBackSound);
+            SoundManger.instance.PlaySoundVolume(gearBackSound, 0.3f);
 
             //RotTarget.rotation = Quaternion.Euler(new Vector3(0f, 0, 0));
 

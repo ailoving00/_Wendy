@@ -148,15 +148,15 @@ public class Gear_Move : MonoBehaviour
             drawingMove_script.Play(true, firstTime); //안됨?
 
             //기어 사운드
-            SoundManger.instance.PlaySound(GearmoveSound);
+            SoundManger.instance.PlaySoundVolume(GearmoveSound, 0.45f);
             //이미지 사운드
-            SoundManger.instance.PlaySound(PictureFrameSound);
+            SoundManger.instance.PlaySoundVolume(PictureFrameSound, 0.45f);
 
         }
         else if (matchType == 2) //사운드
         {
 
-            SoundManger.instance.PlaySound(GearmoveSound);
+            SoundManger.instance.PlaySoundVolume(GearmoveSound, 0.45f);
 
             StartCoroutine(ImageSoundPlaylist());
 

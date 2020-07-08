@@ -92,7 +92,7 @@ public class AddSoundManager : MonoBehaviour
             DelayTimeSet(40f, 70f);
             yield return new WaitForSeconds(Daleytime);
 
-            SoundManger.instance.PlaySound(CellarSound);
+            SoundManger.instance.PlaySoundVolume(CellarSound,0.4f);
 
             particleDust.Play();
 

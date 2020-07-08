@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
@@ -63,7 +64,21 @@ public class GameMgr : MonoBehaviour
         //RectTransform Inventory_Panel = GetComponent<RectTransform>();
 
         animator = Inventory_Panel.GetComponent<Animator>();
-        SoundManger.instance.PlayBGMSound(BGMSound);
+
+
+
+        if (SceneManager.GetActiveScene().name == "01_Stage")
+        {
+            SoundManger.instance.PlayBGMSound(BGMSound);
+        }
+
+        if (SceneManager.GetActiveScene().name == "02_Stage")
+        {
+            SoundManger.instance.PlayBGMSoundVolume(BGMSound,0.2f);
+        }
+
+
+
 
         // - 인벤토리 
         if (puzzleImage != null)
